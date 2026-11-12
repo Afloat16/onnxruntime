@@ -1,0 +1,33 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "fork": "Afloat16/onnxruntime",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "base_tree": "ada396d3d22a607ae65ae1140ac5e66a057fc692",
+  "branch": "perf/vectorize-four-bit-weight-packing-20261112",
+  "files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_four_bit_packing.py"
+  ],
+  "status": "pending_native_validation_and_benchmark",
+  "novelty": {
+    "history_entries": 65,
+    "patches_read": [
+      20935,
+      20362,
+      32174
+    ],
+    "difference": "20935 introduced the current Python element loop; 32174 changes QOperator packing integration, not this helper's packing algorithm.",
+    "all_state_searches": [
+      "pack_bytes_to_4bit PR: only 32174; issues: 0",
+      "pack_bytes vector: 0",
+      "4-bit packing numpy: unrelated QMoE/CUDA kernel work"
+    ],
+    "personal_history": "No earlier ONNX contribution; fork created during this task."
+  },
+  "limits": [
+    "Performance candidate; existing output is correct and semantic tests should pass on both versions.",
+    "NumPy shifted odd-element array temporarily consumes about half the input byte length; report measured memory tradeoff.",
+    "No whole-model quantization time or model-accuracy claim."
+  ],
+  "commit": "877a86f4e8d693293fc8dfd9ffbc846e69fa60ef"
+}
