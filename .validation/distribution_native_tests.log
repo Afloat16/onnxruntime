@@ -1,0 +1,1160 @@
+﻿2026-11-12T20:44:09.3151855Z Current runner version: '2.338.2'
+2026-11-12T20:44:09.3173527Z ##[group]Runner Image Provisioner
+2026-11-12T20:44:09.3174521Z Hosted Compute Agent
+2026-11-12T20:44:09.3175679Z Version: 20261028.624
+2026-11-12T20:44:09.3176432Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-12T20:44:09.3177319Z Build Date: 2026-10-28T21:51:42Z
+2026-11-12T20:44:09.3177945Z Worker ID: {f458a1e6-fda9-477f-8c38-8f68f8cec4ef}
+2026-11-12T20:44:09.3178588Z Region: eastus2
+2026-11-12T20:44:09.3179135Z Cloud: Azure
+2026-11-12T20:44:09.3179613Z ##[endgroup]
+2026-11-12T20:44:09.3181076Z ##[group]Operating System
+2026-11-12T20:44:09.3181713Z Ubuntu
+2026-11-12T20:44:09.3182255Z 24.04.5
+2026-11-12T20:44:09.3182738Z LTS
+2026-11-12T20:44:09.3183199Z ##[endgroup]
+2026-11-12T20:44:09.3183664Z ##[group]Runner Image
+2026-11-12T20:44:09.3184234Z Image: ubuntu-24.04
+2026-11-12T20:44:09.3184764Z Version: 20261101.360.1
+2026-11-12T20:44:09.3185879Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261101.360/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-12T20:44:09.3187136Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261101.360
+2026-11-12T20:44:09.3188172Z ##[endgroup]
+2026-11-12T20:44:09.3189248Z ##[group]GITHUB_TOKEN Permissions
+2026-11-12T20:44:09.3191437Z Actions: read
+2026-11-12T20:44:09.3191966Z Contents: read
+2026-11-12T20:44:09.3192515Z Metadata: read
+2026-11-12T20:44:09.3193087Z ##[endgroup]
+2026-11-12T20:44:09.3195375Z Secret source: Actions
+2026-11-12T20:44:09.3196268Z Cache mode: write
+2026-11-12T20:44:09.3197051Z Prepare workflow directory
+2026-11-12T20:44:09.3507952Z Prepare all required actions
+2026-11-12T20:44:09.3548040Z Getting action download info
+2026-11-12T20:44:09.5527062Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-12T20:44:09.6336479Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-11-12T20:44:09.8502694Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-12T20:44:10.1354300Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-12T20:44:10.3301380Z Complete job name: native-cpu
+2026-11-12T20:44:10.4006661Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-12T20:44:10.4007508Z with:
+2026-11-12T20:44:10.4007907Z   ref: 8dea1194e974fa07b1d2f07a190949c3a92cab80
+2026-11-12T20:44:10.4008392Z   fetch-depth: 2
+2026-11-12T20:44:10.4008777Z   persist-credentials: false
+2026-11-12T20:44:10.4009206Z   repository: Afloat16/onnxruntime
+2026-11-12T20:44:10.4012659Z   token: ***
+2026-11-12T20:44:10.4013026Z   ssh-strict: true
+2026-11-12T20:44:10.4013398Z   ssh-user: git
+2026-11-12T20:44:10.4013745Z   clean: true
+2026-11-12T20:44:10.4014115Z   sparse-checkout-cone-mode: true
+2026-11-12T20:44:10.4014580Z   fetch-tags: false
+2026-11-12T20:44:10.4014958Z   show-progress: true
+2026-11-12T20:44:10.4015336Z   lfs: false
+2026-11-12T20:44:10.4015672Z   submodules: false
+2026-11-12T20:44:10.4016038Z   set-safe-directory: true
+2026-11-12T20:44:10.4016449Z   allow-unsafe-pr-checkout: false
+2026-11-12T20:44:10.4017021Z env:
+2026-11-12T20:44:10.4017364Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:10.4017824Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:10.4018250Z ##[endgroup]
+2026-11-12T20:44:11.0022584Z Syncing repository: Afloat16/onnxruntime
+2026-11-12T20:44:11.0024625Z ##[group]Getting Git version info
+2026-11-12T20:44:11.0025675Z Working directory is '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-12T20:44:11.0027259Z [command]/usr/bin/git version
+2026-11-12T20:44:11.0090351Z git version 2.56.0
+2026-11-12T20:44:11.0108349Z ##[endgroup]
+2026-11-12T20:44:11.0117179Z Temporarily overriding HOME='/home/runner/work/_temp/5cb8b125-b773-4e30-98d4-99fcaeb6ca3d' before making global git config changes
+2026-11-12T20:44:11.0121452Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-12T20:44:11.0124974Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-12T20:44:11.0166645Z Deleting the contents of '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-12T20:44:11.0170663Z ##[group]Determining repository object format
+2026-11-12T20:44:11.0173757Z ##[endgroup]
+2026-11-12T20:44:11.0175949Z ##[group]Initializing the repository
+2026-11-12T20:44:11.0177954Z [command]/usr/bin/git init /home/runner/work/onnxruntime/onnxruntime
+2026-11-12T20:44:11.0281584Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-12T20:44:11.0284246Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-12T20:44:11.0287844Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-12T20:44:11.0289870Z hint: call:
+2026-11-12T20:44:11.0290966Z hint:
+2026-11-12T20:44:11.0292195Z hint: 	git config --global init.defaultBranch <name>
+2026-11-12T20:44:11.0293510Z hint:
+2026-11-12T20:44:11.0294974Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-12T20:44:11.0297665Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-12T20:44:11.0299431Z hint:
+2026-11-12T20:44:11.0300615Z hint: 	git branch -m <name>
+2026-11-12T20:44:11.0301933Z hint:
+2026-11-12T20:44:11.0303213Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-12T20:44:11.0305558Z Initialized empty Git repository in /home/runner/work/onnxruntime/onnxruntime/.git/
+2026-11-12T20:44:11.0309036Z [command]/usr/bin/git remote add origin https://github.com/Afloat16/onnxruntime
+2026-11-12T20:44:11.0523198Z ##[endgroup]
+2026-11-12T20:44:11.0525067Z ##[group]Disabling automatic garbage collection
+2026-11-12T20:44:11.0526799Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-12T20:44:11.0567876Z ##[endgroup]
+2026-11-12T20:44:11.0570098Z ##[group]Setting up auth
+2026-11-12T20:44:11.0657955Z Removing SSH command configuration
+2026-11-12T20:44:11.0660238Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-12T20:44:11.0677722Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-12T20:44:11.0952390Z Removing HTTP extra header
+2026-11-12T20:44:11.0957676Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-12T20:44:11.0995332Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-12T20:44:11.1193368Z Removing includeIf entries pointing to credentials config files
+2026-11-12T20:44:11.1196337Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-12T20:44:11.1240210Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-12T20:44:11.1447510Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-12T20:44:11.1487036Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path /home/runner/work/_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config
+2026-11-12T20:44:11.1523159Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config
+2026-11-12T20:44:11.1559600Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config
+2026-11-12T20:44:11.1595813Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config
+2026-11-12T20:44:11.1629773Z ##[endgroup]
+2026-11-12T20:44:11.1631441Z ##[group]Fetching the repository
+2026-11-12T20:44:11.1634664Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin 8dea1194e974fa07b1d2f07a190949c3a92cab80
+2026-11-12T20:44:26.7816823Z From https://github.com/Afloat16/onnxruntime
+2026-11-12T20:44:26.7817511Z  * branch            8dea1194e974fa07b1d2f07a190949c3a92cab80 -> FETCH_HEAD
+2026-11-12T20:44:26.7825239Z [command]/usr/bin/git rev-parse --verify --quiet 8dea1194e974fa07b1d2f07a190949c3a92cab80^{object}
+2026-11-12T20:44:26.7857101Z 8dea1194e974fa07b1d2f07a190949c3a92cab80
+2026-11-12T20:44:26.7861305Z ##[endgroup]
+2026-11-12T20:44:26.7861666Z ##[group]Determining the checkout info
+2026-11-12T20:44:26.7862150Z ##[endgroup]
+2026-11-12T20:44:26.7865131Z [command]/usr/bin/git sparse-checkout disable
+2026-11-12T20:44:26.7922468Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-12T20:44:26.7957521Z ##[group]Checking out the ref
+2026-11-12T20:44:26.7960950Z [command]/usr/bin/git checkout --progress --force 8dea1194e974fa07b1d2f07a190949c3a92cab80
+2026-11-12T20:44:27.9025799Z Updating files:  74% (8730/11668)
+2026-11-12T20:44:27.9088145Z Updating files:  75% (8751/11668)
+2026-11-12T20:44:27.9181984Z Updating files:  76% (8868/11668)
+2026-11-12T20:44:27.9852792Z Updating files:  77% (8985/11668)
+2026-11-12T20:44:28.0805374Z Updating files:  78% (9102/11668)
+2026-11-12T20:44:28.0848059Z Updating files:  79% (9218/11668)
+2026-11-12T20:44:28.1688963Z Updating files:  80% (9335/11668)
+2026-11-12T20:44:28.3692940Z Updating files:  81% (9452/11668)
+2026-11-12T20:44:28.3907862Z Updating files:  82% (9568/11668)
+2026-11-12T20:44:28.3973723Z Updating files:  83% (9685/11668)
+2026-11-12T20:44:28.4034818Z Updating files:  84% (9802/11668)
+2026-11-12T20:44:28.4121448Z Updating files:  85% (9918/11668)
+2026-11-12T20:44:28.4181373Z Updating files:  86% (10035/11668)
+2026-11-12T20:44:28.4287162Z Updating files:  87% (10152/11668)
+2026-11-12T20:44:28.4337170Z Updating files:  88% (10268/11668)
+2026-11-12T20:44:28.4381621Z Updating files:  89% (10385/11668)
+2026-11-12T20:44:28.4441894Z Updating files:  90% (10502/11668)
+2026-11-12T20:44:28.4517063Z Updating files:  91% (10618/11668)
+2026-11-12T20:44:28.4586338Z Updating files:  92% (10735/11668)
+2026-11-12T20:44:28.4630119Z Updating files:  93% (10852/11668)
+2026-11-12T20:44:28.4677455Z Updating files:  94% (10968/11668)
+2026-11-12T20:44:28.4740176Z Updating files:  95% (11085/11668)
+2026-11-12T20:44:28.4786173Z Updating files:  96% (11202/11668)
+2026-11-12T20:44:28.4831992Z Updating files:  97% (11318/11668)
+2026-11-12T20:44:28.4893346Z Updating files:  98% (11435/11668)
+2026-11-12T20:44:28.7782841Z Updating files:  99% (11552/11668)
+2026-11-12T20:44:28.7783157Z Updating files: 100% (11668/11668)
+2026-11-12T20:44:28.7783388Z Updating files: 100% (11668/11668), done.
+2026-11-12T20:44:28.7875595Z Note: switching to '8dea1194e974fa07b1d2f07a190949c3a92cab80'.
+2026-11-12T20:44:28.7875856Z 
+2026-11-12T20:44:28.7876038Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-12T20:44:28.7876451Z changes and commit them, and you can discard any commits you make in this
+2026-11-12T20:44:28.7876826Z state without impacting any branches by switching back to a branch.
+2026-11-12T20:44:28.7877040Z 
+2026-11-12T20:44:28.7877189Z If you want to create a new branch to retain commits you create, you may
+2026-11-12T20:44:28.7877560Z do so (now or later) by using -c with the switch command. Example:
+2026-11-12T20:44:28.7877794Z 
+2026-11-12T20:44:28.7877892Z   git switch -c <new-branch-name>
+2026-11-12T20:44:28.7878029Z 
+2026-11-12T20:44:28.7878117Z Or undo this operation with:
+2026-11-12T20:44:28.7878265Z 
+2026-11-12T20:44:28.7878705Z   git switch -
+2026-11-12T20:44:28.7878809Z 
+2026-11-12T20:44:28.7878977Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-12T20:44:28.7879215Z 
+2026-11-12T20:44:28.7879383Z HEAD is now at 8dea119 Keep distribution calibration moments finite and accurate
+2026-11-12T20:44:28.7985873Z ##[endgroup]
+2026-11-12T20:44:28.8037034Z [command]/usr/bin/git log -1 --format=%H
+2026-11-12T20:44:28.8069072Z 8dea1194e974fa07b1d2f07a190949c3a92cab80
+2026-11-12T20:44:28.8081050Z ##[group]Removing auth
+2026-11-12T20:44:28.8081601Z Removing SSH command configuration
+2026-11-12T20:44:28.8082256Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-12T20:44:28.8118134Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-12T20:44:28.8337461Z Removing HTTP extra header
+2026-11-12T20:44:28.8340432Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-12T20:44:28.8380340Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-12T20:44:28.8595660Z Removing includeIf entries pointing to credentials config files
+2026-11-12T20:44:28.8597929Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-12T20:44:28.8631410Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-12T20:44:28.8632097Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-12T20:44:28.8632516Z includeif.gitdir:/github/workspace/.git.path
+2026-11-12T20:44:28.8632835Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-12T20:44:28.8639030Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-12T20:44:28.8668160Z /home/runner/work/_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config
+2026-11-12T20:44:28.8676230Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-decfa338\-be8d\-4d51\-82b0\-1c2bba3ebebf\.config
+2026-11-12T20:44:28.8715862Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-12T20:44:28.8743875Z /home/runner/work/_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config
+2026-11-12T20:44:28.8750988Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-decfa338\-be8d\-4d51\-82b0\-1c2bba3ebebf\.config
+2026-11-12T20:44:28.8791587Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-12T20:44:28.8824382Z /github/runner_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config
+2026-11-12T20:44:28.8831067Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-decfa338\-be8d\-4d51\-82b0\-1c2bba3ebebf\.config
+2026-11-12T20:44:28.8869266Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-12T20:44:28.8896988Z /github/runner_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config
+2026-11-12T20:44:28.8903159Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-decfa338\-be8d\-4d51\-82b0\-1c2bba3ebebf\.config
+2026-11-12T20:44:28.8939792Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-12T20:44:28.9151937Z Removing credentials config '/home/runner/work/_temp/git-credentials-decfa338-be8d-4d51-82b0-1c2bba3ebebf.config'
+2026-11-12T20:44:28.9161660Z ##[endgroup]
+2026-11-12T20:44:28.9377745Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-11-12T20:44:28.9378081Z with:
+2026-11-12T20:44:28.9378254Z   python-version: 3.12
+2026-11-12T20:44:28.9378452Z   check-latest: false
+2026-11-12T20:44:28.9380564Z   token: ***
+2026-11-12T20:44:28.9381054Z   update-environment: true
+2026-11-12T20:44:28.9381291Z   allow-prereleases: false
+2026-11-12T20:44:28.9381490Z   freethreaded: false
+2026-11-12T20:44:28.9381665Z env:
+2026-11-12T20:44:28.9381828Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:28.9382028Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:28.9382242Z ##[endgroup]
+2026-11-12T20:44:29.0462577Z ##[group]Installed versions
+2026-11-12T20:44:29.0577035Z (node:2232) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T20:44:29.0577852Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T20:44:29.0578517Z Successfully set up CPython (3.12.16)
+2026-11-12T20:44:29.0579228Z ##[endgroup]
+2026-11-12T20:44:29.0716178Z ##[group]Run python -m venv "$RUNNER_TEMP/ort-validation-venv"
+2026-11-12T20:44:29.0716622Z [36;1mpython -m venv "$RUNNER_TEMP/ort-validation-venv"[0m
+2026-11-12T20:44:29.0716984Z [36;1mecho "$RUNNER_TEMP/ort-validation-venv/bin" >> "$GITHUB_PATH"[0m
+2026-11-12T20:44:29.0845667Z shell: /usr/bin/bash -e {0}
+2026-11-12T20:44:29.0846022Z env:
+2026-11-12T20:44:29.0846256Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:29.0846528Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:29.0846935Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:29.0847487Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:44:29.0848015Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:29.0848480Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:29.0848961Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:29.0849491Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:44:29.0849888Z ##[endgroup]
+2026-11-12T20:44:31.6671950Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-12T20:44:31.6672294Z with:
+2026-11-12T20:44:31.6672474Z   name: cpu-native-wheel-a8246c0d
+2026-11-12T20:44:31.6672680Z   run-id: 43296543822
+2026-11-12T20:44:31.6674798Z   github-token: ***
+2026-11-12T20:44:31.6675024Z   path: /home/runner/work/_temp/ort-built-wheel
+2026-11-12T20:44:31.6675280Z   merge-multiple: false
+2026-11-12T20:44:31.6675481Z   repository: Afloat16/onnxruntime
+2026-11-12T20:44:31.6675699Z env:
+2026-11-12T20:44:31.6675860Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:31.6676060Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:31.6676316Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:31.6676662Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:44:31.6677013Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:31.6677313Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:31.6677633Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:31.6677934Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:44:31.6678194Z ##[endgroup]
+2026-11-12T20:44:31.8172240Z Downloading single artifact
+2026-11-12T20:44:31.8248857Z (node:2266) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T20:44:31.8249527Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T20:44:31.8456786Z (node:2266) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-12T20:44:32.0816476Z Preparing to download the following artifacts:
+2026-11-12T20:44:32.0817468Z - cpu-native-wheel-a8246c0d (ID: 13982605959, Size: 30978382, Expected Digest: sha256:0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301)
+2026-11-12T20:44:32.0848230Z Downloading artifact '13982605959' from 'Afloat16/onnxruntime'
+2026-11-12T20:44:32.4059048Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/6682e059f91784baee0f176a816c789347a553a5901897c10ebf1feb950019db.zip
+2026-11-12T20:44:32.4060094Z Starting download of artifact to: /home/runner/work/_temp/ort-built-wheel
+2026-11-12T20:44:32.5077524Z (node:2266) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-12T20:44:33.0580319Z SHA256 digest of downloaded artifact is 0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301
+2026-11-12T20:44:33.0581116Z Artifact download completed successfully.
+2026-11-12T20:44:33.0581390Z Total of 1 artifact(s) downloaded
+2026-11-12T20:44:33.0584885Z Download artifact has finished successfully
+2026-11-12T20:44:33.0762883Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-12T20:44:33.0763218Z with:
+2026-11-12T20:44:33.0763424Z   name: cpu-distribution-calibration-evidence
+2026-11-12T20:44:33.0763663Z   run-id: 43296543822
+2026-11-12T20:44:33.0765791Z   github-token: ***
+2026-11-12T20:44:33.0766020Z   path: /home/runner/work/_temp/ort-build-evidence
+2026-11-12T20:44:33.0766281Z   merge-multiple: false
+2026-11-12T20:44:33.0766483Z   repository: Afloat16/onnxruntime
+2026-11-12T20:44:33.0766682Z env:
+2026-11-12T20:44:33.0766840Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:33.0767045Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:33.0767303Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:33.0767656Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:44:33.0767994Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:33.0768325Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:33.0768632Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:33.0768924Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:44:33.0769183Z ##[endgroup]
+2026-11-12T20:44:33.2036423Z Downloading single artifact
+2026-11-12T20:44:33.2115051Z (node:2278) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T20:44:33.2115693Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T20:44:33.2246758Z (node:2278) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-12T20:44:33.4616972Z Preparing to download the following artifacts:
+2026-11-12T20:44:33.4617701Z - cpu-distribution-calibration-evidence (ID: 13981818755, Size: 64428, Expected Digest: sha256:53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec)
+2026-11-12T20:44:33.4643061Z Downloading artifact '13981818755' from 'Afloat16/onnxruntime'
+2026-11-12T20:44:33.8018074Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/b5c359d12481e2fcd67c56939a89868631bef8eee9f9477d17c7aaf2174630ca.zip
+2026-11-12T20:44:33.8019680Z Starting download of artifact to: /home/runner/work/_temp/ort-build-evidence
+2026-11-12T20:44:33.8290269Z (node:2278) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-12T20:44:33.8362159Z SHA256 digest of downloaded artifact is 53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec
+2026-11-12T20:44:33.8362842Z Artifact download completed successfully.
+2026-11-12T20:44:33.8363242Z Total of 1 artifact(s) downloaded
+2026-11-12T20:44:33.8366677Z Download artifact has finished successfully
+2026-11-12T20:44:33.8491560Z ##[group]Run python -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12
+2026-11-12T20:44:33.8492407Z [36;1mpython -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12[0m
+2026-11-12T20:44:33.8492879Z [36;1mpython -P - <<'PY'[0m
+2026-11-12T20:44:33.8493104Z [36;1mimport hashlib[0m
+2026-11-12T20:44:33.8493295Z [36;1mimport json[0m
+2026-11-12T20:44:33.8493467Z [36;1mimport os[0m
+2026-11-12T20:44:33.8493660Z [36;1mimport platform[0m
+2026-11-12T20:44:33.8493851Z [36;1mimport subprocess[0m
+2026-11-12T20:44:33.8494083Z [36;1mfrom pathlib import Path[0m
+2026-11-12T20:44:33.8494286Z [36;1mimport numpy[0m
+2026-11-12T20:44:33.8494458Z [36;1mimport onnx[0m
+2026-11-12T20:44:33.8494633Z [36;1mimport onnxruntime[0m
+2026-11-12T20:44:33.8494860Z [36;1mfrom onnxruntime.quantization import calibrate[0m
+2026-11-12T20:44:33.8495381Z [36;1mprovenance = json.loads((Path(os.environ["RUNNER_TEMP"]) / "ort-build-evidence/ort-source-build-metadata.json").read_text())[0m
+2026-11-12T20:44:33.8495961Z [36;1massert provenance["source_commit"] == "8dea1194e974fa07b1d2f07a190949c3a92cab80"[0m
+2026-11-12T20:44:33.8496413Z [36;1mexpected = Path("onnxruntime/python/tools/quantization/calibrate.py").read_bytes()[0m
+2026-11-12T20:44:33.8496779Z [36;1mactual = Path(calibrate.__file__).read_bytes()[0m
+2026-11-12T20:44:33.8497059Z [36;1massert actual == expected, calibrate.__file__[0m
+2026-11-12T20:44:33.8497409Z [36;1massert "CPUExecutionProvider" in onnxruntime.get_available_providers()[0m
+2026-11-12T20:44:33.8497731Z [36;1mmetadata = {[0m
+2026-11-12T20:44:33.8497920Z [36;1m    "native_build_run": 43296543822,[0m
+2026-11-12T20:44:33.8498157Z [36;1m    "native_wheel_artifact": 13982605959,[0m
+2026-11-12T20:44:33.8498524Z [36;1m    "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),[0m
+2026-11-12T20:44:33.8498892Z [36;1m    "python": platform.python_version(),[0m
+2026-11-12T20:44:33.8499136Z [36;1m    "platform": platform.platform(),[0m
+2026-11-12T20:44:33.8499370Z [36;1m    "numpy": numpy.__version__,[0m
+2026-11-12T20:44:33.8499595Z [36;1m    "onnx": onnx.__version__,[0m
+2026-11-12T20:44:33.8499836Z [36;1m    "onnxruntime": onnxruntime.__version__,[0m
+2026-11-12T20:44:33.8500091Z [36;1m    "runtime_path": onnxruntime.__file__,[0m
+2026-11-12T20:44:33.8500337Z [36;1m    "calibration_path": calibrate.__file__,[0m
+2026-11-12T20:44:33.8500619Z [36;1m    "calibration_sha256": hashlib.sha256(actual).hexdigest(),[0m
+2026-11-12T20:44:33.8501122Z [36;1m    "providers": onnxruntime.get_available_providers(),[0m
+2026-11-12T20:44:33.8501375Z [36;1m}[0m
+2026-11-12T20:44:33.8501680Z [36;1mPath("ort-source-build-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")[0m
+2026-11-12T20:44:33.8502054Z [36;1mprint(json.dumps(metadata, indent=2))[0m
+2026-11-12T20:44:33.8502292Z [36;1mPY[0m
+2026-11-12T20:44:33.8520956Z shell: /usr/bin/bash -e {0}
+2026-11-12T20:44:33.8521170Z env:
+2026-11-12T20:44:33.8521341Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:33.8521547Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:33.8521807Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:33.8522145Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:44:33.8522469Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:33.8522787Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:33.8523070Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:33.8523524Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:44:33.8523777Z ##[endgroup]
+2026-11-12T20:44:34.1504024Z Processing /home/runner/work/_temp/ort-built-wheel/onnxruntime-1.33.0-cp312-cp312-linux_x86_64.whl
+2026-11-12T20:44:34.5368269Z Collecting numpy==2.3.5
+2026-11-12T20:44:34.6116378Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-11-12T20:44:34.6907172Z Collecting onnx==1.20.1
+2026-11-12T20:44:34.7109523Z   Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.4 kB)
+2026-11-12T20:44:34.7395893Z Collecting ml_dtypes
+2026-11-12T20:44:34.7592118Z   Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+2026-11-12T20:44:34.7950240Z Collecting pytest==9.1.1
+2026-11-12T20:44:34.8135555Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-11-12T20:44:35.0563659Z Collecting ruff==0.12.12
+2026-11-12T20:44:35.0758154Z   Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2026-11-12T20:44:35.2073089Z Collecting protobuf>=4.25.1 (from onnx==1.20.1)
+2026-11-12T20:44:35.2261087Z   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+2026-11-12T20:44:35.6826819Z Collecting typing_extensions>=4.7.1 (from onnx==1.20.1)
+2026-11-12T20:44:35.7017349Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-12T20:44:35.9260130Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1)
+2026-11-12T20:44:35.9457290Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-12T20:44:36.1772139Z Collecting packaging>=22 (from pytest==9.1.1)
+2026-11-12T20:44:36.1958351Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-12T20:44:36.3988826Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1)
+2026-11-12T20:44:36.4191783Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-12T20:44:36.6211205Z Collecting pygments>=2.7.2 (from pytest==9.1.1)
+2026-11-12T20:44:36.6397389Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-12T20:44:36.7532201Z Collecting flatbuffers (from onnxruntime==1.33.0)
+2026-11-12T20:44:36.7719732Z   Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+2026-11-12T20:44:37.0627945Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-11-12T20:44:37.3099610Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 74.1 MB/s eta 0:00:00
+2026-11-12T20:44:37.3371688Z Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (17.5 MB)
+2026-11-12T20:44:37.5486697Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.5/17.5 MB 82.4 MB/s eta 0:00:00
+2026-11-12T20:44:37.5672608Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-11-12T20:44:37.5906918Z Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+2026-11-12T20:44:37.7683116Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 74.6 MB/s eta 0:00:00
+2026-11-12T20:44:37.7887156Z Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (409 kB)
+2026-11-12T20:44:37.8095009Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-12T20:44:37.8294838Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-12T20:44:38.0634305Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-12T20:44:38.0840003Z Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+2026-11-12T20:44:38.1072340Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-12T20:44:38.1767564Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 14.7 MB/s eta 0:00:00
+2026-11-12T20:44:38.1954958Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-12T20:44:38.2156108Z Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+2026-11-12T20:44:38.3720397Z Installing collected packages: flatbuffers, typing_extensions, ruff, pygments, protobuf, pluggy, packaging, numpy, iniconfig, pytest, onnxruntime, ml_dtypes, onnx
+2026-11-12T20:44:43.8902263Z Successfully installed flatbuffers-25.12.19 iniconfig-2.3.1 ml_dtypes-0.6.0 numpy-2.3.5 onnx-1.20.1 onnxruntime-1.33.0 packaging-26.3 pluggy-1.7.0 protobuf-7.36.2 pygments-2.21.0 pytest-9.1.1 ruff-0.12.12 typing_extensions-4.16.0
+2026-11-12T20:44:43.9716068Z 
+2026-11-12T20:44:43.9716541Z [notice] A new release of pip is available: 25.0.1 -> 26.3
+2026-11-12T20:44:43.9716908Z [notice] To update, run: pip install --upgrade pip
+2026-11-12T20:44:44.1796160Z [0;93m2026-11-12 20:44:44.179330467 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:44:44.2184607Z {
+2026-11-12T20:44:44.2184871Z   "native_build_run": 43296543822,
+2026-11-12T20:44:44.2185153Z   "native_wheel_artifact": 13982605959,
+2026-11-12T20:44:44.2185437Z   "source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+2026-11-12T20:44:44.2185709Z   "python": "3.12.16",
+2026-11-12T20:44:44.2185949Z   "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+2026-11-12T20:44:44.2186222Z   "numpy": "2.3.5",
+2026-11-12T20:44:44.2186391Z   "onnx": "1.20.1",
+2026-11-12T20:44:44.2186559Z   "onnxruntime": "1.33.0",
+2026-11-12T20:44:44.2186950Z   "runtime_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/__init__.py",
+2026-11-12T20:44:44.2187590Z   "calibration_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/calibrate.py",
+2026-11-12T20:44:44.2188171Z   "calibration_sha256": "c491daab07edd7e6efbca2276e1f95c6f773082e2157dda062ffd36da2e0ac7d",
+2026-11-12T20:44:44.2188536Z   "providers": [
+2026-11-12T20:44:44.2188721Z     "CPUExecutionProvider"
+2026-11-12T20:44:44.2188905Z   ]
+2026-11-12T20:44:44.2189051Z }
+2026-11-12T20:44:44.2523379Z ##[group]Run set -o pipefail
+2026-11-12T20:44:44.2523639Z [36;1mset -o pipefail[0m
+2026-11-12T20:44:44.2524455Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_distribution_moments.py onnxruntime/test/python/quantization/test_calibration.py 2>&1 | tee ort-patched.log[0m
+2026-11-12T20:44:44.2544974Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T20:44:44.2545258Z env:
+2026-11-12T20:44:44.2545429Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:44.2545640Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:44.2545899Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:44.2546242Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:44:44.2546571Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:44.2546918Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:44.2547216Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:44.2547518Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:44:44.2547817Z ##[endgroup]
+2026-11-12T20:44:44.3277281Z [0;93m2026-11-12 20:44:44.327393993 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:44:45.0201695Z ...............................                           [100%]
+2026-11-12T20:44:45.0202226Z =============================== warnings summary ===============================
+2026-11-12T20:44:45.0202725Z onnxruntime/test/python/quantization/test_calibration.py:40
+2026-11-12T20:44:45.0204232Z   /home/runner/work/onnxruntime/onnxruntime/onnxruntime/test/python/quantization/test_calibration.py:40: PytestCollectionWarning: cannot collect test class 'TestDataReader' because it has a __init__ constructor (from: onnxruntime/test/python/quantization/test_calibration.py)
+2026-11-12T20:44:45.0205991Z     class TestDataReader(CalibrationDataReader):
+2026-11-12T20:44:45.0206263Z 
+2026-11-12T20:44:45.0206539Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-11-12T20:44:45.0207049Z 31 passed, 1 warning, 15 subtests passed in 0.43s
+2026-11-12T20:44:45.0721359Z ##[group]Run python -P - <<'PY'
+2026-11-12T20:44:45.0721658Z [36;1mpython -P - <<'PY'[0m
+2026-11-12T20:44:45.0721871Z [36;1mimport subprocess[0m
+2026-11-12T20:44:45.0722205Z [36;1mfrom pathlib import Path[0m
+2026-11-12T20:44:45.0722591Z [36;1mfrom onnxruntime.quantization import calibrate[0m
+2026-11-12T20:44:45.0723351Z [36;1mbaseline = subprocess.check_output(["git", "show", "a8246c0d094f1ab0d6bf236228e5e67683321cd7:onnxruntime/python/tools/quantization/calibrate.py"])[0m
+2026-11-12T20:44:45.0724190Z [36;1mtarget = Path(calibrate.__file__)[0m
+2026-11-12T20:44:45.0724548Z [36;1mtarget.write_bytes(baseline)[0m
+2026-11-12T20:44:45.0724933Z [36;1massert target.read_bytes() == baseline[0m
+2026-11-12T20:44:45.0725460Z [36;1mfor cached in target.parent.glob("__pycache__/calibrate.*.pyc"):[0m
+2026-11-12T20:44:45.0725922Z [36;1m    cached.unlink()[0m
+2026-11-12T20:44:45.0726294Z [36;1mprint("Original calibration source restored:", target)[0m
+2026-11-12T20:44:45.0726606Z [36;1mPY[0m
+2026-11-12T20:44:45.0745395Z shell: /usr/bin/bash -e {0}
+2026-11-12T20:44:45.0745627Z env:
+2026-11-12T20:44:45.0745798Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:45.0746012Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:45.0746279Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.0746630Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:44:45.0746976Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.0747286Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.0747581Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.0747880Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:44:45.0748140Z ##[endgroup]
+2026-11-12T20:44:45.1559297Z [0;93m2026-11-12 20:44:45.155570185 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:44:45.2432304Z Original calibration source restored: /home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/calibrate.py
+2026-11-12T20:44:45.2766042Z ##[group]Run set +e
+2026-11-12T20:44:45.2766276Z [36;1mset +e[0m
+2026-11-12T20:44:45.2766929Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_distribution_moments.py > ort-baseline.log 2>&1[0m
+2026-11-12T20:44:45.2767587Z [36;1mresult=$?[0m
+2026-11-12T20:44:45.2767756Z [36;1mset -e[0m
+2026-11-12T20:44:45.2767922Z [36;1mcat ort-baseline.log[0m
+2026-11-12T20:44:45.2768119Z [36;1mtest "$result" -eq 1[0m
+2026-11-12T20:44:45.2768310Z [36;1mpython -P - <<'PY'[0m
+2026-11-12T20:44:45.2768529Z [36;1mimport xml.etree.ElementTree as ET[0m
+2026-11-12T20:44:45.2768797Z [36;1mroot = ET.parse("ort-baseline.xml").getroot()[0m
+2026-11-12T20:44:45.2769189Z [36;1massert not root.findall(".//error"), "Baseline must fail assertions, not collection/import."[0m
+2026-11-12T20:44:45.2769753Z [36;1mfailed = {case.attrib["name"] for case in root.findall(".//testcase") if case.find("failure") is not None}[0m
+2026-11-12T20:44:45.2770129Z [36;1mrequired = {[0m
+2026-11-12T20:44:45.2770466Z [36;1m    "test_float16_midpoint_addition",[0m
+2026-11-12T20:44:45.2770836Z [36;1m    "test_float16_squared_midpoints",[0m
+2026-11-12T20:44:45.2771197Z [36;1m    "test_float32_cancellation",[0m
+2026-11-12T20:44:45.2771432Z [36;1m    "test_float32_large_spread",[0m
+2026-11-12T20:44:45.2771646Z [36;1m    "test_float32_small_spread",[0m
+2026-11-12T20:44:45.2771882Z [36;1m    "test_fp8_static_quantization_scales",[0m
+2026-11-12T20:44:45.2772107Z [36;1m}[0m
+2026-11-12T20:44:45.2772333Z [36;1massert required <= failed, (required - failed, failed)[0m
+2026-11-12T20:44:45.2772708Z [36;1mprint("Confirmed original implementation failures:", sorted(failed))[0m
+2026-11-12T20:44:45.2773016Z [36;1mPY[0m
+2026-11-12T20:44:45.2791020Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T20:44:45.2791300Z env:
+2026-11-12T20:44:45.2791473Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:45.2791683Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:45.2791941Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.2792284Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:44:45.2792609Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.2792901Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.2793187Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.2793475Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:44:45.2793727Z ##[endgroup]
+2026-11-12T20:44:45.8423688Z [0;93m2026-11-12 20:44:45.352277185 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:44:45.8425259Z FFFFFF....F.                                                 [100%]
+2026-11-12T20:44:45.8425728Z =================================== FAILURES ===================================
+2026-11-12T20:44:45.8426276Z ____________ TestDistributionMoments.test_float16_midpoint_addition ____________
+2026-11-12T20:44:45.8426667Z 
+2026-11-12T20:44:45.8427062Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float16_midpoint_addition>
+2026-11-12T20:44:45.8427573Z 
+2026-11-12T20:44:45.8427723Z     def test_float16_midpoint_addition(self):
+2026-11-12T20:44:45.8428218Z >       self.check_moments(np.array([49024, 50016, 51008], dtype=np.float16))
+2026-11-12T20:44:45.8428569Z 
+2026-11-12T20:44:45.8428825Z onnxruntime/test/python/quantization/test_distribution_moments.py:66: 
+2026-11-12T20:44:45.8429367Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-12T20:44:45.8429661Z 
+2026-11-12T20:44:45.8430438Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float16_midpoint_addition>
+2026-11-12T20:44:45.8431314Z edges = array([4.902e+04, 5.002e+04, 5.101e+04], dtype=float16)
+2026-11-12T20:44:45.8431678Z hist = array([1, 1]), power = 1
+2026-11-12T20:44:45.8431815Z 
+2026-11-12T20:44:45.8431940Z     def check_moments(self, edges, hist=None, power=1):
+2026-11-12T20:44:45.8432208Z         if hist is None:
+2026-11-12T20:44:45.8432477Z             hist = np.ones(len(edges) - 1, dtype=np.int64)
+2026-11-12T20:44:45.8432755Z         original_edges = edges.copy()
+2026-11-12T20:44:45.8432985Z         original_hist = hist.copy()
+2026-11-12T20:44:45.8433284Z         expected_mean, expected_std = reference_moments(hist, edges, power)
+2026-11-12T20:44:45.8433668Z         with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+2026-11-12T20:44:45.8434023Z             mean, std = HistogramCollector._avg_std(hist, edges, power)
+2026-11-12T20:44:45.8434330Z         self.assertEqual(mean.dtype, edges.dtype)
+2026-11-12T20:44:45.8434604Z         self.assertEqual(std.dtype, edges.dtype)
+2026-11-12T20:44:45.8434987Z >       np.testing.assert_allclose(mean, np.array(expected_mean, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8435515Z E       AssertionError: 
+2026-11-12T20:44:45.8435824Z E       Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8436072Z E       
+2026-11-12T20:44:45.8436249Z E       +inf location mismatch:
+2026-11-12T20:44:45.8436486Z E        ACTUAL: array(inf, dtype=float16)
+2026-11-12T20:44:45.8436749Z E        DESIRED: array(5.002e+04, dtype=float16)
+2026-11-12T20:44:45.8436914Z 
+2026-11-12T20:44:45.8437130Z onnxruntime/test/python/quantization/test_distribution_moments.py:57: AssertionError
+2026-11-12T20:44:45.8437592Z ____________ TestDistributionMoments.test_float16_squared_midpoints ____________
+2026-11-12T20:44:45.8437844Z 
+2026-11-12T20:44:45.8438084Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float16_squared_midpoints>
+2026-11-12T20:44:45.8438420Z 
+2026-11-12T20:44:45.8438525Z     def test_float16_squared_midpoints(self):
+2026-11-12T20:44:45.8438846Z >       self.check_moments(np.array([1000, 1001, 1002], dtype=np.float16))
+2026-11-12T20:44:45.8439067Z 
+2026-11-12T20:44:45.8439236Z onnxruntime/test/python/quantization/test_distribution_moments.py:63: 
+2026-11-12T20:44:45.8439586Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-12T20:44:45.8439774Z 
+2026-11-12T20:44:45.8440010Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float16_squared_midpoints>
+2026-11-12T20:44:45.8440433Z edges = array([1.000e+03, 1.001e+03, 1.002e+03], dtype=float16)
+2026-11-12T20:44:45.8440886Z hist = array([1, 1]), power = 1
+2026-11-12T20:44:45.8441045Z 
+2026-11-12T20:44:45.8441157Z     def check_moments(self, edges, hist=None, power=1):
+2026-11-12T20:44:45.8441412Z         if hist is None:
+2026-11-12T20:44:45.8441646Z             hist = np.ones(len(edges) - 1, dtype=np.int64)
+2026-11-12T20:44:45.8441914Z         original_edges = edges.copy()
+2026-11-12T20:44:45.8442143Z         original_hist = hist.copy()
+2026-11-12T20:44:45.8442443Z         expected_mean, expected_std = reference_moments(hist, edges, power)
+2026-11-12T20:44:45.8442812Z         with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+2026-11-12T20:44:45.8443176Z             mean, std = HistogramCollector._avg_std(hist, edges, power)
+2026-11-12T20:44:45.8443480Z         self.assertEqual(mean.dtype, edges.dtype)
+2026-11-12T20:44:45.8443738Z         self.assertEqual(std.dtype, edges.dtype)
+2026-11-12T20:44:45.8444122Z         np.testing.assert_allclose(mean, np.array(expected_mean, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8444626Z >       np.testing.assert_allclose(std, np.array(expected_std, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8444982Z E       AssertionError: 
+2026-11-12T20:44:45.8445194Z E       Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8445421Z E       
+2026-11-12T20:44:45.8445718Z E       +inf location mismatch:
+2026-11-12T20:44:45.8445936Z E        ACTUAL: array(inf, dtype=float16)
+2026-11-12T20:44:45.8446179Z E        DESIRED: array(0.5, dtype=float16)
+2026-11-12T20:44:45.8446336Z 
+2026-11-12T20:44:45.8446536Z onnxruntime/test/python/quantization/test_distribution_moments.py:58: AssertionError
+2026-11-12T20:44:45.8446976Z ______________ TestDistributionMoments.test_float32_cancellation _______________
+2026-11-12T20:44:45.8447223Z 
+2026-11-12T20:44:45.8447452Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float32_cancellation>
+2026-11-12T20:44:45.8447740Z 
+2026-11-12T20:44:45.8447833Z     def test_float32_cancellation(self):
+2026-11-12T20:44:45.8448128Z >       self.check_moments(np.array([1, 1.0001, 1.0002], dtype=np.float32))
+2026-11-12T20:44:45.8448348Z 
+2026-11-12T20:44:45.8448508Z onnxruntime/test/python/quantization/test_distribution_moments.py:69: 
+2026-11-12T20:44:45.8448856Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-12T20:44:45.8449051Z 
+2026-11-12T20:44:45.8449268Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float32_cancellation>
+2026-11-12T20:44:45.8449895Z edges = array([1.    , 1.0001, 1.0002], dtype=float32), hist = array([1, 1])
+2026-11-12T20:44:45.8450195Z power = 1
+2026-11-12T20:44:45.8450292Z 
+2026-11-12T20:44:45.8450426Z     def check_moments(self, edges, hist=None, power=1):
+2026-11-12T20:44:45.8451242Z         if hist is None:
+2026-11-12T20:44:45.8451776Z             hist = np.ones(len(edges) - 1, dtype=np.int64)
+2026-11-12T20:44:45.8452411Z         original_edges = edges.copy()
+2026-11-12T20:44:45.8452893Z         original_hist = hist.copy()
+2026-11-12T20:44:45.8453567Z         expected_mean, expected_std = reference_moments(hist, edges, power)
+2026-11-12T20:44:45.8454257Z         with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+2026-11-12T20:44:45.8454744Z             mean, std = HistogramCollector._avg_std(hist, edges, power)
+2026-11-12T20:44:45.8455200Z         self.assertEqual(mean.dtype, edges.dtype)
+2026-11-12T20:44:45.8455596Z         self.assertEqual(std.dtype, edges.dtype)
+2026-11-12T20:44:45.8456108Z         np.testing.assert_allclose(mean, np.array(expected_mean, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8456784Z >       np.testing.assert_allclose(std, np.array(expected_std, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8457258Z E       AssertionError: 
+2026-11-12T20:44:45.8457600Z E       Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8457962Z E       
+2026-11-12T20:44:45.8468661Z E       nan location mismatch:
+2026-11-12T20:44:45.8468975Z E        ACTUAL: array(nan, dtype=float32)
+2026-11-12T20:44:45.8469370Z E        DESIRED: array(5.00083e-05, dtype=float32)
+2026-11-12T20:44:45.8469639Z 
+2026-11-12T20:44:45.8469996Z onnxruntime/test/python/quantization/test_distribution_moments.py:58: AssertionError
+2026-11-12T20:44:45.8470885Z ______________ TestDistributionMoments.test_float32_large_spread _______________
+2026-11-12T20:44:45.8471292Z 
+2026-11-12T20:44:45.8471678Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float32_large_spread>
+2026-11-12T20:44:45.8472186Z 
+2026-11-12T20:44:45.8472339Z     def test_float32_large_spread(self):
+2026-11-12T20:44:45.8472793Z >       self.check_moments(np.array([-2e25, 0, 2e25], dtype=np.float32))
+2026-11-12T20:44:45.8473131Z 
+2026-11-12T20:44:45.8473387Z onnxruntime/test/python/quantization/test_distribution_moments.py:75: 
+2026-11-12T20:44:45.8473956Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-12T20:44:45.8474278Z 
+2026-11-12T20:44:45.8474624Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float32_large_spread>
+2026-11-12T20:44:45.8475341Z edges = array([-2.e+25,  0.e+00,  2.e+25], dtype=float32), hist = array([1, 1])
+2026-11-12T20:44:45.8475820Z power = 1
+2026-11-12T20:44:45.8475967Z 
+2026-11-12T20:44:45.8476388Z     def check_moments(self, edges, hist=None, power=1):
+2026-11-12T20:44:45.8476807Z         if hist is None:
+2026-11-12T20:44:45.8477176Z             hist = np.ones(len(edges) - 1, dtype=np.int64)
+2026-11-12T20:44:45.8477614Z         original_edges = edges.copy()
+2026-11-12T20:44:45.8477982Z         original_hist = hist.copy()
+2026-11-12T20:44:45.8478469Z         expected_mean, expected_std = reference_moments(hist, edges, power)
+2026-11-12T20:44:45.8479079Z         with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+2026-11-12T20:44:45.8479639Z             mean, std = HistogramCollector._avg_std(hist, edges, power)
+2026-11-12T20:44:45.8480134Z         self.assertEqual(mean.dtype, edges.dtype)
+2026-11-12T20:44:45.8480558Z         self.assertEqual(std.dtype, edges.dtype)
+2026-11-12T20:44:45.8481349Z         np.testing.assert_allclose(mean, np.array(expected_mean, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8482168Z >       np.testing.assert_allclose(std, np.array(expected_std, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8482730Z E       AssertionError: 
+2026-11-12T20:44:45.8483071Z E       Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8483671Z E       
+2026-11-12T20:44:45.8483938Z E       +inf location mismatch:
+2026-11-12T20:44:45.8484295Z E        ACTUAL: array(inf, dtype=float32)
+2026-11-12T20:44:45.8484702Z E        DESIRED: array(1.e+25, dtype=float32)
+2026-11-12T20:44:45.8484956Z 
+2026-11-12T20:44:45.8485307Z onnxruntime/test/python/quantization/test_distribution_moments.py:58: AssertionError
+2026-11-12T20:44:45.8486051Z ______________ TestDistributionMoments.test_float32_small_spread _______________
+2026-11-12T20:44:45.8486470Z 
+2026-11-12T20:44:45.8486924Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float32_small_spread>
+2026-11-12T20:44:45.8487441Z 
+2026-11-12T20:44:45.8487591Z     def test_float32_small_spread(self):
+2026-11-12T20:44:45.8488080Z >       self.check_moments(np.array([-2e-30, 0, 2e-30], dtype=np.float32))
+2026-11-12T20:44:45.8488463Z 
+2026-11-12T20:44:45.8488746Z onnxruntime/test/python/quantization/test_distribution_moments.py:72: 
+2026-11-12T20:44:45.8489346Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-12T20:44:45.8489673Z 
+2026-11-12T20:44:45.8490053Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_float32_small_spread>
+2026-11-12T20:44:45.8490988Z edges = array([-2.e-30,  0.e+00,  2.e-30], dtype=float32), hist = array([1, 1])
+2026-11-12T20:44:45.8491478Z power = 1
+2026-11-12T20:44:45.8491637Z 
+2026-11-12T20:44:45.8491832Z     def check_moments(self, edges, hist=None, power=1):
+2026-11-12T20:44:45.8492246Z         if hist is None:
+2026-11-12T20:44:45.8492627Z             hist = np.ones(len(edges) - 1, dtype=np.int64)
+2026-11-12T20:44:45.8493066Z         original_edges = edges.copy()
+2026-11-12T20:44:45.8493428Z         original_hist = hist.copy()
+2026-11-12T20:44:45.8493907Z         expected_mean, expected_std = reference_moments(hist, edges, power)
+2026-11-12T20:44:45.8494537Z         with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+2026-11-12T20:44:45.8495141Z             mean, std = HistogramCollector._avg_std(hist, edges, power)
+2026-11-12T20:44:45.8495632Z         self.assertEqual(mean.dtype, edges.dtype)
+2026-11-12T20:44:45.8495974Z         self.assertEqual(std.dtype, edges.dtype)
+2026-11-12T20:44:45.8496389Z         np.testing.assert_allclose(mean, np.array(expected_mean, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8496934Z >       np.testing.assert_allclose(std, np.array(expected_std, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8497306Z E       AssertionError: 
+2026-11-12T20:44:45.8497533Z E       Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8497786Z E       
+2026-11-12T20:44:45.8497969Z E       Mismatched elements: 1 / 1 (100%)
+2026-11-12T20:44:45.8498246Z E       Max absolute difference among violations: 1.e-30
+2026-11-12T20:44:45.8498732Z E       Max relative difference among violations: 1.
+2026-11-12T20:44:45.8499003Z E        ACTUAL: array(0., dtype=float32)
+2026-11-12T20:44:45.8499246Z E        DESIRED: array(1.e-30, dtype=float32)
+2026-11-12T20:44:45.8499408Z 
+2026-11-12T20:44:45.8499623Z onnxruntime/test/python/quantization/test_distribution_moments.py:58: AssertionError
+2026-11-12T20:44:45.8500085Z _________ TestDistributionMoments.test_fp8_static_quantization_scales __________
+2026-11-12T20:44:45.8500338Z 
+2026-11-12T20:44:45.8500604Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_fp8_static_quantization_scales>
+2026-11-12T20:44:45.8501167Z 
+2026-11-12T20:44:45.8501280Z     def test_fp8_static_quantization_scales(self):
+2026-11-12T20:44:45.8501601Z         with tempfile.TemporaryDirectory() as temporary_directory:
+2026-11-12T20:44:45.8501918Z             directory = Path(temporary_directory)
+2026-11-12T20:44:45.8502169Z             model_path = directory / "model.onnx"
+2026-11-12T20:44:45.8502447Z             quantized_path = directory / "quantized.onnx"
+2026-11-12T20:44:45.8502732Z             self.make_model(model_path, np.float32)
+2026-11-12T20:44:45.8503060Z             values = np.array([[-1e20, -5e19], [5e19, 1e20]], dtype=np.float32)
+2026-11-12T20:44:45.8503475Z             quantize_static(
+2026-11-12T20:44:45.8503682Z                 model_path,
+2026-11-12T20:44:45.8503877Z                 quantized_path,
+2026-11-12T20:44:45.8504092Z                 ArrayReader([values]),
+2026-11-12T20:44:45.8504330Z                 quant_format=QuantFormat.QDQ,
+2026-11-12T20:44:45.8504598Z                 activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-12T20:44:45.8504874Z                 weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-12T20:44:45.8505176Z                 calibrate_method=CalibrationMethod.Distribution,
+2026-11-12T20:44:45.8505490Z                 calibration_providers=["CPUExecutionProvider"],
+2026-11-12T20:44:45.8505743Z             )
+2026-11-12T20:44:45.8505925Z             model = onnx.load(quantized_path)
+2026-11-12T20:44:45.8506178Z             onnx.checker.check_model(model)
+2026-11-12T20:44:45.8506405Z             scales = [
+2026-11-12T20:44:45.8506763Z                 numpy_helper.to_array(value) for value in model.graph.initializer if value.name.endswith("_scale")
+2026-11-12T20:44:45.8507135Z             ]
+2026-11-12T20:44:45.8507326Z             self.assertGreaterEqual(len(scales), 3)
+2026-11-12T20:44:45.8507587Z             for scale in scales:
+2026-11-12T20:44:45.8507826Z >               self.assertTrue(np.all(np.isfinite(scale)))
+2026-11-12T20:44:45.8508113Z E               AssertionError: np.False_ is not true
+2026-11-12T20:44:45.8508278Z 
+2026-11-12T20:44:45.8508485Z onnxruntime/test/python/quantization/test_distribution_moments.py:177: AssertionError
+2026-11-12T20:44:45.8508925Z ----------------------------- Captured stdout call -----------------------------
+2026-11-12T20:44:45.8509260Z Collecting tensor data and making histogram ...
+2026-11-12T20:44:45.8509602Z Finding optimal threshold for each tensor using 'distribution' algorithm ...
+2026-11-12T20:44:45.8509930Z Number of tensors : 2
+2026-11-12T20:44:45.8510130Z Number of histogram bins : 2048
+2026-11-12T20:44:45.8510347Z Scenario : 'same')
+2026-11-12T20:44:45.8510606Z ------------------------------ Captured log call -------------------------------
+2026-11-12T20:44:45.8511607Z WARNING  root:quantize.py:732 Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+2026-11-12T20:44:45.8512765Z WARNING  root:quantize.py:904 Please consider pre-processing before quantization. See https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md
+2026-11-12T20:44:45.8513628Z _ TestDistributionMoments.test_native_cpu_distribution_calibration (dtype=<class 'numpy.float16'>, scenario='same') _
+2026-11-12T20:44:45.8513998Z 
+2026-11-12T20:44:45.8514446Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_native_cpu_distribution_calibration>
+2026-11-12T20:44:45.8514798Z 
+2026-11-12T20:44:45.8514927Z     def test_native_cpu_distribution_calibration(self):
+2026-11-12T20:44:45.8515261Z         for dtype, magnitude in ((np.float16, 1000), (np.float32, 1e20)):
+2026-11-12T20:44:45.8515564Z             for scenario in ("same", "p3"):
+2026-11-12T20:44:45.8515980Z                 with self.subTest(dtype=dtype, scenario=scenario), tempfile.TemporaryDirectory() as temporary_directory:
+2026-11-12T20:44:45.8516410Z                     directory = Path(temporary_directory)
+2026-11-12T20:44:45.8516677Z                     model_path = directory / "model.onnx"
+2026-11-12T20:44:45.8516934Z                     self.make_model(model_path, dtype)
+2026-11-12T20:44:45.8517318Z                     values = np.array([[-magnitude, -magnitude / 2], [magnitude / 2, magnitude]], dtype=dtype)
+2026-11-12T20:44:45.8517695Z                     calibrator = create_calibrator(
+2026-11-12T20:44:45.8517967Z                         model_path,
+2026-11-12T20:44:45.8518244Z                         calibrate_method=CalibrationMethod.Distribution,
+2026-11-12T20:44:45.8518681Z                         augmented_model_path=directory / "augmented.onnx",
+2026-11-12T20:44:45.8518995Z                         providers=["CPUExecutionProvider"],
+2026-11-12T20:44:45.8519312Z                         extra_options={"num_bins": 512, "scenario": scenario},
+2026-11-12T20:44:45.8519585Z                     )
+2026-11-12T20:44:45.8519819Z                     calibrator.collect_data(ArrayReader([values]))
+2026-11-12T20:44:45.8520108Z                     tensors = calibrator.compute_data()
+2026-11-12T20:44:45.8520386Z                     self.assertEqual(set(tensors), {"X", "Y"})
+2026-11-12T20:44:45.8520667Z                     power = 1 if scenario == "same" else 1 / 3
+2026-11-12T20:44:45.8521101Z                     for name in tensors:
+2026-11-12T20:44:45.8521332Z                         tensor = tensors[name]
+2026-11-12T20:44:45.8521667Z                         expected = reference_moments(tensor.hist, tensor.hist_edges, power)
+2026-11-12T20:44:45.8522008Z >                       np.testing.assert_allclose(
+2026-11-12T20:44:45.8522265Z                             tensor.avg_std,
+2026-11-12T20:44:45.8522516Z                             np.asarray(expected, dtype=dtype),
+2026-11-12T20:44:45.8522771Z                             rtol=1e-6,
+2026-11-12T20:44:45.8523045Z                             atol=np.finfo(dtype).eps * max(abs(expected[0]), 1),
+2026-11-12T20:44:45.8523324Z                         )
+2026-11-12T20:44:45.8523530Z E                       AssertionError: 
+2026-11-12T20:44:45.8523801Z E                       Not equal to tolerance rtol=1e-06, atol=0.000976562
+2026-11-12T20:44:45.8524070Z E                       
+2026-11-12T20:44:45.8524273Z E                       nan location mismatch:
+2026-11-12T20:44:45.8524537Z E                        ACTUAL: array([ 1., nan], dtype=float16)
+2026-11-12T20:44:45.8524830Z E                        DESIRED: array([  1. , 789.5], dtype=float16)
+2026-11-12T20:44:45.8525023Z 
+2026-11-12T20:44:45.8525230Z onnxruntime/test/python/quantization/test_distribution_moments.py:144: AssertionError
+2026-11-12T20:44:45.8525800Z _ TestDistributionMoments.test_native_cpu_distribution_calibration (dtype=<class 'numpy.float16'>, scenario='p3') _
+2026-11-12T20:44:45.8526164Z 
+2026-11-12T20:44:45.8526439Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_native_cpu_distribution_calibration>
+2026-11-12T20:44:45.8526778Z 
+2026-11-12T20:44:45.8526895Z     def test_native_cpu_distribution_calibration(self):
+2026-11-12T20:44:45.8527220Z         for dtype, magnitude in ((np.float16, 1000), (np.float32, 1e20)):
+2026-11-12T20:44:45.8527526Z             for scenario in ("same", "p3"):
+2026-11-12T20:44:45.8527937Z                 with self.subTest(dtype=dtype, scenario=scenario), tempfile.TemporaryDirectory() as temporary_directory:
+2026-11-12T20:44:45.8528365Z                     directory = Path(temporary_directory)
+2026-11-12T20:44:45.8528741Z                     model_path = directory / "model.onnx"
+2026-11-12T20:44:45.8529015Z                     self.make_model(model_path, dtype)
+2026-11-12T20:44:45.8529397Z                     values = np.array([[-magnitude, -magnitude / 2], [magnitude / 2, magnitude]], dtype=dtype)
+2026-11-12T20:44:45.8529770Z                     calibrator = create_calibrator(
+2026-11-12T20:44:45.8530011Z                         model_path,
+2026-11-12T20:44:45.8530278Z                         calibrate_method=CalibrationMethod.Distribution,
+2026-11-12T20:44:45.8530603Z                         augmented_model_path=directory / "augmented.onnx",
+2026-11-12T20:44:45.8531065Z                         providers=["CPUExecutionProvider"],
+2026-11-12T20:44:45.8531371Z                         extra_options={"num_bins": 512, "scenario": scenario},
+2026-11-12T20:44:45.8531644Z                     )
+2026-11-12T20:44:45.8531879Z                     calibrator.collect_data(ArrayReader([values]))
+2026-11-12T20:44:45.8532171Z                     tensors = calibrator.compute_data()
+2026-11-12T20:44:45.8532442Z                     self.assertEqual(set(tensors), {"X", "Y"})
+2026-11-12T20:44:45.8532829Z                     power = 1 if scenario == "same" else 1 / 3
+2026-11-12T20:44:45.8533082Z                     for name in tensors:
+2026-11-12T20:44:45.8533310Z                         tensor = tensors[name]
+2026-11-12T20:44:45.8533627Z                         expected = reference_moments(tensor.hist, tensor.hist_edges, power)
+2026-11-12T20:44:45.8533966Z >                       np.testing.assert_allclose(
+2026-11-12T20:44:45.8534206Z                             tensor.avg_std,
+2026-11-12T20:44:45.8534467Z                             np.asarray(expected, dtype=dtype),
+2026-11-12T20:44:45.8534718Z                             rtol=1e-6,
+2026-11-12T20:44:45.8534991Z                             atol=np.finfo(dtype).eps * max(abs(expected[0]), 1),
+2026-11-12T20:44:45.8535272Z                         )
+2026-11-12T20:44:45.8535472Z E                       AssertionError: 
+2026-11-12T20:44:45.8535736Z E                       Not equal to tolerance rtol=1e-06, atol=0.000976562
+2026-11-12T20:44:45.8536008Z E                       
+2026-11-12T20:44:45.8536212Z E                       Mismatched elements: 1 / 2 (50%)
+2026-11-12T20:44:45.8536499Z E                       Max absolute difference among violations: 0.007812
+2026-11-12T20:44:45.8536823Z E                       Max relative difference among violations: 0.000866
+2026-11-12T20:44:45.8537143Z E                        ACTUAL: array([5.859e-03, 9.016e+00], dtype=float16)
+2026-11-12T20:44:45.8537475Z E                        DESIRED: array([5.29e-03, 9.02e+00], dtype=float16)
+2026-11-12T20:44:45.8537674Z 
+2026-11-12T20:44:45.8537889Z onnxruntime/test/python/quantization/test_distribution_moments.py:144: AssertionError
+2026-11-12T20:44:45.8538448Z _ TestDistributionMoments.test_native_cpu_distribution_calibration (dtype=<class 'numpy.float32'>, scenario='same') _
+2026-11-12T20:44:45.8538813Z 
+2026-11-12T20:44:45.8539090Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_native_cpu_distribution_calibration>
+2026-11-12T20:44:45.8539443Z 
+2026-11-12T20:44:45.8539574Z     def test_native_cpu_distribution_calibration(self):
+2026-11-12T20:44:45.8539905Z         for dtype, magnitude in ((np.float16, 1000), (np.float32, 1e20)):
+2026-11-12T20:44:45.8540209Z             for scenario in ("same", "p3"):
+2026-11-12T20:44:45.8540631Z                 with self.subTest(dtype=dtype, scenario=scenario), tempfile.TemporaryDirectory() as temporary_directory:
+2026-11-12T20:44:45.8541267Z                     directory = Path(temporary_directory)
+2026-11-12T20:44:45.8541541Z                     model_path = directory / "model.onnx"
+2026-11-12T20:44:45.8541805Z                     self.make_model(model_path, dtype)
+2026-11-12T20:44:45.8542188Z                     values = np.array([[-magnitude, -magnitude / 2], [magnitude / 2, magnitude]], dtype=dtype)
+2026-11-12T20:44:45.8542684Z                     calibrator = create_calibrator(
+2026-11-12T20:44:45.8542946Z                         model_path,
+2026-11-12T20:44:45.8543239Z                         calibrate_method=CalibrationMethod.Distribution,
+2026-11-12T20:44:45.8543573Z                         augmented_model_path=directory / "augmented.onnx",
+2026-11-12T20:44:45.8543884Z                         providers=["CPUExecutionProvider"],
+2026-11-12T20:44:45.8544197Z                         extra_options={"num_bins": 512, "scenario": scenario},
+2026-11-12T20:44:45.8544470Z                     )
+2026-11-12T20:44:45.8544709Z                     calibrator.collect_data(ArrayReader([values]))
+2026-11-12T20:44:45.8545010Z                     tensors = calibrator.compute_data()
+2026-11-12T20:44:45.8545284Z                     self.assertEqual(set(tensors), {"X", "Y"})
+2026-11-12T20:44:45.8545566Z                     power = 1 if scenario == "same" else 1 / 3
+2026-11-12T20:44:45.8545836Z                     for name in tensors:
+2026-11-12T20:44:45.8546086Z                         tensor = tensors[name]
+2026-11-12T20:44:45.8546406Z                         expected = reference_moments(tensor.hist, tensor.hist_edges, power)
+2026-11-12T20:44:45.8546849Z >                       np.testing.assert_allclose(
+2026-11-12T20:44:45.8547098Z                             tensor.avg_std,
+2026-11-12T20:44:45.8547345Z                             np.asarray(expected, dtype=dtype),
+2026-11-12T20:44:45.8547611Z                             rtol=1e-6,
+2026-11-12T20:44:45.8547890Z                             atol=np.finfo(dtype).eps * max(abs(expected[0]), 1),
+2026-11-12T20:44:45.8548173Z                         )
+2026-11-12T20:44:45.8548370Z E                       AssertionError: 
+2026-11-12T20:44:45.8548635Z E                       Not equal to tolerance rtol=1e-06, atol=1.16416e+10
+2026-11-12T20:44:45.8548911Z E                       
+2026-11-12T20:44:45.8549113Z E                       nan location mismatch:
+2026-11-12T20:44:45.8549405Z E                        ACTUAL: array([9.765532e+16,          nan], dtype=float32)
+2026-11-12T20:44:45.8549752Z E                        DESIRED: array([9.765642e+16, 7.893350e+19], dtype=float32)
+2026-11-12T20:44:45.8549972Z 
+2026-11-12T20:44:45.8550180Z onnxruntime/test/python/quantization/test_distribution_moments.py:144: AssertionError
+2026-11-12T20:44:45.8550871Z _ TestDistributionMoments.test_native_cpu_distribution_calibration (dtype=<class 'numpy.float32'>, scenario='p3') _
+2026-11-12T20:44:45.8551229Z 
+2026-11-12T20:44:45.8551505Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_native_cpu_distribution_calibration>
+2026-11-12T20:44:45.8551841Z 
+2026-11-12T20:44:45.8551960Z     def test_native_cpu_distribution_calibration(self):
+2026-11-12T20:44:45.8552280Z         for dtype, magnitude in ((np.float16, 1000), (np.float32, 1e20)):
+2026-11-12T20:44:45.8552578Z             for scenario in ("same", "p3"):
+2026-11-12T20:44:45.8552996Z                 with self.subTest(dtype=dtype, scenario=scenario), tempfile.TemporaryDirectory() as temporary_directory:
+2026-11-12T20:44:45.8553441Z                     directory = Path(temporary_directory)
+2026-11-12T20:44:45.8553713Z                     model_path = directory / "model.onnx"
+2026-11-12T20:44:45.8553970Z                     self.make_model(model_path, dtype)
+2026-11-12T20:44:45.8554346Z                     values = np.array([[-magnitude, -magnitude / 2], [magnitude / 2, magnitude]], dtype=dtype)
+2026-11-12T20:44:45.8554718Z                     calibrator = create_calibrator(
+2026-11-12T20:44:45.8554958Z                         model_path,
+2026-11-12T20:44:45.8555225Z                         calibrate_method=CalibrationMethod.Distribution,
+2026-11-12T20:44:45.8555555Z                         augmented_model_path=directory / "augmented.onnx",
+2026-11-12T20:44:45.8555874Z                         providers=["CPUExecutionProvider"],
+2026-11-12T20:44:45.8556194Z                         extra_options={"num_bins": 512, "scenario": scenario},
+2026-11-12T20:44:45.8556484Z                     )
+2026-11-12T20:44:45.8556829Z                     calibrator.collect_data(ArrayReader([values]))
+2026-11-12T20:44:45.8557125Z                     tensors = calibrator.compute_data()
+2026-11-12T20:44:45.8557404Z                     self.assertEqual(set(tensors), {"X", "Y"})
+2026-11-12T20:44:45.8557687Z                     power = 1 if scenario == "same" else 1 / 3
+2026-11-12T20:44:45.8557941Z                     for name in tensors:
+2026-11-12T20:44:45.8558164Z                         tensor = tensors[name]
+2026-11-12T20:44:45.8558493Z                         expected = reference_moments(tensor.hist, tensor.hist_edges, power)
+2026-11-12T20:44:45.8558840Z >                       np.testing.assert_allclose(
+2026-11-12T20:44:45.8559089Z                             tensor.avg_std,
+2026-11-12T20:44:45.8559338Z                             np.asarray(expected, dtype=dtype),
+2026-11-12T20:44:45.8559590Z                             rtol=1e-6,
+2026-11-12T20:44:45.8559870Z                             atol=np.finfo(dtype).eps * max(abs(expected[0]), 1),
+2026-11-12T20:44:45.8560155Z                         )
+2026-11-12T20:44:45.8560452Z E                       AssertionError: 
+2026-11-12T20:44:45.8560935Z E                       Not equal to tolerance rtol=1e-06, atol=0.000285919
+2026-11-12T20:44:45.8561265Z E                       
+2026-11-12T20:44:45.8561478Z E                       Mismatched elements: 1 / 2 (50%)
+2026-11-12T20:44:45.8561781Z E                       Max absolute difference among violations: 0.02172852
+2026-11-12T20:44:45.8562113Z E                       Max relative difference among violations: 9.059364e-06
+2026-11-12T20:44:45.8562453Z E                        ACTUAL: array([2.398438e+03, 4.188578e+06], dtype=float32)
+2026-11-12T20:44:45.8562794Z E                        DESIRED: array([2.398459e+03, 4.188576e+06], dtype=float32)
+2026-11-12T20:44:45.8563008Z 
+2026-11-12T20:44:45.8563212Z onnxruntime/test/python/quantization/test_distribution_moments.py:144: AssertionError
+2026-11-12T20:44:45.8563760Z _ TestDistributionMoments.test_signed_power_scenarios (dtype=<class 'numpy.float16'>, power=0.3333333333333333) _
+2026-11-12T20:44:45.8564115Z 
+2026-11-12T20:44:45.8564355Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_signed_power_scenarios>
+2026-11-12T20:44:45.8564662Z 
+2026-11-12T20:44:45.8564763Z     def test_signed_power_scenarios(self):
+2026-11-12T20:44:45.8565016Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:44:45.8565257Z             for power in (1 / 3, 2, 3):
+2026-11-12T20:44:45.8565514Z                 with self.subTest(dtype=dtype, power=power):
+2026-11-12T20:44:45.8565773Z >                   self.check_moments(
+2026-11-12T20:44:45.8566031Z                         np.array([-27, -9, -1, 1, 9, 27], dtype=dtype),
+2026-11-12T20:44:45.8566314Z                         np.array([1, 3, 2, 1, 2]),
+2026-11-12T20:44:45.8566547Z                         power,
+2026-11-12T20:44:45.8566739Z                     )
+2026-11-12T20:44:45.8566842Z 
+2026-11-12T20:44:45.8567015Z onnxruntime/test/python/quantization/test_distribution_moments.py:81: 
+2026-11-12T20:44:45.8567370Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-12T20:44:45.8567568Z 
+2026-11-12T20:44:45.8567797Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_signed_power_scenarios>
+2026-11-12T20:44:45.8568222Z edges = array([-27.,  -9.,  -1.,   1.,   9.,  27.], dtype=float16)
+2026-11-12T20:44:45.8568524Z hist = array([1, 3, 2, 1, 2]), power = 0.3333333333333333
+2026-11-12T20:44:45.8568705Z 
+2026-11-12T20:44:45.8568821Z     def check_moments(self, edges, hist=None, power=1):
+2026-11-12T20:44:45.8569073Z         if hist is None:
+2026-11-12T20:44:45.8569299Z             hist = np.ones(len(edges) - 1, dtype=np.int64)
+2026-11-12T20:44:45.8569561Z         original_edges = edges.copy()
+2026-11-12T20:44:45.8569788Z         original_hist = hist.copy()
+2026-11-12T20:44:45.8570081Z         expected_mean, expected_std = reference_moments(hist, edges, power)
+2026-11-12T20:44:45.8570562Z         with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+2026-11-12T20:44:45.8571260Z             mean, std = HistogramCollector._avg_std(hist, edges, power)
+2026-11-12T20:44:45.8571570Z         self.assertEqual(mean.dtype, edges.dtype)
+2026-11-12T20:44:45.8571841Z         self.assertEqual(std.dtype, edges.dtype)
+2026-11-12T20:44:45.8572225Z >       np.testing.assert_allclose(mean, np.array(expected_mean, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8572604Z E       AssertionError: 
+2026-11-12T20:44:45.8572820Z E       Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8573050Z E       
+2026-11-12T20:44:45.8573223Z E       Mismatched elements: 1 / 1 (100%)
+2026-11-12T20:44:45.8573492Z E       Max absolute difference among violations: 6.104e-05
+2026-11-12T20:44:45.8573788Z E       Max relative difference among violations: 0.000687
+2026-11-12T20:44:45.8574069Z E        ACTUAL: array(-0.08875, dtype=float16)
+2026-11-12T20:44:45.8574326Z E        DESIRED: array(-0.0888, dtype=float16)
+2026-11-12T20:44:45.8574480Z 
+2026-11-12T20:44:45.8574684Z onnxruntime/test/python/quantization/test_distribution_moments.py:57: AssertionError
+2026-11-12T20:44:45.8575301Z _ TestDistributionMoments.test_signed_power_scenarios (dtype=<class 'numpy.float16'>, power=2) _
+2026-11-12T20:44:45.8575600Z 
+2026-11-12T20:44:45.8575833Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_signed_power_scenarios>
+2026-11-12T20:44:45.8576138Z 
+2026-11-12T20:44:45.8576228Z     def test_signed_power_scenarios(self):
+2026-11-12T20:44:45.8576480Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:44:45.8576717Z             for power in (1 / 3, 2, 3):
+2026-11-12T20:44:45.8576983Z                 with self.subTest(dtype=dtype, power=power):
+2026-11-12T20:44:45.8577245Z >                   self.check_moments(
+2026-11-12T20:44:45.8577491Z                         np.array([-27, -9, -1, 1, 9, 27], dtype=dtype),
+2026-11-12T20:44:45.8577768Z                         np.array([1, 3, 2, 1, 2]),
+2026-11-12T20:44:45.8578001Z                         power,
+2026-11-12T20:44:45.8578200Z                     )
+2026-11-12T20:44:45.8578309Z 
+2026-11-12T20:44:45.8578473Z onnxruntime/test/python/quantization/test_distribution_moments.py:81: 
+2026-11-12T20:44:45.8578824Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-12T20:44:45.8579025Z 
+2026-11-12T20:44:45.8579255Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_signed_power_scenarios>
+2026-11-12T20:44:45.8579683Z edges = array([-27.,  -9.,  -1.,   1.,   9.,  27.], dtype=float16)
+2026-11-12T20:44:45.8579958Z hist = array([1, 3, 2, 1, 2]), power = 2
+2026-11-12T20:44:45.8580103Z 
+2026-11-12T20:44:45.8580220Z     def check_moments(self, edges, hist=None, power=1):
+2026-11-12T20:44:45.8580482Z         if hist is None:
+2026-11-12T20:44:45.8580861Z             hist = np.ones(len(edges) - 1, dtype=np.int64)
+2026-11-12T20:44:45.8581149Z         original_edges = edges.copy()
+2026-11-12T20:44:45.8581394Z         original_hist = hist.copy()
+2026-11-12T20:44:45.8581693Z         expected_mean, expected_std = reference_moments(hist, edges, power)
+2026-11-12T20:44:45.8582072Z         with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+2026-11-12T20:44:45.8582422Z             mean, std = HistogramCollector._avg_std(hist, edges, power)
+2026-11-12T20:44:45.8582733Z         self.assertEqual(mean.dtype, edges.dtype)
+2026-11-12T20:44:45.8582999Z         self.assertEqual(std.dtype, edges.dtype)
+2026-11-12T20:44:45.8583378Z         np.testing.assert_allclose(mean, np.array(expected_mean, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8583878Z >       np.testing.assert_allclose(std, np.array(expected_std, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8584240Z E       AssertionError: 
+2026-11-12T20:44:45.8584456Z E       Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8584689Z E       
+2026-11-12T20:44:45.8584860Z E       +inf location mismatch:
+2026-11-12T20:44:45.8585199Z E        ACTUAL: array(inf, dtype=float16)
+2026-11-12T20:44:45.8585444Z E        DESIRED: array(185.4, dtype=float16)
+2026-11-12T20:44:45.8585605Z 
+2026-11-12T20:44:45.8585805Z onnxruntime/test/python/quantization/test_distribution_moments.py:58: AssertionError
+2026-11-12T20:44:45.8586261Z _______________ TestDistributionMoments.test_single_occupied_bin _______________
+2026-11-12T20:44:45.8586511Z 
+2026-11-12T20:44:45.8586769Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_single_occupied_bin>
+2026-11-12T20:44:45.8587066Z 
+2026-11-12T20:44:45.8587167Z     def test_single_occupied_bin(self):
+2026-11-12T20:44:45.8587507Z >       self.check_moments(np.array([1, 1.0001, 1.0002], dtype=np.float32), np.array([0, 7]))
+2026-11-12T20:44:45.8587757Z 
+2026-11-12T20:44:45.8587927Z onnxruntime/test/python/quantization/test_distribution_moments.py:88: 
+2026-11-12T20:44:45.8588270Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-12T20:44:45.8588471Z 
+2026-11-12T20:44:45.8588688Z self = <test_distribution_moments.TestDistributionMoments testMethod=test_single_occupied_bin>
+2026-11-12T20:44:45.8589222Z edges = array([1.    , 1.0001, 1.0002], dtype=float32), hist = array([0, 7])
+2026-11-12T20:44:45.8589516Z power = 1
+2026-11-12T20:44:45.8589614Z 
+2026-11-12T20:44:45.8589733Z     def check_moments(self, edges, hist=None, power=1):
+2026-11-12T20:44:45.8589991Z         if hist is None:
+2026-11-12T20:44:45.8590222Z             hist = np.ones(len(edges) - 1, dtype=np.int64)
+2026-11-12T20:44:45.8590488Z         original_edges = edges.copy()
+2026-11-12T20:44:45.8590864Z         original_hist = hist.copy()
+2026-11-12T20:44:45.8591158Z         expected_mean, expected_std = reference_moments(hist, edges, power)
+2026-11-12T20:44:45.8591525Z         with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+2026-11-12T20:44:45.8591872Z             mean, std = HistogramCollector._avg_std(hist, edges, power)
+2026-11-12T20:44:45.8592192Z         self.assertEqual(mean.dtype, edges.dtype)
+2026-11-12T20:44:45.8592457Z         self.assertEqual(std.dtype, edges.dtype)
+2026-11-12T20:44:45.8592837Z         np.testing.assert_allclose(mean, np.array(expected_mean, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8593336Z >       np.testing.assert_allclose(std, np.array(expected_std, dtype=edges.dtype), rtol=1e-6, atol=0)
+2026-11-12T20:44:45.8593693Z E       AssertionError: 
+2026-11-12T20:44:45.8593903Z E       Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8594131Z E       
+2026-11-12T20:44:45.8594305Z E       nan location mismatch:
+2026-11-12T20:44:45.8594529Z E        ACTUAL: array(nan, dtype=float32)
+2026-11-12T20:44:45.8594770Z E        DESIRED: array(0., dtype=float32)
+2026-11-12T20:44:45.8594914Z 
+2026-11-12T20:44:45.8595117Z onnxruntime/test/python/quantization/test_distribution_moments.py:58: AssertionError
+2026-11-12T20:44:45.8595505Z =============================== warnings summary ===============================
+2026-11-12T20:44:45.8596058Z onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_fp8_static_quantization_scales
+2026-11-12T20:44:45.8596773Z onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_native_cpu_distribution_calibration
+2026-11-12T20:44:45.8597500Z onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_native_cpu_distribution_calibration
+2026-11-12T20:44:45.8598331Z   /home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/calibrate.py:1129: RuntimeWarning: overflow encountered in square
+2026-11-12T20:44:45.8598938Z     std = ((hist * values**2).sum() / hist.sum() - avg**2) ** 0.5
+2026-11-12T20:44:45.8599144Z 
+2026-11-12T20:44:45.8599478Z onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_fp8_static_quantization_scales
+2026-11-12T20:44:45.8600298Z onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_native_cpu_distribution_calibration
+2026-11-12T20:44:45.8601165Z onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_native_cpu_distribution_calibration
+2026-11-12T20:44:45.8602009Z   /home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/calibrate.py:1129: RuntimeWarning: invalid value encountered in multiply
+2026-11-12T20:44:45.8602644Z     std = ((hist * values**2).sum() / hist.sum() - avg**2) ** 0.5
+2026-11-12T20:44:45.8602839Z 
+2026-11-12T20:44:45.8603018Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-11-12T20:44:45.8603381Z =========================== short test summary info ============================
+2026-11-12T20:44:45.8603976Z FAILED onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_float16_midpoint_addition - AssertionError: 
+2026-11-12T20:44:45.8604517Z Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8604677Z 
+2026-11-12T20:44:45.8604762Z +inf location mismatch:
+2026-11-12T20:44:45.8605128Z  ACTUAL: array(inf, dtype=float16)
+2026-11-12T20:44:45.8605370Z  DESIRED: array(5.002e+04, dtype=float16)
+2026-11-12T20:44:45.8605888Z FAILED onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_float16_squared_midpoints - AssertionError: 
+2026-11-12T20:44:45.8606411Z Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8606558Z 
+2026-11-12T20:44:45.8606642Z +inf location mismatch:
+2026-11-12T20:44:45.8606842Z  ACTUAL: array(inf, dtype=float16)
+2026-11-12T20:44:45.8607056Z  DESIRED: array(0.5, dtype=float16)
+2026-11-12T20:44:45.8607552Z FAILED onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_float32_cancellation - AssertionError: 
+2026-11-12T20:44:45.8608059Z Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8608211Z 
+2026-11-12T20:44:45.8608294Z nan location mismatch:
+2026-11-12T20:44:45.8608495Z  ACTUAL: array(nan, dtype=float32)
+2026-11-12T20:44:45.8608720Z  DESIRED: array(5.00083e-05, dtype=float32)
+2026-11-12T20:44:45.8609232Z FAILED onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_float32_large_spread - AssertionError: 
+2026-11-12T20:44:45.8609734Z Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8609882Z 
+2026-11-12T20:44:45.8609956Z +inf location mismatch:
+2026-11-12T20:44:45.8610145Z  ACTUAL: array(inf, dtype=float32)
+2026-11-12T20:44:45.8610360Z  DESIRED: array(1.e+25, dtype=float32)
+2026-11-12T20:44:45.8611016Z FAILED onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_float32_small_spread - AssertionError: 
+2026-11-12T20:44:45.8611532Z Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8611681Z 
+2026-11-12T20:44:45.8611774Z Mismatched elements: 1 / 1 (100%)
+2026-11-12T20:44:45.8612021Z Max absolute difference among violations: 1.e-30
+2026-11-12T20:44:45.8612294Z Max relative difference among violations: 1.
+2026-11-12T20:44:45.8612534Z  ACTUAL: array(0., dtype=float32)
+2026-11-12T20:44:45.8612757Z  DESIRED: array(1.e-30, dtype=float32)
+2026-11-12T20:44:45.8613336Z FAILED onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_fp8_static_quantization_scales - AssertionError: np.False_ is not true
+2026-11-12T20:44:45.8614359Z SUBFAILED(dtype=<class 'numpy.float16'>, scenario='same') onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_native_cpu_distribution_calibration - AssertionError: 
+2026-11-12T20:44:45.8615044Z Not equal to tolerance rtol=1e-06, atol=0.000976562
+2026-11-12T20:44:45.8615218Z 
+2026-11-12T20:44:45.8615300Z nan location mismatch:
+2026-11-12T20:44:45.8615501Z  ACTUAL: array([ 1., nan], dtype=float16)
+2026-11-12T20:44:45.8615746Z  DESIRED: array([  1. , 789.5], dtype=float16)
+2026-11-12T20:44:45.8616969Z SUBFAILED(dtype=<class 'numpy.float16'>, scenario='p3') onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_native_cpu_distribution_calibration - AssertionError: 
+2026-11-12T20:44:45.8618068Z Not equal to tolerance rtol=1e-06, atol=0.000976562
+2026-11-12T20:44:45.8618359Z 
+2026-11-12T20:44:45.8618498Z Mismatched elements: 1 / 2 (50%)
+2026-11-12T20:44:45.8618877Z Max absolute difference among violations: 0.007812
+2026-11-12T20:44:45.8619315Z Max relative difference among violations: 0.000866
+2026-11-12T20:44:45.8619763Z  ACTUAL: array([5.859e-03, 9.016e+00], dtype=float16)
+2026-11-12T20:44:45.8620197Z  DESIRED: array([5.29e-03, 9.02e+00], dtype=float16)
+2026-11-12T20:44:45.8621509Z SUBFAILED(dtype=<class 'numpy.float32'>, scenario='same') onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_native_cpu_distribution_calibration - AssertionError: 
+2026-11-12T20:44:45.8622649Z Not equal to tolerance rtol=1e-06, atol=1.16416e+10
+2026-11-12T20:44:45.8622936Z 
+2026-11-12T20:44:45.8623063Z nan location mismatch:
+2026-11-12T20:44:45.8623423Z  ACTUAL: array([9.765532e+16,          nan], dtype=float32)
+2026-11-12T20:44:45.8624091Z  DESIRED: array([9.765642e+16, 7.893350e+19], dtype=float32)
+2026-11-12T20:44:45.8625261Z SUBFAILED(dtype=<class 'numpy.float32'>, scenario='p3') onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_native_cpu_distribution_calibration - AssertionError: 
+2026-11-12T20:44:45.8626451Z Not equal to tolerance rtol=1e-06, atol=0.000285919
+2026-11-12T20:44:45.8626748Z 
+2026-11-12T20:44:45.8626876Z Mismatched elements: 1 / 2 (50%)
+2026-11-12T20:44:45.8627268Z Max absolute difference among violations: 0.02172852
+2026-11-12T20:44:45.8627736Z Max relative difference among violations: 9.059364e-06
+2026-11-12T20:44:45.8628231Z  ACTUAL: array([2.398438e+03, 4.188578e+06], dtype=float32)
+2026-11-12T20:44:45.8628715Z  DESIRED: array([2.398459e+03, 4.188576e+06], dtype=float32)
+2026-11-12T20:44:45.8629904Z SUBFAILED(dtype=<class 'numpy.float16'>, power=0.3333333333333333) onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_signed_power_scenarios - AssertionError: 
+2026-11-12T20:44:45.8630953Z Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8631224Z 
+2026-11-12T20:44:45.8631311Z Mismatched elements: 1 / 1 (100%)
+2026-11-12T20:44:45.8631560Z Max absolute difference among violations: 6.104e-05
+2026-11-12T20:44:45.8631846Z Max relative difference among violations: 0.000687
+2026-11-12T20:44:45.8632108Z  ACTUAL: array(-0.08875, dtype=float16)
+2026-11-12T20:44:45.8632350Z  DESIRED: array(-0.0888, dtype=float16)
+2026-11-12T20:44:45.8633374Z SUBFAILED(dtype=<class 'numpy.float16'>, power=2) onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_signed_power_scenarios - AssertionError: 
+2026-11-12T20:44:45.8634441Z Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8634688Z 
+2026-11-12T20:44:45.8634819Z +inf location mismatch:
+2026-11-12T20:44:45.8635138Z  ACTUAL: array(inf, dtype=float16)
+2026-11-12T20:44:45.8635492Z  DESIRED: array(185.4, dtype=float16)
+2026-11-12T20:44:45.8636049Z FAILED onnxruntime/test/python/quantization/test_distribution_moments.py::TestDistributionMoments::test_single_occupied_bin - AssertionError: 
+2026-11-12T20:44:45.8636580Z Not equal to tolerance rtol=1e-06, atol=0
+2026-11-12T20:44:45.8636745Z 
+2026-11-12T20:44:45.8636828Z nan location mismatch:
+2026-11-12T20:44:45.8637032Z  ACTUAL: array(nan, dtype=float32)
+2026-11-12T20:44:45.8637254Z  DESIRED: array(0., dtype=float32)
+2026-11-12T20:44:45.8637518Z 13 failed, 5 passed, 6 warnings, 6 subtests passed in 0.32s
+2026-11-12T20:44:45.8638728Z Confirmed original implementation failures: ['test_float16_midpoint_addition', 'test_float16_squared_midpoints', 'test_float32_cancellation', 'test_float32_large_spread', 'test_float32_small_spread', 'test_fp8_static_quantization_scales', 'test_native_cpu_distribution_calibration', 'test_signed_power_scenarios', 'test_single_occupied_bin']
+2026-11-12T20:44:45.8698636Z ##[group]Run python -P - <<'PY'
+2026-11-12T20:44:45.8698922Z [36;1mpython -P - <<'PY'[0m
+2026-11-12T20:44:45.8699146Z [36;1mfrom pathlib import Path[0m
+2026-11-12T20:44:45.8699406Z [36;1mfrom onnxruntime.quantization import calibrate[0m
+2026-11-12T20:44:45.8699797Z [36;1msource = Path("onnxruntime/python/tools/quantization/calibrate.py").read_bytes()[0m
+2026-11-12T20:44:45.8700163Z [36;1mPath(calibrate.__file__).write_bytes(source)[0m
+2026-11-12T20:44:45.8700398Z [36;1mPY[0m
+2026-11-12T20:44:45.8701079Z [36;1mpython -m ruff check onnxruntime/python/tools/quantization/calibrate.py onnxruntime/test/python/quantization/test_distribution_moments.py[0m
+2026-11-12T20:44:45.8701889Z [36;1mpython -m ruff format --check onnxruntime/python/tools/quantization/calibrate.py onnxruntime/test/python/quantization/test_distribution_moments.py[0m
+2026-11-12T20:44:45.8702421Z [36;1mgit diff --check[0m
+2026-11-12T20:44:45.8720073Z shell: /usr/bin/bash -e {0}
+2026-11-12T20:44:45.8720308Z env:
+2026-11-12T20:44:45.8720478Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:45.8720868Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:45.8721250Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.8721592Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:44:45.8721920Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.8722213Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.8722512Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:45.8722811Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:44:45.8723074Z ##[endgroup]
+2026-11-12T20:44:45.9492154Z [0;93m2026-11-12 20:44:45.948900026 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:44:46.0912951Z All checks passed!
+2026-11-12T20:44:46.1160117Z 2 files already formatted
+2026-11-12T20:44:47.0463767Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-12T20:44:47.0464099Z with:
+2026-11-12T20:44:47.0464288Z   name: tested-source-built-distribution
+2026-11-12T20:44:47.0464721Z   path: ort-source-build-metadata.json
+ort-patched.log
+ort-patched.xml
+ort-baseline.log
+ort-baseline.xml
+
+2026-11-12T20:44:47.0465151Z   if-no-files-found: warn
+2026-11-12T20:44:47.0465361Z   compression-level: 6
+2026-11-12T20:44:47.0465546Z   overwrite: false
+2026-11-12T20:44:47.0465726Z   include-hidden-files: false
+2026-11-12T20:44:47.0465913Z   archive: true
+2026-11-12T20:44:47.0466073Z env:
+2026-11-12T20:44:47.0466248Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:44:47.0466446Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:44:47.0466704Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:47.0467036Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:44:47.0467420Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:47.0467723Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:47.0468009Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:44:47.0468295Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:44:47.0468547Z ##[endgroup]
+2026-11-12T20:44:47.1710483Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-12T20:44:47.1719354Z The least common ancestor is /home/runner/work/onnxruntime/onnxruntime. This will be the root directory of the artifact
+2026-11-12T20:44:47.1720390Z With the provided path, there will be 5 files uploaded
+2026-11-12T20:44:47.1721634Z Artifact name is valid!
+2026-11-12T20:44:47.1721968Z Root directory input is valid!
+2026-11-12T20:44:47.3665374Z Uploading artifact: tested-source-built-distribution.zip
+2026-11-12T20:44:47.3696467Z Beginning upload of artifact content to blob storage
+2026-11-12T20:44:47.5724619Z Uploaded bytes 8887
+2026-11-12T20:44:47.5843107Z Finished uploading artifact content to blob storage!
+2026-11-12T20:44:47.5843966Z SHA256 digest of uploaded artifact is 2f1dbbf4ace9a588cd765e88e66a1ae86cf9ccf7d8a5feab89dee2da5c80a98e
+2026-11-12T20:44:47.5844715Z Finalizing artifact upload
+2026-11-12T20:44:47.9943063Z Artifact tested-source-built-distribution successfully finalized. Artifact ID 13982591671
+2026-11-12T20:44:47.9944014Z Artifact tested-source-built-distribution has been successfully uploaded! Final size is 8887 bytes. Artifact ID is 13982591671
+2026-11-12T20:44:47.9946902Z Artifact download URL: https://github.com/Afloat16/onnxruntime/actions/runs/43303231831/artifacts/13982591671
+2026-11-12T20:44:48.0106046Z Post job cleanup.
+2026-11-12T20:44:48.1095870Z (node:2464) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T20:44:48.1096468Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T20:44:48.1247640Z Post job cleanup.
+2026-11-12T20:44:48.1993680Z [command]/usr/bin/git version
+2026-11-12T20:44:48.2081535Z git version 2.56.0
+2026-11-12T20:44:48.2110385Z Temporarily overriding HOME='/home/runner/work/_temp/9712781a-fa8b-4117-9d53-f3fd74775f28' before making global git config changes
+2026-11-12T20:44:48.2121582Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-12T20:44:48.2122686Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-12T20:44:48.2167184Z Removing SSH command configuration
+2026-11-12T20:44:48.2167913Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-12T20:44:48.2196949Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-12T20:44:48.2509666Z Removing HTTP extra header
+2026-11-12T20:44:48.2515933Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-12T20:44:48.2584021Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-12T20:44:48.2836039Z Removing includeIf entries pointing to credentials config files
+2026-11-12T20:44:48.2842272Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-12T20:44:48.2880133Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-12T20:44:48.3229642Z Cleaning up orphan processes
+2026-11-12T20:44:48.3535292Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
