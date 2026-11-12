@@ -52,7 +52,7 @@ jobs:
       - name: Install only the freshly built wheel
         run: |
           python -m pip install --no-deps --force-reinstall build/CPU/Release/dist/*.whl
-          python - <<'PY'
+          python -P - <<'PY'
           import hashlib
           import json
           import platform
@@ -85,10 +85,10 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python -m pytest -q --import-mode=importlib --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_entropy_reconstruction.py onnxruntime/test/python/quantization/test_calibration.py 2>&1 | tee ort-patched.log
+          python -P -m pytest -q --import-mode=importlib --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_entropy_reconstruction.py onnxruntime/test/python/quantization/test_calibration.py 2>&1 | tee ort-patched.log
       - name: Load exact original Python implementation into the same native runtime
         run: |
-          python - <<'PY'
+          python -P - <<'PY'
           import subprocess
           from pathlib import Path
           from onnxruntime.quantization import calibrate
@@ -104,12 +104,12 @@ jobs:
         shell: bash
         run: |
           set +e
-          python -m pytest -q --import-mode=importlib --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_entropy_reconstruction.py > ort-baseline.log 2>&1
+          python -P -m pytest -q --import-mode=importlib --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_entropy_reconstruction.py > ort-baseline.log 2>&1
           result=$?
           set -e
           cat ort-baseline.log
           test "$result" -eq 1
-          python - <<'PY'
+          python -P - <<'PY'
           import xml.etree.ElementTree as ET
           root = ET.parse("ort-baseline.xml").getroot()
           assert not root.findall(".//error"), "Baseline must fail assertions, not collection/import."
@@ -128,7 +128,7 @@ jobs:
       - name: Restore patch and check formatting
         if: always()
         run: |
-          python - <<'PY'
+          python -P - <<'PY'
           from pathlib import Path
           from onnxruntime.quantization import calibrate
           source = Path("onnxruntime/python/tools/quantization/calibrate.py").read_bytes()
@@ -150,7 +150,8 @@ jobs:
             ort-baseline.log
             ort-baseline.xml
             build/CPU/Release/CMakeCache.txt
-      - name: Save tested native CPU wheel
+      - name: Save built native CPU wheel
+        if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: cpu-entropy-native-wheel-a8246c0d
