@@ -1,0 +1,20 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "fork": "Afloat16/onnxruntime",
+  "branch": "fix/blocked-quantization-range-overflow-20261112",
+  "base": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "base_tree": "ada396d3d22a607ae65ae1140ac5e66a057fc692",
+  "commit": "8554dd5683f4d6e492d38b530d6d4f14755680f5",
+  "files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_blocked_quantization_range.py"
+  ],
+  "status": "pending_native_source_build",
+  "local_validation": {
+    "methods": 25,
+    "subtests": 183,
+    "baseline_failed_subtests": 28,
+    "baseline_passed_subtests": 12,
+    "note": "Local source and tests completed before workspace became unavailable; remote test text reconstructed from exact tool-visible file contents and will be revalidated on hosted source build."
+  }
+}
