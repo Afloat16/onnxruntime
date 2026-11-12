@@ -1,0 +1,37 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "fork": "Afloat16/onnxruntime",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "base_tree": "ada396d3d22a607ae65ae1140ac5e66a057fc692",
+  "branch": "fix/quantization-subgraph-captured-inputs-20261112",
+  "files": [
+    "onnxruntime/python/tools/quantization/onnx_model.py",
+    "onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py"
+  ],
+  "status": "pending_native_validation",
+  "novelty": {
+    "file_history_entries": 37,
+    "actual_patches_read": [
+      7913,
+      8012,
+      16003,
+      7833,
+      6735
+    ],
+    "all_state_searches": [
+      "topological_sort subgraph",
+      "quantization topological",
+      "onnx_model.py implicit",
+      "quantization lexical",
+      "remove_unused_constant",
+      "quantization captured"
+    ],
+    "same_root_cause": "Subgraph lexical dependencies are missing from both model sorting and unused constant cleanup; addressed together as one improvement.",
+    "personal_history": "No preexisting ONNX Runtime contribution; new task-created fork and independent source branch."
+  },
+  "limits": [
+    "Quantization ONNXModel graph utilities, not the separate transformers.OnnxModel implementation.",
+    "Native results pending; Graphs custom-attribute case checks ordering only, not an unsupported custom execution kernel."
+  ],
+  "commit": "e8a3d2e6696b1d0392f12b320e948d79e634c297"
+}
