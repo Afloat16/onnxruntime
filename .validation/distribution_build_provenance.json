@@ -1,0 +1,8 @@
+{
+  "source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+  "official_build_run": 43296543822,
+  "native_wheel_artifact": 13982605959,
+  "build_metadata_artifact": 13981818755,
+  "build_command": "python tools/ci_build/build.py --config Release --build_dir build/CPU --update --build --parallel 2 --build_wheel --skip_tests --cmake_generator Ninja --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF onnxruntime_BUILD_BENCHMARKS=OFF",
+  "reason_for_followup": "Official source build and installed source byte verification succeeded; standalone pytest importlib collection incorrectly loaded the source-tree package. Pre-import the source-built installed runtime before invoking pytest, matching the validated local launcher."
+}
