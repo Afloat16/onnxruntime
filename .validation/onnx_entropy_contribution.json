@@ -1,0 +1,58 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "stars": 22296,
+  "fork": "Afloat16/onnxruntime",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "commit": "7ea94334d49d7cf39e7f3f953b0c054c3205b086",
+  "branch": "fix/entropy-histogram-reconstruction-20261112",
+  "title": "Preserve histogram probability mass in entropy calibration",
+  "body": "### Description\n\nCorrect reconstruction of a quantized histogram when evaluating entropy-calibration thresholds:\n\n- Store reconstructed bucket averages in floating point instead of truncating them into the integer histogram dtype.\n- Expand the final quantized bucket over its complete interval, including the remainder bins already accumulated into that bucket.\n- Distribute each bucket's mass only over the originally occupied histogram bins.\n\nThese changes make the reconstructed distribution preserve the quantized bucket mass and original support. Candidate threshold enumeration, outlier handling, smoothing, KL selection, and threshold dtypes retain their existing behavior.\n\n### Motivation and Context\n\nInteger truncation and incomplete expansion can change the distribution compared by KL divergence, selecting an incorrect clipping interval. The regression cases use independent Python bucket reconstruction to check mass conservation and support, then exercise real CPU calibration, persisted calibration data, static quantization, and quantized inference.\n\nFor the fixed integration fixture, correcting histogram reconstruction changes the stored UINT8 activation scale from `16/255` to the independently expected `13/255`. This is a correctness result for that fixture, not a claim of a general model-accuracy gain.\n\n### Validation\n\n- Built the Release CPU runtime from this exact PR commit using the official `tools/ci_build/build.py` on Ubuntu 24.04 / Python 3.12. The [source-build job](https://github.com/Afloat16/onnxruntime/actions/runs/43299831579/job/131467712087) completed compilation and produced the wheel.\n- The [successful native validation](https://github.com/Afloat16/onnxruntime/actions/runs/43304990254) consumes that exact source-built wheel and checks its source commit and installed calibration source bytes: **27 passed, 17 subtests passed**, including the existing calibration module.\n- Restoring the original calibration implementation in the same runtime reproduces **1 failing test method and 10 failing subtests**; the other controls pass. The follow-up validation corrects source-package shadowing during the first job's pytest collection.\n- Ruff lint, Ruff formatting, and `git diff --check` pass.\n\nValidation covers the CPU calibration/quantization paths above; the full C++ and GPU suites were not run.",
+  "prefilled_url": "https://github.com/microsoft/onnxruntime/compare/main...Afloat16:fix/entropy-histogram-reconstruction-20261112?expand=1&title=Preserve%20histogram%20probability%20mass%20in%20entropy%20calibration&body=%23%23%23%20Description%0A%0ACorrect%20reconstruction%20of%20a%20quantized%20histogram%20when%20evaluating%20entropy-calibration%20thresholds%3A%0A%0A-%20Store%20reconstructed%20bucket%20averages%20in%20floating%20point%20instead%20of%20truncating%20them%20into%20the%20integer%20histogram%20dtype.%0A-%20Expand%20the%20final%20quantized%20bucket%20over%20its%20complete%20interval%2C%20including%20the%20remainder%20bins%20already%20accumulated%20into%20that%20bucket.%0A-%20Distribute%20each%20bucket's%20mass%20only%20over%20the%20originally%20occupied%20histogram%20bins.%0A%0AThese%20changes%20make%20the%20reconstructed%20distribution%20preserve%20the%20quantized%20bucket%20mass%20and%20original%20support.%20Candidate%20threshold%20enumeration%2C%20outlier%20handling%2C%20smoothing%2C%20KL%20selection%2C%20and%20threshold%20dtypes%20retain%20their%20existing%20behavior.%0A%0A%23%23%23%20Motivation%20and%20Context%0A%0AInteger%20truncation%20and%20incomplete%20expansion%20can%20change%20the%20distribution%20compared%20by%20KL%20divergence%2C%20selecting%20an%20incorrect%20clipping%20interval.%20The%20regression%20cases%20use%20independent%20Python%20bucket%20reconstruction%20to%20check%20mass%20conservation%20and%20support%2C%20then%20exercise%20real%20CPU%20calibration%2C%20persisted%20calibration%20data%2C%20static%20quantization%2C%20and%20quantized%20inference.%0A%0AFor%20the%20fixed%20integration%20fixture%2C%20correcting%20histogram%20reconstruction%20changes%20the%20stored%20UINT8%20activation%20scale%20from%20%6016%2F255%60%20to%20the%20independently%20expected%20%6013%2F255%60.%20This%20is%20a%20correctness%20result%20for%20that%20fixture%2C%20not%20a%20claim%20of%20a%20general%20model-accuracy%20gain.%0A%0A%23%23%23%20Validation%0A%0A-%20Built%20the%20Release%20CPU%20runtime%20from%20this%20exact%20PR%20commit%20using%20the%20official%20%60tools%2Fci_build%2Fbuild.py%60%20on%20Ubuntu%2024.04%20%2F%20Python%203.12.%20The%20%5Bsource-build%20job%5D(https%3A%2F%2Fgithub.com%2FAfloat16%2Fonnxruntime%2Factions%2Fruns%2F43299831579%2Fjob%2F131467712087)%20completed%20compilation%20and%20produced%20the%20wheel.%0A-%20The%20%5Bsuccessful%20native%20validation%5D(https%3A%2F%2Fgithub.com%2FAfloat16%2Fonnxruntime%2Factions%2Fruns%2F43304990254)%20consumes%20that%20exact%20source-built%20wheel%20and%20checks%20its%20source%20commit%20and%20installed%20calibration%20source%20bytes%3A%20**27%20passed%2C%2017%20subtests%20passed**%2C%20including%20the%20existing%20calibration%20module.%0A-%20Restoring%20the%20original%20calibration%20implementation%20in%20the%20same%20runtime%20reproduces%20**1%20failing%20test%20method%20and%2010%20failing%20subtests**%3B%20the%20other%20controls%20pass.%20The%20follow-up%20validation%20corrects%20source-package%20shadowing%20during%20the%20first%20job's%20pytest%20collection.%0A-%20Ruff%20lint%2C%20Ruff%20formatting%2C%20and%20%60git%20diff%20--check%60%20pass.%0A%0AValidation%20covers%20the%20CPU%20calibration%2Fquantization%20paths%20above%3B%20the%20full%20C%2B%2B%20and%20GPU%20suites%20were%20not%20run.",
+  "pr_url": null,
+  "pr_status": "ready_permission_blocked",
+  "publication_error": "Same upstream create_pull_request integration returned403 for the independent distribution contribution; no repeated permission attempt.",
+  "merged_at": null,
+  "counts_as_upstream_merged": false,
+  "novelty": "genuinely-new",
+  "validation": {
+    "official_build_run": "https://github.com/Afloat16/onnxruntime/actions/runs/43299831579",
+    "build_job": 131467712087,
+    "source_wheel_artifact": 13982801527,
+    "source_wheel_archive_sha256": "748dd06ae0713feca57fe785b29f81ad3d192f3d401bd568e3e6e89e7afec28b",
+    "test_run": "https://github.com/Afloat16/onnxruntime/actions/runs/43304990254",
+    "test_job": 131485777958,
+    "test_conclusion": "success",
+    "test_artifact": 13982324497,
+    "patched_methods_passed": 27,
+    "patched_subtests_passed": 17,
+    "baseline_failed_methods": 1,
+    "baseline_failed_subtests": 10,
+    "baseline_passed_methods": 7,
+    "baseline_passed_subtests": 4,
+    "format": "Ruff 0.12.12 lint/format and git diff --check passed",
+    "build_command": "python tools/ci_build/build.py --config Release --build_dir build/CPU --update --build --parallel 2 --build_wheel --skip_tests --cmake_generator Ninja --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF onnxruntime_BUILD_BENCHMARKS=OFF"
+  },
+  "limitations": [
+    "Targeted CPU calibration/quantization tests only; not full C++/GPU suites.",
+    "Original source build compilation succeeded; follow-up uses its exact wheel with corrected pytest package import path.",
+    "The reported scale change is a controlled fixture, not model-accuracy benchmarking."
+  ],
+  "source_files": [
+    "onnxruntime/python/tools/quantization/calibrate.py",
+    "onnxruntime/test/python/quantization/test_entropy_reconstruction.py"
+  ],
+  "dedup": {
+    "upstream_history_entries": 77,
+    "related_actual_patches_reviewed": [
+      6619,
+      6893,
+      9342,
+      13346
+    ],
+    "distinct_existing_prs": [
+      32577,
+      33956
+    ]
+  },
+  "storage_note": "Remote evidence saved after workspace became unavailable; local receipt may remain pending."
+}

@@ -1,0 +1,972 @@
+﻿2026-11-12T20:54:57.2463357Z Current runner version: '2.338.2'
+2026-11-12T20:54:57.2482420Z ##[group]Runner Image Provisioner
+2026-11-12T20:54:57.2483117Z Hosted Compute Agent
+2026-11-12T20:54:57.2483480Z Version: 20261028.624
+2026-11-12T20:54:57.2484212Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-12T20:54:57.2484665Z Build Date: 2026-10-28T21:51:42Z
+2026-11-12T20:54:57.2485084Z Worker ID: {a34fbfef-cfa0-4932-aa52-dae66b6ec16e}
+2026-11-12T20:54:57.2485577Z Region: westus3
+2026-11-12T20:54:57.2485914Z Cloud: Azure
+2026-11-12T20:54:57.2486239Z ##[endgroup]
+2026-11-12T20:54:57.2487278Z ##[group]Operating System
+2026-11-12T20:54:57.2487683Z Ubuntu
+2026-11-12T20:54:57.2488073Z 24.04.5
+2026-11-12T20:54:57.2488388Z LTS
+2026-11-12T20:54:57.2488702Z ##[endgroup]
+2026-11-12T20:54:57.2489089Z ##[group]Runner Image
+2026-11-12T20:54:57.2489458Z Image: ubuntu-24.04
+2026-11-12T20:54:57.2489857Z Version: 20261101.360.1
+2026-11-12T20:54:57.2490641Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261101.360/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-12T20:54:57.2491566Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261101.360
+2026-11-12T20:54:57.2492268Z ##[endgroup]
+2026-11-12T20:54:57.2493057Z ##[group]GITHUB_TOKEN Permissions
+2026-11-12T20:54:57.2494459Z Actions: read
+2026-11-12T20:54:57.2494858Z Contents: read
+2026-11-12T20:54:57.2495221Z Metadata: read
+2026-11-12T20:54:57.2495621Z ##[endgroup]
+2026-11-12T20:54:57.2497008Z Secret source: Actions
+2026-11-12T20:54:57.2497555Z Cache mode: write
+2026-11-12T20:54:57.2498030Z Prepare workflow directory
+2026-11-12T20:54:57.2747883Z Prepare all required actions
+2026-11-12T20:54:57.2779514Z Getting action download info
+2026-11-12T20:54:57.5768173Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-12T20:54:57.6750720Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-11-12T20:54:57.7703170Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-12T20:54:58.3766215Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-12T20:54:58.5378637Z Complete job name: native-cpu
+2026-11-12T20:54:58.6350139Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-12T20:54:58.6350719Z with:
+2026-11-12T20:54:58.6351005Z   ref: 7ea94334d49d7cf39e7f3f953b0c054c3205b086
+2026-11-12T20:54:58.6351356Z   fetch-depth: 2
+2026-11-12T20:54:58.6351642Z   persist-credentials: false
+2026-11-12T20:54:58.6352132Z   repository: Afloat16/onnxruntime
+2026-11-12T20:54:58.6354367Z   token: ***
+2026-11-12T20:54:58.6354627Z   ssh-strict: true
+2026-11-12T20:54:58.6354894Z   ssh-user: git
+2026-11-12T20:54:58.6355149Z   clean: true
+2026-11-12T20:54:58.6355426Z   sparse-checkout-cone-mode: true
+2026-11-12T20:54:58.6355771Z   fetch-tags: false
+2026-11-12T20:54:58.6356060Z   show-progress: true
+2026-11-12T20:54:58.6356341Z   lfs: false
+2026-11-12T20:54:58.6356595Z   submodules: false
+2026-11-12T20:54:58.6356869Z   set-safe-directory: true
+2026-11-12T20:54:58.6357176Z   allow-unsafe-pr-checkout: false
+2026-11-12T20:54:58.6357578Z env:
+2026-11-12T20:54:58.6357830Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:54:58.6358159Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:54:58.6358478Z ##[endgroup]
+2026-11-12T20:54:58.8252364Z Syncing repository: Afloat16/onnxruntime
+2026-11-12T20:54:58.8254122Z ##[group]Getting Git version info
+2026-11-12T20:54:58.8254843Z Working directory is '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-12T20:54:58.8255838Z [command]/usr/bin/git version
+2026-11-12T20:54:58.8318904Z git version 2.56.0
+2026-11-12T20:54:58.8337718Z ##[endgroup]
+2026-11-12T20:54:58.8344189Z Temporarily overriding HOME='/home/runner/work/_temp/6274e70c-cdb4-48f9-9fee-da265084055d' before making global git config changes
+2026-11-12T20:54:58.8346314Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-12T20:54:58.8347661Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-12T20:54:58.8389139Z Deleting the contents of '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-12T20:54:58.8392419Z ##[group]Determining repository object format
+2026-11-12T20:54:58.8393407Z ##[endgroup]
+2026-11-12T20:54:58.8394121Z ##[group]Initializing the repository
+2026-11-12T20:54:58.8396700Z [command]/usr/bin/git init /home/runner/work/onnxruntime/onnxruntime
+2026-11-12T20:54:58.8488868Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-12T20:54:58.8490282Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-12T20:54:58.8491405Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-12T20:54:58.8492438Z hint: call:
+2026-11-12T20:54:58.8493299Z hint:
+2026-11-12T20:54:58.8493928Z hint: 	git config --global init.defaultBranch <name>
+2026-11-12T20:54:58.8494525Z hint:
+2026-11-12T20:54:58.8495111Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-12T20:54:58.8495981Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-12T20:54:58.8496696Z hint:
+2026-11-12T20:54:58.8497141Z hint: 	git branch -m <name>
+2026-11-12T20:54:58.8497585Z hint:
+2026-11-12T20:54:58.8498198Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-12T20:54:58.8499352Z Initialized empty Git repository in /home/runner/work/onnxruntime/onnxruntime/.git/
+2026-11-12T20:54:58.8506177Z [command]/usr/bin/git remote add origin https://github.com/Afloat16/onnxruntime
+2026-11-12T20:54:58.8550627Z ##[endgroup]
+2026-11-12T20:54:58.8551375Z ##[group]Disabling automatic garbage collection
+2026-11-12T20:54:58.8553551Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-12T20:54:58.8584017Z ##[endgroup]
+2026-11-12T20:54:58.8585109Z ##[group]Setting up auth
+2026-11-12T20:54:58.8585614Z Removing SSH command configuration
+2026-11-12T20:54:58.8589045Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-12T20:54:58.8624460Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-12T20:54:58.8914966Z Removing HTTP extra header
+2026-11-12T20:54:58.8919446Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-12T20:54:58.8959816Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-12T20:54:58.9154402Z Removing includeIf entries pointing to credentials config files
+2026-11-12T20:54:58.9158641Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-12T20:54:58.9206220Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-12T20:54:58.9475202Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-12T20:54:58.9477131Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path /home/runner/work/_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config
+2026-11-12T20:54:58.9502587Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config
+2026-11-12T20:54:58.9543173Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config
+2026-11-12T20:54:58.9584284Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config
+2026-11-12T20:54:58.9621716Z ##[endgroup]
+2026-11-12T20:54:58.9622336Z ##[group]Fetching the repository
+2026-11-12T20:54:58.9627304Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin 7ea94334d49d7cf39e7f3f953b0c054c3205b086
+2026-11-12T20:55:11.8855040Z From https://github.com/Afloat16/onnxruntime
+2026-11-12T20:55:11.8855626Z  * branch            7ea94334d49d7cf39e7f3f953b0c054c3205b086 -> FETCH_HEAD
+2026-11-12T20:55:11.8864129Z [command]/usr/bin/git rev-parse --verify --quiet 7ea94334d49d7cf39e7f3f953b0c054c3205b086^{object}
+2026-11-12T20:55:11.8901214Z 7ea94334d49d7cf39e7f3f953b0c054c3205b086
+2026-11-12T20:55:11.8905345Z ##[endgroup]
+2026-11-12T20:55:11.8906370Z ##[group]Determining the checkout info
+2026-11-12T20:55:11.8906728Z ##[endgroup]
+2026-11-12T20:55:11.8909375Z [command]/usr/bin/git sparse-checkout disable
+2026-11-12T20:55:11.8970891Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-12T20:55:11.9010970Z ##[group]Checking out the ref
+2026-11-12T20:55:11.9014575Z [command]/usr/bin/git checkout --progress --force 7ea94334d49d7cf39e7f3f953b0c054c3205b086
+2026-11-12T20:55:12.9415325Z Updating files:  74% (8730/11668)
+2026-11-12T20:55:12.9472462Z Updating files:  75% (8751/11668)
+2026-11-12T20:55:12.9562501Z Updating files:  76% (8868/11668)
+2026-11-12T20:55:13.0172981Z Updating files:  77% (8985/11668)
+2026-11-12T20:55:13.1039394Z Updating files:  78% (9102/11668)
+2026-11-12T20:55:13.1082288Z Updating files:  79% (9218/11668)
+2026-11-12T20:55:13.1905524Z Updating files:  80% (9335/11668)
+2026-11-12T20:55:13.3799959Z Updating files:  81% (9452/11668)
+2026-11-12T20:55:13.3994803Z Updating files:  82% (9568/11668)
+2026-11-12T20:55:13.4056864Z Updating files:  83% (9685/11668)
+2026-11-12T20:55:13.4128777Z Updating files:  84% (9802/11668)
+2026-11-12T20:55:13.4186559Z Updating files:  85% (9918/11668)
+2026-11-12T20:55:13.4243913Z Updating files:  86% (10035/11668)
+2026-11-12T20:55:13.4342453Z Updating files:  87% (10152/11668)
+2026-11-12T20:55:13.4388043Z Updating files:  88% (10268/11668)
+2026-11-12T20:55:13.4428762Z Updating files:  89% (10385/11668)
+2026-11-12T20:55:13.4468161Z Updating files:  90% (10502/11668)
+2026-11-12T20:55:13.4516567Z Updating files:  91% (10618/11668)
+2026-11-12T20:55:13.4564631Z Updating files:  92% (10735/11668)
+2026-11-12T20:55:13.4603517Z Updating files:  93% (10852/11668)
+2026-11-12T20:55:13.4647216Z Updating files:  94% (10968/11668)
+2026-11-12T20:55:13.4704793Z Updating files:  95% (11085/11668)
+2026-11-12T20:55:13.4742532Z Updating files:  96% (11202/11668)
+2026-11-12T20:55:13.4784767Z Updating files:  97% (11318/11668)
+2026-11-12T20:55:13.4839984Z Updating files:  98% (11435/11668)
+2026-11-12T20:55:13.7481323Z Updating files:  99% (11552/11668)
+2026-11-12T20:55:13.7481687Z Updating files: 100% (11668/11668)
+2026-11-12T20:55:13.7482056Z Updating files: 100% (11668/11668), done.
+2026-11-12T20:55:13.7556925Z Note: switching to '7ea94334d49d7cf39e7f3f953b0c054c3205b086'.
+2026-11-12T20:55:13.7557193Z 
+2026-11-12T20:55:13.7557372Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-12T20:55:13.7557868Z changes and commit them, and you can discard any commits you make in this
+2026-11-12T20:55:13.7558276Z state without impacting any branches by switching back to a branch.
+2026-11-12T20:55:13.7558519Z 
+2026-11-12T20:55:13.7558681Z If you want to create a new branch to retain commits you create, you may
+2026-11-12T20:55:13.7559085Z do so (now or later) by using -c with the switch command. Example:
+2026-11-12T20:55:13.7559330Z 
+2026-11-12T20:55:13.7559442Z   git switch -c <new-branch-name>
+2026-11-12T20:55:13.7559597Z 
+2026-11-12T20:55:13.7559694Z Or undo this operation with:
+2026-11-12T20:55:13.7559856Z 
+2026-11-12T20:55:13.7560382Z   git switch -
+2026-11-12T20:55:13.7560492Z 
+2026-11-12T20:55:13.7560680Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-12T20:55:13.7560940Z 
+2026-11-12T20:55:13.7561149Z HEAD is now at 7ea9433 Preserve histogram mass in entropy calibration reconstruction
+2026-11-12T20:55:13.7672919Z ##[endgroup]
+2026-11-12T20:55:13.7725536Z [command]/usr/bin/git log -1 --format=%H
+2026-11-12T20:55:13.7758752Z 7ea94334d49d7cf39e7f3f953b0c054c3205b086
+2026-11-12T20:55:13.7769628Z ##[group]Removing auth
+2026-11-12T20:55:13.7769809Z Removing SSH command configuration
+2026-11-12T20:55:13.7770046Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-12T20:55:13.7807213Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-12T20:55:13.8023843Z Removing HTTP extra header
+2026-11-12T20:55:13.8026990Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-12T20:55:13.8065860Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-12T20:55:13.8271610Z Removing includeIf entries pointing to credentials config files
+2026-11-12T20:55:13.8275003Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-12T20:55:13.8308934Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-12T20:55:13.8309417Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-12T20:55:13.8309811Z includeif.gitdir:/github/workspace/.git.path
+2026-11-12T20:55:13.8310117Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-12T20:55:13.8316262Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-12T20:55:13.8346949Z /home/runner/work/_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config
+2026-11-12T20:55:13.8354210Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-b811bfe5\-6857\-40cc\-bdbc\-449c6b76e2dd\.config
+2026-11-12T20:55:13.8394321Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-12T20:55:13.8424263Z /home/runner/work/_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config
+2026-11-12T20:55:13.8430615Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-b811bfe5\-6857\-40cc\-bdbc\-449c6b76e2dd\.config
+2026-11-12T20:55:13.8478145Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-12T20:55:13.8511061Z /github/runner_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config
+2026-11-12T20:55:13.8516863Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-b811bfe5\-6857\-40cc\-bdbc\-449c6b76e2dd\.config
+2026-11-12T20:55:13.8559188Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-12T20:55:13.8590397Z /github/runner_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config
+2026-11-12T20:55:13.8595747Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-b811bfe5\-6857\-40cc\-bdbc\-449c6b76e2dd\.config
+2026-11-12T20:55:13.8636252Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-12T20:55:13.8846456Z Removing credentials config '/home/runner/work/_temp/git-credentials-b811bfe5-6857-40cc-bdbc-449c6b76e2dd.config'
+2026-11-12T20:55:13.8855314Z ##[endgroup]
+2026-11-12T20:55:13.9052646Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-11-12T20:55:13.9052887Z with:
+2026-11-12T20:55:13.9053009Z   python-version: 3.12
+2026-11-12T20:55:13.9053141Z   check-latest: false
+2026-11-12T20:55:13.9054498Z   token: ***
+2026-11-12T20:55:13.9054619Z   update-environment: true
+2026-11-12T20:55:13.9054759Z   allow-prereleases: false
+2026-11-12T20:55:13.9054893Z   freethreaded: false
+2026-11-12T20:55:13.9055014Z env:
+2026-11-12T20:55:13.9055126Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:13.9055268Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:13.9055415Z ##[endgroup]
+2026-11-12T20:55:13.9972813Z ##[group]Installed versions
+2026-11-12T20:55:14.0047904Z (node:2216) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T20:55:14.0048445Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T20:55:14.0048826Z Successfully set up CPython (3.12.16)
+2026-11-12T20:55:14.0049305Z ##[endgroup]
+2026-11-12T20:55:14.0202125Z ##[group]Run python -m venv "$RUNNER_TEMP/ort-validation-venv"
+2026-11-12T20:55:14.0202621Z [36;1mpython -m venv "$RUNNER_TEMP/ort-validation-venv"[0m
+2026-11-12T20:55:14.0203011Z [36;1mecho "$RUNNER_TEMP/ort-validation-venv/bin" >> "$GITHUB_PATH"[0m
+2026-11-12T20:55:14.0238015Z shell: /usr/bin/bash -e {0}
+2026-11-12T20:55:14.0238259Z env:
+2026-11-12T20:55:14.0238441Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:14.0238664Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:14.0238958Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:14.0239355Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:55:14.0239731Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:14.0240063Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:14.0240426Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:14.0240829Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:55:14.0241151Z ##[endgroup]
+2026-11-12T20:55:16.1424533Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-12T20:55:16.1424764Z with:
+2026-11-12T20:55:16.1424896Z   name: cpu-entropy-native-wheel-a8246c0d
+2026-11-12T20:55:16.1425055Z   run-id: 43299831579
+2026-11-12T20:55:16.1426491Z   github-token: ***
+2026-11-12T20:55:16.1426633Z   path: /home/runner/work/_temp/ort-built-wheel
+2026-11-12T20:55:16.1426799Z   merge-multiple: false
+2026-11-12T20:55:16.1426934Z   repository: Afloat16/onnxruntime
+2026-11-12T20:55:16.1427072Z env:
+2026-11-12T20:55:16.1427186Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:16.1427323Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:16.1427502Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:16.1427735Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:55:16.1427979Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:16.1428211Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:16.1428418Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:16.1428656Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:55:16.1428834Z ##[endgroup]
+2026-11-12T20:55:16.2436648Z Downloading single artifact
+2026-11-12T20:55:16.2500446Z (node:2253) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T20:55:16.2501079Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T20:55:16.2670536Z (node:2253) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-12T20:55:16.6874951Z Preparing to download the following artifacts:
+2026-11-12T20:55:16.6875462Z - cpu-entropy-native-wheel-a8246c0d (ID: 13982801527, Size: 30978635, Expected Digest: sha256:748dd06ae0713feca57fe785b29f81ad3d192f3d401bd568e3e6e89e7afec28b)
+2026-11-12T20:55:16.6895328Z Downloading artifact '13982801527' from 'Afloat16/onnxruntime'
+2026-11-12T20:55:16.9931958Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/b880f67a-29a8-85c2-874f-59b78fd96397/workflow-job-run-496e0320-a04a-5ed5-bc37-7b84c4015fd2/artifacts/8736e7cd59ecf6ed108b9ee1abe83e7eb6cccc45e0bd78f4065b7896081b0ca1.zip
+2026-11-12T20:55:16.9933076Z Starting download of artifact to: /home/runner/work/_temp/ort-built-wheel
+2026-11-12T20:55:17.3933212Z (node:2253) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-12T20:55:18.5293233Z SHA256 digest of downloaded artifact is 748dd06ae0713feca57fe785b29f81ad3d192f3d401bd568e3e6e89e7afec28b
+2026-11-12T20:55:18.5293773Z Artifact download completed successfully.
+2026-11-12T20:55:18.5294034Z Total of 1 artifact(s) downloaded
+2026-11-12T20:55:18.5296712Z Download artifact has finished successfully
+2026-11-12T20:55:18.5463389Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-12T20:55:18.5463617Z with:
+2026-11-12T20:55:18.5463745Z   name: cpu-entropy-calibration-evidence
+2026-11-12T20:55:18.5463898Z   run-id: 43299831579
+2026-11-12T20:55:18.5465306Z   github-token: ***
+2026-11-12T20:55:18.5465453Z   path: /home/runner/work/_temp/ort-build-evidence
+2026-11-12T20:55:18.5465626Z   merge-multiple: false
+2026-11-12T20:55:18.5465760Z   repository: Afloat16/onnxruntime
+2026-11-12T20:55:18.5465896Z env:
+2026-11-12T20:55:18.5466006Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:18.5466144Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:18.5466320Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:18.5466568Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:55:18.5466799Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:18.5467020Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:18.5467229Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:18.5467437Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:55:18.5467611Z ##[endgroup]
+2026-11-12T20:55:18.6453868Z Downloading single artifact
+2026-11-12T20:55:18.6518180Z (node:2267) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T20:55:18.6518615Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T20:55:18.6664176Z (node:2267) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-12T20:55:19.0238219Z Preparing to download the following artifacts:
+2026-11-12T20:55:19.0238931Z - cpu-entropy-calibration-evidence (ID: 13982796516, Size: 47687, Expected Digest: sha256:c14b12a776fd79953b0af0ce0b1722d620424f7a664be27f090334a64c1cedff)
+2026-11-12T20:55:19.0259599Z Downloading artifact '13982796516' from 'Afloat16/onnxruntime'
+2026-11-12T20:55:19.4387355Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/b880f67a-29a8-85c2-874f-59b78fd96397/workflow-job-run-496e0320-a04a-5ed5-bc37-7b84c4015fd2/artifacts/c608965c0fe751c10cf8b197dfbd54191db780b73a4645be30a078e849d33689.zip
+2026-11-12T20:55:19.4388120Z Starting download of artifact to: /home/runner/work/_temp/ort-build-evidence
+2026-11-12T20:55:19.6594698Z (node:2267) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-12T20:55:19.7078702Z SHA256 digest of downloaded artifact is c14b12a776fd79953b0af0ce0b1722d620424f7a664be27f090334a64c1cedff
+2026-11-12T20:55:19.7079287Z Artifact download completed successfully.
+2026-11-12T20:55:19.7079574Z Total of 1 artifact(s) downloaded
+2026-11-12T20:55:19.7082579Z Download artifact has finished successfully
+2026-11-12T20:55:19.7202591Z ##[group]Run python -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12
+2026-11-12T20:55:19.7203301Z [36;1mpython -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12[0m
+2026-11-12T20:55:19.7203644Z [36;1mpython -P - <<'PY'[0m
+2026-11-12T20:55:19.7203803Z [36;1mimport hashlib[0m
+2026-11-12T20:55:19.7203934Z [36;1mimport json[0m
+2026-11-12T20:55:19.7204051Z [36;1mimport os[0m
+2026-11-12T20:55:19.7204171Z [36;1mimport platform[0m
+2026-11-12T20:55:19.7204307Z [36;1mimport subprocess[0m
+2026-11-12T20:55:19.7204463Z [36;1mfrom pathlib import Path[0m
+2026-11-12T20:55:19.7204620Z [36;1mimport numpy[0m
+2026-11-12T20:55:19.7204741Z [36;1mimport onnx[0m
+2026-11-12T20:55:19.7204863Z [36;1mimport onnxruntime[0m
+2026-11-12T20:55:19.7205034Z [36;1mfrom onnxruntime.quantization import calibrate[0m
+2026-11-12T20:55:19.7205403Z [36;1mprovenance = json.loads((Path(os.environ["RUNNER_TEMP"]) / "ort-build-evidence/ort-source-build-metadata.json").read_text())[0m
+2026-11-12T20:55:19.7205825Z [36;1massert provenance["source_commit"] == "7ea94334d49d7cf39e7f3f953b0c054c3205b086"[0m
+2026-11-12T20:55:19.7206149Z [36;1mexpected = Path("onnxruntime/python/tools/quantization/calibrate.py").read_bytes()[0m
+2026-11-12T20:55:19.7206416Z [36;1mactual = Path(calibrate.__file__).read_bytes()[0m
+2026-11-12T20:55:19.7206612Z [36;1massert actual == expected, calibrate.__file__[0m
+2026-11-12T20:55:19.7206855Z [36;1massert "CPUExecutionProvider" in onnxruntime.get_available_providers()[0m
+2026-11-12T20:55:19.7207080Z [36;1mmetadata = {[0m
+2026-11-12T20:55:19.7207214Z [36;1m    "native_build_run": 43299831579,[0m
+2026-11-12T20:55:19.7207383Z [36;1m    "native_wheel_artifact": 13982801527,[0m
+2026-11-12T20:55:19.7207647Z [36;1m    "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),[0m
+2026-11-12T20:55:19.7207915Z [36;1m    "python": platform.python_version(),[0m
+2026-11-12T20:55:19.7208091Z [36;1m    "platform": platform.platform(),[0m
+2026-11-12T20:55:19.7208256Z [36;1m    "numpy": numpy.__version__,[0m
+2026-11-12T20:55:19.7208409Z [36;1m    "onnx": onnx.__version__,[0m
+2026-11-12T20:55:19.7208579Z [36;1m    "onnxruntime": onnxruntime.__version__,[0m
+2026-11-12T20:55:19.7208758Z [36;1m    "runtime_path": onnxruntime.__file__,[0m
+2026-11-12T20:55:19.7208933Z [36;1m    "calibration_path": calibrate.__file__,[0m
+2026-11-12T20:55:19.7209136Z [36;1m    "calibration_sha256": hashlib.sha256(actual).hexdigest(),[0m
+2026-11-12T20:55:19.7209369Z [36;1m    "providers": onnxruntime.get_available_providers(),[0m
+2026-11-12T20:55:19.7209548Z [36;1m}[0m
+2026-11-12T20:55:19.7209765Z [36;1mPath("ort-source-build-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")[0m
+2026-11-12T20:55:19.7210034Z [36;1mprint(json.dumps(metadata, indent=2))[0m
+2026-11-12T20:55:19.7210194Z [36;1mPY[0m
+2026-11-12T20:55:19.7227712Z shell: /usr/bin/bash -e {0}
+2026-11-12T20:55:19.7227849Z env:
+2026-11-12T20:55:19.7227962Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:19.7228101Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:19.7228281Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:19.7228515Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:55:19.7228749Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:19.7228957Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:19.7229166Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:19.7229497Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:55:19.7229675Z ##[endgroup]
+2026-11-12T20:55:19.9636998Z Processing /home/runner/work/_temp/ort-built-wheel/onnxruntime-1.33.0-cp312-cp312-linux_x86_64.whl
+2026-11-12T20:55:20.1764958Z Collecting numpy==2.3.5
+2026-11-12T20:55:20.2132787Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-11-12T20:55:20.2642222Z Collecting onnx==1.20.1
+2026-11-12T20:55:20.2687311Z   Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.4 kB)
+2026-11-12T20:55:20.2957381Z Collecting ml_dtypes
+2026-11-12T20:55:20.2987564Z   Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+2026-11-12T20:55:20.3374136Z Collecting pytest==9.1.1
+2026-11-12T20:55:20.3408220Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-11-12T20:55:20.5488483Z Collecting ruff==0.12.12
+2026-11-12T20:55:20.5536552Z   Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2026-11-12T20:55:20.6552790Z Collecting protobuf>=4.25.1 (from onnx==1.20.1)
+2026-11-12T20:55:20.6587045Z   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+2026-11-12T20:55:20.6764829Z Collecting typing_extensions>=4.7.1 (from onnx==1.20.1)
+2026-11-12T20:55:20.6797126Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-12T20:55:20.6951690Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1)
+2026-11-12T20:55:20.6981914Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-12T20:55:20.7247306Z Collecting packaging>=22 (from pytest==9.1.1)
+2026-11-12T20:55:20.7275998Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-12T20:55:20.7438692Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1)
+2026-11-12T20:55:20.7471122Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-12T20:55:20.7664398Z Collecting pygments>=2.7.2 (from pytest==9.1.1)
+2026-11-12T20:55:20.7699974Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-12T20:55:20.7868095Z Collecting flatbuffers (from onnxruntime==1.33.0)
+2026-11-12T20:55:20.7901262Z   Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+2026-11-12T20:55:20.8166215Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-11-12T20:55:20.9622274Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 115.4 MB/s eta 0:00:00
+2026-11-12T20:55:20.9669207Z Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (17.5 MB)
+2026-11-12T20:55:21.1918170Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.5/17.5 MB 77.4 MB/s eta 0:00:00
+2026-11-12T20:55:21.1957744Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-11-12T20:55:21.2015808Z Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+2026-11-12T20:55:21.2905114Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 150.5 MB/s eta 0:00:00
+2026-11-12T20:55:21.2945628Z Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (409 kB)
+2026-11-12T20:55:21.3005413Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-12T20:55:21.3059598Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-12T20:55:21.3113028Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-12T20:55:21.3183406Z Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+2026-11-12T20:55:21.3239402Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-12T20:55:21.3296411Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 249.4 MB/s eta 0:00:00
+2026-11-12T20:55:21.3328053Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-12T20:55:21.3375742Z Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+2026-11-12T20:55:21.4774959Z Installing collected packages: flatbuffers, typing_extensions, ruff, pygments, protobuf, pluggy, packaging, numpy, iniconfig, pytest, onnxruntime, ml_dtypes, onnx
+2026-11-12T20:55:25.7185943Z Successfully installed flatbuffers-25.12.19 iniconfig-2.3.1 ml_dtypes-0.6.0 numpy-2.3.5 onnx-1.20.1 onnxruntime-1.33.0 packaging-26.3 pluggy-1.7.0 protobuf-7.36.2 pygments-2.21.0 pytest-9.1.1 ruff-0.12.12 typing_extensions-4.16.0
+2026-11-12T20:55:25.7728511Z 
+2026-11-12T20:55:25.7728934Z [notice] A new release of pip is available: 25.0.1 -> 26.3
+2026-11-12T20:55:25.7729299Z [notice] To update, run: pip install --upgrade pip
+2026-11-12T20:55:25.9613506Z [0;93m2026-11-12 20:55:25.961121871 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:55:25.9929386Z {
+2026-11-12T20:55:25.9929618Z   "native_build_run": 43299831579,
+2026-11-12T20:55:25.9929821Z   "native_wheel_artifact": 13982801527,
+2026-11-12T20:55:25.9930027Z   "source_commit": "7ea94334d49d7cf39e7f3f953b0c054c3205b086",
+2026-11-12T20:55:25.9930223Z   "python": "3.12.16",
+2026-11-12T20:55:25.9930397Z   "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+2026-11-12T20:55:25.9930594Z   "numpy": "2.3.5",
+2026-11-12T20:55:25.9930713Z   "onnx": "1.20.1",
+2026-11-12T20:55:25.9930832Z   "onnxruntime": "1.33.0",
+2026-11-12T20:55:25.9931112Z   "runtime_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/__init__.py",
+2026-11-12T20:55:25.9931561Z   "calibration_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/calibrate.py",
+2026-11-12T20:55:25.9932129Z   "calibration_sha256": "638e923a22707e7820dd876f24f09c07c78d0f2424fb823b5ed69ad26c74304f",
+2026-11-12T20:55:25.9932367Z   "providers": [
+2026-11-12T20:55:25.9932493Z     "CPUExecutionProvider"
+2026-11-12T20:55:25.9932622Z   ]
+2026-11-12T20:55:25.9932719Z }
+2026-11-12T20:55:26.0297310Z ##[group]Run set -o pipefail
+2026-11-12T20:55:26.0297496Z [36;1mset -o pipefail[0m
+2026-11-12T20:55:26.0298059Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_entropy_reconstruction.py onnxruntime/test/python/quantization/test_calibration.py 2>&1 | tee ort-patched.log[0m
+2026-11-12T20:55:26.0317117Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T20:55:26.0317297Z env:
+2026-11-12T20:55:26.0317410Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:26.0317547Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:26.0317722Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.0317950Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:55:26.0318174Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.0318419Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.0318697Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.0318903Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:55:26.0319078Z ##[endgroup]
+2026-11-12T20:55:26.0888804Z [0;93m2026-11-12 20:55:26.088661903 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:55:26.5001070Z ...........................                             [100%]
+2026-11-12T20:55:26.5001404Z =============================== warnings summary ===============================
+2026-11-12T20:55:26.5001689Z onnxruntime/test/python/quantization/test_calibration.py:40
+2026-11-12T20:55:26.5002456Z   /home/runner/work/onnxruntime/onnxruntime/onnxruntime/test/python/quantization/test_calibration.py:40: PytestCollectionWarning: cannot collect test class 'TestDataReader' because it has a __init__ constructor (from: onnxruntime/test/python/quantization/test_calibration.py)
+2026-11-12T20:55:26.5003268Z     class TestDataReader(CalibrationDataReader):
+2026-11-12T20:55:26.5003392Z 
+2026-11-12T20:55:26.5003515Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-11-12T20:55:26.5003750Z 27 passed, 1 warning, 17 subtests passed in 0.19s
+2026-11-12T20:55:26.5410772Z ##[group]Run python -P - <<'PY'
+2026-11-12T20:55:26.5410965Z [36;1mpython -P - <<'PY'[0m
+2026-11-12T20:55:26.5411101Z [36;1mimport subprocess[0m
+2026-11-12T20:55:26.5411237Z [36;1mfrom pathlib import Path[0m
+2026-11-12T20:55:26.5411412Z [36;1mfrom onnxruntime.quantization import calibrate[0m
+2026-11-12T20:55:26.5411935Z [36;1mbaseline = subprocess.check_output(["git", "show", "a8246c0d094f1ab0d6bf236228e5e67683321cd7:onnxruntime/python/tools/quantization/calibrate.py"])[0m
+2026-11-12T20:55:26.5412355Z [36;1mtarget = Path(calibrate.__file__)[0m
+2026-11-12T20:55:26.5412510Z [36;1mtarget.write_bytes(baseline)[0m
+2026-11-12T20:55:26.5412666Z [36;1massert target.read_bytes() == baseline[0m
+2026-11-12T20:55:26.5412878Z [36;1mfor cached in target.parent.glob("__pycache__/calibrate.*.pyc"):[0m
+2026-11-12T20:55:26.5413077Z [36;1m    cached.unlink()[0m
+2026-11-12T20:55:26.5413246Z [36;1mprint("Original calibration source restored:", target)[0m
+2026-11-12T20:55:26.5413455Z [36;1mPY[0m
+2026-11-12T20:55:26.5430009Z shell: /usr/bin/bash -e {0}
+2026-11-12T20:55:26.5430146Z env:
+2026-11-12T20:55:26.5430252Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:26.5430384Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:26.5430554Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.5430778Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:55:26.5430996Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.5431201Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.5431399Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.5431596Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:55:26.5431917Z ##[endgroup]
+2026-11-12T20:55:26.6039601Z [0;93m2026-11-12 20:55:26.603709207 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:55:26.6779400Z Original calibration source restored: /home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/calibrate.py
+2026-11-12T20:55:26.7107735Z ##[group]Run set +e
+2026-11-12T20:55:26.7108000Z [36;1mset +e[0m
+2026-11-12T20:55:26.7108750Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_entropy_reconstruction.py > ort-baseline.log 2>&1[0m
+2026-11-12T20:55:26.7109522Z [36;1mresult=$?[0m
+2026-11-12T20:55:26.7109707Z [36;1mset -e[0m
+2026-11-12T20:55:26.7109898Z [36;1mcat ort-baseline.log[0m
+2026-11-12T20:55:26.7110118Z [36;1mtest "$result" -eq 1[0m
+2026-11-12T20:55:26.7110363Z [36;1mpython -P - <<'PY'[0m
+2026-11-12T20:55:26.7110594Z [36;1mimport xml.etree.ElementTree as ET[0m
+2026-11-12T20:55:26.7110891Z [36;1mroot = ET.parse("ort-baseline.xml").getroot()[0m
+2026-11-12T20:55:26.7111356Z [36;1massert not root.findall(".//error"), "Baseline must fail assertions, not collection/import."[0m
+2026-11-12T20:55:26.7112133Z [36;1mfailed = {case.attrib["name"] for case in root.findall(".//testcase") if case.find("failure") is not None}[0m
+2026-11-12T20:55:26.7112551Z [36;1mrequired = {[0m
+2026-11-12T20:55:26.7112977Z [36;1m    "test_fractional_bucket_averages",[0m
+2026-11-12T20:55:26.7113255Z [36;1m    "test_sparse_histogram_support",[0m
+2026-11-12T20:55:26.7113530Z [36;1m    "test_nondivisible_candidate_widths",[0m
+2026-11-12T20:55:26.7113799Z [36;1m    "test_six_quantized_bins",[0m
+2026-11-12T20:55:26.7114058Z [36;1m    "test_native_cpu_calibration_ranges",[0m
+2026-11-12T20:55:26.7114367Z [36;1m    "test_cached_ranges_drive_static_quantization",[0m
+2026-11-12T20:55:26.7114636Z [36;1m}[0m
+2026-11-12T20:55:26.7114877Z [36;1massert required <= failed, (required - failed, failed)[0m
+2026-11-12T20:55:26.7115292Z [36;1mprint("Confirmed original implementation failures:", sorted(failed))[0m
+2026-11-12T20:55:26.7115608Z [36;1mPY[0m
+2026-11-12T20:55:26.7138177Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-12T20:55:26.7138474Z env:
+2026-11-12T20:55:26.7138667Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:26.7138889Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:26.7139186Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.7139556Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:55:26.7139953Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.7140271Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.7140611Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:26.7140954Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:55:26.7141237Z ##[endgroup]
+2026-11-12T20:55:27.0889054Z [0;93m2026-11-12 20:55:26.772740708 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:55:27.0890288Z F.......                                                   [100%]
+2026-11-12T20:55:27.0890709Z =================================== FAILURES ===================================
+2026-11-12T20:55:27.0891111Z ____ TestEntropyReconstruction.test_cached_ranges_drive_static_quantization ____
+2026-11-12T20:55:27.0891395Z 
+2026-11-12T20:55:27.0891892Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_cached_ranges_drive_static_quantization>
+2026-11-12T20:55:27.0892177Z 
+2026-11-12T20:55:27.0892276Z     def test_cached_ranges_drive_static_quantization(self):
+2026-11-12T20:55:27.0892517Z         with tempfile.TemporaryDirectory() as temporary_directory:
+2026-11-12T20:55:27.0892731Z             directory = Path(temporary_directory)
+2026-11-12T20:55:27.0892911Z             model_path = directory / "model.onnx"
+2026-11-12T20:55:27.0893084Z             self.make_model(model_path, np.float32)
+2026-11-12T20:55:27.0893612Z             values, counts = self.calibration_values(np.float32)
+2026-11-12T20:55:27.0893807Z             calibrator = create_calibrator(
+2026-11-12T20:55:27.0893966Z                 model_path,
+2026-11-12T20:55:27.0894099Z                 ["Add"],
+2026-11-12T20:55:27.0894242Z                 str(directory / "augmented.onnx"),
+2026-11-12T20:55:27.0894430Z                 calibrate_method=CalibrationMethod.Entropy,
+2026-11-12T20:55:27.0894620Z                 providers=["CPUExecutionProvider"],
+2026-11-12T20:55:27.0894823Z                 extra_options={"num_bins": 16, "num_quantized_bins": 4},
+2026-11-12T20:55:27.0895005Z             )
+2026-11-12T20:55:27.0895147Z             calibrator.collect_data(ArrayReader([values]))
+2026-11-12T20:55:27.0895332Z             cache_path = directory / "ranges.json"
+2026-11-12T20:55:27.0895528Z             save_tensors_data(calibrator.compute_data(), cache_path)
+2026-11-12T20:55:27.0895738Z             quantized_path = directory / "quantized.onnx"
+2026-11-12T20:55:27.0895915Z             quantize_static(
+2026-11-12T20:55:27.0896050Z                 model_path,
+2026-11-12T20:55:27.0896299Z                 quantized_path,
+2026-11-12T20:55:27.0896446Z                 calibration_data_reader=None,
+2026-11-12T20:55:27.0896615Z                 quant_format=QuantFormat.QDQ,
+2026-11-12T20:55:27.0896780Z                 activation_type=QuantType.QUInt8,
+2026-11-12T20:55:27.0896949Z                 weight_type=QuantType.QInt8,
+2026-11-12T20:55:27.0897127Z                 calibrate_method=CalibrationMethod.Entropy,
+2026-11-12T20:55:27.0897310Z                 calibration_cache_path=cache_path,
+2026-11-12T20:55:27.0897475Z                 op_types_to_quantize=["Add"],
+2026-11-12T20:55:27.0897621Z             )
+2026-11-12T20:55:27.0897739Z             model = onnx.load(quantized_path)
+2026-11-12T20:55:27.0897899Z             onnx.checker.check_model(model)
+2026-11-12T20:55:27.0898154Z             initializers = {item.name: numpy_helper.to_array(item) for item in model.graph.initializer}
+2026-11-12T20:55:27.0898543Z             expected_low, expected_high = reference_threshold(counts, np.arange(-8, 9, dtype=np.float32), 4)
+2026-11-12T20:55:27.0898863Z             expected_scale = np.float32((expected_high - expected_low) / 255)
+2026-11-12T20:55:27.0899111Z >           self.assertEqual(initializers["X_scale"], expected_scale)
+2026-11-12T20:55:27.0899363Z E           AssertionError: array(0.0627451, dtype=float32) != np.float32(0.050980393)
+2026-11-12T20:55:27.0899531Z 
+2026-11-12T20:55:27.0899671Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:193: AssertionError
+2026-11-12T20:55:27.0899965Z ----------------------------- Captured stdout call -----------------------------
+2026-11-12T20:55:27.0900189Z Collecting tensor data and making histogram ...
+2026-11-12T20:55:27.0900406Z Finding optimal threshold for each tensor using 'entropy' algorithm ...
+2026-11-12T20:55:27.0900609Z Number of tensors : 2
+2026-11-12T20:55:27.0900812Z Number of histogram bins : 16 (The number may increase depends on the data it collects)
+2026-11-12T20:55:27.0901041Z Number of quantized bins : 4
+2026-11-12T20:55:27.0901227Z ------------------------------ Captured log call -------------------------------
+2026-11-12T20:55:27.0901934Z WARNING  root:quantize.py:732 Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+2026-11-12T20:55:27.0902712Z WARNING  root:quantize.py:904 Please consider pre-processing before quantization. See https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md
+2026-11-12T20:55:27.0903260Z _ TestEntropyReconstruction.test_fractional_bucket_averages (dtype=<class 'numpy.float16'>) _
+2026-11-12T20:55:27.0903463Z 
+2026-11-12T20:55:27.0903640Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_fractional_bucket_averages>
+2026-11-12T20:55:27.0904046Z counts = [2, 2, 2, 4, 2, 4, ...], quantized_bins = 4
+2026-11-12T20:55:27.0904161Z 
+2026-11-12T20:55:27.0904243Z     def check_histogram(self, counts, quantized_bins=4):
+2026-11-12T20:55:27.0904431Z         hist = np.array(counts, dtype=np.int64)
+2026-11-12T20:55:27.0904605Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0904771Z             with self.subTest(dtype=dtype):
+2026-11-12T20:55:27.0904980Z                 edges = np.arange(-len(hist) // 2, len(hist) // 2 + 1, dtype=dtype)
+2026-11-12T20:55:27.0905222Z                 original_hist, original_edges = hist.copy(), edges.copy()
+2026-11-12T20:55:27.0905451Z                 expected = reference_threshold(hist, edges, quantized_bins)
+2026-11-12T20:55:27.0905738Z                 collector = HistogramCollector("entropy", False, len(hist), quantized_bins, 99.99, "same")
+2026-11-12T20:55:27.0906080Z                 actual = collector.get_entropy_threshold((hist, edges, edges[0], edges[-1]), quantized_bins)
+2026-11-12T20:55:27.0906355Z >               self.assertEqual(tuple(actual), expected)
+2026-11-12T20:55:27.0906602Z E               AssertionError: Tuples differ: (np.float16(-8.0), np.float16(8.0)) != (-7.0, 8.0)
+2026-11-12T20:55:27.0907226Z E               
+2026-11-12T20:55:27.0907449Z E               First differing element 0:
+2026-11-12T20:55:27.0907692Z E               np.float16(-8.0)
+2026-11-12T20:55:27.0907907Z E               -7.0
+2026-11-12T20:55:27.0908084Z E               
+2026-11-12T20:55:27.0908255Z E               - (np.float16(-8.0), np.float16(8.0))
+2026-11-12T20:55:27.0908418Z E               + (-7.0, 8.0)
+2026-11-12T20:55:27.0908504Z 
+2026-11-12T20:55:27.0908647Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:94: AssertionError
+2026-11-12T20:55:27.0908990Z _ TestEntropyReconstruction.test_fractional_bucket_averages (dtype=<class 'numpy.float32'>) _
+2026-11-12T20:55:27.0909188Z 
+2026-11-12T20:55:27.0909361Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_fractional_bucket_averages>
+2026-11-12T20:55:27.0909656Z counts = [2, 2, 2, 4, 2, 4, ...], quantized_bins = 4
+2026-11-12T20:55:27.0909776Z 
+2026-11-12T20:55:27.0909853Z     def check_histogram(self, counts, quantized_bins=4):
+2026-11-12T20:55:27.0910037Z         hist = np.array(counts, dtype=np.int64)
+2026-11-12T20:55:27.0910208Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0910371Z             with self.subTest(dtype=dtype):
+2026-11-12T20:55:27.0910758Z                 edges = np.arange(-len(hist) // 2, len(hist) // 2 + 1, dtype=dtype)
+2026-11-12T20:55:27.0911133Z                 original_hist, original_edges = hist.copy(), edges.copy()
+2026-11-12T20:55:27.0911501Z                 expected = reference_threshold(hist, edges, quantized_bins)
+2026-11-12T20:55:27.0912118Z                 collector = HistogramCollector("entropy", False, len(hist), quantized_bins, 99.99, "same")
+2026-11-12T20:55:27.0912576Z                 actual = collector.get_entropy_threshold((hist, edges, edges[0], edges[-1]), quantized_bins)
+2026-11-12T20:55:27.0912849Z >               self.assertEqual(tuple(actual), expected)
+2026-11-12T20:55:27.0913100Z E               AssertionError: Tuples differ: (np.float32(-8.0), np.float32(8.0)) != (-7.0, 8.0)
+2026-11-12T20:55:27.0913324Z E               
+2026-11-12T20:55:27.0913445Z E               First differing element 0:
+2026-11-12T20:55:27.0913601Z E               np.float32(-8.0)
+2026-11-12T20:55:27.0913736Z E               -7.0
+2026-11-12T20:55:27.0913850Z E               
+2026-11-12T20:55:27.0913978Z E               - (np.float32(-8.0), np.float32(8.0))
+2026-11-12T20:55:27.0914137Z E               + (-7.0, 8.0)
+2026-11-12T20:55:27.0914222Z 
+2026-11-12T20:55:27.0914359Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:94: AssertionError
+2026-11-12T20:55:27.0914699Z _ TestEntropyReconstruction.test_native_cpu_calibration_ranges (dtype=<class 'numpy.float16'>) _
+2026-11-12T20:55:27.0914903Z 
+2026-11-12T20:55:27.0915434Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_native_cpu_calibration_ranges>
+2026-11-12T20:55:27.0915663Z 
+2026-11-12T20:55:27.0915737Z     def test_native_cpu_calibration_ranges(self):
+2026-11-12T20:55:27.0915917Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0916145Z             with self.subTest(dtype=dtype), tempfile.TemporaryDirectory() as directory:
+2026-11-12T20:55:27.0916394Z                 model_path = Path(directory) / "model.onnx"
+2026-11-12T20:55:27.0916575Z                 self.make_model(model_path, dtype)
+2026-11-12T20:55:27.0916763Z                 values, counts = self.calibration_values(dtype)
+2026-11-12T20:55:27.0916947Z                 calibrator = create_calibrator(
+2026-11-12T20:55:27.0917109Z                     model_path,
+2026-11-12T20:55:27.0917245Z                     ["Add"],
+2026-11-12T20:55:27.0917397Z                     str(Path(directory) / "augmented.onnx"),
+2026-11-12T20:55:27.0917589Z                     calibrate_method=CalibrationMethod.Entropy,
+2026-11-12T20:55:27.0917785Z                     providers=["CPUExecutionProvider"],
+2026-11-12T20:55:27.0918011Z                     extra_options={"num_bins": 16, "num_quantized_bins": 4},
+2026-11-12T20:55:27.0918350Z                 )
+2026-11-12T20:55:27.0918580Z                 calibrator.collect_data(ArrayReader([values]))
+2026-11-12T20:55:27.0919023Z                 ranges = calibrator.compute_data()
+2026-11-12T20:55:27.0919336Z                 expected = reference_threshold(counts, np.arange(-8, 9, dtype=dtype), 4)
+2026-11-12T20:55:27.0919629Z                 for name in ("X", "Y"):
+2026-11-12T20:55:27.0920034Z                     np.testing.assert_array_equal(calibrator.collector.histogram_dict[name][0], counts)
+2026-11-12T20:55:27.0920406Z >                   self.assertEqual(tuple(ranges[name].range_value), expected)
+2026-11-12T20:55:27.0920831Z E                   AssertionError: Tuples differ: (np.float16(-8.0), np.float16(8.0)) != (-6.0, 7.0)
+2026-11-12T20:55:27.0921137Z E                   
+2026-11-12T20:55:27.0921343Z E                   First differing element 0:
+2026-11-12T20:55:27.0921634Z E                   np.float16(-8.0)
+2026-11-12T20:55:27.0932061Z E                   -6.0
+2026-11-12T20:55:27.0932283Z E                   
+2026-11-12T20:55:27.0932487Z E                   - (np.float16(-8.0), np.float16(8.0))
+2026-11-12T20:55:27.0932739Z E                   + (-6.0, 7.0)
+2026-11-12T20:55:27.0932872Z 
+2026-11-12T20:55:27.0933119Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:157: AssertionError
+2026-11-12T20:55:27.0933650Z _ TestEntropyReconstruction.test_native_cpu_calibration_ranges (dtype=<class 'numpy.float32'>) _
+2026-11-12T20:55:27.0933977Z 
+2026-11-12T20:55:27.0934257Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_native_cpu_calibration_ranges>
+2026-11-12T20:55:27.0934621Z 
+2026-11-12T20:55:27.0934735Z     def test_native_cpu_calibration_ranges(self):
+2026-11-12T20:55:27.0935025Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0935397Z             with self.subTest(dtype=dtype), tempfile.TemporaryDirectory() as directory:
+2026-11-12T20:55:27.0935796Z                 model_path = Path(directory) / "model.onnx"
+2026-11-12T20:55:27.0936088Z                 self.make_model(model_path, dtype)
+2026-11-12T20:55:27.0936392Z                 values, counts = self.calibration_values(dtype)
+2026-11-12T20:55:27.0936690Z                 calibrator = create_calibrator(
+2026-11-12T20:55:27.0936953Z                     model_path,
+2026-11-12T20:55:27.0937171Z                     ["Add"],
+2026-11-12T20:55:27.0937418Z                     str(Path(directory) / "augmented.onnx"),
+2026-11-12T20:55:27.0937729Z                     calibrate_method=CalibrationMethod.Entropy,
+2026-11-12T20:55:27.0938003Z                     providers=["CPUExecutionProvider"],
+2026-11-12T20:55:27.0938210Z                     extra_options={"num_bins": 16, "num_quantized_bins": 4},
+2026-11-12T20:55:27.0938396Z                 )
+2026-11-12T20:55:27.0938690Z                 calibrator.collect_data(ArrayReader([values]))
+2026-11-12T20:55:27.0938880Z                 ranges = calibrator.compute_data()
+2026-11-12T20:55:27.0939114Z                 expected = reference_threshold(counts, np.arange(-8, 9, dtype=dtype), 4)
+2026-11-12T20:55:27.0939337Z                 for name in ("X", "Y"):
+2026-11-12T20:55:27.0939585Z                     np.testing.assert_array_equal(calibrator.collector.histogram_dict[name][0], counts)
+2026-11-12T20:55:27.0939872Z >                   self.assertEqual(tuple(ranges[name].range_value), expected)
+2026-11-12T20:55:27.0940153Z E                   AssertionError: Tuples differ: (np.float32(-8.0), np.float32(8.0)) != (-6.0, 7.0)
+2026-11-12T20:55:27.0940380Z E                   
+2026-11-12T20:55:27.0940515Z E                   First differing element 0:
+2026-11-12T20:55:27.0940676Z E                   np.float32(-8.0)
+2026-11-12T20:55:27.0940820Z E                   -6.0
+2026-11-12T20:55:27.0940945Z E                   
+2026-11-12T20:55:27.0941087Z E                   - (np.float32(-8.0), np.float32(8.0))
+2026-11-12T20:55:27.0941255Z E                   + (-6.0, 7.0)
+2026-11-12T20:55:27.0941429Z 
+2026-11-12T20:55:27.0941570Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:157: AssertionError
+2026-11-12T20:55:27.0942164Z _ TestEntropyReconstruction.test_nondivisible_candidate_widths (dtype=<class 'numpy.float16'>) _
+2026-11-12T20:55:27.0942370Z 
+2026-11-12T20:55:27.0942553Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_nondivisible_candidate_widths>
+2026-11-12T20:55:27.0942849Z counts = [4, 1, 5, 0, 5, 1, ...], quantized_bins = 4
+2026-11-12T20:55:27.0942964Z 
+2026-11-12T20:55:27.0943042Z     def check_histogram(self, counts, quantized_bins=4):
+2026-11-12T20:55:27.0943230Z         hist = np.array(counts, dtype=np.int64)
+2026-11-12T20:55:27.0943404Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0943573Z             with self.subTest(dtype=dtype):
+2026-11-12T20:55:27.0943778Z                 edges = np.arange(-len(hist) // 2, len(hist) // 2 + 1, dtype=dtype)
+2026-11-12T20:55:27.0944018Z                 original_hist, original_edges = hist.copy(), edges.copy()
+2026-11-12T20:55:27.0944258Z                 expected = reference_threshold(hist, edges, quantized_bins)
+2026-11-12T20:55:27.0944548Z                 collector = HistogramCollector("entropy", False, len(hist), quantized_bins, 99.99, "same")
+2026-11-12T20:55:27.0944891Z                 actual = collector.get_entropy_threshold((hist, edges, edges[0], edges[-1]), quantized_bins)
+2026-11-12T20:55:27.0945159Z >               self.assertEqual(tuple(actual), expected)
+2026-11-12T20:55:27.0945403Z E               AssertionError: Tuples differ: (np.float16(-8.0), np.float16(8.0)) != (-6.0, 7.0)
+2026-11-12T20:55:27.0945626Z E               
+2026-11-12T20:55:27.0945751Z E               First differing element 0:
+2026-11-12T20:55:27.0945904Z E               np.float16(-8.0)
+2026-11-12T20:55:27.0946039Z E               -6.0
+2026-11-12T20:55:27.0946153Z E               
+2026-11-12T20:55:27.0946287Z E               - (np.float16(-8.0), np.float16(8.0))
+2026-11-12T20:55:27.0946445Z E               + (-6.0, 7.0)
+2026-11-12T20:55:27.0946533Z 
+2026-11-12T20:55:27.0946665Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:94: AssertionError
+2026-11-12T20:55:27.0947004Z _ TestEntropyReconstruction.test_nondivisible_candidate_widths (dtype=<class 'numpy.float32'>) _
+2026-11-12T20:55:27.0947208Z 
+2026-11-12T20:55:27.0947384Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_nondivisible_candidate_widths>
+2026-11-12T20:55:27.0947671Z counts = [4, 1, 5, 0, 5, 1, ...], quantized_bins = 4
+2026-11-12T20:55:27.0947780Z 
+2026-11-12T20:55:27.0947859Z     def check_histogram(self, counts, quantized_bins=4):
+2026-11-12T20:55:27.0948040Z         hist = np.array(counts, dtype=np.int64)
+2026-11-12T20:55:27.0948207Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0948368Z             with self.subTest(dtype=dtype):
+2026-11-12T20:55:27.0948663Z                 edges = np.arange(-len(hist) // 2, len(hist) // 2 + 1, dtype=dtype)
+2026-11-12T20:55:27.0948904Z                 original_hist, original_edges = hist.copy(), edges.copy()
+2026-11-12T20:55:27.0949133Z                 expected = reference_threshold(hist, edges, quantized_bins)
+2026-11-12T20:55:27.0949414Z                 collector = HistogramCollector("entropy", False, len(hist), quantized_bins, 99.99, "same")
+2026-11-12T20:55:27.0949751Z                 actual = collector.get_entropy_threshold((hist, edges, edges[0], edges[-1]), quantized_bins)
+2026-11-12T20:55:27.0950015Z >               self.assertEqual(tuple(actual), expected)
+2026-11-12T20:55:27.0950256Z E               AssertionError: Tuples differ: (np.float32(-8.0), np.float32(8.0)) != (-6.0, 7.0)
+2026-11-12T20:55:27.0950484Z E               
+2026-11-12T20:55:27.0950608Z E               First differing element 0:
+2026-11-12T20:55:27.0950759Z E               np.float32(-8.0)
+2026-11-12T20:55:27.0950891Z E               -6.0
+2026-11-12T20:55:27.0951007Z E               
+2026-11-12T20:55:27.0951134Z E               - (np.float32(-8.0), np.float32(8.0))
+2026-11-12T20:55:27.0951374Z E               + (-6.0, 7.0)
+2026-11-12T20:55:27.0951458Z 
+2026-11-12T20:55:27.0951592Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:94: AssertionError
+2026-11-12T20:55:27.0952030Z _ TestEntropyReconstruction.test_six_quantized_bins (dtype=<class 'numpy.float16'>) _
+2026-11-12T20:55:27.0952210Z 
+2026-11-12T20:55:27.0952369Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_six_quantized_bins>
+2026-11-12T20:55:27.0952639Z counts = [0, 5, 3, 1, 5, 0, ...], quantized_bins = 6
+2026-11-12T20:55:27.0952750Z 
+2026-11-12T20:55:27.0952827Z     def check_histogram(self, counts, quantized_bins=4):
+2026-11-12T20:55:27.0953008Z         hist = np.array(counts, dtype=np.int64)
+2026-11-12T20:55:27.0953175Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0953338Z             with self.subTest(dtype=dtype):
+2026-11-12T20:55:27.0953540Z                 edges = np.arange(-len(hist) // 2, len(hist) // 2 + 1, dtype=dtype)
+2026-11-12T20:55:27.0953781Z                 original_hist, original_edges = hist.copy(), edges.copy()
+2026-11-12T20:55:27.0954008Z                 expected = reference_threshold(hist, edges, quantized_bins)
+2026-11-12T20:55:27.0954290Z                 collector = HistogramCollector("entropy", False, len(hist), quantized_bins, 99.99, "same")
+2026-11-12T20:55:27.0954624Z                 actual = collector.get_entropy_threshold((hist, edges, edges[0], edges[-1]), quantized_bins)
+2026-11-12T20:55:27.0954888Z >               self.assertEqual(tuple(actual), expected)
+2026-11-12T20:55:27.0955127Z E               AssertionError: Tuples differ: (np.float16(-7.0), np.float16(8.0)) != (-8.0, 8.0)
+2026-11-12T20:55:27.0955347Z E               
+2026-11-12T20:55:27.0955468Z E               First differing element 0:
+2026-11-12T20:55:27.0955617Z E               np.float16(-7.0)
+2026-11-12T20:55:27.0955752Z E               -8.0
+2026-11-12T20:55:27.0955868Z E               
+2026-11-12T20:55:27.0955995Z E               - (np.float16(-7.0), np.float16(8.0))
+2026-11-12T20:55:27.0956155Z E               + (-8.0, 8.0)
+2026-11-12T20:55:27.0956238Z 
+2026-11-12T20:55:27.0956370Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:94: AssertionError
+2026-11-12T20:55:27.0956680Z _ TestEntropyReconstruction.test_six_quantized_bins (dtype=<class 'numpy.float32'>) _
+2026-11-12T20:55:27.0956862Z 
+2026-11-12T20:55:27.0957019Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_six_quantized_bins>
+2026-11-12T20:55:27.0957286Z counts = [0, 5, 3, 1, 5, 0, ...], quantized_bins = 6
+2026-11-12T20:55:27.0957395Z 
+2026-11-12T20:55:27.0957472Z     def check_histogram(self, counts, quantized_bins=4):
+2026-11-12T20:55:27.0957655Z         hist = np.array(counts, dtype=np.int64)
+2026-11-12T20:55:27.0957821Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0958124Z             with self.subTest(dtype=dtype):
+2026-11-12T20:55:27.0958324Z                 edges = np.arange(-len(hist) // 2, len(hist) // 2 + 1, dtype=dtype)
+2026-11-12T20:55:27.0958562Z                 original_hist, original_edges = hist.copy(), edges.copy()
+2026-11-12T20:55:27.0958793Z                 expected = reference_threshold(hist, edges, quantized_bins)
+2026-11-12T20:55:27.0959076Z                 collector = HistogramCollector("entropy", False, len(hist), quantized_bins, 99.99, "same")
+2026-11-12T20:55:27.0959412Z                 actual = collector.get_entropy_threshold((hist, edges, edges[0], edges[-1]), quantized_bins)
+2026-11-12T20:55:27.0959677Z >               self.assertEqual(tuple(actual), expected)
+2026-11-12T20:55:27.0959915Z E               AssertionError: Tuples differ: (np.float32(-7.0), np.float32(8.0)) != (-8.0, 8.0)
+2026-11-12T20:55:27.0960132Z E               
+2026-11-12T20:55:27.0960253Z E               First differing element 0:
+2026-11-12T20:55:27.0960403Z E               np.float32(-7.0)
+2026-11-12T20:55:27.0960541Z E               -8.0
+2026-11-12T20:55:27.0960654Z E               
+2026-11-12T20:55:27.0960781Z E               - (np.float32(-7.0), np.float32(8.0))
+2026-11-12T20:55:27.0961018Z E               + (-8.0, 8.0)
+2026-11-12T20:55:27.0961098Z 
+2026-11-12T20:55:27.0961233Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:94: AssertionError
+2026-11-12T20:55:27.0961557Z _ TestEntropyReconstruction.test_sparse_histogram_support (dtype=<class 'numpy.float16'>) _
+2026-11-12T20:55:27.0961947Z 
+2026-11-12T20:55:27.0962208Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_sparse_histogram_support>
+2026-11-12T20:55:27.0962636Z counts = [0, 0, 5, 1, 0, 4, ...], quantized_bins = 4
+2026-11-12T20:55:27.0962809Z 
+2026-11-12T20:55:27.0962928Z     def check_histogram(self, counts, quantized_bins=4):
+2026-11-12T20:55:27.0963213Z         hist = np.array(counts, dtype=np.int64)
+2026-11-12T20:55:27.0963476Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0963740Z             with self.subTest(dtype=dtype):
+2026-11-12T20:55:27.0964032Z                 edges = np.arange(-len(hist) // 2, len(hist) // 2 + 1, dtype=dtype)
+2026-11-12T20:55:27.0964275Z                 original_hist, original_edges = hist.copy(), edges.copy()
+2026-11-12T20:55:27.0964502Z                 expected = reference_threshold(hist, edges, quantized_bins)
+2026-11-12T20:55:27.0964784Z                 collector = HistogramCollector("entropy", False, len(hist), quantized_bins, 99.99, "same")
+2026-11-12T20:55:27.0965123Z                 actual = collector.get_entropy_threshold((hist, edges, edges[0], edges[-1]), quantized_bins)
+2026-11-12T20:55:27.0965388Z >               self.assertEqual(tuple(actual), expected)
+2026-11-12T20:55:27.0965627Z E               AssertionError: Tuples differ: (np.float16(-8.0), np.float16(8.0)) != (-4.0, 5.0)
+2026-11-12T20:55:27.0965846Z E               
+2026-11-12T20:55:27.0965969Z E               First differing element 0:
+2026-11-12T20:55:27.0966124Z E               np.float16(-8.0)
+2026-11-12T20:55:27.0966257Z E               -4.0
+2026-11-12T20:55:27.0966370Z E               
+2026-11-12T20:55:27.0966497Z E               - (np.float16(-8.0), np.float16(8.0))
+2026-11-12T20:55:27.0966656Z E               + (-4.0, 5.0)
+2026-11-12T20:55:27.0966736Z 
+2026-11-12T20:55:27.0966870Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:94: AssertionError
+2026-11-12T20:55:27.0967195Z _ TestEntropyReconstruction.test_sparse_histogram_support (dtype=<class 'numpy.float32'>) _
+2026-11-12T20:55:27.0967388Z 
+2026-11-12T20:55:27.0967558Z self = <test_entropy_reconstruction.TestEntropyReconstruction testMethod=test_sparse_histogram_support>
+2026-11-12T20:55:27.0967840Z counts = [0, 0, 5, 1, 0, 4, ...], quantized_bins = 4
+2026-11-12T20:55:27.0967951Z 
+2026-11-12T20:55:27.0968026Z     def check_histogram(self, counts, quantized_bins=4):
+2026-11-12T20:55:27.0968244Z         hist = np.array(counts, dtype=np.int64)
+2026-11-12T20:55:27.0968463Z         for dtype in (np.float16, np.float32):
+2026-11-12T20:55:27.0968730Z             with self.subTest(dtype=dtype):
+2026-11-12T20:55:27.0968932Z                 edges = np.arange(-len(hist) // 2, len(hist) // 2 + 1, dtype=dtype)
+2026-11-12T20:55:27.0969169Z                 original_hist, original_edges = hist.copy(), edges.copy()
+2026-11-12T20:55:27.0969396Z                 expected = reference_threshold(hist, edges, quantized_bins)
+2026-11-12T20:55:27.0969676Z                 collector = HistogramCollector("entropy", False, len(hist), quantized_bins, 99.99, "same")
+2026-11-12T20:55:27.0970011Z                 actual = collector.get_entropy_threshold((hist, edges, edges[0], edges[-1]), quantized_bins)
+2026-11-12T20:55:27.0970272Z >               self.assertEqual(tuple(actual), expected)
+2026-11-12T20:55:27.0970516Z E               AssertionError: Tuples differ: (np.float32(-8.0), np.float32(8.0)) != (-4.0, 5.0)
+2026-11-12T20:55:27.0970732Z E               
+2026-11-12T20:55:27.0970854Z E               First differing element 0:
+2026-11-12T20:55:27.0971007Z E               np.float32(-8.0)
+2026-11-12T20:55:27.0971140Z E               -4.0
+2026-11-12T20:55:27.0971332Z E               
+2026-11-12T20:55:27.0971456Z E               - (np.float32(-8.0), np.float32(8.0))
+2026-11-12T20:55:27.0971612Z E               + (-4.0, 5.0)
+2026-11-12T20:55:27.0971694Z 
+2026-11-12T20:55:27.0971972Z onnxruntime/test/python/quantization/test_entropy_reconstruction.py:94: AssertionError
+2026-11-12T20:55:27.0972242Z =========================== short test summary info ============================
+2026-11-12T20:55:27.0972809Z FAILED onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_cached_ranges_drive_static_quantization - AssertionError: array(0.0627451, dtype=float32) != np.float32(0.050980393)
+2026-11-12T20:55:27.0973662Z SUBFAILED(dtype=<class 'numpy.float16'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_fractional_bucket_averages - AssertionError: Tuples differ: (np.float16(-8.0), np.float16(8.0)) != (-7.0, 8.0)
+2026-11-12T20:55:27.0974135Z 
+2026-11-12T20:55:27.0974194Z First differing element 0:
+2026-11-12T20:55:27.0974325Z np.float16(-8.0)
+2026-11-12T20:55:27.0974437Z -7.0
+2026-11-12T20:55:27.0974498Z 
+2026-11-12T20:55:27.0974558Z - (np.float16(-8.0), np.float16(8.0))
+2026-11-12T20:55:27.0974700Z + (-7.0, 8.0)
+2026-11-12T20:55:27.0975177Z SUBFAILED(dtype=<class 'numpy.float32'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_fractional_bucket_averages - AssertionError: Tuples differ: (np.float32(-8.0), np.float32(8.0)) != (-7.0, 8.0)
+2026-11-12T20:55:27.0975635Z 
+2026-11-12T20:55:27.0975691Z First differing element 0:
+2026-11-12T20:55:27.0975821Z np.float32(-8.0)
+2026-11-12T20:55:27.0975929Z -7.0
+2026-11-12T20:55:27.0975989Z 
+2026-11-12T20:55:27.0976043Z - (np.float32(-8.0), np.float32(8.0))
+2026-11-12T20:55:27.0976179Z + (-7.0, 8.0)
+2026-11-12T20:55:27.0976666Z SUBFAILED(dtype=<class 'numpy.float16'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_native_cpu_calibration_ranges - AssertionError: Tuples differ: (np.float16(-8.0), np.float16(8.0)) != (-6.0, 7.0)
+2026-11-12T20:55:27.0977138Z 
+2026-11-12T20:55:27.0977193Z First differing element 0:
+2026-11-12T20:55:27.0977321Z np.float16(-8.0)
+2026-11-12T20:55:27.0977428Z -6.0
+2026-11-12T20:55:27.0977487Z 
+2026-11-12T20:55:27.0977541Z - (np.float16(-8.0), np.float16(8.0))
+2026-11-12T20:55:27.0977675Z + (-6.0, 7.0)
+2026-11-12T20:55:27.0978157Z SUBFAILED(dtype=<class 'numpy.float32'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_native_cpu_calibration_ranges - AssertionError: Tuples differ: (np.float32(-8.0), np.float32(8.0)) != (-6.0, 7.0)
+2026-11-12T20:55:27.0978618Z 
+2026-11-12T20:55:27.0978672Z First differing element 0:
+2026-11-12T20:55:27.0978797Z np.float32(-8.0)
+2026-11-12T20:55:27.0978905Z -6.0
+2026-11-12T20:55:27.0978959Z 
+2026-11-12T20:55:27.0979109Z - (np.float32(-8.0), np.float32(8.0))
+2026-11-12T20:55:27.0979244Z + (-6.0, 7.0)
+2026-11-12T20:55:27.0979721Z SUBFAILED(dtype=<class 'numpy.float16'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_nondivisible_candidate_widths - AssertionError: Tuples differ: (np.float16(-8.0), np.float16(8.0)) != (-6.0, 7.0)
+2026-11-12T20:55:27.0980182Z 
+2026-11-12T20:55:27.0980233Z First differing element 0:
+2026-11-12T20:55:27.0980354Z np.float16(-8.0)
+2026-11-12T20:55:27.0980456Z -6.0
+2026-11-12T20:55:27.0980509Z 
+2026-11-12T20:55:27.0980561Z - (np.float16(-8.0), np.float16(8.0))
+2026-11-12T20:55:27.0980697Z + (-6.0, 7.0)
+2026-11-12T20:55:27.0981172Z SUBFAILED(dtype=<class 'numpy.float32'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_nondivisible_candidate_widths - AssertionError: Tuples differ: (np.float32(-8.0), np.float32(8.0)) != (-6.0, 7.0)
+2026-11-12T20:55:27.0981634Z 
+2026-11-12T20:55:27.0981687Z First differing element 0:
+2026-11-12T20:55:27.0981923Z np.float32(-8.0)
+2026-11-12T20:55:27.0982029Z -6.0
+2026-11-12T20:55:27.0982172Z 
+2026-11-12T20:55:27.0982226Z - (np.float32(-8.0), np.float32(8.0))
+2026-11-12T20:55:27.0982361Z + (-6.0, 7.0)
+2026-11-12T20:55:27.0982818Z SUBFAILED(dtype=<class 'numpy.float16'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_six_quantized_bins - AssertionError: Tuples differ: (np.float16(-7.0), np.float16(8.0)) != (-8.0, 8.0)
+2026-11-12T20:55:27.0983261Z 
+2026-11-12T20:55:27.0983311Z First differing element 0:
+2026-11-12T20:55:27.0983435Z np.float16(-7.0)
+2026-11-12T20:55:27.0983539Z -8.0
+2026-11-12T20:55:27.0983594Z 
+2026-11-12T20:55:27.0983646Z - (np.float16(-7.0), np.float16(8.0))
+2026-11-12T20:55:27.0983779Z + (-8.0, 8.0)
+2026-11-12T20:55:27.0984239Z SUBFAILED(dtype=<class 'numpy.float32'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_six_quantized_bins - AssertionError: Tuples differ: (np.float32(-7.0), np.float32(8.0)) != (-8.0, 8.0)
+2026-11-12T20:55:27.0984682Z 
+2026-11-12T20:55:27.0984740Z First differing element 0:
+2026-11-12T20:55:27.0984865Z np.float32(-7.0)
+2026-11-12T20:55:27.0984969Z -8.0
+2026-11-12T20:55:27.0985024Z 
+2026-11-12T20:55:27.0985077Z - (np.float32(-7.0), np.float32(8.0))
+2026-11-12T20:55:27.0985208Z + (-8.0, 8.0)
+2026-11-12T20:55:27.0985677Z SUBFAILED(dtype=<class 'numpy.float16'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_sparse_histogram_support - AssertionError: Tuples differ: (np.float16(-8.0), np.float16(8.0)) != (-4.0, 5.0)
+2026-11-12T20:55:27.0986141Z 
+2026-11-12T20:55:27.0986196Z First differing element 0:
+2026-11-12T20:55:27.0986322Z np.float16(-8.0)
+2026-11-12T20:55:27.0986431Z -4.0
+2026-11-12T20:55:27.0986484Z 
+2026-11-12T20:55:27.0986539Z - (np.float16(-8.0), np.float16(8.0))
+2026-11-12T20:55:27.0986674Z + (-4.0, 5.0)
+2026-11-12T20:55:27.0987142Z SUBFAILED(dtype=<class 'numpy.float32'>) onnxruntime/test/python/quantization/test_entropy_reconstruction.py::TestEntropyReconstruction::test_sparse_histogram_support - AssertionError: Tuples differ: (np.float32(-8.0), np.float32(8.0)) != (-4.0, 5.0)
+2026-11-12T20:55:27.0987597Z 
+2026-11-12T20:55:27.0987650Z First differing element 0:
+2026-11-12T20:55:27.0987776Z np.float32(-8.0)
+2026-11-12T20:55:27.0987881Z -4.0
+2026-11-12T20:55:27.0987934Z 
+2026-11-12T20:55:27.0987990Z - (np.float32(-8.0), np.float32(8.0))
+2026-11-12T20:55:27.0988124Z + (-4.0, 5.0)
+2026-11-12T20:55:27.0988257Z 11 failed, 7 passed, 4 subtests passed in 0.16s
+2026-11-12T20:55:27.1026083Z Confirmed original implementation failures: ['test_cached_ranges_drive_static_quantization', 'test_fractional_bucket_averages', 'test_native_cpu_calibration_ranges', 'test_nondivisible_candidate_widths', 'test_six_quantized_bins', 'test_sparse_histogram_support']
+2026-11-12T20:55:27.1075213Z ##[group]Run python -P - <<'PY'
+2026-11-12T20:55:27.1075409Z [36;1mpython -P - <<'PY'[0m
+2026-11-12T20:55:27.1075554Z [36;1mfrom pathlib import Path[0m
+2026-11-12T20:55:27.1075732Z [36;1mfrom onnxruntime.quantization import calibrate[0m
+2026-11-12T20:55:27.1076010Z [36;1msource = Path("onnxruntime/python/tools/quantization/calibrate.py").read_bytes()[0m
+2026-11-12T20:55:27.1076270Z [36;1mPath(calibrate.__file__).write_bytes(source)[0m
+2026-11-12T20:55:27.1076436Z [36;1mPY[0m
+2026-11-12T20:55:27.1076745Z [36;1mpython -m ruff check onnxruntime/python/tools/quantization/calibrate.py onnxruntime/test/python/quantization/test_entropy_reconstruction.py[0m
+2026-11-12T20:55:27.1077286Z [36;1mpython -m ruff format --check onnxruntime/python/tools/quantization/calibrate.py onnxruntime/test/python/quantization/test_entropy_reconstruction.py[0m
+2026-11-12T20:55:27.1077642Z [36;1mgit diff --check[0m
+2026-11-12T20:55:27.1093826Z shell: /usr/bin/bash -e {0}
+2026-11-12T20:55:27.1093977Z env:
+2026-11-12T20:55:27.1094089Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:27.1094225Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:27.1094405Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:27.1094741Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:55:27.1094972Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:27.1095175Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:27.1095384Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:27.1095599Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:55:27.1095777Z ##[endgroup]
+2026-11-12T20:55:27.1688075Z [0;93m2026-11-12 20:55:27.168590731 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-12T20:55:27.2861999Z All checks passed!
+2026-11-12T20:55:27.3058399Z 2 files already formatted
+2026-11-12T20:55:28.1634099Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-12T20:55:28.1634346Z with:
+2026-11-12T20:55:28.1634473Z   name: tested-source-built-entropy
+2026-11-12T20:55:28.1634759Z   path: ort-source-build-metadata.json
+ort-patched.log
+ort-patched.xml
+ort-baseline.log
+ort-baseline.xml
+
+2026-11-12T20:55:28.1635045Z   if-no-files-found: warn
+2026-11-12T20:55:28.1635178Z   compression-level: 6
+2026-11-12T20:55:28.1635300Z   overwrite: false
+2026-11-12T20:55:28.1635429Z   include-hidden-files: false
+2026-11-12T20:55:28.1635562Z   archive: true
+2026-11-12T20:55:28.1635673Z env:
+2026-11-12T20:55:28.1635785Z   OPENBLAS_NUM_THREADS: 1
+2026-11-12T20:55:28.1635920Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-12T20:55:28.1636101Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:28.1636391Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-12T20:55:28.1636698Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:28.1636929Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:28.1637141Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-12T20:55:28.1637353Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-12T20:55:28.1637533Z ##[endgroup]
+2026-11-12T20:55:28.2952323Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-12T20:55:28.2954514Z The least common ancestor is /home/runner/work/onnxruntime/onnxruntime. This will be the root directory of the artifact
+2026-11-12T20:55:28.2955107Z With the provided path, there will be 5 files uploaded
+2026-11-12T20:55:28.2962376Z Artifact name is valid!
+2026-11-12T20:55:28.2962674Z Root directory input is valid!
+2026-11-12T20:55:28.6592177Z Uploading artifact: tested-source-built-entropy.zip
+2026-11-12T20:55:28.6616313Z Beginning upload of artifact content to blob storage
+2026-11-12T20:55:29.7657239Z Uploaded bytes 6968
+2026-11-12T20:55:29.8251324Z Finished uploading artifact content to blob storage!
+2026-11-12T20:55:29.8251996Z SHA256 digest of uploaded artifact is b31089124e22c3e48e13231610a1a98037aff8c45fd7732df2efe0025b2bd491
+2026-11-12T20:55:29.8252420Z Finalizing artifact upload
+2026-11-12T20:55:30.7386038Z Artifact tested-source-built-entropy successfully finalized. Artifact ID 13982324497
+2026-11-12T20:55:30.7386742Z Artifact tested-source-built-entropy has been successfully uploaded! Final size is 6968 bytes. Artifact ID is 13982324497
+2026-11-12T20:55:30.7389329Z Artifact download URL: https://github.com/Afloat16/onnxruntime/actions/runs/43304990254/artifacts/13982324497
+2026-11-12T20:55:30.7542096Z Post job cleanup.
+2026-11-12T20:55:30.8467663Z (node:2397) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-12T20:55:30.8468139Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-12T20:55:30.8597160Z Post job cleanup.
+2026-11-12T20:55:30.9252507Z [command]/usr/bin/git version
+2026-11-12T20:55:30.9285854Z git version 2.56.0
+2026-11-12T20:55:30.9309418Z Temporarily overriding HOME='/home/runner/work/_temp/a9421b84-805d-4843-9493-eb9c25c76dbe' before making global git config changes
+2026-11-12T20:55:30.9310162Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-12T20:55:30.9314291Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-12T20:55:30.9346104Z Removing SSH command configuration
+2026-11-12T20:55:30.9350761Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-12T20:55:30.9388427Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-12T20:55:30.9640692Z Removing HTTP extra header
+2026-11-12T20:55:30.9645869Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-12T20:55:30.9732902Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-12T20:55:31.0005831Z Removing includeIf entries pointing to credentials config files
+2026-11-12T20:55:31.0013799Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-12T20:55:31.0058706Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-12T20:55:31.0407817Z Cleaning up orphan processes
+2026-11-12T20:55:31.0667045Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
