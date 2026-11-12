@@ -1,0 +1,15 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "fork": "Afloat16/onnxruntime",
+  "branch": "fix/blocked-quantization-negative-axis-20261112",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "base_tree": "ada396d3d22a607ae65ae1140ac5e66a057fc692",
+  "commit": "35c4aee613b28979bbaeb7587a9c6a7b31e92dfa",
+  "status": "pending_native_validation",
+  "validation": "No passing results claimed yet",
+  "scope": "Public blocked parameter and initializer helpers; main QDQ pipeline already normalizes its axis.",
+  "files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_blocked_negative_axes.py"
+  ]
+}
