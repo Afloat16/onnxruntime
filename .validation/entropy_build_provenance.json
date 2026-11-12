@@ -1,0 +1,9 @@
+{
+  "source_commit": "7ea94334d49d7cf39e7f3f953b0c054c3205b086",
+  "official_build_run": 43299831579,
+  "native_wheel_artifact": 13982801527,
+  "native_wheel_archive_sha256": "748dd06ae0713feca57fe785b29f81ad3d192f3d401bd568e3e6e89e7afec28b",
+  "build_metadata_artifact": 13982796516,
+  "build_command": "python tools/ci_build/build.py --config Release --build_dir build/CPU --update --build --parallel 2 --build_wheel --skip_tests --cmake_generator Ninja --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF onnxruntime_BUILD_BENCHMARKS=OFF",
+  "reason_for_followup": "Official CPU source compilation and source hash verification succeeded. Test collection loaded the repository stub package; preload installed native runtime before invoking pytest."
+}
