@@ -1,0 +1,169 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "default_branch": "main",
+  "fork": "Afloat16/onnxruntime",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "commit": "d8596d3fe7a5b0d548e52a97f2252111035b1879",
+  "branch": "perf/vectorize-four-bit-weight-packing-20261112",
+  "title": "Vectorize byte packing for four-bit quantized weights",
+  "body": "### Description\n\nPacking INT4/UINT4 weights currently runs a Python iteration for every pair of elements. Add a NumPy bitwise path for bytes and bytearray inputs, writing the low and high nibbles into the destination bytearray.\n\nThe layout, odd-length zero padding, return type and input ownership are unchanged. Other sequences retain the original element-wise path, including noncontiguous and non-byte memoryviews.\n\n### Validation\n\n- Seven new unittest methods cover all signed/unsigned nibble pairs, empty/odd/even lengths, bytearray ownership, strided/reversed/signed/wider buffer inputs, explicit nibble order and persisted INT4/UINT4 initializer bytes.\n- Native CPU DequantizeLinear followed by MatMul checks actual quantized initializers against independently reconstructed float16/float32 weights.\n- New and existing quantization utility tests: **16 methods passed, 163 subtests passed**.\n- The same new tests pass on the original helper: **7 methods, 32 subtests**. This is a performance improvement; the original packing outputs are already correct.\n- Ruff lint/format and `git diff --check` passed.\n\nExact-source native validation and benchmark: https://github.com/Afloat16/onnxruntime/actions/runs/43401492131\n\n### Measured helper performance\n\nOne warmup and five timed calls per case, with median time reported. Input construction is outside the measured region. Peak Python/NumPy allocations are measured separately with tracemalloc; packed output hashes match in every case.\n\n| Input elements | Original median | Patched median | Original peak | Patched peak |\n| ---: | ---: | ---: | ---: | ---: |\n| 32 | 0.002233 ms | 0.005738 ms | 73 B | 978 B |\n| 4,096 | 0.298420 ms | 0.006619 ms | 2,261 B | 5,134 B |\n| 1,000,000 | 74.687110 ms | 0.519886 ms | 500,213 B | 1,001,038 B |\n| 8,000,000 | 571.160013 ms | 7.104263 ms | 4,000,213 B | 8,001,038 B |\n\nThe shifted odd-element array adds temporary storage of roughly half the input length. Tiny inputs are slower, as shown above. These results concern this packing helper only, not end-to-end quantization throughput or model accuracy.\n\nThe native runtime comes from the repository's official CPU Release build.py/CMake build at 8dea1194e974fa07b1d2f07a190949c3a92cab80. Its C++ sources match base a8246c0d094f1ab0d6bf236228e5e67683321cd7. The validation installs that built wheel and overlays the complete quantization package from this exact patch, verifying every Python file byte-for-byte and recording a SHA-256 manifest. Tests use normal native imports. This is targeted Linux CPU validation, not GPU execution or the full C++ suite.",
+  "prefilled_url": "https://github.com/microsoft/onnxruntime/compare/main...Afloat16:perf/vectorize-four-bit-weight-packing-20261112?expand=1&title=Vectorize%20byte%20packing%20for%20four-bit%20quantized%20weights&body=%23%23%23%20Description%0A%0APacking%20INT4%2FUINT4%20weights%20currently%20runs%20a%20Python%20iteration%20for%20every%20pair%20of%20elements.%20Add%20a%20NumPy%20bitwise%20path%20for%20bytes%20and%20bytearray%20inputs%2C%20writing%20the%20low%20and%20high%20nibbles%20into%20the%20destination%20bytearray.%0A%0AThe%20layout%2C%20odd-length%20zero%20padding%2C%20return%20type%20and%20input%20ownership%20are%20unchanged.%20Other%20sequences%20retain%20the%20original%20element-wise%20path%2C%20including%20noncontiguous%20and%20non-byte%20memoryviews.%0A%0A%23%23%23%20Validation%0A%0A-%20Seven%20new%20unittest%20methods%20cover%20all%20signed%2Funsigned%20nibble%20pairs%2C%20empty%2Fodd%2Feven%20lengths%2C%20bytearray%20ownership%2C%20strided%2Freversed%2Fsigned%2Fwider%20buffer%20inputs%2C%20explicit%20nibble%20order%20and%20persisted%20INT4%2FUINT4%20initializer%20bytes.%0A-%20Native%20CPU%20DequantizeLinear%20followed%20by%20MatMul%20checks%20actual%20quantized%20initializers%20against%20independently%20reconstructed%20float16%2Ffloat32%20weights.%0A-%20New%20and%20existing%20quantization%20utility%20tests%3A%20**16%20methods%20passed%2C%20163%20subtests%20passed**.%0A-%20The%20same%20new%20tests%20pass%20on%20the%20original%20helper%3A%20**7%20methods%2C%2032%20subtests**.%20This%20is%20a%20performance%20improvement%3B%20the%20original%20packing%20outputs%20are%20already%20correct.%0A-%20Ruff%20lint%2Fformat%20and%20%60git%20diff%20--check%60%20passed.%0A%0AExact-source%20native%20validation%20and%20benchmark%3A%20https%3A%2F%2Fgithub.com%2FAfloat16%2Fonnxruntime%2Factions%2Fruns%2F43401492131%0A%0A%23%23%23%20Measured%20helper%20performance%0A%0AOne%20warmup%20and%20five%20timed%20calls%20per%20case%2C%20with%20median%20time%20reported.%20Input%20construction%20is%20outside%20the%20measured%20region.%20Peak%20Python%2FNumPy%20allocations%20are%20measured%20separately%20with%20tracemalloc%3B%20packed%20output%20hashes%20match%20in%20every%20case.%0A%0A%7C%20Input%20elements%20%7C%20Original%20median%20%7C%20Patched%20median%20%7C%20Original%20peak%20%7C%20Patched%20peak%20%7C%0A%7C%20---%3A%20%7C%20---%3A%20%7C%20---%3A%20%7C%20---%3A%20%7C%20---%3A%20%7C%0A%7C%2032%20%7C%200.002233%20ms%20%7C%200.005738%20ms%20%7C%2073%20B%20%7C%20978%20B%20%7C%0A%7C%204%2C096%20%7C%200.298420%20ms%20%7C%200.006619%20ms%20%7C%202%2C261%20B%20%7C%205%2C134%20B%20%7C%0A%7C%201%2C000%2C000%20%7C%2074.687110%20ms%20%7C%200.519886%20ms%20%7C%20500%2C213%20B%20%7C%201%2C001%2C038%20B%20%7C%0A%7C%208%2C000%2C000%20%7C%20571.160013%20ms%20%7C%207.104263%20ms%20%7C%204%2C000%2C213%20B%20%7C%208%2C001%2C038%20B%20%7C%0A%0AThe%20shifted%20odd-element%20array%20adds%20temporary%20storage%20of%20roughly%20half%20the%20input%20length.%20Tiny%20inputs%20are%20slower%2C%20as%20shown%20above.%20These%20results%20concern%20this%20packing%20helper%20only%2C%20not%20end-to-end%20quantization%20throughput%20or%20model%20accuracy.%0A%0AThe%20native%20runtime%20comes%20from%20the%20repository's%20official%20CPU%20Release%20build.py%2FCMake%20build%20at%208dea1194e974fa07b1d2f07a190949c3a92cab80.%20Its%20C%2B%2B%20sources%20match%20base%20a8246c0d094f1ab0d6bf236228e5e67683321cd7.%20The%20validation%20installs%20that%20built%20wheel%20and%20overlays%20the%20complete%20quantization%20package%20from%20this%20exact%20patch%2C%20verifying%20every%20Python%20file%20byte-for-byte%20and%20recording%20a%20SHA-256%20manifest.%20Tests%20use%20normal%20native%20imports.%20This%20is%20targeted%20Linux%20CPU%20validation%2C%20not%20GPU%20execution%20or%20the%20full%20C%2B%2B%20suite.",
+  "pr_url": null,
+  "pr_status": "ready",
+  "merged_at": null,
+  "counts_as_upstream_merged": false,
+  "novelty": {
+    "classification": "genuinely_new",
+    "history_entries": 65,
+    "patches_read": [
+      20935,
+      20362,
+      32174
+    ],
+    "difference": "20935 introduced the current Python element loop; 32174 changes QOperator packing integration, not this helper's packing algorithm.",
+    "all_state_searches": [
+      "pack_bytes_to_4bit PR: only 32174; issues: 0",
+      "pack_bytes vector: 0",
+      "4-bit packing numpy: unrelated QMoE/CUDA kernel work"
+    ],
+    "personal_history": "No earlier ONNX contribution; fork created during this task."
+  },
+  "validation": {
+    "run_id": 43401492131,
+    "job_id": 131805155174,
+    "conclusion": "success",
+    "artifact_id": 14025831017,
+    "new_methods": 7,
+    "new_subcases": 32,
+    "fixed": "16 passed methods, 163 subtests passed",
+    "baseline": "7 passed methods, 32 subtests passed",
+    "runtime_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+    "runtime_build_run": 43296543822,
+    "runtime_wheel_artifact": 13982605959,
+    "native_sources_match_base": true,
+    "exact_python_overlay_commit": "d8596d3fe7a5b0d548e52a97f2252111035b1879",
+    "lint": "Ruff 0.12.12 check/format and git diff --check passed"
+  },
+  "limitations": [
+    "Performance candidate; existing output is correct and semantic tests should pass on both versions.",
+    "NumPy shifted odd-element array temporarily consumes about half the input byte length; report measured memory tradeoff.",
+    "No whole-model quantization time or model-accuracy claim."
+  ],
+  "source_files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_four_bit_packing.py"
+  ],
+  "benchmark": {
+    "warmups": 1,
+    "repeats": 5,
+    "scope": "Packing helper only; input created outside measurements; tracemalloc separate from timings.",
+    "rows": [
+      {
+        "elements": 32,
+        "packed_sha256": "15e6b1e608a7f7e27c79ebdc7ec028d961e04bc5a1714aec5ec4f89ab3da75e6",
+        "original": {
+          "median_ms": 0.002232999989359996,
+          "samples_ms": [
+            0.003555000006372211,
+            0.002973999997379906,
+            0.002232999989359996,
+            0.0019530000088252564,
+            0.0018929999896499794
+          ],
+          "peak_traced_bytes": 73
+        },
+        "vectorized": {
+          "median_ms": 0.005737999998700616,
+          "samples_ms": [
+            0.005737999998700616,
+            0.004316000001836073,
+            0.0045870000064951455,
+            0.023114000001100976,
+            0.00825300000428797
+          ],
+          "peak_traced_bytes": 978
+        }
+      },
+      {
+        "elements": 4096,
+        "packed_sha256": "7df843ddeabc9b437133819573952ce31de7b874630f7362bd751492dc365b2e",
+        "original": {
+          "median_ms": 0.2984200000071269,
+          "samples_ms": [
+            0.2953850000011471,
+            0.30764299999930245,
+            0.2959760000038614,
+            0.2984200000071269,
+            0.30950599999357564
+          ],
+          "peak_traced_bytes": 2261
+        },
+        "vectorized": {
+          "median_ms": 0.006619000004093323,
+          "samples_ms": [
+            0.007320999998228217,
+            0.007730999996624632,
+            0.006619000004093323,
+            0.006399000000101296,
+            0.006399000000101296
+          ],
+          "peak_traced_bytes": 5134
+        }
+      },
+      {
+        "elements": 1000000,
+        "packed_sha256": "a939222610e42c5bde925e618eca1c3161b5b36726d453c73e30b6070c43a53a",
+        "original": {
+          "median_ms": 74.68710999999928,
+          "samples_ms": [
+            74.70150099999273,
+            74.46440200000382,
+            74.35443999999336,
+            74.68710999999928,
+            75.11925599999358
+          ],
+          "peak_traced_bytes": 500213
+        },
+        "vectorized": {
+          "median_ms": 0.5198860000064087,
+          "samples_ms": [
+            0.5217789999960587,
+            0.537211000008142,
+            0.5098409999959586,
+            0.5198860000064087,
+            0.5052439999957414
+          ],
+          "peak_traced_bytes": 1001038
+        }
+      },
+      {
+        "elements": 8000000,
+        "packed_sha256": "c15757ca1c2f0a3ccc220716d292cf75b0f8002a1b36363be4b79648f121f3d8",
+        "original": {
+          "median_ms": 571.1600129999965,
+          "samples_ms": [
+            575.0688690000061,
+            571.1600129999965,
+            569.5692500000007,
+            570.6597169999981,
+            571.2356549999953
+          ],
+          "peak_traced_bytes": 4000213
+        },
+        "vectorized": {
+          "median_ms": 7.10426300000222,
+          "samples_ms": [
+            7.216798000001745,
+            4.780363999998372,
+            7.10426300000222,
+            4.779702000007546,
+            7.1763379999936205
+          ],
+          "peak_traced_bytes": 8001038
+        }
+      }
+    ]
+  }
+}

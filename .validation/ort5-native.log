@@ -1,0 +1,952 @@
+﻿2026-11-13T09:31:44.6108564Z Current runner version: '2.338.2'
+2026-11-13T09:31:44.6132900Z ##[group]Runner Image Provisioner
+2026-11-13T09:31:44.6133844Z Hosted Compute Agent
+2026-11-13T09:31:44.6134353Z Version: 20261103.629
+2026-11-13T09:31:44.6134979Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-13T09:31:44.6135606Z Build Date: 2026-11-03T17:26:59Z
+2026-11-13T09:31:44.6136173Z Worker ID: {b6087aa8-be9e-4972-a2d8-778ace95a71f}
+2026-11-13T09:31:44.6136882Z Region: westus3
+2026-11-13T09:31:44.6137357Z Cloud: Azure
+2026-11-13T09:31:44.6137874Z ##[endgroup]
+2026-11-13T09:31:44.6139141Z ##[group]Operating System
+2026-11-13T09:31:44.6139666Z Ubuntu
+2026-11-13T09:31:44.6140196Z 24.04.5
+2026-11-13T09:31:44.6140644Z LTS
+2026-11-13T09:31:44.6141140Z ##[endgroup]
+2026-11-13T09:31:44.6141637Z ##[group]Runner Image
+2026-11-13T09:31:44.6142156Z Image: ubuntu-24.04
+2026-11-13T09:31:44.6142694Z Version: 20261111.370.1
+2026-11-13T09:31:44.6143990Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.370/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-13T09:31:44.6145371Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.370
+2026-11-13T09:31:44.6146197Z ##[endgroup]
+2026-11-13T09:31:44.6147274Z ##[group]GITHUB_TOKEN Permissions
+2026-11-13T09:31:44.6149378Z Actions: read
+2026-11-13T09:31:44.6149953Z Contents: read
+2026-11-13T09:31:44.6150488Z Metadata: read
+2026-11-13T09:31:44.6150992Z ##[endgroup]
+2026-11-13T09:31:44.6152941Z Secret source: Actions
+2026-11-13T09:31:44.6154089Z Cache mode: write
+2026-11-13T09:31:44.6155098Z Prepare workflow directory
+2026-11-13T09:31:44.6530706Z Prepare all required actions
+2026-11-13T09:31:44.6572446Z Getting action download info
+2026-11-13T09:31:44.9527265Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-13T09:31:45.0679552Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-11-13T09:31:45.1986034Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-13T09:31:45.8421882Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-13T09:31:46.1270421Z Complete job name: native-cpu
+2026-11-13T09:31:46.2058099Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-13T09:31:46.2058957Z with:
+2026-11-13T09:31:46.2059360Z   ref: d8596d3fe7a5b0d548e52a97f2252111035b1879
+2026-11-13T09:31:46.2059844Z   fetch-depth: 2
+2026-11-13T09:31:46.2060222Z   persist-credentials: false
+2026-11-13T09:31:46.2060652Z   repository: Afloat16/onnxruntime
+2026-11-13T09:31:46.2064137Z   token: ***
+2026-11-13T09:31:46.2064506Z   ssh-strict: true
+2026-11-13T09:31:46.2064872Z   ssh-user: git
+2026-11-13T09:31:46.2065225Z   clean: true
+2026-11-13T09:31:46.2065593Z   sparse-checkout-cone-mode: true
+2026-11-13T09:31:46.2066056Z   fetch-tags: false
+2026-11-13T09:31:46.2066438Z   show-progress: true
+2026-11-13T09:31:46.2066813Z   lfs: false
+2026-11-13T09:31:46.2067152Z   submodules: false
+2026-11-13T09:31:46.2067516Z   set-safe-directory: true
+2026-11-13T09:31:46.2067934Z   allow-unsafe-pr-checkout: false
+2026-11-13T09:31:46.2068539Z env:
+2026-11-13T09:31:46.2068882Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:31:46.2069338Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:31:46.2069825Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:31:46.2070309Z ##[endgroup]
+2026-11-13T09:31:46.4962192Z Syncing repository: Afloat16/onnxruntime
+2026-11-13T09:31:46.4964353Z ##[group]Getting Git version info
+2026-11-13T09:31:46.4965011Z Working directory is '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T09:31:46.4966333Z [command]/usr/bin/git version
+2026-11-13T09:31:46.5070519Z git version 2.56.1
+2026-11-13T09:31:46.5087027Z ##[endgroup]
+2026-11-13T09:31:46.5097371Z Temporarily overriding HOME='/home/runner/work/_temp/580eb540-0a1a-4cc5-9033-62d9b56e945a' before making global git config changes
+2026-11-13T09:31:46.5099571Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T09:31:46.5102723Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T09:31:46.5227761Z Deleting the contents of '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T09:31:46.5231608Z ##[group]Determining repository object format
+2026-11-13T09:31:46.5233315Z ##[endgroup]
+2026-11-13T09:31:46.5234191Z ##[group]Initializing the repository
+2026-11-13T09:31:46.5237751Z [command]/usr/bin/git init /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T09:31:46.5359380Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-13T09:31:46.5360685Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-13T09:31:46.5361771Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-13T09:31:46.5362736Z hint: call:
+2026-11-13T09:31:46.5363387Z hint:
+2026-11-13T09:31:46.5364004Z hint: 	git config --global init.defaultBranch <name>
+2026-11-13T09:31:46.5364733Z hint:
+2026-11-13T09:31:46.5365449Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-13T09:31:46.5366617Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-13T09:31:46.5367501Z hint:
+2026-11-13T09:31:46.5368000Z hint: 	git branch -m <name>
+2026-11-13T09:31:46.5368601Z hint:
+2026-11-13T09:31:46.5369472Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-13T09:31:46.5370789Z Initialized empty Git repository in /home/runner/work/onnxruntime/onnxruntime/.git/
+2026-11-13T09:31:46.5380828Z [command]/usr/bin/git remote add origin https://github.com/Afloat16/onnxruntime
+2026-11-13T09:31:46.5483324Z ##[endgroup]
+2026-11-13T09:31:46.5484511Z ##[group]Disabling automatic garbage collection
+2026-11-13T09:31:46.5485994Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-13T09:31:46.5525220Z ##[endgroup]
+2026-11-13T09:31:46.5526871Z ##[group]Setting up auth
+2026-11-13T09:31:46.5527789Z Removing SSH command configuration
+2026-11-13T09:31:46.5530449Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T09:31:46.5581062Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T09:31:46.6260668Z Removing HTTP extra header
+2026-11-13T09:31:46.6266572Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T09:31:46.6307115Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T09:31:46.6523567Z Removing includeIf entries pointing to credentials config files
+2026-11-13T09:31:46.6530213Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T09:31:46.6589974Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T09:31:46.6845930Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-13T09:31:46.6904242Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path /home/runner/work/_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config
+2026-11-13T09:31:46.6953476Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config
+2026-11-13T09:31:46.7000639Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config
+2026-11-13T09:31:46.7043953Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config
+2026-11-13T09:31:46.7086074Z ##[endgroup]
+2026-11-13T09:31:46.7086792Z ##[group]Fetching the repository
+2026-11-13T09:31:46.7092250Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin d8596d3fe7a5b0d548e52a97f2252111035b1879
+2026-11-13T09:31:59.6184015Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T09:31:59.6184711Z  * branch            d8596d3fe7a5b0d548e52a97f2252111035b1879 -> FETCH_HEAD
+2026-11-13T09:31:59.6192190Z [command]/usr/bin/git rev-parse --verify --quiet d8596d3fe7a5b0d548e52a97f2252111035b1879^{object}
+2026-11-13T09:31:59.6229228Z d8596d3fe7a5b0d548e52a97f2252111035b1879
+2026-11-13T09:31:59.6234133Z ##[endgroup]
+2026-11-13T09:31:59.6234729Z ##[group]Determining the checkout info
+2026-11-13T09:31:59.6238914Z ##[endgroup]
+2026-11-13T09:31:59.6239428Z [command]/usr/bin/git sparse-checkout disable
+2026-11-13T09:31:59.6306590Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-13T09:31:59.6351415Z ##[group]Checking out the ref
+2026-11-13T09:31:59.6354371Z [command]/usr/bin/git checkout --progress --force d8596d3fe7a5b0d548e52a97f2252111035b1879
+2026-11-13T09:32:00.7458964Z Updating files:  74% (8728/11668)
+2026-11-13T09:32:00.7520658Z Updating files:  75% (8751/11668)
+2026-11-13T09:32:00.7614900Z Updating files:  76% (8868/11668)
+2026-11-13T09:32:00.8284228Z Updating files:  77% (8985/11668)
+2026-11-13T09:32:00.9224827Z Updating files:  78% (9102/11668)
+2026-11-13T09:32:00.9267077Z Updating files:  79% (9218/11668)
+2026-11-13T09:32:01.0110828Z Updating files:  80% (9335/11668)
+2026-11-13T09:32:01.2112655Z Updating files:  81% (9452/11668)
+2026-11-13T09:32:01.2327965Z Updating files:  82% (9568/11668)
+2026-11-13T09:32:01.2392959Z Updating files:  83% (9685/11668)
+2026-11-13T09:32:01.2454629Z Updating files:  84% (9802/11668)
+2026-11-13T09:32:01.2516756Z Updating files:  85% (9918/11668)
+2026-11-13T09:32:01.2577856Z Updating files:  86% (10035/11668)
+2026-11-13T09:32:01.2684824Z Updating files:  87% (10152/11668)
+2026-11-13T09:32:01.2735885Z Updating files:  88% (10268/11668)
+2026-11-13T09:32:01.2779836Z Updating files:  89% (10385/11668)
+2026-11-13T09:32:01.2822771Z Updating files:  90% (10502/11668)
+2026-11-13T09:32:01.2875050Z Updating files:  91% (10618/11668)
+2026-11-13T09:32:01.2927762Z Updating files:  92% (10735/11668)
+2026-11-13T09:32:01.2970637Z Updating files:  93% (10852/11668)
+2026-11-13T09:32:01.3018436Z Updating files:  94% (10968/11668)
+2026-11-13T09:32:01.3081798Z Updating files:  95% (11085/11668)
+2026-11-13T09:32:01.3122246Z Updating files:  96% (11202/11668)
+2026-11-13T09:32:01.3169520Z Updating files:  97% (11318/11668)
+2026-11-13T09:32:01.3232460Z Updating files:  98% (11435/11668)
+2026-11-13T09:32:01.6164360Z Updating files:  99% (11552/11668)
+2026-11-13T09:32:01.6164652Z Updating files: 100% (11668/11668)
+2026-11-13T09:32:01.6164881Z Updating files: 100% (11668/11668), done.
+2026-11-13T09:32:01.6261273Z Note: switching to 'd8596d3fe7a5b0d548e52a97f2252111035b1879'.
+2026-11-13T09:32:01.6261659Z 
+2026-11-13T09:32:01.6262017Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-13T09:32:01.6262413Z changes and commit them, and you can discard any commits you make in this
+2026-11-13T09:32:01.6262771Z state without impacting any branches by switching back to a branch.
+2026-11-13T09:32:01.6262988Z 
+2026-11-13T09:32:01.6263356Z If you want to create a new branch to retain commits you create, you may
+2026-11-13T09:32:01.6263745Z do so (now or later) by using -c with the switch command. Example:
+2026-11-13T09:32:01.6263951Z 
+2026-11-13T09:32:01.6264048Z   git switch -c <new-branch-name>
+2026-11-13T09:32:01.6264184Z 
+2026-11-13T09:32:01.6264528Z Or undo this operation with:
+2026-11-13T09:32:01.6264670Z 
+2026-11-13T09:32:01.6264750Z   git switch -
+2026-11-13T09:32:01.6264851Z 
+2026-11-13T09:32:01.6265015Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-13T09:32:01.6265248Z 
+2026-11-13T09:32:01.6265393Z HEAD is now at d8596d3 Vectorize four-bit quantized weight byte packing
+2026-11-13T09:32:01.6402908Z ##[endgroup]
+2026-11-13T09:32:01.6460586Z [command]/usr/bin/git log -1 --format=%H
+2026-11-13T09:32:01.6499242Z d8596d3fe7a5b0d548e52a97f2252111035b1879
+2026-11-13T09:32:01.6541451Z ##[group]Removing auth
+2026-11-13T09:32:01.6545714Z Removing SSH command configuration
+2026-11-13T09:32:01.6546150Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T09:32:01.6589927Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T09:32:01.6839405Z Removing HTTP extra header
+2026-11-13T09:32:01.6843924Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T09:32:01.6895267Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T09:32:01.7145837Z Removing includeIf entries pointing to credentials config files
+2026-11-13T09:32:01.7150126Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T09:32:01.7190918Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T09:32:01.7191588Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T09:32:01.7192095Z includeif.gitdir:/github/workspace/.git.path
+2026-11-13T09:32:01.7192527Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T09:32:01.7201482Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T09:32:01.7240786Z /home/runner/work/_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config
+2026-11-13T09:32:01.7265547Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-bd9bb71f\-9fab\-43e4\-a1af\-dbc585a15dcc\.config
+2026-11-13T09:32:01.7313008Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T09:32:01.7351567Z /home/runner/work/_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config
+2026-11-13T09:32:01.7361324Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-bd9bb71f\-9fab\-43e4\-a1af\-dbc585a15dcc\.config
+2026-11-13T09:32:01.7414178Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-13T09:32:01.7451215Z /github/runner_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config
+2026-11-13T09:32:01.7465170Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-bd9bb71f\-9fab\-43e4\-a1af\-dbc585a15dcc\.config
+2026-11-13T09:32:01.7516183Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T09:32:01.7552075Z /github/runner_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config
+2026-11-13T09:32:01.7559302Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-bd9bb71f\-9fab\-43e4\-a1af\-dbc585a15dcc\.config
+2026-11-13T09:32:01.7606105Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T09:32:01.7850877Z Removing credentials config '/home/runner/work/_temp/git-credentials-bd9bb71f-9fab-43e4-a1af-dbc585a15dcc.config'
+2026-11-13T09:32:01.7862161Z ##[endgroup]
+2026-11-13T09:32:01.8104462Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-11-13T09:32:01.8104810Z with:
+2026-11-13T09:32:01.8104995Z   python-version: 3.12
+2026-11-13T09:32:01.8105184Z   check-latest: false
+2026-11-13T09:32:01.8107236Z   token: ***
+2026-11-13T09:32:01.8107430Z   update-environment: true
+2026-11-13T09:32:01.8107639Z   allow-prereleases: false
+2026-11-13T09:32:01.8107833Z   freethreaded: false
+2026-11-13T09:32:01.8108010Z env:
+2026-11-13T09:32:01.8108174Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:01.8108370Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:01.8108616Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:01.8108855Z ##[endgroup]
+2026-11-13T09:32:01.9342917Z ##[group]Installed versions
+2026-11-13T09:32:01.9435151Z (node:2230) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T09:32:01.9435797Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T09:32:01.9436581Z Successfully set up CPython (3.12.16)
+2026-11-13T09:32:01.9437146Z ##[endgroup]
+2026-11-13T09:32:01.9601964Z ##[group]Run python -m venv "$RUNNER_TEMP/ort-validation-venv"
+2026-11-13T09:32:01.9602619Z [36;1mpython -m venv "$RUNNER_TEMP/ort-validation-venv"[0m
+2026-11-13T09:32:01.9603326Z [36;1mecho "$RUNNER_TEMP/ort-validation-venv/bin" >> "$GITHUB_PATH"[0m
+2026-11-13T09:32:01.9647115Z shell: /usr/bin/bash -e {0}
+2026-11-13T09:32:01.9647466Z env:
+2026-11-13T09:32:01.9647703Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:01.9647990Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:01.9648349Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:01.9648788Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:01.9649291Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:01.9649821Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:01.9650272Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:01.9650795Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:01.9651236Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:01.9651622Z ##[endgroup]
+2026-11-13T09:32:06.3475801Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T09:32:06.3476133Z with:
+2026-11-13T09:32:06.3476309Z   name: cpu-native-wheel-a8246c0d
+2026-11-13T09:32:06.3476522Z   run-id: 43296543822
+2026-11-13T09:32:06.3478573Z   github-token: ***
+2026-11-13T09:32:06.3478791Z   path: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T09:32:06.3479034Z   merge-multiple: false
+2026-11-13T09:32:06.3479230Z   repository: Afloat16/onnxruntime
+2026-11-13T09:32:06.3479432Z env:
+2026-11-13T09:32:06.3479594Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:06.3479819Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:06.3480070Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:06.3480352Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:06.3480683Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:06.3481007Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:06.3481342Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:06.3481637Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:06.3481928Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:06.3482179Z ##[endgroup]
+2026-11-13T09:32:06.4829983Z Downloading single artifact
+2026-11-13T09:32:06.4911694Z (node:2265) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T09:32:06.4912267Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T09:32:06.5096477Z (node:2265) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T09:32:06.8552139Z Preparing to download the following artifacts:
+2026-11-13T09:32:06.8553632Z - cpu-native-wheel-a8246c0d (ID: 13982605959, Size: 30978382, Expected Digest: sha256:0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301)
+2026-11-13T09:32:06.8586240Z Downloading artifact '13982605959' from 'Afloat16/onnxruntime'
+2026-11-13T09:32:07.2360856Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/6682e059f91784baee0f176a816c789347a553a5901897c10ebf1feb950019db.zip
+2026-11-13T09:32:07.2361892Z Starting download of artifact to: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T09:32:07.4915649Z (node:2265) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T09:32:08.7315555Z SHA256 digest of downloaded artifact is 0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301
+2026-11-13T09:32:08.7316286Z Artifact download completed successfully.
+2026-11-13T09:32:08.7316671Z Total of 1 artifact(s) downloaded
+2026-11-13T09:32:08.7322953Z Download artifact has finished successfully
+2026-11-13T09:32:08.7505331Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T09:32:08.7505671Z with:
+2026-11-13T09:32:08.7505875Z   name: cpu-distribution-calibration-evidence
+2026-11-13T09:32:08.7506110Z   run-id: 43296543822
+2026-11-13T09:32:08.7508134Z   github-token: ***
+2026-11-13T09:32:08.7529581Z   path: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T09:32:08.7529904Z   merge-multiple: false
+2026-11-13T09:32:08.7530127Z   repository: Afloat16/onnxruntime
+2026-11-13T09:32:08.7530343Z env:
+2026-11-13T09:32:08.7530514Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:08.7530716Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:08.7530956Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:08.7531259Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:08.7531598Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:08.7531978Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:08.7532278Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:08.7532584Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:08.7532883Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:08.7533359Z ##[endgroup]
+2026-11-13T09:32:08.8918006Z Downloading single artifact
+2026-11-13T09:32:08.9001408Z (node:2280) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T09:32:08.9001997Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T09:32:08.9159712Z (node:2280) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T09:32:09.3017399Z Preparing to download the following artifacts:
+2026-11-13T09:32:09.3018108Z - cpu-distribution-calibration-evidence (ID: 13981818755, Size: 64428, Expected Digest: sha256:53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec)
+2026-11-13T09:32:09.3043581Z Downloading artifact '13981818755' from 'Afloat16/onnxruntime'
+2026-11-13T09:32:09.5907851Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/b5c359d12481e2fcd67c56939a89868631bef8eee9f9477d17c7aaf2174630ca.zip
+2026-11-13T09:32:09.5909273Z Starting download of artifact to: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T09:32:09.8337620Z (node:2280) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T09:32:09.9226365Z SHA256 digest of downloaded artifact is 53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec
+2026-11-13T09:32:09.9227121Z Artifact download completed successfully.
+2026-11-13T09:32:09.9227491Z Total of 1 artifact(s) downloaded
+2026-11-13T09:32:09.9230914Z Download artifact has finished successfully
+2026-11-13T09:32:09.9356273Z ##[group]Run python -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12
+2026-11-13T09:32:09.9357141Z [36;1mpython -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12[0m
+2026-11-13T09:32:09.9357749Z [36;1mgit fetch --no-tags origin 8dea1194e974fa07b1d2f07a190949c3a92cab80[0m
+2026-11-13T09:32:09.9358058Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T09:32:09.9358257Z [36;1mimport hashlib[0m
+2026-11-13T09:32:09.9358438Z [36;1mimport json[0m
+2026-11-13T09:32:09.9358609Z [36;1mimport os[0m
+2026-11-13T09:32:09.9358775Z [36;1mimport shutil[0m
+2026-11-13T09:32:09.9358957Z [36;1mimport subprocess[0m
+2026-11-13T09:32:09.9359153Z [36;1mfrom pathlib import Path[0m
+2026-11-13T09:32:09.9359384Z [36;1mimport onnxruntime[0m
+2026-11-13T09:32:09.9359594Z [36;1mfrom onnxruntime import quantization[0m
+2026-11-13T09:32:09.9359922Z [36;1mbuilt_commit = "8dea1194e974fa07b1d2f07a190949c3a92cab80"[0m
+2026-11-13T09:32:09.9360252Z [36;1mbase_commit = "a8246c0d094f1ab0d6bf236228e5e67683321cd7"[0m
+2026-11-13T09:32:09.9360758Z [36;1msource_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()[0m
+2026-11-13T09:32:09.9361334Z [36;1mprovenance = json.loads((Path(os.environ["RUNNER_TEMP"]) / "ort-build-evidence/ort-source-build-metadata.json").read_text())[0m
+2026-11-13T09:32:09.9361803Z [36;1massert provenance["source_commit"] == built_commit[0m
+2026-11-13T09:32:09.9362098Z [36;1mfor revision in (built_commit, source_commit):[0m
+2026-11-13T09:32:09.9362520Z [36;1m    paths = subprocess.check_output(["git", "diff", "--name-only", base_commit, revision], text=True).splitlines()[0m
+2026-11-13T09:32:09.9363521Z [36;1m    assert all(path.startswith(("onnxruntime/python/tools/quantization/", "onnxruntime/test/python/quantization/")) for path in paths), paths[0m
+2026-11-13T09:32:09.9364068Z [36;1msource = Path("onnxruntime/python/tools/quantization")[0m
+2026-11-13T09:32:09.9364380Z [36;1mdestination = Path(quantization.__file__).parent[0m
+2026-11-13T09:32:09.9364692Z [36;1mshutil.copytree(source, destination, dirs_exist_ok=True)[0m
+2026-11-13T09:32:09.9364994Z [36;1mfor cache in destination.rglob("__pycache__"):[0m
+2026-11-13T09:32:09.9365248Z [36;1m    shutil.rmtree(cache)[0m
+2026-11-13T09:32:09.9365447Z [36;1mhashes = {}[0m
+2026-11-13T09:32:09.9365647Z [36;1mfor path in source.rglob("*.py"):[0m
+2026-11-13T09:32:09.9365911Z [36;1m    installed = destination / path.relative_to(source)[0m
+2026-11-13T09:32:09.9366229Z [36;1m    assert installed.read_bytes() == path.read_bytes(), installed[0m
+2026-11-13T09:32:09.9366645Z [36;1m    hashes[str(path.relative_to(source))] = hashlib.sha256(installed.read_bytes()).hexdigest()[0m
+2026-11-13T09:32:09.9367089Z [36;1massert "CPUExecutionProvider" in onnxruntime.get_available_providers()[0m
+2026-11-13T09:32:09.9367414Z [36;1mmetadata = {[0m
+2026-11-13T09:32:09.9367609Z [36;1m    "source_commit": source_commit,[0m
+2026-11-13T09:32:09.9367864Z [36;1m    "native_build_source_commit": built_commit,[0m
+2026-11-13T09:32:09.9368134Z [36;1m    "common_native_source_base": base_commit,[0m
+2026-11-13T09:32:09.9368394Z [36;1m    "native_build_run": 43296543822,[0m
+2026-11-13T09:32:09.9368800Z [36;1m    "native_wheel_artifact": 13982605959,[0m
+2026-11-13T09:32:09.9369059Z [36;1m    "runtime_version": onnxruntime.__version__,[0m
+2026-11-13T09:32:09.9369322Z [36;1m    "runtime_path": onnxruntime.__file__,[0m
+2026-11-13T09:32:09.9369571Z [36;1m    "quantization_path": str(destination),[0m
+2026-11-13T09:32:09.9369813Z [36;1m    "quantization_sha256": hashes,[0m
+2026-11-13T09:32:09.9370215Z [36;1m    "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged.",[0m
+2026-11-13T09:32:09.9370597Z [36;1m}[0m
+2026-11-13T09:32:09.9371040Z [36;1mPath("ort-source-overlay-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")[0m
+2026-11-13T09:32:09.9371426Z [36;1mprint(json.dumps(metadata, indent=2))[0m
+2026-11-13T09:32:09.9371702Z [36;1mPY[0m
+2026-11-13T09:32:09.9392418Z shell: /usr/bin/bash -e {0}
+2026-11-13T09:32:09.9392629Z env:
+2026-11-13T09:32:09.9392805Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:09.9393019Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:09.9393479Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:09.9393795Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:09.9394132Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:09.9394456Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:09.9394745Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:09.9395037Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:09.9395340Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:09.9395610Z ##[endgroup]
+2026-11-13T09:32:10.7332497Z Processing /home/runner/work/_temp/ort-built-wheel/onnxruntime-1.33.0-cp312-cp312-linux_x86_64.whl
+2026-11-13T09:32:10.9882529Z Collecting numpy==2.3.5
+2026-11-13T09:32:11.0355128Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-11-13T09:32:11.1041743Z Collecting onnx==1.20.1
+2026-11-13T09:32:11.1151791Z   Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.4 kB)
+2026-11-13T09:32:11.1424055Z Collecting ml_dtypes
+2026-11-13T09:32:11.1527788Z   Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+2026-11-13T09:32:11.1892486Z Collecting pytest==9.1.1
+2026-11-13T09:32:11.1995148Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-11-13T09:32:11.4432068Z Collecting ruff==0.12.12
+2026-11-13T09:32:11.4544172Z   Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2026-11-13T09:32:11.6074384Z Collecting protobuf>=4.25.1 (from onnx==1.20.1)
+2026-11-13T09:32:11.6178482Z   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+2026-11-13T09:32:11.6385580Z Collecting typing_extensions>=4.7.1 (from onnx==1.20.1)
+2026-11-13T09:32:11.6490266Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-13T09:32:11.6772125Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1)
+2026-11-13T09:32:11.6875172Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-13T09:32:11.7221630Z Collecting packaging>=22 (from pytest==9.1.1)
+2026-11-13T09:32:11.7323406Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-13T09:32:11.7600081Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1)
+2026-11-13T09:32:11.7700523Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-13T09:32:11.9604667Z Collecting pygments>=2.7.2 (from pytest==9.1.1)
+2026-11-13T09:32:11.9704447Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-13T09:32:11.9940723Z Collecting flatbuffers (from onnxruntime==1.33.0)
+2026-11-13T09:32:12.0040269Z   Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+2026-11-13T09:32:12.0433445Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-11-13T09:32:12.2207317Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 99.4 MB/s eta 0:00:00
+2026-11-13T09:32:12.2316995Z Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (17.5 MB)
+2026-11-13T09:32:12.3828448Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.5/17.5 MB 115.9 MB/s eta 0:00:00
+2026-11-13T09:32:12.3930680Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-11-13T09:32:12.4204723Z Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+2026-11-13T09:32:12.5194652Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 135.0 MB/s eta 0:00:00
+2026-11-13T09:32:12.5296608Z Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (409 kB)
+2026-11-13T09:32:12.5428127Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-13T09:32:12.5546585Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-13T09:32:12.5671689Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-13T09:32:12.6300473Z Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+2026-11-13T09:32:12.6892178Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-13T09:32:12.6951294Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 266.2 MB/s eta 0:00:00
+2026-11-13T09:32:12.7052385Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-13T09:32:12.7175087Z Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+2026-11-13T09:32:12.8809564Z Installing collected packages: flatbuffers, typing_extensions, ruff, pygments, protobuf, pluggy, packaging, numpy, iniconfig, pytest, onnxruntime, ml_dtypes, onnx
+2026-11-13T09:32:18.5640815Z Successfully installed flatbuffers-25.12.19 iniconfig-2.3.1 ml_dtypes-0.6.0 numpy-2.3.5 onnx-1.20.1 onnxruntime-1.33.0 packaging-26.3 pluggy-1.7.0 protobuf-7.36.2 pygments-2.21.0 pytest-9.1.1 ruff-0.12.12 typing_extensions-4.16.0
+2026-11-13T09:32:18.6336083Z 
+2026-11-13T09:32:18.6336753Z [notice] A new release of pip is available: 25.0.1 -> 26.3
+2026-11-13T09:32:18.6337162Z [notice] To update, run: pip install --upgrade pip
+2026-11-13T09:32:32.9140597Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T09:32:32.9141181Z  * branch              8dea1194e974fa07b1d2f07a190949c3a92cab80 -> FETCH_HEAD
+2026-11-13T09:32:33.0733715Z [0;93m2026-11-13 09:32:33.072989526 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T09:32:33.2010172Z {
+2026-11-13T09:32:33.2010553Z   "source_commit": "d8596d3fe7a5b0d548e52a97f2252111035b1879",
+2026-11-13T09:32:33.2011043Z   "native_build_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+2026-11-13T09:32:33.2011555Z   "common_native_source_base": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+2026-11-13T09:32:33.2011963Z   "native_build_run": 43296543822,
+2026-11-13T09:32:33.2012242Z   "native_wheel_artifact": 13982605959,
+2026-11-13T09:32:33.2012534Z   "runtime_version": "1.33.0",
+2026-11-13T09:32:33.2013284Z   "runtime_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/__init__.py",
+2026-11-13T09:32:33.2014045Z   "quantization_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization",
+2026-11-13T09:32:33.2014491Z   "quantization_sha256": {
+2026-11-13T09:32:33.2014812Z     "onnx_model.py": "3d98ad52611d43a1e89a0e7cb5e2f376f850bf2640a783a5e627f9c21c7f74b8",
+2026-11-13T09:32:33.2015289Z     "cuda_quantizer.py": "1e4dbc4f780c06a281054aac00fbbb7e136dfee1c29eee350c3e3dd420310e55",
+2026-11-13T09:32:33.2015728Z     "registry.py": "342e55d91f62a64fcd4e4d721a0ac568af69c822a7557312d8bd69a4adc3a5f5",
+2026-11-13T09:32:33.2016150Z     "calibrate.py": "dd84a7663166b2eb013ac51c1184cd36c689786813d49916cd5a7b779b39bea0",
+2026-11-13T09:32:33.2016884Z     "matmul_nbits_quantizer.py": "04feb252358ee7f20758a732537adff49fb10c7e80e84e358a4eb4c763bc3903",
+2026-11-13T09:32:33.2017360Z     "shape_inference.py": "f1fc6a69fd829d29963ba6d90a6b81d16b7ef3536a7a0dffacf8e3858ef5c227",
+2026-11-13T09:32:33.2017810Z     "qdq_quantizer.py": "6c6c061ae90ea4a0d6a8b5d2314e764bf1b0c4245ed4dafcd72d1603cd69683b",
+2026-11-13T09:32:33.2018250Z     "qdq_loss_debug.py": "f8fcf18ea1e0081ba77ecb6664e67650c068bdf206f0d3ff63351833da480629",
+2026-11-13T09:32:33.2018751Z     "tensor_quant_overrides.py": "6df028cd14bf2919ead19d103aad77331fe4fde186a90f8a74f440384932a0c9",
+2026-11-13T09:32:33.2019304Z     "__init__.py": "e6a397c6f48639307150aa6d495826b3a3f3229220748a095837a592c9beac8c",
+2026-11-13T09:32:33.2019737Z     "static_quantize_runner.py": "656546050e54f699780c560b85b19209f9cbfdf6544a6bd046de4ea93d6c3a12",
+2026-11-13T09:32:33.2020178Z     "quant_utils.py": "ab38904b03b24a0bd3f21933585e19d31a614f44b55e7fbfcd89abdc9dd8f653",
+2026-11-13T09:32:33.2020627Z     "matmul_bnb4_quantizer.py": "2afb1460ff720f0fee991f2f12434d4a154059f00847e96853151041735fcff6",
+2026-11-13T09:32:33.2021073Z     "onnx_quantizer.py": "f9c3705d631ff38231b4787f89e487274a8768122d79c11a3a6f0ce7caf62dc9",
+2026-11-13T09:32:33.2021509Z     "preprocess.py": "105d56a717cc3a81922596c1d3804bf4ae3e9801d8ef15a3e6d86fcf5b7ae1d7",
+2026-11-13T09:32:33.2021934Z     "base_quantizer.py": "750f1ae870b793a140938a83c9f72fa361ecf3e5c36257bc9482a6e1e0463335",
+2026-11-13T09:32:33.2022356Z     "quantize.py": "b96538a6a4f2311cf9af9ece760170b3d90c527cd7dfc4760ad8cafbbf694324",
+2026-11-13T09:32:33.2022831Z     "execution_providers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T09:32:33.2023606Z     "fusions/fusion.py": "f2f4cb00704942a8143f02b6539c9de94c14b64d4c1cfc8ace52e3fb89574112",
+2026-11-13T09:32:33.2024115Z     "fusions/replace_upsample_with_resize.py": "21663d11455fde7190b9aa04c334a798f8383059af561527ac309398b7cba3bc",
+2026-11-13T09:32:33.2024626Z     "fusions/__init__.py": "f05e55a909e2a9aedaec74ef9451aff14e65b6f059f9215ad936310ab822ab24",
+2026-11-13T09:32:33.2025125Z     "fusions/fusion_gelu.py": "a2216ab4e51cba690f6601f96dd4aa9ad7a898ce9611a7b0c0cd7cc29bf79b2c",
+2026-11-13T09:32:33.2025611Z     "fusions/fusion_layernorm.py": "5347c96082498172da1d61742ec120746b3fd7d8a9b27ff397cd1ba9b0806784",
+2026-11-13T09:32:33.2026070Z     "operators/conv.py": "be3bc477995318cfd45619453444abb19638e746b6907318cacfe54ec1b34d7e",
+2026-11-13T09:32:33.2026502Z     "operators/norm.py": "0da2c43dc5677e4c1a0fa7a94e0ac2ee1784f838e25814ecda8b0048c613f741",
+2026-11-13T09:32:33.2026973Z     "operators/maxpool.py": "b7357d17439efe5c35c9d22131ef0cc33f661fb395613cfee54031bc38dc265c",
+2026-11-13T09:32:33.2027431Z     "operators/where.py": "b43afc5d219013a56e43653f9a244db0e8b0efee9766478ef7a74cd67697e1e8",
+2026-11-13T09:32:33.2027890Z     "operators/activation.py": "63d8004592e07fedc847da426b135e541a06bb465889063c646e0a72dc3829ff",
+2026-11-13T09:32:33.2028390Z     "operators/qdq_base_operator.py": "833a553185bda598964606d9107a4a806b96a9c3a232cb18b61f93a7269ddac8",
+2026-11-13T09:32:33.2028866Z     "operators/pad.py": "92ee11d6df95801111f345685eb132ff8c41754a3dec363d7ac0df999d736b01",
+2026-11-13T09:32:33.2029315Z     "operators/concat.py": "731ec69fc8e1e1fa016e8a516f824f02836c4b23f500a737fe01969d5c891344",
+2026-11-13T09:32:33.2029755Z     "operators/lstm.py": "1cdd3fb3c00ded7503747824a1dbd773ba08e3172f4b63da9c6fe9238c613cec",
+2026-11-13T09:32:33.2030203Z     "operators/pooling.py": "65323c1632f093e79aa3bfaa638e5c0ac52da1b95956f27b3c86745bd629404c",
+2026-11-13T09:32:33.2030677Z     "operators/attention.py": "45b7d496416d2cfd4ee702e5c2fe47f18a2535e8dfd17cae07845fa8629595e3",
+2026-11-13T09:32:33.2031142Z     "operators/argmax.py": "86b3b40c8808df3c33956e8c7207d25b3f7b6d4bc7b96193b321f6ba11b540d1",
+2026-11-13T09:32:33.2031607Z     "operators/binary_op.py": "407cb36bfb9b087e8a2caa7b26d586a0d2d804e2d5c61b8287572b98860bf4ca",
+2026-11-13T09:32:33.2032053Z     "operators/matmul.py": "7d850ddaa686a670848662c50f2338a3e634a859b4b5c6efd6191bc60940d08e",
+2026-11-13T09:32:33.2032635Z     "operators/__init__.py": "7b531614058e27f1678fbea573c2e71b6dafd8ac22ff236f2a1d1aaa489d10a5",
+2026-11-13T09:32:33.2033253Z     "operators/direct_q8.py": "ed3514d7e2409b916efffe11a91c463e05f0aaa0f7ff472e4b44944788aa28d5",
+2026-11-13T09:32:33.2033746Z     "operators/gemm.py": "9077b95a0f33f0eb962ce2bd5f66b411ef268b80fba62a61269b327cfda6d1c4",
+2026-11-13T09:32:33.2034198Z     "operators/gather.py": "2cac2de86bcc9bcd327047580cf73bc8e0ecee1a52b832e279289bd7695b9b7a",
+2026-11-13T09:32:33.2034657Z     "operators/split.py": "1d76742cae13f2fb116e1c8723c0e30710a62769c0df321258cf486bdca50212",
+2026-11-13T09:32:33.2035243Z     "operators/base_operator.py": "74a29cf70d2a2e7afd1ceb4a4c6f222452993f037077956576efb544998fcaf9",
+2026-11-13T09:32:33.2035727Z     "operators/softmax.py": "377d90c9cf445eb62c4c84fd24e009804662f838740f81551c54ac98e226bd1d",
+2026-11-13T09:32:33.2036173Z     "operators/resize.py": "5caa4667dafb624f433982c041173f98acbe8ef884f375a74f8155eb908b4cb4",
+2026-11-13T09:32:33.2036662Z     "operators/embed_layernorm.py": "686ab6cb0e19b63be00b9fed78023f7c09f5f14120af54a126b5d3eedd7c2464",
+2026-11-13T09:32:33.2037218Z     "operators/gavgpool.py": "cdb2d953162af78b71f8e553656bfae005becbc32f9a4fb671740d6ca3352896",
+2026-11-13T09:32:33.2037745Z     "neural_compressor/onnx_model.py": "0f901eb2ee11bc2ec80a941e4072243ef472143b0e1becd020ad0de72f2d3563",
+2026-11-13T09:32:33.2038248Z     "neural_compressor/util.py": "20f54aa4817b69e5480e3bb456f460bcc3d53b9b12a8d1fecb038a182b968eaf",
+2026-11-13T09:32:33.2038765Z     "neural_compressor/weight_only.py": "2f7a7760a7dd7bbbd65a6ea0b46c876e2ce1fda0e34bccf0a54c946f6a676598",
+2026-11-13T09:32:33.2039282Z     "neural_compressor/__init__.py": "97eb008ba62d7bfb6234540b738dce6914085e0517358f1c091232e9db87f172",
+2026-11-13T09:32:33.2039817Z     "CalTableFlatBuffers/TrtTable.py": "eeb0e37992385ac644f978f88e601dbcceb10c6c42c256cb88889a87b05f1133",
+2026-11-13T09:32:33.2040362Z     "CalTableFlatBuffers/KeyValue.py": "fecc58656ee31b11d336456ad3e6e5fce4e8ab60dd31718e9e968756180dd8cb",
+2026-11-13T09:32:33.2040882Z     "CalTableFlatBuffers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T09:32:33.2041531Z     "execution_providers/qnn/quant_config.py": "07a58ddb57eaf0a4a17550bf86bebeee1c8c739a65a92b30368ad4629b9c68d4",
+2026-11-13T09:32:33.2042142Z     "execution_providers/qnn/fusion_lpnorm.py": "6767db32ff39da3cc2c9691f4d36acab90883d2bed0fe1161a6507d677c7cf5f",
+2026-11-13T09:32:33.2042740Z     "execution_providers/qnn/fusion_spacetodepth.py": "1fe6bea7151d14dc4e0c9bca81e6b251c65bc9297bb8b6c2c5ba43e5b0650575",
+2026-11-13T09:32:33.2043489Z     "execution_providers/qnn/__init__.py": "99a13e72b8e602904cfac188b98fcfce386542eb10afc0fe140840f5eaa6f758",
+2026-11-13T09:32:33.2044082Z     "execution_providers/qnn/mixed_precision_overrides_utils.py": "beff0aa9254a724556906333c169615ab64de047b45c09c1f325fee0b334da07",
+2026-11-13T09:32:33.2044680Z     "execution_providers/qnn/preprocess.py": "56997c1fa18cd53a176ca84706f9667c127c8a145b2265490c8177798b249665"
+2026-11-13T09:32:33.2045051Z   },
+2026-11-13T09:32:33.2045368Z   "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged."
+2026-11-13T09:32:33.2045726Z }
+2026-11-13T09:32:33.2513723Z ##[group]Run set -o pipefail
+2026-11-13T09:32:33.2514142Z [36;1mset -o pipefail[0m
+2026-11-13T09:32:33.2515492Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_four_bit_packing.py onnxruntime/test/python/quantization/test_quant_util.py 2>&1 | tee ort-patched.log[0m
+2026-11-13T09:32:33.2538786Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T09:32:33.2539077Z env:
+2026-11-13T09:32:33.2539260Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:33.2539472Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:33.2539722Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:33.2540198Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:33.2540534Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:33.2540868Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:33.2541207Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:33.2541515Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:33.2541811Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:33.2542067Z ##[endgroup]
+2026-11-13T09:32:33.3645370Z [0;93m2026-11-13 09:32:33.364174551 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T09:32:34.5231384Z ................                                      [100%]
+2026-11-13T09:32:34.5231900Z 16 passed, 163 subtests passed in 0.50s
+2026-11-13T09:32:34.6026567Z ##[group]Run python -P - <<'PY'
+2026-11-13T09:32:34.6026986Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T09:32:34.6027277Z [36;1mimport ast[0m
+2026-11-13T09:32:34.6027534Z [36;1mimport hashlib[0m
+2026-11-13T09:32:34.6027800Z [36;1mimport json[0m
+2026-11-13T09:32:34.6028056Z [36;1mimport statistics[0m
+2026-11-13T09:32:34.6028340Z [36;1mimport subprocess[0m
+2026-11-13T09:32:34.6028604Z [36;1mimport time[0m
+2026-11-13T09:32:34.6028861Z [36;1mimport tracemalloc[0m
+2026-11-13T09:32:34.6029156Z [36;1mfrom pathlib import Path[0m
+2026-11-13T09:32:34.6029404Z [36;1m[0m
+2026-11-13T09:32:34.6029560Z [36;1mimport numpy as np[0m
+2026-11-13T09:32:34.6029857Z [36;1mfrom onnxruntime.quantization.quant_utils import pack_bytes_to_4bit[0m
+2026-11-13T09:32:34.6030163Z [36;1m[0m
+2026-11-13T09:32:34.6030362Z [36;1moriginal_source = subprocess.check_output([0m
+2026-11-13T09:32:34.6030891Z [36;1m    ["git", "show", "a8246c0d094f1ab0d6bf236228e5e67683321cd7:onnxruntime/python/tools/quantization/quant_utils.py"],[0m
+2026-11-13T09:32:34.6031314Z [36;1m    text=True,[0m
+2026-11-13T09:32:34.6031493Z [36;1m)[0m
+2026-11-13T09:32:34.6031900Z [36;1mnode = next(x for x in ast.parse(original_source).body if isinstance(x, ast.FunctionDef) and x.name == "pack_bytes_to_4bit")[0m
+2026-11-13T09:32:34.6032321Z [36;1mnamespace = {"numpy": np}[0m
+2026-11-13T09:32:34.6032701Z [36;1mexec(compile(ast.Module(body=[node], type_ignores=[]), "<exact upstream pack_bytes_to_4bit>", "exec"), namespace)[0m
+2026-11-13T09:32:34.6033346Z [36;1moriginal = namespace["pack_bytes_to_4bit"][0m
+2026-11-13T09:32:34.6033588Z [36;1mrows = [][0m
+2026-11-13T09:32:34.6033782Z [36;1mfor length in (32, 4096, 1000000, 8000000):[0m
+2026-11-13T09:32:34.6034044Z [36;1m    source = bytes(range(16)) * (length // 16)[0m
+2026-11-13T09:32:34.6034293Z [36;1m    assert len(source) == length[0m
+2026-11-13T09:32:34.6034527Z [36;1m    expected = original(source)[0m
+2026-11-13T09:32:34.6034780Z [36;1m    assert pack_bytes_to_4bit(source) == expected[0m
+2026-11-13T09:32:34.6035131Z [36;1m    row = {"elements": length, "packed_sha256": hashlib.sha256(expected).hexdigest()}[0m
+2026-11-13T09:32:34.6035550Z [36;1m    for label, function in (("original", original), ("vectorized", pack_bytes_to_4bit)):[0m
+2026-11-13T09:32:34.6035879Z [36;1m        function(source)[0m
+2026-11-13T09:32:34.6036078Z [36;1m        timings = [][0m
+2026-11-13T09:32:34.6036273Z [36;1m        for _ in range(5):[0m
+2026-11-13T09:32:34.6036491Z [36;1m            start = time.perf_counter()[0m
+2026-11-13T09:32:34.6036730Z [36;1m            output = function(source)[0m
+2026-11-13T09:32:34.6037008Z [36;1m            timings.append((time.perf_counter() - start) * 1000)[0m
+2026-11-13T09:32:34.6037281Z [36;1m            assert output == expected[0m
+2026-11-13T09:32:34.6037497Z [36;1m        del output[0m
+2026-11-13T09:32:34.6037877Z [36;1m        tracemalloc.start()[0m
+2026-11-13T09:32:34.6038095Z [36;1m        output = function(source)[0m
+2026-11-13T09:32:34.6038340Z [36;1m        _, peak = tracemalloc.get_traced_memory()[0m
+2026-11-13T09:32:34.6038585Z [36;1m        tracemalloc.stop()[0m
+2026-11-13T09:32:34.6038797Z [36;1m        assert output == expected[0m
+2026-11-13T09:32:34.6039172Z [36;1m        row[label] = {"median_ms": statistics.median(timings), "samples_ms": timings, "peak_traced_bytes": peak}[0m
+2026-11-13T09:32:34.6039544Z [36;1m    rows.append(row)[0m
+2026-11-13T09:32:34.6040013Z [36;1mresult = {"warmups": 1, "repeats": 5, "scope": "Packing helper only; input created outside measurements; tracemalloc separate from timings.", "rows": rows}[0m
+2026-11-13T09:32:34.6040619Z [36;1mPath("ort-packing-benchmark.json").write_text(json.dumps(result, indent=2) + "\n")[0m
+2026-11-13T09:32:34.6040961Z [36;1mprint(json.dumps(result, indent=2))[0m
+2026-11-13T09:32:34.6041178Z [36;1mPY[0m
+2026-11-13T09:32:34.6041356Z [36;1mtest -s ort-packing-benchmark.json[0m
+2026-11-13T09:32:34.6078664Z shell: /usr/bin/bash -e {0}
+2026-11-13T09:32:34.6079083Z env:
+2026-11-13T09:32:34.6079255Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:34.6079463Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:34.6079711Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:34.6080008Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:34.6080337Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:34.6080665Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:34.6080972Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:34.6081270Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:34.6081575Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:34.6081843Z ##[endgroup]
+2026-11-13T09:32:34.7455756Z [0;93m2026-11-13 09:32:34.745276576 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T09:32:48.1617068Z {
+2026-11-13T09:32:48.1617393Z   "warmups": 1,
+2026-11-13T09:32:48.1617642Z   "repeats": 5,
+2026-11-13T09:32:48.1618203Z   "scope": "Packing helper only; input created outside measurements; tracemalloc separate from timings.",
+2026-11-13T09:32:48.1618747Z   "rows": [
+2026-11-13T09:32:48.1618947Z     {
+2026-11-13T09:32:48.1619155Z       "elements": 32,
+2026-11-13T09:32:48.1619602Z       "packed_sha256": "15e6b1e608a7f7e27c79ebdc7ec028d961e04bc5a1714aec5ec4f89ab3da75e6",
+2026-11-13T09:32:48.1620101Z       "original": {
+2026-11-13T09:32:48.1620335Z         "median_ms": 0.002232999989359996,
+2026-11-13T09:32:48.1620624Z         "samples_ms": [
+2026-11-13T09:32:48.1620873Z           0.003555000006372211,
+2026-11-13T09:32:48.1621151Z           0.002973999997379906,
+2026-11-13T09:32:48.1621420Z           0.002232999989359996,
+2026-11-13T09:32:48.1621671Z           0.0019530000088252564,
+2026-11-13T09:32:48.1621925Z           0.0018929999896499794
+2026-11-13T09:32:48.1622170Z         ],
+2026-11-13T09:32:48.1622390Z         "peak_traced_bytes": 73
+2026-11-13T09:32:48.1622642Z       },
+2026-11-13T09:32:48.1622854Z       "vectorized": {
+2026-11-13T09:32:48.1623312Z         "median_ms": 0.005737999998700616,
+2026-11-13T09:32:48.1623620Z         "samples_ms": [
+2026-11-13T09:32:48.1623845Z           0.005737999998700616,
+2026-11-13T09:32:48.1624087Z           0.004316000001836073,
+2026-11-13T09:32:48.1624337Z           0.0045870000064951455,
+2026-11-13T09:32:48.1624583Z           0.023114000001100976,
+2026-11-13T09:32:48.1624823Z           0.00825300000428797
+2026-11-13T09:32:48.1625069Z         ],
+2026-11-13T09:32:48.1625277Z         "peak_traced_bytes": 978
+2026-11-13T09:32:48.1625536Z       }
+2026-11-13T09:32:48.1626042Z     },
+2026-11-13T09:32:48.1626228Z     {
+2026-11-13T09:32:48.1626437Z       "elements": 4096,
+2026-11-13T09:32:48.1626854Z       "packed_sha256": "7df843ddeabc9b437133819573952ce31de7b874630f7362bd751492dc365b2e",
+2026-11-13T09:32:48.1627325Z       "original": {
+2026-11-13T09:32:48.1627557Z         "median_ms": 0.2984200000071269,
+2026-11-13T09:32:48.1627840Z         "samples_ms": [
+2026-11-13T09:32:48.1628072Z           0.2953850000011471,
+2026-11-13T09:32:48.1628324Z           0.30764299999930245,
+2026-11-13T09:32:48.1628576Z           0.2959760000038614,
+2026-11-13T09:32:48.1628820Z           0.2984200000071269,
+2026-11-13T09:32:48.1629060Z           0.30950599999357564
+2026-11-13T09:32:48.1629288Z         ],
+2026-11-13T09:32:48.1629507Z         "peak_traced_bytes": 2261
+2026-11-13T09:32:48.1629856Z       },
+2026-11-13T09:32:48.1630184Z       "vectorized": {
+2026-11-13T09:32:48.1630567Z         "median_ms": 0.006619000004093323,
+2026-11-13T09:32:48.1631141Z         "samples_ms": [
+2026-11-13T09:32:48.1631509Z           0.007320999998228217,
+2026-11-13T09:32:48.1632081Z           0.007730999996624632,
+2026-11-13T09:32:48.1632512Z           0.006619000004093323,
+2026-11-13T09:32:48.1632884Z           0.006399000000101296,
+2026-11-13T09:32:48.1633463Z           0.006399000000101296
+2026-11-13T09:32:48.1633863Z         ],
+2026-11-13T09:32:48.1634172Z         "peak_traced_bytes": 5134
+2026-11-13T09:32:48.1634614Z       }
+2026-11-13T09:32:48.1634924Z     },
+2026-11-13T09:32:48.1635275Z     {
+2026-11-13T09:32:48.1635616Z       "elements": 1000000,
+2026-11-13T09:32:48.1636181Z       "packed_sha256": "a939222610e42c5bde925e618eca1c3161b5b36726d453c73e30b6070c43a53a",
+2026-11-13T09:32:48.1649272Z       "original": {
+2026-11-13T09:32:48.1649592Z         "median_ms": 74.68710999999928,
+2026-11-13T09:32:48.1649906Z         "samples_ms": [
+2026-11-13T09:32:48.1650165Z           74.70150099999273,
+2026-11-13T09:32:48.1650454Z           74.46440200000382,
+2026-11-13T09:32:48.1650693Z           74.35443999999336,
+2026-11-13T09:32:48.1650941Z           74.68710999999928,
+2026-11-13T09:32:48.1651180Z           75.11925599999358
+2026-11-13T09:32:48.1651414Z         ],
+2026-11-13T09:32:48.1651628Z         "peak_traced_bytes": 500213
+2026-11-13T09:32:48.1651885Z       },
+2026-11-13T09:32:48.1652081Z       "vectorized": {
+2026-11-13T09:32:48.1652326Z         "median_ms": 0.5198860000064087,
+2026-11-13T09:32:48.1652605Z         "samples_ms": [
+2026-11-13T09:32:48.1652834Z           0.5217789999960587,
+2026-11-13T09:32:48.1653233Z           0.537211000008142,
+2026-11-13T09:32:48.1653474Z           0.5098409999959586,
+2026-11-13T09:32:48.1653709Z           0.5198860000064087,
+2026-11-13T09:32:48.1653935Z           0.5052439999957414
+2026-11-13T09:32:48.1654156Z         ],
+2026-11-13T09:32:48.1654360Z         "peak_traced_bytes": 1001038
+2026-11-13T09:32:48.1654622Z       }
+2026-11-13T09:32:48.1654812Z     },
+2026-11-13T09:32:48.1655015Z     {
+2026-11-13T09:32:48.1655216Z       "elements": 8000000,
+2026-11-13T09:32:48.1655638Z       "packed_sha256": "c15757ca1c2f0a3ccc220716d292cf75b0f8002a1b36363be4b79648f121f3d8",
+2026-11-13T09:32:48.1656091Z       "original": {
+2026-11-13T09:32:48.1656323Z         "median_ms": 571.1600129999965,
+2026-11-13T09:32:48.1656599Z         "samples_ms": [
+2026-11-13T09:32:48.1656830Z           575.0688690000061,
+2026-11-13T09:32:48.1657066Z           571.1600129999965,
+2026-11-13T09:32:48.1657298Z           569.5692500000007,
+2026-11-13T09:32:48.1657529Z           570.6597169999981,
+2026-11-13T09:32:48.1657761Z           571.2356549999953
+2026-11-13T09:32:48.1657999Z         ],
+2026-11-13T09:32:48.1658215Z         "peak_traced_bytes": 4000213
+2026-11-13T09:32:48.1658485Z       },
+2026-11-13T09:32:48.1658685Z       "vectorized": {
+2026-11-13T09:32:48.1658928Z         "median_ms": 7.10426300000222,
+2026-11-13T09:32:48.1659193Z         "samples_ms": [
+2026-11-13T09:32:48.1659416Z           7.216798000001745,
+2026-11-13T09:32:48.1659646Z           4.780363999998372,
+2026-11-13T09:32:48.1660177Z           7.10426300000222,
+2026-11-13T09:32:48.1660414Z           4.779702000007546,
+2026-11-13T09:32:48.1660658Z           7.1763379999936205
+2026-11-13T09:32:48.1660888Z         ],
+2026-11-13T09:32:48.1661103Z         "peak_traced_bytes": 8001038
+2026-11-13T09:32:48.1661361Z       }
+2026-11-13T09:32:48.1661551Z     }
+2026-11-13T09:32:48.1661736Z   ]
+2026-11-13T09:32:48.1661925Z }
+2026-11-13T09:32:48.2279008Z ##[group]Run python -P - <<'PY'
+2026-11-13T09:32:48.2279296Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T09:32:48.2279500Z [36;1mimport subprocess[0m
+2026-11-13T09:32:48.2279703Z [36;1mfrom pathlib import Path[0m
+2026-11-13T09:32:48.2280046Z [36;1mfrom onnxruntime.quantization import quant_utils[0m
+2026-11-13T09:32:48.2280445Z [36;1mtarget = Path(quant_utils.__file__)[0m
+2026-11-13T09:32:48.2281217Z [36;1mtarget.write_bytes(subprocess.check_output(["git", "show", "a8246c0d094f1ab0d6bf236228e5e67683321cd7:onnxruntime/python/tools/quantization/quant_utils.py"]))[0m
+2026-11-13T09:32:48.2282049Z [36;1mfor cache in target.parent.glob("__pycache__/quant_utils.*.pyc"):[0m
+2026-11-13T09:32:48.2282440Z [36;1m    cache.unlink()[0m
+2026-11-13T09:32:48.2282707Z [36;1mPY[0m
+2026-11-13T09:32:48.2302088Z shell: /usr/bin/bash -e {0}
+2026-11-13T09:32:48.2302297Z env:
+2026-11-13T09:32:48.2302471Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:48.2302745Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:48.2303003Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:48.2303434Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.2303766Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:48.2304087Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.2304380Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.2304680Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.2304972Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:48.2305237Z ##[endgroup]
+2026-11-13T09:32:48.3254462Z [0;93m2026-11-13 09:32:48.325119335 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T09:32:48.4918944Z ##[group]Run set -o pipefail
+2026-11-13T09:32:48.4919314Z [36;1mset -o pipefail[0m
+2026-11-13T09:32:48.4920306Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_four_bit_packing.py > ort-baseline.log 2>&1[0m
+2026-11-13T09:32:48.4921352Z [36;1mcat ort-baseline.log[0m
+2026-11-13T09:32:48.4941728Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T09:32:48.4942003Z env:
+2026-11-13T09:32:48.4942173Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:48.4942396Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:48.4942643Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:48.4942932Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.4943412Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:48.4943761Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.4944108Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.4944416Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.4944709Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:48.4944967Z ##[endgroup]
+2026-11-13T09:32:48.9806316Z [0;93m2026-11-13 09:32:48.601989225 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T09:32:48.9808225Z .......                                  [100%]
+2026-11-13T09:32:48.9808590Z 7 passed, 32 subtests passed in 0.19s
+2026-11-13T09:32:48.9839299Z ##[group]Run python -m ruff check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_four_bit_packing.py
+2026-11-13T09:32:48.9840102Z [36;1mpython -m ruff check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_four_bit_packing.py[0m
+2026-11-13T09:32:48.9840871Z [36;1mpython -m ruff format --diff onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_four_bit_packing.py || true[0m
+2026-11-13T09:32:48.9841495Z [36;1mpython -m ruff format onnxruntime/test/python/quantization/test_four_bit_packing.py[0m
+2026-11-13T09:32:48.9841855Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T09:32:48.9842064Z [36;1mfrom pathlib import Path[0m
+2026-11-13T09:32:48.9842293Z [36;1mprint("BEGIN_FORMATTED_TEST")[0m
+2026-11-13T09:32:48.9842652Z [36;1mprint(Path("onnxruntime/test/python/quantization/test_four_bit_packing.py").read_text())[0m
+2026-11-13T09:32:48.9843224Z [36;1mprint("END_FORMATTED_TEST")[0m
+2026-11-13T09:32:48.9843455Z [36;1mPY[0m
+2026-11-13T09:32:48.9843633Z [36;1mgit diff --exit-code[0m
+2026-11-13T09:32:48.9843824Z [36;1mgit diff --check[0m
+2026-11-13T09:32:48.9861694Z shell: /usr/bin/bash -e {0}
+2026-11-13T09:32:48.9861892Z env:
+2026-11-13T09:32:48.9862059Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:48.9862256Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:48.9862496Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:48.9862781Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.9863286Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:48.9863613Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.9863915Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.9864207Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:48.9864517Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:48.9864772Z ##[endgroup]
+2026-11-13T09:32:49.0145971Z All checks passed!
+2026-11-13T09:32:49.0401522Z 2 files already formatted
+2026-11-13T09:32:49.0614947Z 1 file left unchanged
+2026-11-13T09:32:49.0809574Z BEGIN_FORMATTED_TEST
+2026-11-13T09:32:49.0810032Z # Copyright (c) Microsoft Corporation. All rights reserved.
+2026-11-13T09:32:49.0810483Z # Licensed under the MIT License.
+2026-11-13T09:32:49.0810690Z 
+2026-11-13T09:32:49.0810805Z import unittest
+2026-11-13T09:32:49.0810951Z 
+2026-11-13T09:32:49.0811067Z import numpy as np
+2026-11-13T09:32:49.0811318Z import onnx
+2026-11-13T09:32:49.0811576Z from ml_dtypes import int4, uint4
+2026-11-13T09:32:49.0811938Z from onnx import TensorProto, helper, numpy_helper
+2026-11-13T09:32:49.0812243Z 
+2026-11-13T09:32:49.0812360Z import onnxruntime as ort
+2026-11-13T09:32:49.0812881Z from onnxruntime.quantization.quant_utils import pack_bytes_to_4bit, quantize_onnx_initializer
+2026-11-13T09:32:49.0813425Z 
+2026-11-13T09:32:49.0813430Z 
+2026-11-13T09:32:49.0813538Z def pack_reference(values):
+2026-11-13T09:32:49.0813750Z     result = bytearray()
+2026-11-13T09:32:49.0813968Z     for start in range(0, len(values), 2):
+2026-11-13T09:32:49.0814211Z         low = int(values[start]) % 16
+2026-11-13T09:32:49.0814498Z         high = int(values[start + 1]) % 16 if start + 1 < len(values) else 0
+2026-11-13T09:32:49.0814799Z         result.append(low + 16 * high)
+2026-11-13T09:32:49.0815021Z     return result
+2026-11-13T09:32:49.0815127Z 
+2026-11-13T09:32:49.0815131Z 
+2026-11-13T09:32:49.0815241Z class TestFourBitPacking(unittest.TestCase):
+2026-11-13T09:32:49.0815512Z     def test_all_signed_and_unsigned_pairs(self):
+2026-11-13T09:32:49.0815765Z         for signed in (False, True):
+2026-11-13T09:32:49.0816392Z             with self.subTest(signed=signed):
+2026-11-13T09:32:49.0816694Z                 numbers = range(-8, 8) if signed else range(16)
+2026-11-13T09:32:49.0816962Z                 values = np.array(
+2026-11-13T09:32:49.0817483Z                     [number for first in numbers for second in numbers for number in (first, second)],
+2026-11-13T09:32:49.0817864Z                     dtype=np.int8 if signed else np.uint8,
+2026-11-13T09:32:49.0818165Z                 )
+2026-11-13T09:32:49.0818381Z                 actual = pack_bytes_to_4bit(values.tobytes())
+2026-11-13T09:32:49.0818672Z                 self.assertIsInstance(actual, bytearray)
+2026-11-13T09:32:49.0818959Z                 self.assertEqual(actual, pack_reference(values))
+2026-11-13T09:32:49.0819150Z 
+2026-11-13T09:32:49.0819239Z     def test_lengths_and_odd_padding(self):
+2026-11-13T09:32:49.0819530Z         for length in (0, 1, 2, 3, 15, 16, 17, 255, 256, 257, 65535, 65536, 65537):
+2026-11-13T09:32:49.0819825Z             with self.subTest(length=length):
+2026-11-13T09:32:49.0820143Z                 values = ((np.arange(length, dtype=np.int64) * 7) % 16).astype(np.uint8)
+2026-11-13T09:32:49.0820473Z                 actual = pack_bytes_to_4bit(values.tobytes())
+2026-11-13T09:32:49.0820759Z                 self.assertEqual(actual, pack_reference(values))
+2026-11-13T09:32:49.0821040Z                 self.assertEqual(len(actual), (length + 1) // 2)
+2026-11-13T09:32:49.0821290Z                 if length % 2:
+2026-11-13T09:32:49.0821515Z                     self.assertEqual(actual[-1] >> 4, 0)
+2026-11-13T09:32:49.0821679Z 
+2026-11-13T09:32:49.0821789Z     def test_source_ownership_and_buffer_inputs(self):
+2026-11-13T09:32:49.0822058Z         expected = bytearray([0x10, 0xF2, 0x08])
+2026-11-13T09:32:49.0822326Z         for factory in (bytes, bytearray, memoryview):
+2026-11-13T09:32:49.0822586Z             with self.subTest(factory=factory.__name__):
+2026-11-13T09:32:49.0822838Z                 storage = bytearray([0, 1, 2, 15, 8])
+2026-11-13T09:32:49.0823268Z                 source = factory(storage)
+2026-11-13T09:32:49.0823541Z                 result = pack_bytes_to_4bit(source)
+2026-11-13T09:32:49.0823790Z                 self.assertEqual(result, expected)
+2026-11-13T09:32:49.0824081Z                 self.assertEqual(storage, bytearray([0, 1, 2, 15, 8]))
+2026-11-13T09:32:49.0824356Z                 result[0] = 255
+2026-11-13T09:32:49.0824576Z                 self.assertEqual(storage[0], 0)
+2026-11-13T09:32:49.0824812Z                 storage[-1] = 0
+2026-11-13T09:32:49.0825019Z                 self.assertEqual(result[-1], 8)
+2026-11-13T09:32:49.0825164Z 
+2026-11-13T09:32:49.0825329Z     def test_noncontiguous_and_nonbyte_sequences_keep_element_order(self):
+2026-11-13T09:32:49.0825631Z         sources = {
+2026-11-13T09:32:49.0825899Z             "strided_view": memoryview(bytearray([0, 9, 1, 9, 2]))[::2],
+2026-11-13T09:32:49.0826235Z             "reversed_view": memoryview(bytearray([8, 15, 2, 1, 0]))[::-1],
+2026-11-13T09:32:49.0826608Z             "signed_view": memoryview(np.array([-8, -1, 0, 7, -2], dtype=np.int8)),
+2026-11-13T09:32:49.0826991Z             "wider_view": memoryview(np.array([-8, -1, 0, 7, -2], dtype=np.int16)),
+2026-11-13T09:32:49.0827295Z             "list": [0, 1, 2, 15, 8],
+2026-11-13T09:32:49.0827578Z             "strided_array": np.array([0, 9, 1, 9, 2], dtype=np.uint8)[::2],
+2026-11-13T09:32:49.0827856Z         }
+2026-11-13T09:32:49.0828042Z         for name, source in sources.items():
+2026-11-13T09:32:49.0828281Z             with self.subTest(source=name):
+2026-11-13T09:32:49.0828511Z                 before = list(source)
+2026-11-13T09:32:49.0828741Z                 result = pack_bytes_to_4bit(source)
+2026-11-13T09:32:49.0829009Z                 self.assertEqual(result, pack_reference(source))
+2026-11-13T09:32:49.0829295Z                 self.assertIsInstance(result, bytearray)
+2026-11-13T09:32:49.0829562Z                 self.assertEqual(list(source), before)
+2026-11-13T09:32:49.0829798Z                 result[0] ^= 0xFF
+2026-11-13T09:32:49.0830185Z                 self.assertEqual(list(source), before)
+2026-11-13T09:32:49.0830338Z 
+2026-11-13T09:32:49.0830484Z     def test_small_signed_pattern_has_expected_nibble_order(self):
+2026-11-13T09:32:49.0830766Z         self.assertEqual(
+2026-11-13T09:32:49.0831164Z             pack_bytes_to_4bit(np.array([-8, -1, 0, 7, -2], dtype=np.int8).tobytes()),
+2026-11-13T09:32:49.0831479Z             bytearray([0xF8, 0x70, 0x0E]),
+2026-11-13T09:32:49.0831689Z         )
+2026-11-13T09:32:49.0831781Z 
+2026-11-13T09:32:49.0831895Z     def test_initializer_raw_bytes_round_trip(self):
+2026-11-13T09:32:49.0832257Z         for quant_type, quant_dtype in ((TensorProto.INT4, int4), (TensorProto.UINT4, uint4)):
+2026-11-13T09:32:49.0832598Z             for shape in ((3, 5), (4, 4)):
+2026-11-13T09:32:49.0832864Z                 with self.subTest(quant_type=quant_type, shape=shape):
+2026-11-13T09:32:49.0833367Z                     numbers = np.arange(np.prod(shape), dtype=np.int16) % 16
+2026-11-13T09:32:49.0833671Z                     if quant_type == TensorProto.INT4:
+2026-11-13T09:32:49.0833908Z                         numbers -= 8
+2026-11-13T09:32:49.0834140Z                     expected = numbers.reshape(shape)
+2026-11-13T09:32:49.0834415Z                     weights = expected.astype(np.float32) * 0.25
+2026-11-13T09:32:49.0834703Z                     quantized = quantize_onnx_initializer(
+2026-11-13T09:32:49.0834986Z                         numpy_helper.from_array(weights, "weight"),
+2026-11-13T09:32:49.0835242Z                         quant_type,
+2026-11-13T09:32:49.0835467Z                         np.array(0, dtype=quant_dtype),
+2026-11-13T09:32:49.0835721Z                         np.array(0.25, dtype=np.float32),
+2026-11-13T09:32:49.0835950Z                     )
+2026-11-13T09:32:49.0836219Z                     self.assertEqual(quantized.raw_data, bytes(pack_reference(numbers)))
+2026-11-13T09:32:49.0836546Z                     restored = onnx.TensorProto()
+2026-11-13T09:32:49.0836939Z                     restored.ParseFromString(quantized.SerializeToString())
+2026-11-13T09:32:49.0837566Z                     np.testing.assert_array_equal(numpy_helper.to_array(restored).astype(np.int16), expected)
+2026-11-13T09:32:49.0837991Z 
+2026-11-13T09:32:49.0838196Z     def test_native_cpu_dequantization_and_matmul(self):
+2026-11-13T09:32:49.0838787Z         for quant_type, quant_dtype in ((TensorProto.INT4, int4), (TensorProto.UINT4, uint4)):
+2026-11-13T09:32:49.0839417Z             for dtype, tensor_type in ((np.float16, TensorProto.FLOAT16), (np.float32, TensorProto.FLOAT)):
+2026-11-13T09:32:49.0839956Z                 with self.subTest(quant_type=quant_type, dtype=dtype):
+2026-11-13T09:32:49.0840398Z                     numbers = np.arange(15, dtype=np.int16)
+2026-11-13T09:32:49.0840843Z                     if quant_type == TensorProto.INT4:
+2026-11-13T09:32:49.0841215Z                         numbers -= 8
+2026-11-13T09:32:49.0841594Z                     weights = numbers.reshape(5, 3).astype(dtype) * dtype(0.25)
+2026-11-13T09:32:49.0842006Z                     scale = np.array(0.25, dtype=dtype)
+2026-11-13T09:32:49.0842372Z                     zero_point = np.array(0, dtype=quant_dtype)
+2026-11-13T09:32:49.0842801Z                     quantized = quantize_onnx_initializer(
+2026-11-13T09:32:49.0843409Z                         numpy_helper.from_array(weights, "weight"), quant_type, zero_point, scale
+2026-11-13T09:32:49.0843845Z                     )
+2026-11-13T09:32:49.0844105Z                     graph = helper.make_graph(
+2026-11-13T09:32:49.0844404Z                         [
+2026-11-13T09:32:49.0844903Z                             helper.make_node("DequantizeLinear", [quantized.name, "scale", "zero_point"], ["decoded"]),
+2026-11-13T09:32:49.0845541Z                             helper.make_node("MatMul", ["input", "decoded"], ["output"]),
+2026-11-13T09:32:49.0845984Z                         ],
+2026-11-13T09:32:49.0846287Z                         "packed_weight_matmul",
+2026-11-13T09:32:49.0846639Z                         [helper.make_tensor_value_info("input", tensor_type, [2, 5])],
+2026-11-13T09:32:49.0847230Z                         [
+2026-11-13T09:32:49.0847521Z                             helper.make_tensor_value_info("decoded", tensor_type, [5, 3]),
+2026-11-13T09:32:49.0847990Z                             helper.make_tensor_value_info("output", tensor_type, [2, 3]),
+2026-11-13T09:32:49.0848296Z                         ],
+2026-11-13T09:32:49.0848480Z                         [
+2026-11-13T09:32:49.0848672Z                             quantized,
+2026-11-13T09:32:49.0848920Z                             numpy_helper.from_array(scale, "scale"),
+2026-11-13T09:32:49.0849224Z                             numpy_helper.from_array(zero_point, "zero_point"),
+2026-11-13T09:32:49.0849492Z                         ],
+2026-11-13T09:32:49.0849675Z                     )
+2026-11-13T09:32:49.0849999Z                     model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 21)], ir_version=10)
+2026-11-13T09:32:49.0850375Z                     onnx.checker.check_model(model)
+2026-11-13T09:32:49.0850646Z                     options = ort.SessionOptions()
+2026-11-13T09:32:49.0851004Z                     options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
+2026-11-13T09:32:49.0851358Z                     session = ort.InferenceSession(
+2026-11-13T09:32:49.0851724Z                         model.SerializeToString(), sess_options=options, providers=["CPUExecutionProvider"]
+2026-11-13T09:32:49.0852070Z                     )
+2026-11-13T09:32:49.0852305Z                     data = np.arange(10, dtype=dtype).reshape(2, 5) / dtype(4)
+2026-11-13T09:32:49.0852620Z                     decoded, actual = session.run(None, {"input": data})
+2026-11-13T09:32:49.0852930Z                     np.testing.assert_array_equal(decoded, weights)
+2026-11-13T09:32:49.0853416Z                     np.testing.assert_array_equal(
+2026-11-13T09:32:49.0853751Z                         actual, (data.astype(np.float64) @ weights.astype(np.float64)).astype(dtype)
+2026-11-13T09:32:49.0854076Z                     )
+2026-11-13T09:32:49.0854175Z 
+2026-11-13T09:32:49.0854179Z 
+2026-11-13T09:32:49.0854265Z if __name__ == "__main__":
+2026-11-13T09:32:49.0854453Z     unittest.main()
+2026-11-13T09:32:49.0854557Z 
+2026-11-13T09:32:49.0854633Z END_FORMATTED_TEST
+2026-11-13T09:32:50.5918313Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-13T09:32:50.5918843Z with:
+2026-11-13T09:32:50.5919125Z   name: native-four-bit-packing-evidence
+2026-11-13T09:32:50.5919910Z   path: ort-source-overlay-metadata.json
+ort-patched.log
+ort-patched.xml
+ort-baseline.log
+ort-baseline.xml
+ort-packing-benchmark.json
+
+2026-11-13T09:32:50.5920683Z   if-no-files-found: warn
+2026-11-13T09:32:50.5920980Z   compression-level: 6
+2026-11-13T09:32:50.5921255Z   overwrite: false
+2026-11-13T09:32:50.5921523Z   include-hidden-files: false
+2026-11-13T09:32:50.5921822Z   archive: true
+2026-11-13T09:32:50.5922059Z env:
+2026-11-13T09:32:50.5922286Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:32:50.5922609Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:32:50.5922985Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:32:50.5923599Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:50.5924195Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:32:50.5924744Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:50.5925232Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:50.5925709Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:32:50.5926180Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:32:50.5926584Z ##[endgroup]
+2026-11-13T09:32:50.7214767Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-13T09:32:50.7216502Z The least common ancestor is /home/runner/work/onnxruntime/onnxruntime. This will be the root directory of the artifact
+2026-11-13T09:32:50.7217566Z With the provided path, there will be 6 files uploaded
+2026-11-13T09:32:50.7218092Z Artifact name is valid!
+2026-11-13T09:32:50.7218368Z Root directory input is valid!
+2026-11-13T09:32:51.0487440Z Uploading artifact: native-four-bit-packing-evidence.zip
+2026-11-13T09:32:51.0519193Z Beginning upload of artifact content to blob storage
+2026-11-13T09:32:51.2982367Z Uploaded bytes 6391
+2026-11-13T09:32:51.3532502Z Finished uploading artifact content to blob storage!
+2026-11-13T09:32:51.3533410Z SHA256 digest of uploaded artifact is 29068507965cf8ba3d1739f001ed74def58e0e1ea0f785cfb800e14cea473b86
+2026-11-13T09:32:51.3534039Z Finalizing artifact upload
+2026-11-13T09:32:51.8541168Z Artifact native-four-bit-packing-evidence successfully finalized. Artifact ID 14025831017
+2026-11-13T09:32:51.8542100Z Artifact native-four-bit-packing-evidence has been successfully uploaded! Final size is 6391 bytes. Artifact ID is 14025831017
+2026-11-13T09:32:51.8543218Z Artifact download URL: https://github.com/Afloat16/onnxruntime/actions/runs/43401492131/artifacts/14025831017
+2026-11-13T09:32:51.8702534Z Post job cleanup.
+2026-11-13T09:32:51.9720674Z (node:2462) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T09:32:51.9721269Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T09:32:51.9873584Z Post job cleanup.
+2026-11-13T09:32:52.0641075Z [command]/usr/bin/git version
+2026-11-13T09:32:52.0695495Z git version 2.56.1
+2026-11-13T09:32:52.0747713Z Temporarily overriding HOME='/home/runner/work/_temp/2ea8bb8f-7a5c-43f7-862a-f90ce78ee1ba' before making global git config changes
+2026-11-13T09:32:52.0748918Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T09:32:52.0749926Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T09:32:52.0793952Z Removing SSH command configuration
+2026-11-13T09:32:52.0796561Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T09:32:52.0853416Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T09:32:52.1177867Z Removing HTTP extra header
+2026-11-13T09:32:52.1184593Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T09:32:52.1226957Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T09:32:52.1482521Z Removing includeIf entries pointing to credentials config files
+2026-11-13T09:32:52.1488177Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T09:32:52.1561426Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T09:32:52.1926761Z Cleaning up orphan processes
+2026-11-13T09:32:52.2251495Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
