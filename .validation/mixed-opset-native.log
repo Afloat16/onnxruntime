@@ -1,0 +1,1718 @@
+﻿2026-11-13T10:56:22.7474858Z Current runner version: '2.338.2'
+2026-11-13T10:56:22.7500757Z ##[group]Runner Image Provisioner
+2026-11-13T10:56:22.7501600Z Hosted Compute Agent
+2026-11-13T10:56:22.7502243Z Version: 20261103.629
+2026-11-13T10:56:22.7502868Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-13T10:56:22.7503606Z Build Date: 2026-11-03T17:26:59Z
+2026-11-13T10:56:22.7504346Z Worker ID: {a65ed623-9c68-4240-a2ef-e65d40201e13}
+2026-11-13T10:56:22.7505073Z Region: us-east-1
+2026-11-13T10:56:22.7505645Z Cloud: AWS
+2026-11-13T10:56:22.7506165Z ##[endgroup]
+2026-11-13T10:56:22.7507651Z ##[group]Operating System
+2026-11-13T10:56:22.7508261Z Ubuntu
+2026-11-13T10:56:22.7508770Z 24.04.5
+2026-11-13T10:56:22.7509538Z LTS
+2026-11-13T10:56:22.7510049Z ##[endgroup]
+2026-11-13T10:56:22.7510556Z ##[group]Runner Image
+2026-11-13T10:56:22.7511229Z Image: ubuntu-24.04
+2026-11-13T10:56:22.7511774Z Version: 20261111.127.1
+2026-11-13T10:56:22.7513164Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.127/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-13T10:56:22.7514844Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.127
+2026-11-13T10:56:22.7515862Z ##[endgroup]
+2026-11-13T10:56:22.7517141Z ##[group]GITHUB_TOKEN Permissions
+2026-11-13T10:56:22.7519720Z Actions: read
+2026-11-13T10:56:22.7520334Z Contents: read
+2026-11-13T10:56:22.7520990Z Metadata: read
+2026-11-13T10:56:22.7521546Z ##[endgroup]
+2026-11-13T10:56:22.7523876Z Secret source: Actions
+2026-11-13T10:56:22.7524733Z Cache mode: write
+2026-11-13T10:56:22.7525480Z Prepare workflow directory
+2026-11-13T10:56:22.7905902Z Prepare all required actions
+2026-11-13T10:56:22.7957057Z Getting action download info
+2026-11-13T10:56:22.9795151Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-13T10:56:24.6302503Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-11-13T10:56:24.7862999Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-13T10:56:24.9263756Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-13T10:56:25.2223398Z Complete job name: native-cpu
+2026-11-13T10:56:25.2989053Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-13T10:56:25.2990829Z with:
+2026-11-13T10:56:25.2991679Z   ref: d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4
+2026-11-13T10:56:25.2992646Z   fetch-depth: 2
+2026-11-13T10:56:25.2993464Z   persist-credentials: false
+2026-11-13T10:56:25.2994360Z   repository: Afloat16/onnxruntime
+2026-11-13T10:56:25.3000905Z   token: ***
+2026-11-13T10:56:25.3001691Z   ssh-strict: true
+2026-11-13T10:56:25.3002489Z   ssh-user: git
+2026-11-13T10:56:25.3003257Z   clean: true
+2026-11-13T10:56:25.3004063Z   sparse-checkout-cone-mode: true
+2026-11-13T10:56:25.3004982Z   fetch-tags: false
+2026-11-13T10:56:25.3005774Z   show-progress: true
+2026-11-13T10:56:25.3006560Z   lfs: false
+2026-11-13T10:56:25.3007302Z   submodules: false
+2026-11-13T10:56:25.3008098Z   set-safe-directory: true
+2026-11-13T10:56:25.3008963Z   allow-unsafe-pr-checkout: false
+2026-11-13T10:56:25.3010280Z env:
+2026-11-13T10:56:25.3010992Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:56:25.3011933Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:56:25.3012959Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:56:25.3013964Z ##[endgroup]
+2026-11-13T10:56:29.1599548Z Syncing repository: Afloat16/onnxruntime
+2026-11-13T10:56:29.1600834Z ##[group]Getting Git version info
+2026-11-13T10:56:29.1601305Z Working directory is '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T10:56:29.1602106Z [command]/usr/bin/git version
+2026-11-13T10:56:29.3222725Z git version 2.56.1
+2026-11-13T10:56:29.3235998Z ##[endgroup]
+2026-11-13T10:56:29.3243934Z Temporarily overriding HOME='/home/runner/work/_temp/005f813e-293f-4dca-91b4-4ef13a3dcde3' before making global git config changes
+2026-11-13T10:56:29.3245263Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T10:56:29.3248642Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:56:29.3307946Z Deleting the contents of '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T10:56:29.3310394Z ##[group]Determining repository object format
+2026-11-13T10:56:29.3311254Z ##[endgroup]
+2026-11-13T10:56:29.3311706Z ##[group]Initializing the repository
+2026-11-13T10:56:29.3315427Z [command]/usr/bin/git init /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:56:29.4039145Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-13T10:56:29.4040594Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-13T10:56:29.4041110Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-13T10:56:29.4041537Z hint: call:
+2026-11-13T10:56:29.4041884Z hint:
+2026-11-13T10:56:29.4042229Z hint: 	git config --global init.defaultBranch <name>
+2026-11-13T10:56:29.4042627Z hint:
+2026-11-13T10:56:29.4042990Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-13T10:56:29.4043472Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-13T10:56:29.4043854Z hint:
+2026-11-13T10:56:29.4044120Z hint: 	git branch -m <name>
+2026-11-13T10:56:29.4044401Z hint:
+2026-11-13T10:56:29.4044768Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-13T10:56:29.4053967Z Initialized empty Git repository in /home/runner/work/onnxruntime/onnxruntime/.git/
+2026-11-13T10:56:29.4061526Z [command]/usr/bin/git remote add origin https://github.com/Afloat16/onnxruntime
+2026-11-13T10:56:29.4117309Z ##[endgroup]
+2026-11-13T10:56:29.4118032Z ##[group]Disabling automatic garbage collection
+2026-11-13T10:56:29.4120038Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-13T10:56:29.4143595Z ##[endgroup]
+2026-11-13T10:56:29.4144108Z ##[group]Setting up auth
+2026-11-13T10:56:29.4144467Z Removing SSH command configuration
+2026-11-13T10:56:29.4147425Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:56:29.4176516Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:56:29.7189160Z Removing HTTP extra header
+2026-11-13T10:56:29.7194523Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:56:29.7220597Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:56:29.7363337Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:56:29.7367795Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:56:29.7398793Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:56:29.7546757Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-13T10:56:29.7574299Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path /home/runner/work/_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config
+2026-11-13T10:56:29.7596252Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config
+2026-11-13T10:56:29.7618291Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config
+2026-11-13T10:56:29.7641306Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config
+2026-11-13T10:56:29.7661519Z ##[endgroup]
+2026-11-13T10:56:29.7662107Z ##[group]Fetching the repository
+2026-11-13T10:56:29.7666121Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4
+2026-11-13T10:56:42.9513579Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T10:56:42.9514093Z  * branch            d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4 -> FETCH_HEAD
+2026-11-13T10:56:42.9523084Z [command]/usr/bin/git rev-parse --verify --quiet d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4^{object}
+2026-11-13T10:56:42.9545173Z d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4
+2026-11-13T10:56:42.9548733Z ##[endgroup]
+2026-11-13T10:56:42.9549505Z ##[group]Determining the checkout info
+2026-11-13T10:56:42.9550112Z ##[endgroup]
+2026-11-13T10:56:42.9552577Z [command]/usr/bin/git sparse-checkout disable
+2026-11-13T10:56:42.9623655Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-13T10:56:42.9647049Z ##[group]Checking out the ref
+2026-11-13T10:56:42.9649989Z [command]/usr/bin/git checkout --progress --force d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4
+2026-11-13T10:56:44.0958411Z Updating files:  74% (8728/11668)
+2026-11-13T10:56:44.1012220Z Updating files:  75% (8751/11668)
+2026-11-13T10:56:44.1106461Z Updating files:  76% (8868/11668)
+2026-11-13T10:56:44.1982453Z Updating files:  77% (8985/11668)
+2026-11-13T10:56:44.3207239Z Updating files:  78% (9102/11668)
+2026-11-13T10:56:44.3237025Z Updating files:  79% (9218/11668)
+2026-11-13T10:56:44.3672576Z Updating files:  80% (9335/11668)
+2026-11-13T10:56:44.6320310Z Updating files:  81% (9452/11668)
+2026-11-13T10:56:44.6575548Z Updating files:  82% (9568/11668)
+2026-11-13T10:56:44.6628435Z Updating files:  83% (9685/11668)
+2026-11-13T10:56:44.6675756Z Updating files:  84% (9802/11668)
+2026-11-13T10:56:44.6736276Z Updating files:  85% (9918/11668)
+2026-11-13T10:56:44.6781427Z Updating files:  86% (10035/11668)
+2026-11-13T10:56:44.6877414Z Updating files:  87% (10152/11668)
+2026-11-13T10:56:44.6912137Z Updating files:  88% (10268/11668)
+2026-11-13T10:56:44.6950080Z Updating files:  89% (10385/11668)
+2026-11-13T10:56:44.6987167Z Updating files:  90% (10502/11668)
+2026-11-13T10:56:44.7034957Z Updating files:  91% (10618/11668)
+2026-11-13T10:56:44.7088179Z Updating files:  92% (10735/11668)
+2026-11-13T10:56:44.7123808Z Updating files:  93% (10852/11668)
+2026-11-13T10:56:44.7155555Z Updating files:  94% (10968/11668)
+2026-11-13T10:56:44.7204094Z Updating files:  95% (11085/11668)
+2026-11-13T10:56:44.7222388Z Updating files:  96% (11202/11668)
+2026-11-13T10:56:44.7255072Z Updating files:  97% (11318/11668)
+2026-11-13T10:56:44.7306392Z Updating files:  98% (11435/11668)
+2026-11-13T10:56:45.0396346Z Updating files:  99% (11552/11668)
+2026-11-13T10:56:45.0980577Z Updating files:  99% (11667/11668)
+2026-11-13T10:56:45.0981436Z Updating files: 100% (11668/11668)
+2026-11-13T10:56:45.0981785Z Updating files: 100% (11668/11668), done.
+2026-11-13T10:56:45.1077980Z Note: switching to 'd9c51010d378330a4aeb9c3d7a9f4fdbba4866c4'.
+2026-11-13T10:56:45.1078489Z 
+2026-11-13T10:56:45.1078697Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-13T10:56:45.1079364Z changes and commit them, and you can discard any commits you make in this
+2026-11-13T10:56:45.1079862Z state without impacting any branches by switching back to a branch.
+2026-11-13T10:56:45.1080154Z 
+2026-11-13T10:56:45.1080413Z If you want to create a new branch to retain commits you create, you may
+2026-11-13T10:56:45.1080848Z do so (now or later) by using -c with the switch command. Example:
+2026-11-13T10:56:45.1081079Z 
+2026-11-13T10:56:45.1081200Z   git switch -c <new-branch-name>
+2026-11-13T10:56:45.1081590Z 
+2026-11-13T10:56:45.1081733Z Or undo this operation with:
+2026-11-13T10:56:45.1081980Z 
+2026-11-13T10:56:45.1082108Z   git switch -
+2026-11-13T10:56:45.1082214Z 
+2026-11-13T10:56:45.1082409Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-13T10:56:45.1082637Z 
+2026-11-13T10:56:45.1082855Z HEAD is now at d9c5101 Honor 16-bit overrides when upgrading FLOAT8 quantization opsets
+2026-11-13T10:56:45.1148479Z ##[endgroup]
+2026-11-13T10:56:45.1193826Z [command]/usr/bin/git log -1 --format=%H
+2026-11-13T10:56:45.1215143Z d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4
+2026-11-13T10:56:45.1221883Z ##[group]Removing auth
+2026-11-13T10:56:45.1222270Z Removing SSH command configuration
+2026-11-13T10:56:45.1225292Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:56:45.1250243Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:56:45.1418190Z Removing HTTP extra header
+2026-11-13T10:56:45.1420681Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:56:45.1444255Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:56:45.1603048Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:56:45.1605730Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:56:45.1629084Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T10:56:45.1630176Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T10:56:45.1630736Z includeif.gitdir:/github/workspace/.git.path
+2026-11-13T10:56:45.1631075Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T10:56:45.1635478Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T10:56:45.1653088Z /home/runner/work/_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config
+2026-11-13T10:56:45.1658949Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-97bbfff5\-084c\-4fc3\-b7df\-5334682b2319\.config
+2026-11-13T10:56:45.1684797Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T10:56:45.1702486Z /home/runner/work/_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config
+2026-11-13T10:56:45.1707661Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-97bbfff5\-084c\-4fc3\-b7df\-5334682b2319\.config
+2026-11-13T10:56:45.1735635Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-13T10:56:45.1753269Z /github/runner_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config
+2026-11-13T10:56:45.1757123Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-97bbfff5\-084c\-4fc3\-b7df\-5334682b2319\.config
+2026-11-13T10:56:45.1781917Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T10:56:45.1798200Z /github/runner_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config
+2026-11-13T10:56:45.1803134Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-97bbfff5\-084c\-4fc3\-b7df\-5334682b2319\.config
+2026-11-13T10:56:45.1825680Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:56:45.1983926Z Removing credentials config '/home/runner/work/_temp/git-credentials-97bbfff5-084c-4fc3-b7df-5334682b2319.config'
+2026-11-13T10:56:45.1991614Z ##[endgroup]
+2026-11-13T10:56:45.2186080Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-11-13T10:56:45.2186438Z with:
+2026-11-13T10:56:45.2186697Z   python-version: 3.12
+2026-11-13T10:56:45.2186928Z   check-latest: false
+2026-11-13T10:56:45.2188780Z   token: ***
+2026-11-13T10:56:45.2188998Z   update-environment: true
+2026-11-13T10:56:45.2189486Z   allow-prereleases: false
+2026-11-13T10:56:45.2189758Z   freethreaded: false
+2026-11-13T10:56:45.2189965Z env:
+2026-11-13T10:56:45.2190202Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:56:45.2190439Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:56:45.2190731Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:56:45.2191027Z ##[endgroup]
+2026-11-13T10:56:45.3193173Z ##[group]Installed versions
+2026-11-13T10:56:45.4796093Z (node:2249) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:56:45.4796848Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:56:45.4797349Z Successfully set up CPython (3.12.16)
+2026-11-13T10:56:45.4797840Z ##[endgroup]
+2026-11-13T10:56:45.4918786Z ##[group]Run python -m venv "$RUNNER_TEMP/ort-validation-venv"
+2026-11-13T10:56:45.4919501Z [36;1mpython -m venv "$RUNNER_TEMP/ort-validation-venv"[0m
+2026-11-13T10:56:45.4919922Z [36;1mecho "$RUNNER_TEMP/ort-validation-venv/bin" >> "$GITHUB_PATH"[0m
+2026-11-13T10:56:45.8443095Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:56:45.8443540Z env:
+2026-11-13T10:56:45.8443791Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:56:45.8444054Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:56:45.8444401Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:56:45.8444760Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:45.8445202Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:56:45.8445583Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:45.8445931Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:45.8446421Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:45.8446767Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:56:45.8447078Z ##[endgroup]
+2026-11-13T10:56:50.7090669Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T10:56:50.7091040Z with:
+2026-11-13T10:56:50.7091302Z   name: cpu-native-wheel-a8246c0d
+2026-11-13T10:56:50.7091552Z   run-id: 43296543822
+2026-11-13T10:56:50.7093435Z   github-token: ***
+2026-11-13T10:56:50.7093718Z   path: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T10:56:50.7093993Z   merge-multiple: false
+2026-11-13T10:56:50.7094253Z   repository: Afloat16/onnxruntime
+2026-11-13T10:56:50.7094494Z env:
+2026-11-13T10:56:50.7094679Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:56:50.7094936Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:56:50.7095201Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:56:50.7095533Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:50.7095896Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:56:50.7096262Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:50.7096665Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:50.7097021Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:50.7097368Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:56:50.7097639Z ##[endgroup]
+2026-11-13T10:56:50.8201287Z Downloading single artifact
+2026-11-13T10:56:50.8269779Z (node:2282) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:56:50.8270720Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:56:50.8501204Z (node:2282) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T10:56:51.1122526Z Preparing to download the following artifacts:
+2026-11-13T10:56:51.1123703Z - cpu-native-wheel-a8246c0d (ID: 13982605959, Size: 30978382, Expected Digest: sha256:0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301)
+2026-11-13T10:56:51.1144494Z Downloading artifact '13982605959' from 'Afloat16/onnxruntime'
+2026-11-13T10:56:51.4296359Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/6682e059f91784baee0f176a816c789347a553a5901897c10ebf1feb950019db.zip
+2026-11-13T10:56:51.5487134Z (node:2282) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T10:56:51.5487899Z Starting download of artifact to: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T10:56:52.0920383Z SHA256 digest of downloaded artifact is 0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301
+2026-11-13T10:56:52.0921270Z Artifact download completed successfully.
+2026-11-13T10:56:52.0921732Z Total of 1 artifact(s) downloaded
+2026-11-13T10:56:52.0924694Z Download artifact has finished successfully
+2026-11-13T10:56:52.1841486Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T10:56:52.1841879Z with:
+2026-11-13T10:56:52.1842109Z   name: cpu-distribution-calibration-evidence
+2026-11-13T10:56:52.1842420Z   run-id: 43296543822
+2026-11-13T10:56:52.1844573Z   github-token: ***
+2026-11-13T10:56:52.1844871Z   path: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T10:56:52.1845181Z   merge-multiple: false
+2026-11-13T10:56:52.1845438Z   repository: Afloat16/onnxruntime
+2026-11-13T10:56:52.1845702Z env:
+2026-11-13T10:56:52.1845903Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:56:52.1846153Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:56:52.1846457Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:56:52.1846779Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:52.1847452Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:56:52.1847895Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:52.1848244Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:52.1848606Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:52.1848962Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:56:52.1849460Z ##[endgroup]
+2026-11-13T10:56:52.3001240Z Downloading single artifact
+2026-11-13T10:56:52.3072324Z (node:2295) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:56:52.3073058Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:56:52.3247462Z (node:2295) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T10:56:52.5228856Z Preparing to download the following artifacts:
+2026-11-13T10:56:52.5229882Z - cpu-distribution-calibration-evidence (ID: 13981818755, Size: 64428, Expected Digest: sha256:53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec)
+2026-11-13T10:56:52.5261601Z Downloading artifact '13981818755' from 'Afloat16/onnxruntime'
+2026-11-13T10:56:52.7681644Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/b5c359d12481e2fcd67c56939a89868631bef8eee9f9477d17c7aaf2174630ca.zip
+2026-11-13T10:56:52.7683778Z Starting download of artifact to: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T10:56:52.8088434Z (node:2295) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T10:56:52.8195184Z SHA256 digest of downloaded artifact is 53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec
+2026-11-13T10:56:52.8195968Z Artifact download completed successfully.
+2026-11-13T10:56:52.8196496Z Total of 1 artifact(s) downloaded
+2026-11-13T10:56:52.8200041Z Download artifact has finished successfully
+2026-11-13T10:56:52.8296665Z ##[group]Run python -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12
+2026-11-13T10:56:52.8297873Z [36;1mpython -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12[0m
+2026-11-13T10:56:52.8298712Z [36;1mgit fetch --no-tags origin 8dea1194e974fa07b1d2f07a190949c3a92cab80[0m
+2026-11-13T10:56:52.8299446Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:56:52.8299843Z [36;1mimport hashlib[0m
+2026-11-13T10:56:52.8300157Z [36;1mimport json[0m
+2026-11-13T10:56:52.8300447Z [36;1mimport os[0m
+2026-11-13T10:56:52.8300809Z [36;1mimport shutil[0m
+2026-11-13T10:56:52.8301117Z [36;1mimport subprocess[0m
+2026-11-13T10:56:52.8301479Z [36;1mfrom pathlib import Path[0m
+2026-11-13T10:56:52.8301831Z [36;1mimport onnxruntime[0m
+2026-11-13T10:56:52.8302198Z [36;1mfrom onnxruntime import quantization[0m
+2026-11-13T10:56:52.8302785Z [36;1mbuilt_commit = "8dea1194e974fa07b1d2f07a190949c3a92cab80"[0m
+2026-11-13T10:56:52.8303289Z [36;1mbase_commit = "a8246c0d094f1ab0d6bf236228e5e67683321cd7"[0m
+2026-11-13T10:56:52.8303914Z [36;1msource_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()[0m
+2026-11-13T10:56:52.8304790Z [36;1mprovenance = json.loads((Path(os.environ["RUNNER_TEMP"]) / "ort-build-evidence/ort-source-build-metadata.json").read_text())[0m
+2026-11-13T10:56:52.8305618Z [36;1massert provenance["source_commit"] == built_commit[0m
+2026-11-13T10:56:52.8306101Z [36;1mfor revision in (built_commit, source_commit):[0m
+2026-11-13T10:56:52.8306731Z [36;1m    paths = subprocess.check_output(["git", "diff", "--name-only", base_commit, revision], text=True).splitlines()[0m
+2026-11-13T10:56:52.8307708Z [36;1m    assert all(path.startswith(("onnxruntime/python/tools/quantization/", "onnxruntime/test/python/quantization/")) for path in paths), paths[0m
+2026-11-13T10:56:52.8308516Z [36;1msource = Path("onnxruntime/python/tools/quantization")[0m
+2026-11-13T10:56:52.8309047Z [36;1mdestination = Path(quantization.__file__).parent[0m
+2026-11-13T10:56:52.8309841Z [36;1mshutil.copytree(source, destination, dirs_exist_ok=True)[0m
+2026-11-13T10:56:52.8310371Z [36;1mfor cache in destination.rglob("__pycache__"):[0m
+2026-11-13T10:56:52.8310797Z [36;1m    shutil.rmtree(cache)[0m
+2026-11-13T10:56:52.8311136Z [36;1mhashes = {}[0m
+2026-11-13T10:56:52.8311511Z [36;1mfor path in source.rglob("*.py"):[0m
+2026-11-13T10:56:52.8311946Z [36;1m    installed = destination / path.relative_to(source)[0m
+2026-11-13T10:56:52.8312452Z [36;1m    assert installed.read_bytes() == path.read_bytes(), installed[0m
+2026-11-13T10:56:52.8313165Z [36;1m    hashes[str(path.relative_to(source))] = hashlib.sha256(installed.read_bytes()).hexdigest()[0m
+2026-11-13T10:56:52.8313809Z [36;1massert "CPUExecutionProvider" in onnxruntime.get_available_providers()[0m
+2026-11-13T10:56:52.8314343Z [36;1mmetadata = {[0m
+2026-11-13T10:56:52.8314684Z [36;1m    "source_commit": source_commit,[0m
+2026-11-13T10:56:52.8315088Z [36;1m    "native_build_source_commit": built_commit,[0m
+2026-11-13T10:56:52.8315556Z [36;1m    "common_native_source_base": base_commit,[0m
+2026-11-13T10:56:52.8316184Z [36;1m    "native_build_run": 43296543822,[0m
+2026-11-13T10:56:52.8316650Z [36;1m    "native_wheel_artifact": 13982605959,[0m
+2026-11-13T10:56:52.8317068Z [36;1m    "runtime_version": onnxruntime.__version__,[0m
+2026-11-13T10:56:52.8317460Z [36;1m    "runtime_path": onnxruntime.__file__,[0m
+2026-11-13T10:56:52.8317904Z [36;1m    "quantization_path": str(destination),[0m
+2026-11-13T10:56:52.8318310Z [36;1m    "quantization_sha256": hashes,[0m
+2026-11-13T10:56:52.8318954Z [36;1m    "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged.",[0m
+2026-11-13T10:56:52.8319756Z [36;1m}[0m
+2026-11-13T10:56:52.8320433Z [36;1mPath("ort-source-overlay-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")[0m
+2026-11-13T10:56:52.8321241Z [36;1mprint(json.dumps(metadata, indent=2))[0m
+2026-11-13T10:56:52.8321644Z [36;1mPY[0m
+2026-11-13T10:56:52.8359609Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:56:52.8360009Z env:
+2026-11-13T10:56:52.8360464Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:56:52.8360804Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:56:52.8361309Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:56:52.8361825Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:52.8362344Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:56:52.8362949Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:52.8363437Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:52.8364267Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:56:52.8364786Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:56:52.8365247Z ##[endgroup]
+2026-11-13T10:56:53.5972973Z Processing /home/runner/work/_temp/ort-built-wheel/onnxruntime-1.33.0-cp312-cp312-linux_x86_64.whl
+2026-11-13T10:56:53.7801848Z Collecting numpy==2.3.5
+2026-11-13T10:56:53.8043104Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-11-13T10:56:53.8487260Z Collecting onnx==1.20.1
+2026-11-13T10:56:53.8524197Z   Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.4 kB)
+2026-11-13T10:56:53.8677084Z Collecting ml_dtypes
+2026-11-13T10:56:53.8706202Z   Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+2026-11-13T10:56:53.8916147Z Collecting pytest==9.1.1
+2026-11-13T10:56:53.8940127Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-11-13T10:56:54.0778872Z Collecting ruff==0.12.12
+2026-11-13T10:56:54.0814267Z   Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2026-11-13T10:56:54.1814425Z Collecting protobuf>=4.25.1 (from onnx==1.20.1)
+2026-11-13T10:56:54.1844362Z   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+2026-11-13T10:56:54.1957033Z Collecting typing_extensions>=4.7.1 (from onnx==1.20.1)
+2026-11-13T10:56:54.1993007Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-13T10:56:54.2072768Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1)
+2026-11-13T10:56:54.2099489Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-13T10:56:54.2201110Z Collecting packaging>=22 (from pytest==9.1.1)
+2026-11-13T10:56:54.2226829Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-13T10:56:54.2320561Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1)
+2026-11-13T10:56:54.2347744Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-13T10:56:54.2470744Z Collecting pygments>=2.7.2 (from pytest==9.1.1)
+2026-11-13T10:56:54.2496562Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-13T10:56:54.2583059Z Collecting flatbuffers (from onnxruntime==1.33.0)
+2026-11-13T10:56:54.2616145Z   Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+2026-11-13T10:56:54.2850474Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-11-13T10:56:54.3812728Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 182.9 MB/s eta 0:00:00
+2026-11-13T10:56:54.3875198Z Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (17.5 MB)
+2026-11-13T10:56:54.4921258Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.5/17.5 MB 168.0 MB/s eta 0:00:00
+2026-11-13T10:56:54.4949666Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-11-13T10:56:54.4999696Z Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+2026-11-13T10:56:54.5409729Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 333.2 MB/s eta 0:00:00
+2026-11-13T10:56:54.5448477Z Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (409 kB)
+2026-11-13T10:56:54.5514952Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-13T10:56:54.5552542Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-13T10:56:54.5599704Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-13T10:56:54.5658136Z Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+2026-11-13T10:56:54.5703900Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-13T10:56:54.5762888Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 244.9 MB/s eta 0:00:00
+2026-11-13T10:56:54.5790916Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-13T10:56:54.5827083Z Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+2026-11-13T10:56:54.7203708Z Installing collected packages: flatbuffers, typing_extensions, ruff, pygments, protobuf, pluggy, packaging, numpy, iniconfig, pytest, onnxruntime, ml_dtypes, onnx
+2026-11-13T10:56:58.9499778Z Successfully installed flatbuffers-25.12.19 iniconfig-2.3.1 ml_dtypes-0.6.0 numpy-2.3.5 onnx-1.20.1 onnxruntime-1.33.0 packaging-26.3 pluggy-1.7.0 protobuf-7.36.2 pygments-2.21.0 pytest-9.1.1 ruff-0.12.12 typing_extensions-4.16.0
+2026-11-13T10:56:59.0126104Z 
+2026-11-13T10:56:59.0126591Z [notice] A new release of pip is available: 25.0.1 -> 26.3
+2026-11-13T10:56:59.0127185Z [notice] To update, run: pip install --upgrade pip
+2026-11-13T10:57:12.3030964Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T10:57:12.3031500Z  * branch              8dea1194e974fa07b1d2f07a190949c3a92cab80 -> FETCH_HEAD
+2026-11-13T10:57:12.5549806Z {
+2026-11-13T10:57:12.5550319Z   "source_commit": "d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4",
+2026-11-13T10:57:12.5550987Z   "native_build_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+2026-11-13T10:57:12.5551510Z   "common_native_source_base": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+2026-11-13T10:57:12.5551921Z   "native_build_run": 43296543822,
+2026-11-13T10:57:12.5552318Z   "native_wheel_artifact": 13982605959,
+2026-11-13T10:57:12.5552656Z   "runtime_version": "1.33.0",
+2026-11-13T10:57:12.5553255Z   "runtime_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/__init__.py",
+2026-11-13T10:57:12.5553895Z   "quantization_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization",
+2026-11-13T10:57:12.5554371Z   "quantization_sha256": {
+2026-11-13T10:57:12.5554777Z     "static_quantize_runner.py": "656546050e54f699780c560b85b19209f9cbfdf6544a6bd046de4ea93d6c3a12",
+2026-11-13T10:57:12.5555273Z     "preprocess.py": "105d56a717cc3a81922596c1d3804bf4ae3e9801d8ef15a3e6d86fcf5b7ae1d7",
+2026-11-13T10:57:12.5555804Z     "matmul_nbits_quantizer.py": "04feb252358ee7f20758a732537adff49fb10c7e80e84e358a4eb4c763bc3903",
+2026-11-13T10:57:12.5556322Z     "tensor_quant_overrides.py": "6df028cd14bf2919ead19d103aad77331fe4fde186a90f8a74f440384932a0c9",
+2026-11-13T10:57:12.5556839Z     "base_quantizer.py": "750f1ae870b793a140938a83c9f72fa361ecf3e5c36257bc9482a6e1e0463335",
+2026-11-13T10:57:12.5557328Z     "onnx_quantizer.py": "f9c3705d631ff38231b4787f89e487274a8768122d79c11a3a6f0ce7caf62dc9",
+2026-11-13T10:57:12.5557972Z     "onnx_model.py": "3d98ad52611d43a1e89a0e7cb5e2f376f850bf2640a783a5e627f9c21c7f74b8",
+2026-11-13T10:57:12.5558407Z     "__init__.py": "e6a397c6f48639307150aa6d495826b3a3f3229220748a095837a592c9beac8c",
+2026-11-13T10:57:12.5558880Z     "matmul_bnb4_quantizer.py": "2afb1460ff720f0fee991f2f12434d4a154059f00847e96853151041735fcff6",
+2026-11-13T10:57:12.5559651Z     "qdq_quantizer.py": "6c6c061ae90ea4a0d6a8b5d2314e764bf1b0c4245ed4dafcd72d1603cd69683b",
+2026-11-13T10:57:12.5560180Z     "registry.py": "342e55d91f62a64fcd4e4d721a0ac568af69c822a7557312d8bd69a4adc3a5f5",
+2026-11-13T10:57:12.5560661Z     "quantize.py": "b96538a6a4f2311cf9af9ece760170b3d90c527cd7dfc4760ad8cafbbf694324",
+2026-11-13T10:57:12.5561216Z     "cuda_quantizer.py": "1e4dbc4f780c06a281054aac00fbbb7e136dfee1c29eee350c3e3dd420310e55",
+2026-11-13T10:57:12.5561708Z     "calibrate.py": "dd84a7663166b2eb013ac51c1184cd36c689786813d49916cd5a7b779b39bea0",
+2026-11-13T10:57:12.5562181Z     "qdq_loss_debug.py": "f8fcf18ea1e0081ba77ecb6664e67650c068bdf206f0d3ff63351833da480629",
+2026-11-13T10:57:12.5562674Z     "shape_inference.py": "f1fc6a69fd829d29963ba6d90a6b81d16b7ef3536a7a0dffacf8e3858ef5c227",
+2026-11-13T10:57:12.5563180Z     "quant_utils.py": "32fb07a7216e0f868c07bf68de65390e4c1d5ddec14cdaf664f828c428965795",
+2026-11-13T10:57:12.5563699Z     "fusions/fusion_layernorm.py": "5347c96082498172da1d61742ec120746b3fd7d8a9b27ff397cd1ba9b0806784",
+2026-11-13T10:57:12.5564272Z     "fusions/fusion_gelu.py": "a2216ab4e51cba690f6601f96dd4aa9ad7a898ce9611a7b0c0cd7cc29bf79b2c",
+2026-11-13T10:57:12.5564769Z     "fusions/fusion.py": "f2f4cb00704942a8143f02b6539c9de94c14b64d4c1cfc8ace52e3fb89574112",
+2026-11-13T10:57:12.5565266Z     "fusions/__init__.py": "f05e55a909e2a9aedaec74ef9451aff14e65b6f059f9215ad936310ab822ab24",
+2026-11-13T10:57:12.5565812Z     "fusions/replace_upsample_with_resize.py": "21663d11455fde7190b9aa04c334a798f8383059af561527ac309398b7cba3bc",
+2026-11-13T10:57:12.5566412Z     "execution_providers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T10:57:12.5566987Z     "neural_compressor/weight_only.py": "2f7a7760a7dd7bbbd65a6ea0b46c876e2ce1fda0e34bccf0a54c946f6a676598",
+2026-11-13T10:57:12.5567535Z     "neural_compressor/util.py": "20f54aa4817b69e5480e3bb456f460bcc3d53b9b12a8d1fecb038a182b968eaf",
+2026-11-13T10:57:12.5568082Z     "neural_compressor/onnx_model.py": "0f901eb2ee11bc2ec80a941e4072243ef472143b0e1becd020ad0de72f2d3563",
+2026-11-13T10:57:12.5568629Z     "neural_compressor/__init__.py": "97eb008ba62d7bfb6234540b738dce6914085e0517358f1c091232e9db87f172",
+2026-11-13T10:57:12.5569147Z     "CalTableFlatBuffers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T10:57:12.5569868Z     "CalTableFlatBuffers/KeyValue.py": "fecc58656ee31b11d336456ad3e6e5fce4e8ab60dd31718e9e968756180dd8cb",
+2026-11-13T10:57:12.5570453Z     "CalTableFlatBuffers/TrtTable.py": "eeb0e37992385ac644f978f88e601dbcceb10c6c42c256cb88889a87b05f1133",
+2026-11-13T10:57:12.5571025Z     "operators/qdq_base_operator.py": "833a553185bda598964606d9107a4a806b96a9c3a232cb18b61f93a7269ddac8",
+2026-11-13T10:57:12.5571543Z     "operators/resize.py": "5caa4667dafb624f433982c041173f98acbe8ef884f375a74f8155eb908b4cb4",
+2026-11-13T10:57:12.5572020Z     "operators/norm.py": "0da2c43dc5677e4c1a0fa7a94e0ac2ee1784f838e25814ecda8b0048c613f741",
+2026-11-13T10:57:12.5572533Z     "operators/direct_q8.py": "ed3514d7e2409b916efffe11a91c463e05f0aaa0f7ff472e4b44944788aa28d5",
+2026-11-13T10:57:12.5573022Z     "operators/lstm.py": "1cdd3fb3c00ded7503747824a1dbd773ba08e3172f4b63da9c6fe9238c613cec",
+2026-11-13T10:57:12.5573574Z     "operators/gemm.py": "9077b95a0f33f0eb962ce2bd5f66b411ef268b80fba62a61269b327cfda6d1c4",
+2026-11-13T10:57:12.5574057Z     "operators/where.py": "b43afc5d219013a56e43653f9a244db0e8b0efee9766478ef7a74cd67697e1e8",
+2026-11-13T10:57:12.5574549Z     "operators/base_operator.py": "74a29cf70d2a2e7afd1ceb4a4c6f222452993f037077956576efb544998fcaf9",
+2026-11-13T10:57:12.5575123Z     "operators/embed_layernorm.py": "686ab6cb0e19b63be00b9fed78023f7c09f5f14120af54a126b5d3eedd7c2464",
+2026-11-13T10:57:12.5575761Z     "operators/softmax.py": "377d90c9cf445eb62c4c84fd24e009804662f838740f81551c54ac98e226bd1d",
+2026-11-13T10:57:12.5576278Z     "operators/split.py": "1d76742cae13f2fb116e1c8723c0e30710a62769c0df321258cf486bdca50212",
+2026-11-13T10:57:12.5576833Z     "operators/activation.py": "63d8004592e07fedc847da426b135e541a06bb465889063c646e0a72dc3829ff",
+2026-11-13T10:57:12.5577317Z     "operators/conv.py": "be3bc477995318cfd45619453444abb19638e746b6907318cacfe54ec1b34d7e",
+2026-11-13T10:57:12.5577843Z     "operators/attention.py": "45b7d496416d2cfd4ee702e5c2fe47f18a2535e8dfd17cae07845fa8629595e3",
+2026-11-13T10:57:12.5578423Z     "operators/gather.py": "2cac2de86bcc9bcd327047580cf73bc8e0ecee1a52b832e279289bd7695b9b7a",
+2026-11-13T10:57:12.5578934Z     "operators/concat.py": "731ec69fc8e1e1fa016e8a516f824f02836c4b23f500a737fe01969d5c891344",
+2026-11-13T10:57:12.5579585Z     "operators/matmul.py": "7d850ddaa686a670848662c50f2338a3e634a859b4b5c6efd6191bc60940d08e",
+2026-11-13T10:57:12.5580091Z     "operators/__init__.py": "7b531614058e27f1678fbea573c2e71b6dafd8ac22ff236f2a1d1aaa489d10a5",
+2026-11-13T10:57:12.5580649Z     "operators/gavgpool.py": "cdb2d953162af78b71f8e553656bfae005becbc32f9a4fb671740d6ca3352896",
+2026-11-13T10:57:12.5581172Z     "operators/pad.py": "92ee11d6df95801111f345685eb132ff8c41754a3dec363d7ac0df999d736b01",
+2026-11-13T10:57:12.5581674Z     "operators/pooling.py": "65323c1632f093e79aa3bfaa638e5c0ac52da1b95956f27b3c86745bd629404c",
+2026-11-13T10:57:12.5582192Z     "operators/maxpool.py": "b7357d17439efe5c35c9d22131ef0cc33f661fb395613cfee54031bc38dc265c",
+2026-11-13T10:57:12.5582700Z     "operators/binary_op.py": "407cb36bfb9b087e8a2caa7b26d586a0d2d804e2d5c61b8287572b98860bf4ca",
+2026-11-13T10:57:12.5583215Z     "operators/argmax.py": "86b3b40c8808df3c33956e8c7207d25b3f7b6d4bc7b96193b321f6ba11b540d1",
+2026-11-13T10:57:12.5583816Z     "execution_providers/qnn/fusion_lpnorm.py": "6767db32ff39da3cc2c9691f4d36acab90883d2bed0fe1161a6507d677c7cf5f",
+2026-11-13T10:57:12.5584833Z     "execution_providers/qnn/preprocess.py": "56997c1fa18cd53a176ca84706f9667c127c8a145b2265490c8177798b249665",
+2026-11-13T10:57:12.5585508Z     "execution_providers/qnn/mixed_precision_overrides_utils.py": "beff0aa9254a724556906333c169615ab64de047b45c09c1f325fee0b334da07",
+2026-11-13T10:57:12.5586197Z     "execution_providers/qnn/fusion_spacetodepth.py": "1fe6bea7151d14dc4e0c9bca81e6b251c65bc9297bb8b6c2c5ba43e5b0650575",
+2026-11-13T10:57:12.5586816Z     "execution_providers/qnn/__init__.py": "99a13e72b8e602904cfac188b98fcfce386542eb10afc0fe140840f5eaa6f758",
+2026-11-13T10:57:12.5587395Z     "execution_providers/qnn/quant_config.py": "07a58ddb57eaf0a4a17550bf86bebeee1c8c739a65a92b30368ad4629b9c68d4"
+2026-11-13T10:57:12.5587796Z   },
+2026-11-13T10:57:12.5588151Z   "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged."
+2026-11-13T10:57:12.5588539Z }
+2026-11-13T10:57:12.5937573Z ##[group]Run set -o pipefail
+2026-11-13T10:57:12.5937919Z [36;1mset -o pipefail[0m
+2026-11-13T10:57:12.5938733Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_mixed_quantization_opset.py onnxruntime/test/python/quantization/test_quant_util.py 2>&1 | tee ort-patched.log[0m
+2026-11-13T10:57:12.5967747Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T10:57:12.5968117Z env:
+2026-11-13T10:57:12.5968347Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:57:12.5968593Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:57:12.5968904Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:57:12.5969409Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:12.5969826Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:57:12.5970267Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:12.5970641Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:12.5971117Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:12.5971457Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:57:12.5971765Z ##[endgroup]
+2026-11-13T10:57:13.7716110Z ............ [ 80%]
+2026-11-13T10:57:13.8332592Z ...                                   [100%]
+2026-11-13T10:57:13.8333332Z 15 passed, 167 subtests passed in 0.56s
+2026-11-13T10:57:13.8920294Z ##[group]Run python -P - <<'PY'
+2026-11-13T10:57:13.8920629Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:57:13.8920935Z [36;1mimport subprocess[0m
+2026-11-13T10:57:13.8921193Z [36;1mfrom pathlib import Path[0m
+2026-11-13T10:57:13.8921518Z [36;1mfrom onnxruntime.quantization import quant_utils[0m
+2026-11-13T10:57:13.8921857Z [36;1mtarget = Path(quant_utils.__file__)[0m
+2026-11-13T10:57:13.8922455Z [36;1mtarget.write_bytes(subprocess.check_output(["git", "show", "a8246c0d094f1ab0d6bf236228e5e67683321cd7:onnxruntime/python/tools/quantization/quant_utils.py"]))[0m
+2026-11-13T10:57:13.8923091Z [36;1mfor cache in target.parent.glob("__pycache__/quant_utils.*.pyc"):[0m
+2026-11-13T10:57:13.8923431Z [36;1m    cache.unlink()[0m
+2026-11-13T10:57:13.8923711Z [36;1mPY[0m
+2026-11-13T10:57:13.8949835Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:57:13.8950170Z env:
+2026-11-13T10:57:13.8950401Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:57:13.8950768Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:57:13.8951069Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:57:13.8951423Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:13.8951807Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:57:13.8952520Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:13.8952859Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:13.8953194Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:13.8953561Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:57:13.8953855Z ##[endgroup]
+2026-11-13T10:57:14.1176170Z ##[group]Run set +e
+2026-11-13T10:57:14.1176461Z [36;1mset +e[0m
+2026-11-13T10:57:14.1177175Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_mixed_quantization_opset.py > ort-baseline.log 2>&1[0m
+2026-11-13T10:57:14.1177839Z [36;1mresult=$?[0m
+2026-11-13T10:57:14.1178041Z [36;1mset -e[0m
+2026-11-13T10:57:14.1178414Z [36;1mcat ort-baseline.log[0m
+2026-11-13T10:57:14.1178720Z [36;1mtest "$result" -eq 1[0m
+2026-11-13T10:57:14.1178968Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:57:14.1179389Z [36;1mimport xml.etree.ElementTree as ET[0m
+2026-11-13T10:57:14.1179700Z [36;1mroot = ET.parse("ort-baseline.xml").getroot()[0m
+2026-11-13T10:57:14.1180272Z [36;1mfailed = {case.attrib["name"] for case in root.findall(".//testcase") if case.find("failure") is not None or case.find("error") is not None}[0m
+2026-11-13T10:57:14.1180858Z [36;1mrequired = {[0m
+2026-11-13T10:57:14.1181210Z [36;1m    "test_float8_with_integer_override_uses_highest_required_opset",[0m
+2026-11-13T10:57:14.1181586Z [36;1m    "test_public_quantize_static_produces_native_mixed_qdq",[0m
+2026-11-13T10:57:14.1181940Z [36;1m    "test_config_based_quantization_with_convert_override",[0m
+2026-11-13T10:57:14.1182297Z [36;1m    "test_upgrade_does_not_mutate_the_supplied_model",[0m
+2026-11-13T10:57:14.1182586Z [36;1m}[0m
+2026-11-13T10:57:14.1182877Z [36;1massert required <= failed, (required - failed, failed)[0m
+2026-11-13T10:57:14.1183295Z [36;1mprint("Confirmed original FLOAT8 statistics failures:", sorted(failed))[0m
+2026-11-13T10:57:14.1183627Z [36;1mPY[0m
+2026-11-13T10:57:14.1210568Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T10:57:14.1210958Z env:
+2026-11-13T10:57:14.1211191Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:57:14.1211578Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:57:14.1211907Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:57:14.1212278Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:14.1212677Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:57:14.1213057Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:14.1213407Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:14.1213774Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:14.1214124Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:57:14.1214434Z ##[endgroup]
+2026-11-13T10:57:15.0684865Z .....F                               [100%]
+2026-11-13T10:57:15.0685370Z =================================== FAILURES ===================================
+2026-11-13T10:57:15.0686141Z _ TestMixedQuantizationOpset.test_config_based_quantization_with_convert_override (integer_type=<QuantType.QInt16: 3>) _
+2026-11-13T10:57:15.0687257Z 
+2026-11-13T10:57:15.0687688Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_config_based_quantization_with_convert_override>
+2026-11-13T10:57:15.0688285Z 
+2026-11-13T10:57:15.0688472Z     def test_config_based_quantization_with_convert_override(self):
+2026-11-13T10:57:15.0688929Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.0689967Z             path = Path(directory) / "configured.onnx"
+2026-11-13T10:57:15.0690447Z             for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0690917Z                 with self.subTest(integer_type=integer_type):
+2026-11-13T10:57:15.0691355Z                     model = self._model(17)
+2026-11-13T10:57:15.0691716Z                     config = get_qdq_config(
+2026-11-13T10:57:15.0692093Z                         model,
+2026-11-13T10:57:15.0692422Z                         _Reader(),
+2026-11-13T10:57:15.0692799Z                         calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.0693559Z                         activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0693983Z                         weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0694457Z                         tensor_quant_overrides={"X": [{"convert": {"quant_type": integer_type}}]},
+2026-11-13T10:57:15.0694957Z                         calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.0695361Z                     )
+2026-11-13T10:57:15.0695751Z                     self.assertFalse(config.extra_options.get("UseQDQContribOps", False))
+2026-11-13T10:57:15.0696288Z                     quantize(model, path, config)
+2026-11-13T10:57:15.0696713Z >                   self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.0696967Z 
+2026-11-13T10:57:15.0697215Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:135: 
+2026-11-13T10:57:15.0697735Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0698290Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.0698935Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.0699689Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0700197Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.0700803Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.0701188Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0701365Z 
+2026-11-13T10:57:15.0701625Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f47463f1ac0>
+2026-11-13T10:57:15.0702105Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.0702541Z disabled_optimizers = None
+2026-11-13T10:57:15.0702700Z 
+2026-11-13T10:57:15.0702917Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.0703345Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.0703639Z     
+2026-11-13T10:57:15.0704005Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.0704470Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.0704966Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.0705443Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.0705795Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.0706110Z             raise ValueError(
+2026-11-13T10:57:15.0706476Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.0706878Z                 "in the same session."
+2026-11-13T10:57:15.0707120Z             )
+2026-11-13T10:57:15.0707324Z     
+2026-11-13T10:57:15.0707685Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.0708115Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.0708443Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.0708860Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.0709482Z         ):
+2026-11-13T10:57:15.0710184Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.0710650Z         else:
+2026-11-13T10:57:15.0710980Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.0711333Z     
+2026-11-13T10:57:15.0711723Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.0712337Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.0712721Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.0713006Z         )
+2026-11-13T10:57:15.0713205Z     
+2026-11-13T10:57:15.0713569Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.0714075Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.0714449Z         # here will take precedence.
+2026-11-13T10:57:15.0714873Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.0715286Z             warnings.warn(
+2026-11-13T10:57:15.0715726Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.0716254Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.0716633Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.0716912Z             )
+2026-11-13T10:57:15.0717112Z     
+2026-11-13T10:57:15.0717460Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.0717831Z     
+2026-11-13T10:57:15.0718158Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.0718559Z     
+2026-11-13T10:57:15.0718860Z         if self._model_path:
+2026-11-13T10:57:15.0719446Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.0719945Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0720955Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpna33nasm/configured.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.0721916Z 
+2026-11-13T10:57:15.0722255Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.0722950Z _ TestMixedQuantizationOpset.test_config_based_quantization_with_convert_override (integer_type=<QuantType.QUInt16: 4>) _
+2026-11-13T10:57:15.0723291Z 
+2026-11-13T10:57:15.0723618Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_config_based_quantization_with_convert_override>
+2026-11-13T10:57:15.0724011Z 
+2026-11-13T10:57:15.0724155Z     def test_config_based_quantization_with_convert_override(self):
+2026-11-13T10:57:15.0724500Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.0724828Z             path = Path(directory) / "configured.onnx"
+2026-11-13T10:57:15.0725182Z             for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0725558Z                 with self.subTest(integer_type=integer_type):
+2026-11-13T10:57:15.0725857Z                     model = self._model(17)
+2026-11-13T10:57:15.0726128Z                     config = get_qdq_config(
+2026-11-13T10:57:15.0726401Z                         model,
+2026-11-13T10:57:15.0726651Z                         _Reader(),
+2026-11-13T10:57:15.0726929Z                         calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.0727280Z                         activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0727594Z                         weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0728005Z                         tensor_quant_overrides={"X": [{"convert": {"quant_type": integer_type}}]},
+2026-11-13T10:57:15.0728416Z                         calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.0728696Z                     )
+2026-11-13T10:57:15.0729086Z                     self.assertFalse(config.extra_options.get("UseQDQContribOps", False))
+2026-11-13T10:57:15.0729602Z                     quantize(model, path, config)
+2026-11-13T10:57:15.0729916Z >                   self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.0730148Z 
+2026-11-13T10:57:15.0730328Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:135: 
+2026-11-13T10:57:15.0730734Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0731306Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.0731980Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.0732527Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0733248Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.0734068Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.0734669Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0734943Z 
+2026-11-13T10:57:15.0735322Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f47469f6ea0>
+2026-11-13T10:57:15.0736001Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.0736540Z disabled_optimizers = None
+2026-11-13T10:57:15.0736765Z 
+2026-11-13T10:57:15.0737063Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.0737662Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.0738049Z     
+2026-11-13T10:57:15.0738629Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.0739609Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.0740267Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.0740975Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.0741453Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.0741832Z             raise ValueError(
+2026-11-13T10:57:15.0742364Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.0742898Z                 "in the same session."
+2026-11-13T10:57:15.0743189Z             )
+2026-11-13T10:57:15.0743396Z     
+2026-11-13T10:57:15.0743766Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.0744226Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.0744572Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.0744959Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.0745312Z         ):
+2026-11-13T10:57:15.0745635Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.0746041Z         else:
+2026-11-13T10:57:15.0746302Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.0746579Z     
+2026-11-13T10:57:15.0746860Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.0747278Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.0747660Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.0747977Z         )
+2026-11-13T10:57:15.0748172Z     
+2026-11-13T10:57:15.0748511Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.0749123Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.0749700Z         # here will take precedence.
+2026-11-13T10:57:15.0750138Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.0750555Z             warnings.warn(
+2026-11-13T10:57:15.0750957Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.0751473Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.0751878Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.0752140Z             )
+2026-11-13T10:57:15.0752325Z     
+2026-11-13T10:57:15.0752695Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.0753096Z     
+2026-11-13T10:57:15.0753431Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.0753831Z     
+2026-11-13T10:57:15.0754022Z         if self._model_path:
+2026-11-13T10:57:15.0754430Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.0754861Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0755822Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpna33nasm/configured.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.0756651Z 
+2026-11-13T10:57:15.0756979Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.0757687Z _ TestMixedQuantizationOpset.test_direct_tensor_types_use_the_same_requirement (integer_type=5) _
+2026-11-13T10:57:15.0758039Z 
+2026-11-13T10:57:15.0758328Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_direct_tensor_types_use_the_same_requirement>
+2026-11-13T10:57:15.0758813Z 
+2026-11-13T10:57:15.0758959Z     def test_direct_tensor_types_use_the_same_requirement(self):
+2026-11-13T10:57:15.0760316Z         for integer_type in (TensorProto.INT16, TensorProto.UINT16):
+2026-11-13T10:57:15.0760817Z             with self.subTest(integer_type=integer_type):
+2026-11-13T10:57:15.0761220Z                 result = update_opset_version(self._model(17), TensorProto.FLOAT8E4M3FN, integer_type)
+2026-11-13T10:57:15.0761680Z >               self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0761986Z E               AssertionError: 19 != 21
+2026-11-13T10:57:15.0762158Z 
+2026-11-13T10:57:15.0762384Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:96: AssertionError
+2026-11-13T10:57:15.0762934Z _ TestMixedQuantizationOpset.test_direct_tensor_types_use_the_same_requirement (integer_type=4) _
+2026-11-13T10:57:15.0763259Z 
+2026-11-13T10:57:15.0763550Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_direct_tensor_types_use_the_same_requirement>
+2026-11-13T10:57:15.0764017Z 
+2026-11-13T10:57:15.0764193Z     def test_direct_tensor_types_use_the_same_requirement(self):
+2026-11-13T10:57:15.0764561Z         for integer_type in (TensorProto.INT16, TensorProto.UINT16):
+2026-11-13T10:57:15.0764911Z             with self.subTest(integer_type=integer_type):
+2026-11-13T10:57:15.0765350Z                 result = update_opset_version(self._model(17), TensorProto.FLOAT8E4M3FN, integer_type)
+2026-11-13T10:57:15.0765759Z >               self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0766098Z E               AssertionError: 19 != 21
+2026-11-13T10:57:15.0766275Z 
+2026-11-13T10:57:15.0766591Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:96: AssertionError
+2026-11-13T10:57:15.0767258Z _ TestMixedQuantizationOpset.test_float8_with_integer_override_uses_highest_required_opset (integer_type=<QuantType.QInt16: 3>, nested=False, opset=17) _
+2026-11-13T10:57:15.0767696Z 
+2026-11-13T10:57:15.0768082Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_float8_with_integer_override_uses_highest_required_opset>
+2026-11-13T10:57:15.0768507Z 
+2026-11-13T10:57:15.0768669Z     def test_float8_with_integer_override_uses_highest_required_opset(self):
+2026-11-13T10:57:15.0769062Z         for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0769593Z             for nested in (False, True):
+2026-11-13T10:57:15.0769923Z                 override = {"quant_type": integer_type}
+2026-11-13T10:57:15.0770216Z                 if nested:
+2026-11-13T10:57:15.0770488Z                     override = {"convert": override}
+2026-11-13T10:57:15.0770780Z                 for opset in (17, 18, 19, 20):
+2026-11-13T10:57:15.0771167Z                     with self.subTest(integer_type=integer_type, nested=nested, opset=opset):
+2026-11-13T10:57:15.0771526Z                         model = self._model(opset)
+2026-11-13T10:57:15.0771838Z                         result = update_opset_version(
+2026-11-13T10:57:15.0772138Z                             model,
+2026-11-13T10:57:15.0772448Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0772734Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0773023Z                             tensor_quant_overrides={"X": [override]},
+2026-11-13T10:57:15.0773331Z                         )
+2026-11-13T10:57:15.0773616Z >                       self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0773923Z E                       AssertionError: 19 != 21
+2026-11-13T10:57:15.0774117Z 
+2026-11-13T10:57:15.0774321Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:90: AssertionError
+2026-11-13T10:57:15.0775051Z _ TestMixedQuantizationOpset.test_float8_with_integer_override_uses_highest_required_opset (integer_type=<QuantType.QInt16: 3>, nested=False, opset=18) _
+2026-11-13T10:57:15.0775486Z 
+2026-11-13T10:57:15.0775869Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_float8_with_integer_override_uses_highest_required_opset>
+2026-11-13T10:57:15.0776254Z 
+2026-11-13T10:57:15.0776442Z     def test_float8_with_integer_override_uses_highest_required_opset(self):
+2026-11-13T10:57:15.0776858Z         for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0777188Z             for nested in (False, True):
+2026-11-13T10:57:15.0777470Z                 override = {"quant_type": integer_type}
+2026-11-13T10:57:15.0777801Z                 if nested:
+2026-11-13T10:57:15.0778055Z                     override = {"convert": override}
+2026-11-13T10:57:15.0778333Z                 for opset in (17, 18, 19, 20):
+2026-11-13T10:57:15.0778704Z                     with self.subTest(integer_type=integer_type, nested=nested, opset=opset):
+2026-11-13T10:57:15.0779119Z                         model = self._model(opset)
+2026-11-13T10:57:15.0779581Z                         result = update_opset_version(
+2026-11-13T10:57:15.0779851Z                             model,
+2026-11-13T10:57:15.0780104Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0780452Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0780748Z                             tensor_quant_overrides={"X": [override]},
+2026-11-13T10:57:15.0781053Z                         )
+2026-11-13T10:57:15.0781325Z >                       self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0781614Z E                       AssertionError: 19 != 21
+2026-11-13T10:57:15.0781816Z 
+2026-11-13T10:57:15.0782015Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:90: AssertionError
+2026-11-13T10:57:15.0782727Z _ TestMixedQuantizationOpset.test_float8_with_integer_override_uses_highest_required_opset (integer_type=<QuantType.QInt16: 3>, nested=True, opset=17) _
+2026-11-13T10:57:15.0783225Z 
+2026-11-13T10:57:15.0783603Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_float8_with_integer_override_uses_highest_required_opset>
+2026-11-13T10:57:15.0783973Z 
+2026-11-13T10:57:15.0784159Z     def test_float8_with_integer_override_uses_highest_required_opset(self):
+2026-11-13T10:57:15.0784648Z         for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0785081Z             for nested in (False, True):
+2026-11-13T10:57:15.0785422Z                 override = {"quant_type": integer_type}
+2026-11-13T10:57:15.0785799Z                 if nested:
+2026-11-13T10:57:15.0786124Z                     override = {"convert": override}
+2026-11-13T10:57:15.0786500Z                 for opset in (17, 18, 19, 20):
+2026-11-13T10:57:15.0786981Z                     with self.subTest(integer_type=integer_type, nested=nested, opset=opset):
+2026-11-13T10:57:15.0787449Z                         model = self._model(opset)
+2026-11-13T10:57:15.0787828Z                         result = update_opset_version(
+2026-11-13T10:57:15.0788176Z                             model,
+2026-11-13T10:57:15.0788502Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0788876Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0789449Z                             tensor_quant_overrides={"X": [override]},
+2026-11-13T10:57:15.0789872Z                         )
+2026-11-13T10:57:15.0790215Z >                       self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0790603Z E                       AssertionError: 19 != 21
+2026-11-13T10:57:15.0790790Z 
+2026-11-13T10:57:15.0791078Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:90: AssertionError
+2026-11-13T10:57:15.0791709Z _ TestMixedQuantizationOpset.test_float8_with_integer_override_uses_highest_required_opset (integer_type=<QuantType.QInt16: 3>, nested=True, opset=18) _
+2026-11-13T10:57:15.0792275Z 
+2026-11-13T10:57:15.0792579Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_float8_with_integer_override_uses_highest_required_opset>
+2026-11-13T10:57:15.0793006Z 
+2026-11-13T10:57:15.0793190Z     def test_float8_with_integer_override_uses_highest_required_opset(self):
+2026-11-13T10:57:15.0793569Z         for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0793889Z             for nested in (False, True):
+2026-11-13T10:57:15.0794180Z                 override = {"quant_type": integer_type}
+2026-11-13T10:57:15.0794438Z                 if nested:
+2026-11-13T10:57:15.0794704Z                     override = {"convert": override}
+2026-11-13T10:57:15.0794975Z                 for opset in (17, 18, 19, 20):
+2026-11-13T10:57:15.0795319Z                     with self.subTest(integer_type=integer_type, nested=nested, opset=opset):
+2026-11-13T10:57:15.0795730Z                         model = self._model(opset)
+2026-11-13T10:57:15.0795997Z                         result = update_opset_version(
+2026-11-13T10:57:15.0796278Z                             model,
+2026-11-13T10:57:15.0796530Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0796814Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0797131Z                             tensor_quant_overrides={"X": [override]},
+2026-11-13T10:57:15.0797409Z                         )
+2026-11-13T10:57:15.0797683Z >                       self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0798022Z E                       AssertionError: 19 != 21
+2026-11-13T10:57:15.0798174Z 
+2026-11-13T10:57:15.0798391Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:90: AssertionError
+2026-11-13T10:57:15.0799133Z _ TestMixedQuantizationOpset.test_float8_with_integer_override_uses_highest_required_opset (integer_type=<QuantType.QUInt16: 4>, nested=False, opset=17) _
+2026-11-13T10:57:15.0799745Z 
+2026-11-13T10:57:15.0800192Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_float8_with_integer_override_uses_highest_required_opset>
+2026-11-13T10:57:15.0800617Z 
+2026-11-13T10:57:15.0800789Z     def test_float8_with_integer_override_uses_highest_required_opset(self):
+2026-11-13T10:57:15.0801221Z         for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0801522Z             for nested in (False, True):
+2026-11-13T10:57:15.0801823Z                 override = {"quant_type": integer_type}
+2026-11-13T10:57:15.0802089Z                 if nested:
+2026-11-13T10:57:15.0802337Z                     override = {"convert": override}
+2026-11-13T10:57:15.0802610Z                 for opset in (17, 18, 19, 20):
+2026-11-13T10:57:15.0802940Z                     with self.subTest(integer_type=integer_type, nested=nested, opset=opset):
+2026-11-13T10:57:15.0803331Z                         model = self._model(opset)
+2026-11-13T10:57:15.0803617Z                         result = update_opset_version(
+2026-11-13T10:57:15.0803915Z                             model,
+2026-11-13T10:57:15.0804171Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0804437Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0804764Z                             tensor_quant_overrides={"X": [override]},
+2026-11-13T10:57:15.0805041Z                         )
+2026-11-13T10:57:15.0805306Z >                       self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0805622Z E                       AssertionError: 19 != 21
+2026-11-13T10:57:15.0805803Z 
+2026-11-13T10:57:15.0806013Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:90: AssertionError
+2026-11-13T10:57:15.0806687Z _ TestMixedQuantizationOpset.test_float8_with_integer_override_uses_highest_required_opset (integer_type=<QuantType.QUInt16: 4>, nested=False, opset=18) _
+2026-11-13T10:57:15.0807104Z 
+2026-11-13T10:57:15.0807492Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_float8_with_integer_override_uses_highest_required_opset>
+2026-11-13T10:57:15.0807879Z 
+2026-11-13T10:57:15.0808046Z     def test_float8_with_integer_override_uses_highest_required_opset(self):
+2026-11-13T10:57:15.0808423Z         for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0808749Z             for nested in (False, True):
+2026-11-13T10:57:15.0809062Z                 override = {"quant_type": integer_type}
+2026-11-13T10:57:15.0809466Z                 if nested:
+2026-11-13T10:57:15.0809717Z                     override = {"convert": override}
+2026-11-13T10:57:15.0809996Z                 for opset in (17, 18, 19, 20):
+2026-11-13T10:57:15.0810359Z                     with self.subTest(integer_type=integer_type, nested=nested, opset=opset):
+2026-11-13T10:57:15.0810717Z                         model = self._model(opset)
+2026-11-13T10:57:15.0810996Z                         result = update_opset_version(
+2026-11-13T10:57:15.0811253Z                             model,
+2026-11-13T10:57:15.0811557Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0811851Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0812149Z                             tensor_quant_overrides={"X": [override]},
+2026-11-13T10:57:15.0812426Z                         )
+2026-11-13T10:57:15.0812681Z >                       self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0813005Z E                       AssertionError: 19 != 21
+2026-11-13T10:57:15.0813200Z 
+2026-11-13T10:57:15.0813395Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:90: AssertionError
+2026-11-13T10:57:15.0814031Z _ TestMixedQuantizationOpset.test_float8_with_integer_override_uses_highest_required_opset (integer_type=<QuantType.QUInt16: 4>, nested=True, opset=17) _
+2026-11-13T10:57:15.0814482Z 
+2026-11-13T10:57:15.0814821Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_float8_with_integer_override_uses_highest_required_opset>
+2026-11-13T10:57:15.0815251Z 
+2026-11-13T10:57:15.0815427Z     def test_float8_with_integer_override_uses_highest_required_opset(self):
+2026-11-13T10:57:15.0815830Z         for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0816149Z             for nested in (False, True):
+2026-11-13T10:57:15.0816419Z                 override = {"quant_type": integer_type}
+2026-11-13T10:57:15.0816696Z                 if nested:
+2026-11-13T10:57:15.0816950Z                     override = {"convert": override}
+2026-11-13T10:57:15.0817256Z                 for opset in (17, 18, 19, 20):
+2026-11-13T10:57:15.0817596Z                     with self.subTest(integer_type=integer_type, nested=nested, opset=opset):
+2026-11-13T10:57:15.0817956Z                         model = self._model(opset)
+2026-11-13T10:57:15.0818242Z                         result = update_opset_version(
+2026-11-13T10:57:15.0818506Z                             model,
+2026-11-13T10:57:15.0818769Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0819097Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0819585Z                             tensor_quant_overrides={"X": [override]},
+2026-11-13T10:57:15.0819888Z                         )
+2026-11-13T10:57:15.0820166Z >                       self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0820504Z E                       AssertionError: 19 != 21
+2026-11-13T10:57:15.0820693Z 
+2026-11-13T10:57:15.0820894Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:90: AssertionError
+2026-11-13T10:57:15.0821525Z _ TestMixedQuantizationOpset.test_float8_with_integer_override_uses_highest_required_opset (integer_type=<QuantType.QUInt16: 4>, nested=True, opset=18) _
+2026-11-13T10:57:15.0821977Z 
+2026-11-13T10:57:15.0822319Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_float8_with_integer_override_uses_highest_required_opset>
+2026-11-13T10:57:15.0822743Z 
+2026-11-13T10:57:15.0822930Z     def test_float8_with_integer_override_uses_highest_required_opset(self):
+2026-11-13T10:57:15.0823334Z         for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0823638Z             for nested in (False, True):
+2026-11-13T10:57:15.0823905Z                 override = {"quant_type": integer_type}
+2026-11-13T10:57:15.0824199Z                 if nested:
+2026-11-13T10:57:15.0824445Z                     override = {"convert": override}
+2026-11-13T10:57:15.0824742Z                 for opset in (17, 18, 19, 20):
+2026-11-13T10:57:15.0825130Z                     with self.subTest(integer_type=integer_type, nested=nested, opset=opset):
+2026-11-13T10:57:15.0825483Z                         model = self._model(opset)
+2026-11-13T10:57:15.0825795Z                         result = update_opset_version(
+2026-11-13T10:57:15.0826063Z                             model,
+2026-11-13T10:57:15.0826345Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0826646Z                             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0826948Z                             tensor_quant_overrides={"X": [override]},
+2026-11-13T10:57:15.0827307Z                         )
+2026-11-13T10:57:15.0827617Z >                       self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.0827947Z E                       AssertionError: 19 != 21
+2026-11-13T10:57:15.0828119Z 
+2026-11-13T10:57:15.0828348Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:90: AssertionError
+2026-11-13T10:57:15.0828984Z _ TestMixedQuantizationOpset.test_public_quantize_static_produces_native_mixed_qdq (opset=17, integer_type=<QuantType.QInt16: 3>, tensor='X') _
+2026-11-13T10:57:15.0829541Z 
+2026-11-13T10:57:15.0829866Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_public_quantize_static_produces_native_mixed_qdq>
+2026-11-13T10:57:15.0830263Z 
+2026-11-13T10:57:15.0830518Z     def test_public_quantize_static_produces_native_mixed_qdq(self):
+2026-11-13T10:57:15.0831070Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.0831499Z             path = Path(directory) / "mixed.onnx"
+2026-11-13T10:57:15.0831868Z             for opset in (17, 18):
+2026-11-13T10:57:15.0832285Z                 for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0832746Z                     for tensor in ("X", "W"):
+2026-11-13T10:57:15.0833218Z                         with self.subTest(opset=opset, integer_type=integer_type, tensor=tensor):
+2026-11-13T10:57:15.0833732Z                             quantize_static(
+2026-11-13T10:57:15.0834160Z                                 self._model(opset),
+2026-11-13T10:57:15.0834567Z                                 path,
+2026-11-13T10:57:15.0834958Z                                 _Reader(),
+2026-11-13T10:57:15.0835326Z                                 quant_format=QuantFormat.QDQ,
+2026-11-13T10:57:15.0835799Z                                 activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0836275Z                                 weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0836751Z                                 calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.0837298Z                                 calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.0837947Z                                 extra_options={"TensorQuantOverrides": {tensor: [{"quant_type": integer_type}]}},
+2026-11-13T10:57:15.0838521Z                             )
+2026-11-13T10:57:15.0838980Z >                           self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.0839392Z 
+2026-11-13T10:57:15.0839706Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:116: 
+2026-11-13T10:57:15.0840275Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0840880Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.0841747Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.0842372Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0842931Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.0843541Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.0843926Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0844134Z 
+2026-11-13T10:57:15.0844366Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f47460719a0>
+2026-11-13T10:57:15.0844822Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.0845164Z disabled_optimizers = None
+2026-11-13T10:57:15.0845321Z 
+2026-11-13T10:57:15.0845550Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.0845964Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.0846249Z     
+2026-11-13T10:57:15.0846608Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.0847063Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.0847546Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.0848039Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.0848449Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.0848712Z             raise ValueError(
+2026-11-13T10:57:15.0849068Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.0849679Z                 "in the same session."
+2026-11-13T10:57:15.0849933Z             )
+2026-11-13T10:57:15.0850135Z     
+2026-11-13T10:57:15.0850563Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.0851042Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.0851406Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.0851798Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.0852144Z         ):
+2026-11-13T10:57:15.0852454Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.0852898Z         else:
+2026-11-13T10:57:15.0853172Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.0853448Z     
+2026-11-13T10:57:15.0853763Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.0854206Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.0854566Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.0854858Z         )
+2026-11-13T10:57:15.0855049Z     
+2026-11-13T10:57:15.0855375Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.0855892Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.0856289Z         # here will take precedence.
+2026-11-13T10:57:15.0856733Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.0857141Z             warnings.warn(
+2026-11-13T10:57:15.0857509Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.0858044Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.0858502Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.0858775Z             )
+2026-11-13T10:57:15.0858971Z     
+2026-11-13T10:57:15.0859488Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.0859940Z     
+2026-11-13T10:57:15.0860265Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.0860647Z     
+2026-11-13T10:57:15.0860849Z         if self._model_path:
+2026-11-13T10:57:15.0861209Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.0861683Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0862629Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.0863434Z 
+2026-11-13T10:57:15.0863788Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.0864498Z _ TestMixedQuantizationOpset.test_public_quantize_static_produces_native_mixed_qdq (opset=17, integer_type=<QuantType.QInt16: 3>, tensor='W') _
+2026-11-13T10:57:15.0864909Z 
+2026-11-13T10:57:15.0865191Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_public_quantize_static_produces_native_mixed_qdq>
+2026-11-13T10:57:15.0865661Z 
+2026-11-13T10:57:15.0865812Z     def test_public_quantize_static_produces_native_mixed_qdq(self):
+2026-11-13T10:57:15.0866188Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.0866502Z             path = Path(directory) / "mixed.onnx"
+2026-11-13T10:57:15.0866774Z             for opset in (17, 18):
+2026-11-13T10:57:15.0867124Z                 for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0867486Z                     for tensor in ("X", "W"):
+2026-11-13T10:57:15.0867836Z                         with self.subTest(opset=opset, integer_type=integer_type, tensor=tensor):
+2026-11-13T10:57:15.0868189Z                             quantize_static(
+2026-11-13T10:57:15.0868465Z                                 self._model(opset),
+2026-11-13T10:57:15.0868750Z                                 path,
+2026-11-13T10:57:15.0869034Z                                 _Reader(),
+2026-11-13T10:57:15.0869467Z                                 quant_format=QuantFormat.QDQ,
+2026-11-13T10:57:15.0869792Z                                 activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0870128Z                                 weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0870459Z                                 calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.0870843Z                                 calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.0871328Z                                 extra_options={"TensorQuantOverrides": {tensor: [{"quant_type": integer_type}]}},
+2026-11-13T10:57:15.0871731Z                             )
+2026-11-13T10:57:15.0872012Z >                           self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.0872192Z 
+2026-11-13T10:57:15.0872408Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:116: 
+2026-11-13T10:57:15.0872795Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0873219Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.0873709Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.0874256Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0875008Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.0875773Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.0876278Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0876555Z 
+2026-11-13T10:57:15.0876848Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f474504bfb0>
+2026-11-13T10:57:15.0877506Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.0877952Z disabled_optimizers = None
+2026-11-13T10:57:15.0878106Z 
+2026-11-13T10:57:15.0878362Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.0878866Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.0879147Z     
+2026-11-13T10:57:15.0879809Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.0880567Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.0881032Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.0881548Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.0881908Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.0882176Z             raise ValueError(
+2026-11-13T10:57:15.0882578Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.0882967Z                 "in the same session."
+2026-11-13T10:57:15.0883202Z             )
+2026-11-13T10:57:15.0883421Z     
+2026-11-13T10:57:15.0883768Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.0884275Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.0884681Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.0885068Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.0885442Z         ):
+2026-11-13T10:57:15.0885765Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.0886128Z         else:
+2026-11-13T10:57:15.0886466Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.0886815Z     
+2026-11-13T10:57:15.0887199Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.0887617Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.0887984Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.0888268Z         )
+2026-11-13T10:57:15.0888465Z     
+2026-11-13T10:57:15.0888806Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.0889507Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.0889897Z         # here will take precedence.
+2026-11-13T10:57:15.0890365Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.0890779Z             warnings.warn(
+2026-11-13T10:57:15.0891166Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.0891700Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.0892094Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.0892375Z             )
+2026-11-13T10:57:15.0892576Z     
+2026-11-13T10:57:15.0892942Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.0893381Z     
+2026-11-13T10:57:15.0893697Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.0894081Z     
+2026-11-13T10:57:15.0894282Z         if self._model_path:
+2026-11-13T10:57:15.0894649Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.0895101Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0896032Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (X_zero_point) of operator (QuantizeLinear) in node (X_QuantizeLinear) is invalid.
+2026-11-13T10:57:15.0896828Z 
+2026-11-13T10:57:15.0897172Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.0897882Z _ TestMixedQuantizationOpset.test_public_quantize_static_produces_native_mixed_qdq (opset=17, integer_type=<QuantType.QUInt16: 4>, tensor='X') _
+2026-11-13T10:57:15.0898275Z 
+2026-11-13T10:57:15.0898654Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_public_quantize_static_produces_native_mixed_qdq>
+2026-11-13T10:57:15.0899082Z 
+2026-11-13T10:57:15.0899336Z     def test_public_quantize_static_produces_native_mixed_qdq(self):
+2026-11-13T10:57:15.0899709Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.0900035Z             path = Path(directory) / "mixed.onnx"
+2026-11-13T10:57:15.0900309Z             for opset in (17, 18):
+2026-11-13T10:57:15.0900613Z                 for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0900963Z                     for tensor in ("X", "W"):
+2026-11-13T10:57:15.0901313Z                         with self.subTest(opset=opset, integer_type=integer_type, tensor=tensor):
+2026-11-13T10:57:15.0901722Z                             quantize_static(
+2026-11-13T10:57:15.0901987Z                                 self._model(opset),
+2026-11-13T10:57:15.0902300Z                                 path,
+2026-11-13T10:57:15.0902559Z                                 _Reader(),
+2026-11-13T10:57:15.0902835Z                                 quant_format=QuantFormat.QDQ,
+2026-11-13T10:57:15.0903150Z                                 activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0903466Z                                 weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0903796Z                                 calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.0904162Z                                 calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.0904603Z                                 extra_options={"TensorQuantOverrides": {tensor: [{"quant_type": integer_type}]}},
+2026-11-13T10:57:15.0904978Z                             )
+2026-11-13T10:57:15.0905250Z >                           self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.0905428Z 
+2026-11-13T10:57:15.0905629Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:116: 
+2026-11-13T10:57:15.0906023Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0906436Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.0906926Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.0907362Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0907861Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.0908434Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.0908859Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0909053Z 
+2026-11-13T10:57:15.0909427Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f474504bad0>
+2026-11-13T10:57:15.0909901Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.0910241Z disabled_optimizers = None
+2026-11-13T10:57:15.0910384Z 
+2026-11-13T10:57:15.0910628Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.0911034Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.0911306Z     
+2026-11-13T10:57:15.0911684Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.0912143Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.0912599Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.0913101Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.0913445Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.0913733Z             raise ValueError(
+2026-11-13T10:57:15.0914105Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.0914501Z                 "in the same session."
+2026-11-13T10:57:15.0914737Z             )
+2026-11-13T10:57:15.0914921Z     
+2026-11-13T10:57:15.0915294Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.0915730Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.0916098Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.0916482Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.0916824Z         ):
+2026-11-13T10:57:15.0917201Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.0917539Z         else:
+2026-11-13T10:57:15.0917796Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.0918082Z     
+2026-11-13T10:57:15.0918353Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.0918868Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.0919397Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.0919693Z         )
+2026-11-13T10:57:15.0919898Z     
+2026-11-13T10:57:15.0920232Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.0920783Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.0921187Z         # here will take precedence.
+2026-11-13T10:57:15.0921648Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.0922066Z             warnings.warn(
+2026-11-13T10:57:15.0922435Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.0922979Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.0923375Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.0923617Z             )
+2026-11-13T10:57:15.0923836Z     
+2026-11-13T10:57:15.0924152Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.0924562Z     
+2026-11-13T10:57:15.0924885Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.0925235Z     
+2026-11-13T10:57:15.0925506Z         if self._model_path:
+2026-11-13T10:57:15.0925891Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.0926314Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0927267Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.0928105Z 
+2026-11-13T10:57:15.0928433Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.0929173Z _ TestMixedQuantizationOpset.test_public_quantize_static_produces_native_mixed_qdq (opset=17, integer_type=<QuantType.QUInt16: 4>, tensor='W') _
+2026-11-13T10:57:15.0929753Z 
+2026-11-13T10:57:15.0930084Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_public_quantize_static_produces_native_mixed_qdq>
+2026-11-13T10:57:15.0930468Z 
+2026-11-13T10:57:15.0930632Z     def test_public_quantize_static_produces_native_mixed_qdq(self):
+2026-11-13T10:57:15.0931001Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.0931337Z             path = Path(directory) / "mixed.onnx"
+2026-11-13T10:57:15.0931641Z             for opset in (17, 18):
+2026-11-13T10:57:15.0931968Z                 for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0932294Z                     for tensor in ("X", "W"):
+2026-11-13T10:57:15.0932659Z                         with self.subTest(opset=opset, integer_type=integer_type, tensor=tensor):
+2026-11-13T10:57:15.0933023Z                             quantize_static(
+2026-11-13T10:57:15.0933307Z                                 self._model(opset),
+2026-11-13T10:57:15.0933596Z                                 path,
+2026-11-13T10:57:15.0933925Z                                 _Reader(),
+2026-11-13T10:57:15.0934214Z                                 quant_format=QuantFormat.QDQ,
+2026-11-13T10:57:15.0934526Z                                 activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0934856Z                                 weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.0935211Z                                 calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.0935552Z                                 calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.0936003Z                                 extra_options={"TensorQuantOverrides": {tensor: [{"quant_type": integer_type}]}},
+2026-11-13T10:57:15.0936404Z                             )
+2026-11-13T10:57:15.0936755Z >                           self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.0936960Z 
+2026-11-13T10:57:15.0937181Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:116: 
+2026-11-13T10:57:15.0937570Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0938038Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.0938559Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.0938994Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0939685Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.0940246Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.0940680Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.0940902Z 
+2026-11-13T10:57:15.0941137Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f4745ff7020>
+2026-11-13T10:57:15.0941780Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.0942186Z disabled_optimizers = None
+2026-11-13T10:57:15.0942402Z 
+2026-11-13T10:57:15.0942686Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.0943251Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.0943602Z     
+2026-11-13T10:57:15.0944079Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.0944692Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.0945277Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.0945895Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.0946390Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.0946709Z             raise ValueError(
+2026-11-13T10:57:15.0947151Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.0947546Z                 "in the same session."
+2026-11-13T10:57:15.0947797Z             )
+2026-11-13T10:57:15.0947995Z     
+2026-11-13T10:57:15.0948346Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.0948806Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.0949168Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.0949703Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.0950052Z         ):
+2026-11-13T10:57:15.0950358Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.0950724Z         else:
+2026-11-13T10:57:15.0950985Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.0951330Z     
+2026-11-13T10:57:15.0951618Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.0952034Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.0952424Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.0952699Z         )
+2026-11-13T10:57:15.0952888Z     
+2026-11-13T10:57:15.0953216Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.0953742Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.0954142Z         # here will take precedence.
+2026-11-13T10:57:15.0954544Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.0954978Z             warnings.warn(
+2026-11-13T10:57:15.0955385Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.0955898Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.0956304Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.0956561Z             )
+2026-11-13T10:57:15.0956745Z     
+2026-11-13T10:57:15.0957081Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.0957507Z     
+2026-11-13T10:57:15.0957872Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.0958237Z     
+2026-11-13T10:57:15.0958428Z         if self._model_path:
+2026-11-13T10:57:15.0958932Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.0959537Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.0960566Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (X_zero_point) of operator (QuantizeLinear) in node (X_QuantizeLinear) is invalid.
+2026-11-13T10:57:15.0961411Z 
+2026-11-13T10:57:15.0961752Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.0962462Z _ TestMixedQuantizationOpset.test_public_quantize_static_produces_native_mixed_qdq (opset=18, integer_type=<QuantType.QInt16: 3>, tensor='X') _
+2026-11-13T10:57:15.0962851Z 
+2026-11-13T10:57:15.0963209Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_public_quantize_static_produces_native_mixed_qdq>
+2026-11-13T10:57:15.0963595Z 
+2026-11-13T10:57:15.0963743Z     def test_public_quantize_static_produces_native_mixed_qdq(self):
+2026-11-13T10:57:15.0964106Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.0964429Z             path = Path(directory) / "mixed.onnx"
+2026-11-13T10:57:15.0964725Z             for opset in (17, 18):
+2026-11-13T10:57:15.0965068Z                 for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.0965397Z                     for tensor in ("X", "W"):
+2026-11-13T10:57:15.1081029Z                         with self.subTest(opset=opset, integer_type=integer_type, tensor=tensor):
+2026-11-13T10:57:15.1081633Z                             quantize_static(
+2026-11-13T10:57:15.1081853Z                                 self._model(opset),
+2026-11-13T10:57:15.1082082Z                                 path,
+2026-11-13T10:57:15.1082283Z                                 _Reader(),
+2026-11-13T10:57:15.1082491Z                                 quant_format=QuantFormat.QDQ,
+2026-11-13T10:57:15.1082771Z                                 activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1083178Z                                 weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1083457Z                                 calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.1083740Z                                 calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.1084092Z                                 extra_options={"TensorQuantOverrides": {tensor: [{"quant_type": integer_type}]}},
+2026-11-13T10:57:15.1084396Z                             )
+2026-11-13T10:57:15.1084595Z >                           self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.1084763Z 
+2026-11-13T10:57:15.1084921Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:116: 
+2026-11-13T10:57:15.1085226Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.1085574Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.1086023Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.1086345Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.1086805Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.1087286Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.1087609Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.1087763Z 
+2026-11-13T10:57:15.1087973Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f47450ff110>
+2026-11-13T10:57:15.1088396Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.1088650Z disabled_optimizers = None
+2026-11-13T10:57:15.1088821Z 
+2026-11-13T10:57:15.1089002Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.1089490Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.1089705Z     
+2026-11-13T10:57:15.1090006Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.1090400Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.1090781Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.1091198Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.1091469Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.1091663Z             raise ValueError(
+2026-11-13T10:57:15.1091961Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.1092293Z                 "in the same session."
+2026-11-13T10:57:15.1092473Z             )
+2026-11-13T10:57:15.1092614Z     
+2026-11-13T10:57:15.1092893Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.1093264Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.1093583Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.1093924Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.1094198Z         ):
+2026-11-13T10:57:15.1094426Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.1094693Z         else:
+2026-11-13T10:57:15.1094875Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.1095091Z     
+2026-11-13T10:57:15.1095301Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.1095626Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.1095987Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.1096195Z         )
+2026-11-13T10:57:15.1096323Z     
+2026-11-13T10:57:15.1096583Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.1097056Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.1097398Z         # here will take precedence.
+2026-11-13T10:57:15.1097746Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.1098088Z             warnings.warn(
+2026-11-13T10:57:15.1098400Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.1098855Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.1099334Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.1099573Z             )
+2026-11-13T10:57:15.1099700Z     
+2026-11-13T10:57:15.1099954Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.1100239Z     
+2026-11-13T10:57:15.1100503Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.1100803Z     
+2026-11-13T10:57:15.1100935Z         if self._model_path:
+2026-11-13T10:57:15.1101239Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.1101585Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.1102445Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.1103271Z 
+2026-11-13T10:57:15.1103562Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.1104260Z _ TestMixedQuantizationOpset.test_public_quantize_static_produces_native_mixed_qdq (opset=18, integer_type=<QuantType.QInt16: 3>, tensor='W') _
+2026-11-13T10:57:15.1104621Z 
+2026-11-13T10:57:15.1104909Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_public_quantize_static_produces_native_mixed_qdq>
+2026-11-13T10:57:15.1105257Z 
+2026-11-13T10:57:15.1105377Z     def test_public_quantize_static_produces_native_mixed_qdq(self):
+2026-11-13T10:57:15.1105662Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.1105899Z             path = Path(directory) / "mixed.onnx"
+2026-11-13T10:57:15.1106119Z             for opset in (17, 18):
+2026-11-13T10:57:15.1106359Z                 for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.1106623Z                     for tensor in ("X", "W"):
+2026-11-13T10:57:15.1106919Z                         with self.subTest(opset=opset, integer_type=integer_type, tensor=tensor):
+2026-11-13T10:57:15.1107213Z                             quantize_static(
+2026-11-13T10:57:15.1107430Z                                 self._model(opset),
+2026-11-13T10:57:15.1107640Z                                 path,
+2026-11-13T10:57:15.1107822Z                                 _Reader(),
+2026-11-13T10:57:15.1108042Z                                 quant_format=QuantFormat.QDQ,
+2026-11-13T10:57:15.1108295Z                                 activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1108552Z                                 weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1108832Z                                 calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.1109315Z                                 calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.1109688Z                                 extra_options={"TensorQuantOverrides": {tensor: [{"quant_type": integer_type}]}},
+2026-11-13T10:57:15.1110001Z                             )
+2026-11-13T10:57:15.1110201Z >                           self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.1110363Z 
+2026-11-13T10:57:15.1110513Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:116: 
+2026-11-13T10:57:15.1110823Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.1111182Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.1111622Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.1111962Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.1112385Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.1112866Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.1113182Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.1113351Z 
+2026-11-13T10:57:15.1113566Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f47450a5700>
+2026-11-13T10:57:15.1113951Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.1114197Z disabled_optimizers = None
+2026-11-13T10:57:15.1114302Z 
+2026-11-13T10:57:15.1114488Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.1114840Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.1115101Z     
+2026-11-13T10:57:15.1115410Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.1115833Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.1116235Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.1116760Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.1117133Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.1117393Z             raise ValueError(
+2026-11-13T10:57:15.1117786Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.1118207Z                 "in the same session."
+2026-11-13T10:57:15.1118439Z             )
+2026-11-13T10:57:15.1118620Z     
+2026-11-13T10:57:15.1119055Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.1119680Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.1120042Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.1120476Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.1120849Z         ):
+2026-11-13T10:57:15.1121179Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.1121508Z         else:
+2026-11-13T10:57:15.1121729Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.1121962Z     
+2026-11-13T10:57:15.1122203Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.1122539Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.1122839Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.1123067Z         )
+2026-11-13T10:57:15.1123219Z     
+2026-11-13T10:57:15.1123554Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.1124000Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.1124318Z         # here will take precedence.
+2026-11-13T10:57:15.1124699Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.1125041Z             warnings.warn(
+2026-11-13T10:57:15.1125348Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.1125807Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.1126128Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.1126321Z             )
+2026-11-13T10:57:15.1126445Z     
+2026-11-13T10:57:15.1126696Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.1126988Z     
+2026-11-13T10:57:15.1127254Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.1127553Z     
+2026-11-13T10:57:15.1127689Z         if self._model_path:
+2026-11-13T10:57:15.1127997Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.1128358Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.1129380Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (X_zero_point) of operator (QuantizeLinear) in node (X_QuantizeLinear) is invalid.
+2026-11-13T10:57:15.1130172Z 
+2026-11-13T10:57:15.1130527Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.1131190Z _ TestMixedQuantizationOpset.test_public_quantize_static_produces_native_mixed_qdq (opset=18, integer_type=<QuantType.QUInt16: 4>, tensor='X') _
+2026-11-13T10:57:15.1131560Z 
+2026-11-13T10:57:15.1131858Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_public_quantize_static_produces_native_mixed_qdq>
+2026-11-13T10:57:15.1132350Z 
+2026-11-13T10:57:15.1132477Z     def test_public_quantize_static_produces_native_mixed_qdq(self):
+2026-11-13T10:57:15.1132763Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.1133001Z             path = Path(directory) / "mixed.onnx"
+2026-11-13T10:57:15.1133213Z             for opset in (17, 18):
+2026-11-13T10:57:15.1133460Z                 for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.1133722Z                     for tensor in ("X", "W"):
+2026-11-13T10:57:15.1134016Z                         with self.subTest(opset=opset, integer_type=integer_type, tensor=tensor):
+2026-11-13T10:57:15.1134311Z                             quantize_static(
+2026-11-13T10:57:15.1134513Z                                 self._model(opset),
+2026-11-13T10:57:15.1134715Z                                 path,
+2026-11-13T10:57:15.1134902Z                                 _Reader(),
+2026-11-13T10:57:15.1135217Z                                 quant_format=QuantFormat.QDQ,
+2026-11-13T10:57:15.1135486Z                                 activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1135779Z                                 weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1136078Z                                 calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.1136398Z                                 calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.1136784Z                                 extra_options={"TensorQuantOverrides": {tensor: [{"quant_type": integer_type}]}},
+2026-11-13T10:57:15.1137187Z                             )
+2026-11-13T10:57:15.1137423Z >                           self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.1137606Z 
+2026-11-13T10:57:15.1137767Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:116: 
+2026-11-13T10:57:15.1138116Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.1138501Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.1138969Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.1139474Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.1139944Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.1140564Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.1140920Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.1141103Z 
+2026-11-13T10:57:15.1141340Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f474504a240>
+2026-11-13T10:57:15.1141763Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.1142039Z disabled_optimizers = None
+2026-11-13T10:57:15.1142155Z 
+2026-11-13T10:57:15.1142363Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.1142757Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.1143034Z     
+2026-11-13T10:57:15.1143386Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.1143819Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.1144297Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.1144721Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.1145017Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.1145243Z             raise ValueError(
+2026-11-13T10:57:15.1145609Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.1145944Z                 "in the same session."
+2026-11-13T10:57:15.1146124Z             )
+2026-11-13T10:57:15.1146261Z     
+2026-11-13T10:57:15.1146543Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.1146923Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.1147195Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.1147523Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.1147811Z         ):
+2026-11-13T10:57:15.1148039Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.1148308Z         else:
+2026-11-13T10:57:15.1148496Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.1148712Z     
+2026-11-13T10:57:15.1148922Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.1149381Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.1149680Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.1149893Z         )
+2026-11-13T10:57:15.1150028Z     
+2026-11-13T10:57:15.1150296Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.1150748Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.1151079Z         # here will take precedence.
+2026-11-13T10:57:15.1151468Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.1151816Z             warnings.warn(
+2026-11-13T10:57:15.1152119Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.1152567Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.1152894Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.1153081Z             )
+2026-11-13T10:57:15.1153213Z     
+2026-11-13T10:57:15.1153470Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.1153762Z     
+2026-11-13T10:57:15.1154031Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.1154335Z     
+2026-11-13T10:57:15.1154473Z         if self._model_path:
+2026-11-13T10:57:15.1154773Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.1155127Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.1155977Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.1156798Z 
+2026-11-13T10:57:15.1157080Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.1157733Z _ TestMixedQuantizationOpset.test_public_quantize_static_produces_native_mixed_qdq (opset=18, integer_type=<QuantType.QUInt16: 4>, tensor='W') _
+2026-11-13T10:57:15.1158132Z 
+2026-11-13T10:57:15.1158419Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_public_quantize_static_produces_native_mixed_qdq>
+2026-11-13T10:57:15.1158822Z 
+2026-11-13T10:57:15.1158954Z     def test_public_quantize_static_produces_native_mixed_qdq(self):
+2026-11-13T10:57:15.1159406Z         with tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:57:15.1159667Z             path = Path(directory) / "mixed.onnx"
+2026-11-13T10:57:15.1159882Z             for opset in (17, 18):
+2026-11-13T10:57:15.1160138Z                 for integer_type in (QuantType.QInt16, QuantType.QUInt16):
+2026-11-13T10:57:15.1160406Z                     for tensor in ("X", "W"):
+2026-11-13T10:57:15.1160704Z                         with self.subTest(opset=opset, integer_type=integer_type, tensor=tensor):
+2026-11-13T10:57:15.1161007Z                             quantize_static(
+2026-11-13T10:57:15.1161228Z                                 self._model(opset),
+2026-11-13T10:57:15.1161438Z                                 path,
+2026-11-13T10:57:15.1161630Z                                 _Reader(),
+2026-11-13T10:57:15.1161836Z                                 quant_format=QuantFormat.QDQ,
+2026-11-13T10:57:15.1162072Z                                 activation_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1162342Z                                 weight_type=QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1162626Z                                 calibrate_method=CalibrationMethod.Distribution,
+2026-11-13T10:57:15.1162946Z                                 calibration_providers=["CPUExecutionProvider"],
+2026-11-13T10:57:15.1163302Z                                 extra_options={"TensorQuantOverrides": {tensor: [{"quant_type": integer_type}]}},
+2026-11-13T10:57:15.1163610Z                             )
+2026-11-13T10:57:15.1163811Z >                           self._check_native_model(path, integer_type)
+2026-11-13T10:57:15.1163973Z 
+2026-11-13T10:57:15.1164167Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:116: 
+2026-11-13T10:57:15.1164490Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.1164844Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:58: in _check_native_model
+2026-11-13T10:57:15.1165271Z     session = ort.InferenceSession(str(path), options, providers=["CPUExecutionProvider"])
+2026-11-13T10:57:15.1165606Z               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.1166037Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:694: in __init__
+2026-11-13T10:57:15.1166591Z     self._create_inference_session(providers, provider_options, disabled_optimizers)
+2026-11-13T10:57:15.1166937Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:57:15.1167112Z 
+2026-11-13T10:57:15.1167344Z self = <onnxruntime.capi.onnxruntime_inference_collection.InferenceSession object at 0x7f4745049760>
+2026-11-13T10:57:15.1167763Z providers = ['CPUExecutionProvider'], provider_options = [{}]
+2026-11-13T10:57:15.1168032Z disabled_optimizers = None
+2026-11-13T10:57:15.1168145Z 
+2026-11-13T10:57:15.1168348Z     def _create_inference_session(self, providers, provider_options, disabled_optimizers=None):
+2026-11-13T10:57:15.1168724Z         available_providers = C.get_available_providers()
+2026-11-13T10:57:15.1168951Z     
+2026-11-13T10:57:15.1169384Z         provider_names = [provider[0] if isinstance(provider, tuple) else provider for provider in providers or []]
+2026-11-13T10:57:15.1169816Z         has_tensorrt = "TensorrtExecutionProvider" in provider_names
+2026-11-13T10:57:15.1170227Z         # NvTensorRTRTXExecutionProvider is only available as a plugin EP registered by the application.
+2026-11-13T10:57:15.1170656Z         has_tensorrt_rtx = "NvTensorRTRTXExecutionProvider" in provider_names
+2026-11-13T10:57:15.1171010Z         if has_tensorrt and has_tensorrt_rtx:
+2026-11-13T10:57:15.1171235Z             raise ValueError(
+2026-11-13T10:57:15.1171557Z                 "Cannot enable both 'TensorrtExecutionProvider' and 'NvTensorRTRTXExecutionProvider' "
+2026-11-13T10:57:15.1171896Z                 "in the same session."
+2026-11-13T10:57:15.1172083Z             )
+2026-11-13T10:57:15.1172234Z     
+2026-11-13T10:57:15.1172544Z         # TensorRT and TensorRT RTX can fall back to CUDA if it's explicitly assigned. All others fall back to CPU.
+2026-11-13T10:57:15.1172936Z         if "CUDAExecutionProvider" in provider_names and any(
+2026-11-13T10:57:15.1173221Z             name in provider_names and name in available_providers
+2026-11-13T10:57:15.1173565Z             for name in ("TensorrtExecutionProvider", "NvTensorRTRTXExecutionProvider")
+2026-11-13T10:57:15.1173862Z         ):
+2026-11-13T10:57:15.1174118Z             self._fallback_providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+2026-11-13T10:57:15.1174422Z         else:
+2026-11-13T10:57:15.1174635Z             self._fallback_providers = ["CPUExecutionProvider"]
+2026-11-13T10:57:15.1174890Z     
+2026-11-13T10:57:15.1175138Z         # validate providers and provider_options before other initialization
+2026-11-13T10:57:15.1175486Z         providers, provider_options = check_and_normalize_provider_args(
+2026-11-13T10:57:15.1175805Z             providers, provider_options, available_providers
+2026-11-13T10:57:15.1176046Z         )
+2026-11-13T10:57:15.1176199Z     
+2026-11-13T10:57:15.1176487Z         # Print a warning if user passed providers to InferenceSession() but the SessionOptions instance
+2026-11-13T10:57:15.1176967Z         # already has provider information (e.g., via add_provider_for_devices()). The providers specified
+2026-11-13T10:57:15.1177312Z         # here will take precedence.
+2026-11-13T10:57:15.1177676Z         if self._sess_options is not None and (providers or provider_options) and self._sess_options.has_providers():
+2026-11-13T10:57:15.1178111Z             warnings.warn(
+2026-11-13T10:57:15.1178484Z                 "Specified 'providers'/'provider_options' when creating InferenceSession but SessionOptions has "
+2026-11-13T10:57:15.1178954Z                 "already been configured with providers. InferenceSession will only use the providers "
+2026-11-13T10:57:15.1179445Z                 "passed to InferenceSession()."
+2026-11-13T10:57:15.1179663Z             )
+2026-11-13T10:57:15.1179818Z     
+2026-11-13T10:57:15.1180094Z         session_options = self._sess_options if self._sess_options else C.get_default_session_options()
+2026-11-13T10:57:15.1180416Z     
+2026-11-13T10:57:15.1180688Z         self._register_ep_custom_ops(session_options, providers, provider_options, available_providers)
+2026-11-13T10:57:15.1181024Z     
+2026-11-13T10:57:15.1181179Z         if self._model_path:
+2026-11-13T10:57:15.1181503Z >           sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+2026-11-13T10:57:15.1181893Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:57:15.1182777Z E           onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (X_zero_point) of operator (QuantizeLinear) in node (X_QuantizeLinear) is invalid.
+2026-11-13T10:57:15.1183564Z 
+2026-11-13T10:57:15.1183854Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:753: InvalidGraph
+2026-11-13T10:57:15.1184393Z __ TestMixedQuantizationOpset.test_upgrade_does_not_mutate_the_supplied_model __
+2026-11-13T10:57:15.1184624Z 
+2026-11-13T10:57:15.1184912Z self = <test_mixed_quantization_opset.TestMixedQuantizationOpset testMethod=test_upgrade_does_not_mutate_the_supplied_model>
+2026-11-13T10:57:15.1185250Z 
+2026-11-13T10:57:15.1185439Z     def test_upgrade_does_not_mutate_the_supplied_model(self):
+2026-11-13T10:57:15.1185699Z         model = self._model(17)
+2026-11-13T10:57:15.1185915Z         before = model.SerializeToString()
+2026-11-13T10:57:15.1186149Z         result = update_opset_version(
+2026-11-13T10:57:15.1186352Z             model,
+2026-11-13T10:57:15.1186547Z             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1186763Z             QuantType.QFLOAT8E4M3FN,
+2026-11-13T10:57:15.1187037Z             tensor_quant_overrides={"W": [{"quant_type": QuantType.QInt16}]},
+2026-11-13T10:57:15.1187296Z         )
+2026-11-13T10:57:15.1187488Z >       self.assertEqual(get_opset_version(result), 21)
+2026-11-13T10:57:15.1187734Z E       AssertionError: 19 != 21
+2026-11-13T10:57:15.1187869Z 
+2026-11-13T10:57:15.1188059Z onnxruntime/test/python/quantization/test_mixed_quantization_opset.py:167: AssertionError
+2026-11-13T10:57:15.1188467Z ------------------------------ Captured log call -------------------------------
+2026-11-13T10:57:15.1189337Z WARNING  root:quant_utils.py:1205 The original model opset version is 17, which does not support quantization to float 8. Please update the model to opset >= 19. Automatically update the model to opset 19. Please verify the quantized model.
+2026-11-13T10:57:15.1190025Z =========================== short test summary info ============================
+2026-11-13T10:57:15.1191473Z SUBFAILED(integer_type=<QuantType.QInt16: 3>) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_config_based_quantization_with_convert_override - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpna33nasm/configured.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.1194057Z SUBFAILED(integer_type=<QuantType.QUInt16: 4>) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_config_based_quantization_with_convert_override - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpna33nasm/configured.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.1195791Z SUBFAILED(integer_type=5) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_direct_tensor_types_use_the_same_requirement - AssertionError: 19 != 21
+2026-11-13T10:57:15.1196760Z SUBFAILED(integer_type=4) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_direct_tensor_types_use_the_same_requirement - AssertionError: 19 != 21
+2026-11-13T10:57:15.1197880Z SUBFAILED(integer_type=<QuantType.QInt16: 3>, nested=False, opset=17) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_float8_with_integer_override_uses_highest_required_opset - AssertionError: 19 != 21
+2026-11-13T10:57:15.1199173Z SUBFAILED(integer_type=<QuantType.QInt16: 3>, nested=False, opset=18) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_float8_with_integer_override_uses_highest_required_opset - AssertionError: 19 != 21
+2026-11-13T10:57:15.1200475Z SUBFAILED(integer_type=<QuantType.QInt16: 3>, nested=True, opset=17) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_float8_with_integer_override_uses_highest_required_opset - AssertionError: 19 != 21
+2026-11-13T10:57:15.1201696Z SUBFAILED(integer_type=<QuantType.QInt16: 3>, nested=True, opset=18) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_float8_with_integer_override_uses_highest_required_opset - AssertionError: 19 != 21
+2026-11-13T10:57:15.1202942Z SUBFAILED(integer_type=<QuantType.QUInt16: 4>, nested=False, opset=17) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_float8_with_integer_override_uses_highest_required_opset - AssertionError: 19 != 21
+2026-11-13T10:57:15.1204139Z SUBFAILED(integer_type=<QuantType.QUInt16: 4>, nested=False, opset=18) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_float8_with_integer_override_uses_highest_required_opset - AssertionError: 19 != 21
+2026-11-13T10:57:15.1205318Z SUBFAILED(integer_type=<QuantType.QUInt16: 4>, nested=True, opset=17) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_float8_with_integer_override_uses_highest_required_opset - AssertionError: 19 != 21
+2026-11-13T10:57:15.1206473Z SUBFAILED(integer_type=<QuantType.QUInt16: 4>, nested=True, opset=18) onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_float8_with_integer_override_uses_highest_required_opset - AssertionError: 19 != 21
+2026-11-13T10:57:15.1208335Z SUBFAILED(opset=17, integer_type=<QuantType.QInt16: 3>, tensor='X') onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_public_quantize_static_produces_native_mixed_qdq - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.1210896Z SUBFAILED(opset=17, integer_type=<QuantType.QInt16: 3>, tensor='W') onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_public_quantize_static_produces_native_mixed_qdq - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (X_zero_point) of operator (QuantizeLinear) in node (X_QuantizeLinear) is invalid.
+2026-11-13T10:57:15.1213363Z SUBFAILED(opset=17, integer_type=<QuantType.QUInt16: 4>, tensor='X') onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_public_quantize_static_produces_native_mixed_qdq - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.1215833Z SUBFAILED(opset=17, integer_type=<QuantType.QUInt16: 4>, tensor='W') onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_public_quantize_static_produces_native_mixed_qdq - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (X_zero_point) of operator (QuantizeLinear) in node (X_QuantizeLinear) is invalid.
+2026-11-13T10:57:15.1218316Z SUBFAILED(opset=18, integer_type=<QuantType.QInt16: 3>, tensor='X') onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_public_quantize_static_produces_native_mixed_qdq - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.1220910Z SUBFAILED(opset=18, integer_type=<QuantType.QInt16: 3>, tensor='W') onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_public_quantize_static_produces_native_mixed_qdq - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (X_zero_point) of operator (QuantizeLinear) in node (X_QuantizeLinear) is invalid.
+2026-11-13T10:57:15.1223353Z SUBFAILED(opset=18, integer_type=<QuantType.QUInt16: 4>, tensor='X') onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_public_quantize_static_produces_native_mixed_qdq - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (W_quantized) of operator (DequantizeLinear) in node (W_DequantizeLinear) is invalid.
+2026-11-13T10:57:15.1225853Z SUBFAILED(opset=18, integer_type=<QuantType.QUInt16: 4>, tensor='W') onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_public_quantize_static_produces_native_mixed_qdq - onnxruntime.capi.onnxruntime_pybind11_state.InvalidGraph: [ONNXRuntimeError] : 10 : INVALID_GRAPH : Load model from /tmp/tmpqpq0p03r/mixed.onnx failed:This is an invalid model. Type Error: Type 'tensor(float8e4m3fn)' of input parameter (X_zero_point) of operator (QuantizeLinear) in node (X_QuantizeLinear) is invalid.
+2026-11-13T10:57:15.1227462Z FAILED onnxruntime/test/python/quantization/test_mixed_quantization_opset.py::TestMixedQuantizationOpset::test_upgrade_does_not_mutate_the_supplied_model - AssertionError: 19 != 21
+2026-11-13T10:57:15.1228002Z 21 failed, 5 passed, 16 subtests passed in 0.70s
+2026-11-13T10:57:15.1228913Z Confirmed original FLOAT8 statistics failures: ['test_config_based_quantization_with_convert_override', 'test_direct_tensor_types_use_the_same_requirement', 'test_float8_with_integer_override_uses_highest_required_opset', 'test_public_quantize_static_produces_native_mixed_qdq', 'test_upgrade_does_not_mutate_the_supplied_model']
+2026-11-13T10:57:15.1284171Z ##[group]Run python -m ruff check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_mixed_quantization_opset.py
+2026-11-13T10:57:15.1284961Z [36;1mpython -m ruff check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_mixed_quantization_opset.py[0m
+2026-11-13T10:57:15.1285723Z [36;1mpython -m ruff format --diff onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_mixed_quantization_opset.py || true[0m
+2026-11-13T10:57:15.1286485Z [36;1mpython -m ruff format --check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_mixed_quantization_opset.py[0m
+2026-11-13T10:57:15.1286975Z [36;1mgit diff --check[0m
+2026-11-13T10:57:15.1313583Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:57:15.1313842Z env:
+2026-11-13T10:57:15.1314032Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:57:15.1314319Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:57:15.1314620Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:57:15.1314974Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:15.1315374Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:57:15.1315771Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:15.1316131Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:15.1316484Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:15.1316839Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:57:15.1317143Z ##[endgroup]
+2026-11-13T10:57:15.1626545Z All checks passed!
+2026-11-13T10:57:15.1862575Z 2 files already formatted
+2026-11-13T10:57:15.2056739Z 2 files already formatted
+2026-11-13T10:57:15.3926806Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-13T10:57:15.3927102Z with:
+2026-11-13T10:57:15.3927292Z   name: native-mixed-quantization-opset-evidence
+2026-11-13T10:57:15.3927693Z   path: ort-source-overlay-metadata.json
+ort-patched.log
+ort-patched.xml
+ort-baseline.log
+ort-baseline.xml
+
+2026-11-13T10:57:15.3928113Z   if-no-files-found: warn
+2026-11-13T10:57:15.3928290Z   compression-level: 6
+2026-11-13T10:57:15.3928455Z   overwrite: false
+2026-11-13T10:57:15.3928634Z   include-hidden-files: false
+2026-11-13T10:57:15.3928827Z   archive: true
+2026-11-13T10:57:15.3928985Z env:
+2026-11-13T10:57:15.3929137Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:57:15.3929571Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:57:15.3929832Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:57:15.3930124Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:15.3930507Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:57:15.3930865Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:15.3931149Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:15.3931431Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:57:15.3931715Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:57:15.3931959Z ##[endgroup]
+2026-11-13T10:57:15.5060637Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-13T10:57:15.5062075Z The least common ancestor is /home/runner/work/onnxruntime/onnxruntime. This will be the root directory of the artifact
+2026-11-13T10:57:15.5062710Z With the provided path, there will be 5 files uploaded
+2026-11-13T10:57:15.5063179Z Artifact name is valid!
+2026-11-13T10:57:15.5063436Z Root directory input is valid!
+2026-11-13T10:57:15.7023898Z Uploading artifact: native-mixed-quantization-opset-evidence.zip
+2026-11-13T10:57:15.7051032Z Beginning upload of artifact content to blob storage
+2026-11-13T10:57:15.8925072Z Uploaded bytes 11487
+2026-11-13T10:57:15.9098404Z Finished uploading artifact content to blob storage!
+2026-11-13T10:57:15.9098939Z SHA256 digest of uploaded artifact is b88eb4ac5f1b53313e6c5215cd5f50ce6a503b3353663beaa4dc3ff40f053480
+2026-11-13T10:57:15.9099647Z Finalizing artifact upload
+2026-11-13T10:57:16.2780628Z Artifact native-mixed-quantization-opset-evidence successfully finalized. Artifact ID 14029868334
+2026-11-13T10:57:16.2781292Z Artifact native-mixed-quantization-opset-evidence has been successfully uploaded! Final size is 11487 bytes. Artifact ID is 14029868334
+2026-11-13T10:57:16.2784285Z Artifact download URL: https://github.com/Afloat16/onnxruntime/actions/runs/43412825667/artifacts/14029868334
+2026-11-13T10:57:16.2923036Z Post job cleanup.
+2026-11-13T10:57:16.3876845Z (node:2452) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:57:16.3877535Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:57:16.3983286Z Post job cleanup.
+2026-11-13T10:57:16.4633098Z [command]/usr/bin/git version
+2026-11-13T10:57:16.4663157Z git version 2.56.1
+2026-11-13T10:57:16.4687478Z Temporarily overriding HOME='/home/runner/work/_temp/eddd2277-11a9-4b22-9e76-c2038c4b4073' before making global git config changes
+2026-11-13T10:57:16.4688402Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T10:57:16.4691627Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:57:16.4715279Z Removing SSH command configuration
+2026-11-13T10:57:16.4720089Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:57:16.4744662Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:57:16.4914920Z Removing HTTP extra header
+2026-11-13T10:57:16.4920491Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:57:16.4970357Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:57:16.5187693Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:57:16.5193780Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:57:16.5246487Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:57:16.5546277Z Cleaning up orphan processes
+2026-11-13T10:57:16.5781874Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

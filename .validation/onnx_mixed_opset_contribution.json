@@ -1,0 +1,67 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "default_branch": "main",
+  "fork": "Afloat16/onnxruntime",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "commit": "d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4",
+  "branch": "fix/float8-int16-opset-priority-20261113",
+  "title": "Honor 16-bit overrides when upgrading FLOAT8 quantization opsets",
+  "body": "### Description\n\nA FLOAT8 quantization request can also contain INT16 or UINT16 tensor overrides, which require opset 21. For an input model at opset 17 or 18, the FLOAT8 branch currently wins first and upgrades only to opset 19. Mixed QDQ models then receive incompatible operator domains and can fail native model loading.\n\nLet the existing 16-bit requirement take precedence over the FLOAT8-only upgrade. This is a one-condition change; blocked quantization, newer opsets, and other version rules retain their existing order.\n\n### Validation\n\n- Six new unittest methods cover direct and nested 16-bit overrides, direct TensorProto type inputs, ordinary upgrade rules, and preservation of the caller's source model.\n- Eight real `quantize_static` models and two `get_qdq_config` models use supported FLOAT8 defaults with per-tensor 16-bit overrides. Tests check persisted opsets, domains and types, ONNX model validation, saved-model CPU inference, and an independent ONNX ReferenceEvaluator.\n- New tests plus the existing quantization-utility tests: **15 methods passed, 167 subtests passed**.\n- Restoring the original implementation produces **1 failing method and 20 failing subtests** (pytest reports 21 failures), with 5 completed methods and 16 passing subtests. Failures include native loading of the incorrectly upgraded mixed models.\n- Ruff 0.12.12 lint/format and `git diff --check` passed.\n\nExact-source native validation: https://github.com/Afloat16/onnxruntime/actions/runs/43412825667\n\nThe runtime was built using the repository's official CPU Release build.py/CMake process at `8dea1194e974fa07b1d2f07a190949c3a92cab80`. Its C++ sources match base `a8246c0d094f1ab0d6bf236228e5e67683321cd7`. This Python-only validation installs that built wheel, overlays the complete quantization package from this exact commit, and verifies byte equality and hashes before normal native imports.\n\n### Motivation and Context\n\nThe public integration tests use per-tensor overrides; validation of top-level mixed quantization types is unchanged. Native CPU inference disables graph optimization to exercise the saved QDQ graph directly. This fixes version selection and model validity without claiming a general quantization-accuracy or throughput improvement.\n",
+  "pr_url": null,
+  "pr_status": "ready",
+  "merged_at": null,
+  "counts_as_upstream_merged": false,
+  "novelty": {
+    "classification": "genuinely-new",
+    "history_entries": 65,
+    "actual_patches_read": [
+      24949,
+      28202,
+      28522,
+      32372
+    ],
+    "all_state_queries": [
+      "update_opset_version",
+      "opset float8 16",
+      "float8 overrides opset",
+      "opset precedence"
+    ],
+    "personal_fork": "31 fork branches inspected, with all existing source heads belonging to separate current-task repairs; no prior opset-priority patch.",
+    "related_exclusions": {
+      "24949": "Introduced the helper and FLOAT8 upgrade; predates integer override support",
+      "28202": "Introduced 16-bit automatic upgrade after the FLOAT8 elif; does not handle simultaneous FLOAT8 and INT16/UINT16 requirements",
+      "28522": "Added block-size priority, leaves FLOAT8-before-16bit ordering unchanged",
+      "32372": "Adds CPU FP6 schemas/kernels, does not modify Python quantization opset selection"
+    }
+  },
+  "validation": {
+    "runtime_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+    "runtime_build_run": 43296543822,
+    "runtime_wheel_artifact": 13982605959,
+    "native_sources_match_base": true,
+    "exact_python_overlay_commit": "d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4",
+    "workflow_commit": "de0de1138397c081f503570fd0d71a283e681a64",
+    "run_id": 43412825667,
+    "run_url": "https://github.com/Afloat16/onnxruntime/actions/runs/43412825667",
+    "job_id": 131843212874,
+    "conclusion": "success",
+    "artifact_id": 14029868334,
+    "new_methods": 6,
+    "fixed": "15 passed methods, 167 subtests passed",
+    "baseline": "1 failed method and 20 failed subtests; 5 completed methods and 16 subtests passed",
+    "lint": "Ruff 0.12.12 check and format; git diff --check passed"
+  },
+  "limitations": [
+    "Public mixed integration uses supported per-tensor overrides, not unsupported top-level FLOAT8/integer combinations",
+    "CPU graph optimization disabled to exercise native QDQ nodes directly",
+    "Same-base official C++ build reused with exact full Python quantization-package overlay",
+    "No GPU execution, throughput or model-accuracy claims"
+  ],
+  "source_files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_mixed_quantization_opset.py"
+  ],
+  "prefilled_url": "https://github.com/microsoft/onnxruntime/compare/main...Afloat16:fix/float8-int16-opset-priority-20261113?expand=1&title=Honor%2016-bit%20overrides%20when%20upgrading%20FLOAT8%20quantization%20opsets&body=%23%23%23%20Description%0A%0AA%20FLOAT8%20quantization%20request%20can%20also%20contain%20INT16%20or%20UINT16%20tensor%20overrides%2C%20which%20require%20opset%2021.%20For%20an%20input%20model%20at%20opset%2017%20or%2018%2C%20the%20FLOAT8%20branch%20currently%20wins%20first%20and%20upgrades%20only%20to%20opset%2019.%20Mixed%20QDQ%20models%20then%20receive%20incompatible%20operator%20domains%20and%20can%20fail%20native%20model%20loading.%0A%0ALet%20the%20existing%2016-bit%20requirement%20take%20precedence%20over%20the%20FLOAT8-only%20upgrade.%20This%20is%20a%20one-condition%20change%3B%20blocked%20quantization%2C%20newer%20opsets%2C%20and%20other%20version%20rules%20retain%20their%20existing%20order.%0A%0A%23%23%23%20Validation%0A%0A-%20Six%20new%20unittest%20methods%20cover%20direct%20and%20nested%2016-bit%20overrides%2C%20direct%20TensorProto%20type%20inputs%2C%20ordinary%20upgrade%20rules%2C%20and%20preservation%20of%20the%20caller's%20source%20model.%0A-%20Eight%20real%20%60quantize_static%60%20models%20and%20two%20%60get_qdq_config%60%20models%20use%20supported%20FLOAT8%20defaults%20with%20per-tensor%2016-bit%20overrides.%20Tests%20check%20persisted%20opsets%2C%20domains%20and%20types%2C%20ONNX%20model%20validation%2C%20saved-model%20CPU%20inference%2C%20and%20an%20independent%20ONNX%20ReferenceEvaluator.%0A-%20New%20tests%20plus%20the%20existing%20quantization-utility%20tests%3A%20**15%20methods%20passed%2C%20167%20subtests%20passed**.%0A-%20Restoring%20the%20original%20implementation%20produces%20**1%20failing%20method%20and%2020%20failing%20subtests**%20(pytest%20reports%2021%20failures)%2C%20with%205%20completed%20methods%20and%2016%20passing%20subtests.%20Failures%20include%20native%20loading%20of%20the%20incorrectly%20upgraded%20mixed%20models.%0A-%20Ruff%200.12.12%20lint%2Fformat%20and%20%60git%20diff%20--check%60%20passed.%0A%0AExact-source%20native%20validation%3A%20https%3A%2F%2Fgithub.com%2FAfloat16%2Fonnxruntime%2Factions%2Fruns%2F43412825667%0A%0AThe%20runtime%20was%20built%20using%20the%20repository's%20official%20CPU%20Release%20build.py%2FCMake%20process%20at%20%608dea1194e974fa07b1d2f07a190949c3a92cab80%60.%20Its%20C%2B%2B%20sources%20match%20base%20%60a8246c0d094f1ab0d6bf236228e5e67683321cd7%60.%20This%20Python-only%20validation%20installs%20that%20built%20wheel%2C%20overlays%20the%20complete%20quantization%20package%20from%20this%20exact%20commit%2C%20and%20verifies%20byte%20equality%20and%20hashes%20before%20normal%20native%20imports.%0A%0A%23%23%23%20Motivation%20and%20Context%0A%0AThe%20public%20integration%20tests%20use%20per-tensor%20overrides%3B%20validation%20of%20top-level%20mixed%20quantization%20types%20is%20unchanged.%20Native%20CPU%20inference%20disables%20graph%20optimization%20to%20exercise%20the%20saved%20QDQ%20graph%20directly.%20This%20fixes%20version%20selection%20and%20model%20validity%20without%20claiming%20a%20general%20quantization-accuracy%20or%20throughput%20improvement.%0A"
+}
