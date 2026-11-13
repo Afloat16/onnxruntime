@@ -1,0 +1,60 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "default_branch": "main",
+  "fork": "Afloat16/onnxruntime",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "commit": "5c574563ff5a3707345cd40f507e4c0cdbfb438f",
+  "branch": "fix/float8-weight-statistics-range-20261113",
+  "title": "Use wide accumulation for FLOAT8 weight statistics",
+  "body": "### Description\n\nFLOAT8 weight quantization computes the input standard deviation in the weight dtype. Finite FP16/FP32 weights can therefore produce an infinite or zero scale when the intermediate squared deviations overflow or underflow. The resulting codes can collapse or contain NaNs even when the final scale is representable.\n\nAccumulate the standard deviation in float64 for FP16/FP32 input weights, then cast the final scale back to the original weight dtype. Other direct-helper input dtypes retain NumPy's existing default statistics/result dtype. The codebook reference distribution and zero-variance policy are unchanged.\n\n### Validation\n\n- Eight new unittest methods cover large and small nonconstant weights, independent `math.fsum` standard-deviation references, quantized FP8 codes, ordinary values/options, readonly strided inputs, zero variance and six other direct-helper input dtypes.\n- Native CPU `DequantizeLinear + Add` inference consumes the saved/reloaded FP32-weight quantization result, with persisted scales and codes checked independently.\n- New and existing quantization utility tests: **17 methods passed, 161 subtests passed**.\n- Restoring the original implementation produces **19 failing subtests**, with 8 completed methods and 11 passing subtests. These include finite large/small inputs as well as FP16 rounding controls.\n- Ruff 0.12.12 lint/format and `git diff --check` passed.\n\nExact-source native validation: https://github.com/Afloat16/onnxruntime/actions/runs/43406537495\n\nThe runtime was built using the repository's official CPU Release build.py/CMake process at `8dea1194e974fa07b1d2f07a190949c3a92cab80`. Its C++ sources match base `a8246c0d094f1ab0d6bf236228e5e67683321cd7`. This Python-only validation installs that built wheel, overlays the complete quantization package from this exact commit, and verifies byte equality and hashes before normal native imports.\n\n### Motivation and Context\n\nThis repairs the direct FLOAT8 weight-statistics path. Histogram calibration, the codebook distribution, integer quantization and constant-weight policy keep their existing behavior. The tests establish numerical correctness for the covered FP16/FP32 scales; they do not measure end-to-end model accuracy or throughput.\n",
+  "prefilled_url": "https://github.com/microsoft/onnxruntime/compare/main...Afloat16:fix/float8-weight-statistics-range-20261113?expand=1&title=Use%20wide%20accumulation%20for%20FLOAT8%20weight%20statistics&body=%23%23%23%20Description%0A%0AFLOAT8%20weight%20quantization%20computes%20the%20input%20standard%20deviation%20in%20the%20weight%20dtype.%20Finite%20FP16%2FFP32%20weights%20can%20therefore%20produce%20an%20infinite%20or%20zero%20scale%20when%20the%20intermediate%20squared%20deviations%20overflow%20or%20underflow.%20The%20resulting%20codes%20can%20collapse%20or%20contain%20NaNs%20even%20when%20the%20final%20scale%20is%20representable.%0A%0AAccumulate%20the%20standard%20deviation%20in%20float64%20for%20FP16%2FFP32%20input%20weights%2C%20then%20cast%20the%20final%20scale%20back%20to%20the%20original%20weight%20dtype.%20Other%20direct-helper%20input%20dtypes%20retain%20NumPy's%20existing%20default%20statistics%2Fresult%20dtype.%20The%20codebook%20reference%20distribution%20and%20zero-variance%20policy%20are%20unchanged.%0A%0A%23%23%23%20Validation%0A%0A-%20Eight%20new%20unittest%20methods%20cover%20large%20and%20small%20nonconstant%20weights%2C%20independent%20%60math.fsum%60%20standard-deviation%20references%2C%20quantized%20FP8%20codes%2C%20ordinary%20values%2Foptions%2C%20readonly%20strided%20inputs%2C%20zero%20variance%20and%20six%20other%20direct-helper%20input%20dtypes.%0A-%20Native%20CPU%20%60DequantizeLinear%20%2B%20Add%60%20inference%20consumes%20the%20saved%2Freloaded%20FP32-weight%20quantization%20result%2C%20with%20persisted%20scales%20and%20codes%20checked%20independently.%0A-%20New%20and%20existing%20quantization%20utility%20tests%3A%20**17%20methods%20passed%2C%20161%20subtests%20passed**.%0A-%20Restoring%20the%20original%20implementation%20produces%20**19%20failing%20subtests**%2C%20with%208%20completed%20methods%20and%2011%20passing%20subtests.%20These%20include%20finite%20large%2Fsmall%20inputs%20as%20well%20as%20FP16%20rounding%20controls.%0A-%20Ruff%200.12.12%20lint%2Fformat%20and%20%60git%20diff%20--check%60%20passed.%0A%0AExact-source%20native%20validation%3A%20https%3A%2F%2Fgithub.com%2FAfloat16%2Fonnxruntime%2Factions%2Fruns%2F43406537495%0A%0AThe%20runtime%20was%20built%20using%20the%20repository's%20official%20CPU%20Release%20build.py%2FCMake%20process%20at%20%608dea1194e974fa07b1d2f07a190949c3a92cab80%60.%20Its%20C%2B%2B%20sources%20match%20base%20%60a8246c0d094f1ab0d6bf236228e5e67683321cd7%60.%20This%20Python-only%20validation%20installs%20that%20built%20wheel%2C%20overlays%20the%20complete%20quantization%20package%20from%20this%20exact%20commit%2C%20and%20verifies%20byte%20equality%20and%20hashes%20before%20normal%20native%20imports.%0A%0A%23%23%23%20Motivation%20and%20Context%0A%0AThis%20repairs%20the%20direct%20FLOAT8%20weight-statistics%20path.%20Histogram%20calibration%2C%20the%20codebook%20distribution%2C%20integer%20quantization%20and%20constant-weight%20policy%20keep%20their%20existing%20behavior.%20The%20tests%20establish%20numerical%20correctness%20for%20the%20covered%20FP16%2FFP32%20scales%3B%20they%20do%20not%20measure%20end-to-end%20model%20accuracy%20or%20throughput.%0A",
+  "pr_url": null,
+  "pr_status": "ready",
+  "merged_at": null,
+  "counts_as_upstream_merged": false,
+  "novelty": {
+    "classification": "genuinely-new",
+    "history_entries": 65,
+    "actual_patches_read": [
+      16550,
+      29350,
+      33479
+    ],
+    "all_state_queries": [
+      "float8 std",
+      "float8 overflow",
+      "quantization \"standard deviation\"",
+      "\"numpy.std\" quantization",
+      "FP8 scale overflow"
+    ],
+    "personal_fork": "All fork branches created in this task; no prior weight-std repair. Distribution histogram moments #34179 is a separate histogram algorithm and input path."
+  },
+  "validation": {
+    "runtime_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+    "runtime_build_run": 43296543822,
+    "runtime_wheel_artifact": 13982605959,
+    "native_sources_match_base": true,
+    "exact_python_overlay_commit": "5c574563ff5a3707345cd40f507e4c0cdbfb438f",
+    "run_id": 43406537495,
+    "job_id": 131822123967,
+    "conclusion": "success",
+    "artifact_id": 14026874712,
+    "new_methods": 8,
+    "fixed": "17 passed methods, 161 subtests passed",
+    "baseline": "19 failed subtests; 8 completed methods, 11 subtests passed",
+    "lint": "Ruff 0.12.12 check and format; git diff --check passed"
+  },
+  "limitations": [
+    "Wide accumulation and scale cast apply only to FP16/FP32; other direct-helper input dtypes retain their previous behavior",
+    "Native runtime reused from same-base official CPU build with exact Python overlay",
+    "CPU DQ + Add inference covers FP32 weights; FP16 codes and statistics are checked with independent numerical references",
+    "Existing zero-variance scale policy remains unchanged",
+    "No model-quality or throughput measurements"
+  ],
+  "source_files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_float8_weight_statistics.py"
+  ]
+}

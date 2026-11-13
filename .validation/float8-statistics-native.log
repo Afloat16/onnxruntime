@@ -1,0 +1,1293 @@
+﻿2026-11-13T10:07:13.3510992Z Current runner version: '2.338.2'
+2026-11-13T10:07:13.3539910Z ##[group]Runner Image Provisioner
+2026-11-13T10:07:13.3540859Z Hosted Compute Agent
+2026-11-13T10:07:13.3541576Z Version: 20261103.629
+2026-11-13T10:07:13.3542225Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-13T10:07:13.3542951Z Build Date: 2026-11-03T17:26:59Z
+2026-11-13T10:07:13.3543726Z Worker ID: {e417a741-8670-4ef0-bed1-53678dd1cbac}
+2026-11-13T10:07:13.3544479Z Region: westus2
+2026-11-13T10:07:13.3545106Z Cloud: Azure
+2026-11-13T10:07:13.3545683Z ##[endgroup]
+2026-11-13T10:07:13.3547719Z ##[group]Operating System
+2026-11-13T10:07:13.3548501Z Ubuntu
+2026-11-13T10:07:13.3549082Z 24.04.5
+2026-11-13T10:07:13.3549675Z LTS
+2026-11-13T10:07:13.3550218Z ##[endgroup]
+2026-11-13T10:07:13.3550831Z ##[group]Runner Image
+2026-11-13T10:07:13.3551488Z Image: ubuntu-24.04
+2026-11-13T10:07:13.3552107Z Version: 20261111.370.1
+2026-11-13T10:07:13.3553531Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.370/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-13T10:07:13.3555151Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.370
+2026-11-13T10:07:13.3556197Z ##[endgroup]
+2026-11-13T10:07:13.3557722Z ##[group]GITHUB_TOKEN Permissions
+2026-11-13T10:07:13.3560155Z Actions: read
+2026-11-13T10:07:13.3560776Z Contents: read
+2026-11-13T10:07:13.3561458Z Metadata: read
+2026-11-13T10:07:13.3562071Z ##[endgroup]
+2026-11-13T10:07:13.3564309Z Secret source: Actions
+2026-11-13T10:07:13.3565342Z Cache mode: write
+2026-11-13T10:07:13.3566442Z Prepare workflow directory
+2026-11-13T10:07:13.4042506Z Prepare all required actions
+2026-11-13T10:07:13.4092253Z Getting action download info
+2026-11-13T10:07:13.8603840Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-13T10:07:13.9995569Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-11-13T10:07:14.0835579Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-13T10:07:14.3363145Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-13T10:07:14.5197148Z Complete job name: native-cpu
+2026-11-13T10:07:14.6120372Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-13T10:07:14.6121569Z with:
+2026-11-13T10:07:14.6122053Z   ref: 5c574563ff5a3707345cd40f507e4c0cdbfb438f
+2026-11-13T10:07:14.6122648Z   fetch-depth: 2
+2026-11-13T10:07:14.6123103Z   persist-credentials: false
+2026-11-13T10:07:14.6123641Z   repository: Afloat16/onnxruntime
+2026-11-13T10:07:14.6128084Z   token: ***
+2026-11-13T10:07:14.6128533Z   ssh-strict: true
+2026-11-13T10:07:14.6128988Z   ssh-user: git
+2026-11-13T10:07:14.6129411Z   clean: true
+2026-11-13T10:07:14.6129874Z   sparse-checkout-cone-mode: true
+2026-11-13T10:07:14.6130432Z   fetch-tags: false
+2026-11-13T10:07:14.6130902Z   show-progress: true
+2026-11-13T10:07:14.6131359Z   lfs: false
+2026-11-13T10:07:14.6131773Z   submodules: false
+2026-11-13T10:07:14.6132232Z   set-safe-directory: true
+2026-11-13T10:07:14.6132746Z   allow-unsafe-pr-checkout: false
+2026-11-13T10:07:14.6133548Z env:
+2026-11-13T10:07:14.6133974Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:07:14.6134534Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:07:14.6135151Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:07:14.6135763Z ##[endgroup]
+2026-11-13T10:07:14.9487057Z Syncing repository: Afloat16/onnxruntime
+2026-11-13T10:07:14.9490771Z ##[group]Getting Git version info
+2026-11-13T10:07:14.9492065Z Working directory is '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T10:07:14.9493284Z [command]/usr/bin/git version
+2026-11-13T10:07:14.9618958Z git version 2.56.1
+2026-11-13T10:07:14.9645779Z ##[endgroup]
+2026-11-13T10:07:14.9657775Z Temporarily overriding HOME='/home/runner/work/_temp/0cbe56db-ec7b-4319-aa41-9a57c8c5910e' before making global git config changes
+2026-11-13T10:07:14.9665038Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T10:07:14.9667378Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:07:14.9738677Z Deleting the contents of '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T10:07:14.9744791Z ##[group]Determining repository object format
+2026-11-13T10:07:14.9747342Z ##[endgroup]
+2026-11-13T10:07:14.9748882Z ##[group]Initializing the repository
+2026-11-13T10:07:14.9754874Z [command]/usr/bin/git init /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:07:14.9897818Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-13T10:07:14.9899812Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-13T10:07:14.9901576Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-13T10:07:14.9902957Z hint: call:
+2026-11-13T10:07:14.9903713Z hint:
+2026-11-13T10:07:14.9904702Z hint: 	git config --global init.defaultBranch <name>
+2026-11-13T10:07:14.9905820Z hint:
+2026-11-13T10:07:14.9907079Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-13T10:07:14.9908950Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-13T10:07:14.9910423Z hint:
+2026-11-13T10:07:14.9911141Z hint: 	git branch -m <name>
+2026-11-13T10:07:14.9912052Z hint:
+2026-11-13T10:07:14.9913342Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-13T10:07:14.9915344Z Initialized empty Git repository in /home/runner/work/onnxruntime/onnxruntime/.git/
+2026-11-13T10:07:14.9925187Z [command]/usr/bin/git remote add origin https://github.com/Afloat16/onnxruntime
+2026-11-13T10:07:15.0008909Z ##[endgroup]
+2026-11-13T10:07:15.0009950Z ##[group]Disabling automatic garbage collection
+2026-11-13T10:07:15.0013232Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-13T10:07:15.0058828Z ##[endgroup]
+2026-11-13T10:07:15.0059731Z ##[group]Setting up auth
+2026-11-13T10:07:15.0060356Z Removing SSH command configuration
+2026-11-13T10:07:15.0175194Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:07:15.0181675Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:07:15.0620108Z Removing HTTP extra header
+2026-11-13T10:07:15.0627169Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:07:15.0681604Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:07:15.0934975Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:07:15.0940743Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:07:15.0998218Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:07:15.1257293Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-13T10:07:15.1309630Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path /home/runner/work/_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config
+2026-11-13T10:07:15.1355709Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config
+2026-11-13T10:07:15.1429277Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config
+2026-11-13T10:07:15.1458941Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config
+2026-11-13T10:07:15.1503947Z ##[endgroup]
+2026-11-13T10:07:15.1505659Z ##[group]Fetching the repository
+2026-11-13T10:07:15.1513117Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin 5c574563ff5a3707345cd40f507e4c0cdbfb438f
+2026-11-13T10:07:27.9232118Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T10:07:27.9233565Z  * branch            5c574563ff5a3707345cd40f507e4c0cdbfb438f -> FETCH_HEAD
+2026-11-13T10:07:27.9243767Z [command]/usr/bin/git rev-parse --verify --quiet 5c574563ff5a3707345cd40f507e4c0cdbfb438f^{object}
+2026-11-13T10:07:27.9285722Z 5c574563ff5a3707345cd40f507e4c0cdbfb438f
+2026-11-13T10:07:27.9292698Z ##[endgroup]
+2026-11-13T10:07:27.9293769Z ##[group]Determining the checkout info
+2026-11-13T10:07:27.9297923Z ##[endgroup]
+2026-11-13T10:07:27.9298559Z [command]/usr/bin/git sparse-checkout disable
+2026-11-13T10:07:27.9380837Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-13T10:07:27.9430550Z ##[group]Checking out the ref
+2026-11-13T10:07:27.9431274Z [command]/usr/bin/git checkout --progress --force 5c574563ff5a3707345cd40f507e4c0cdbfb438f
+2026-11-13T10:07:28.9691991Z Updating files:  69% (8076/11668)
+2026-11-13T10:07:28.9794502Z Updating files:  70% (8168/11668)
+2026-11-13T10:07:28.9913354Z Updating files:  71% (8285/11668)
+2026-11-13T10:07:29.0017211Z Updating files:  72% (8401/11668)
+2026-11-13T10:07:29.0884366Z Updating files:  73% (8518/11668)
+2026-11-13T10:07:29.3479898Z Updating files:  74% (8635/11668)
+2026-11-13T10:07:29.3560239Z Updating files:  75% (8751/11668)
+2026-11-13T10:07:29.3675408Z Updating files:  76% (8868/11668)
+2026-11-13T10:07:29.4471881Z Updating files:  77% (8985/11668)
+2026-11-13T10:07:29.5585540Z Updating files:  78% (9102/11668)
+2026-11-13T10:07:29.5642631Z Updating files:  79% (9218/11668)
+2026-11-13T10:07:29.6659526Z Updating files:  80% (9335/11668)
+2026-11-13T10:07:29.9027232Z Updating files:  81% (9452/11668)
+2026-11-13T10:07:29.9285651Z Updating files:  82% (9568/11668)
+2026-11-13T10:07:29.9372001Z Updating files:  83% (9685/11668)
+2026-11-13T10:07:29.9450095Z Updating files:  84% (9802/11668)
+2026-11-13T10:07:29.9528802Z Updating files:  85% (9918/11668)
+2026-11-13T10:07:29.9581619Z Updating files:  86% (10035/11668)
+2026-11-13T10:07:29.9609213Z Updating files:  86% (10110/11668)
+2026-11-13T10:07:29.9740586Z Updating files:  87% (10152/11668)
+2026-11-13T10:07:29.9808433Z Updating files:  88% (10268/11668)
+2026-11-13T10:07:29.9866839Z Updating files:  89% (10385/11668)
+2026-11-13T10:07:29.9923809Z Updating files:  90% (10502/11668)
+2026-11-13T10:07:29.9991671Z Updating files:  91% (10618/11668)
+2026-11-13T10:07:30.0059281Z Updating files:  92% (10735/11668)
+2026-11-13T10:07:30.0115978Z Updating files:  93% (10852/11668)
+2026-11-13T10:07:30.0179924Z Updating files:  94% (10968/11668)
+2026-11-13T10:07:30.0263570Z Updating files:  95% (11085/11668)
+2026-11-13T10:07:30.0320033Z Updating files:  96% (11202/11668)
+2026-11-13T10:07:30.0382730Z Updating files:  97% (11318/11668)
+2026-11-13T10:07:30.0463126Z Updating files:  98% (11435/11668)
+2026-11-13T10:07:30.3901087Z Updating files:  99% (11552/11668)
+2026-11-13T10:07:30.3901573Z Updating files: 100% (11668/11668)
+2026-11-13T10:07:30.3901952Z Updating files: 100% (11668/11668), done.
+2026-11-13T10:07:30.4021100Z Note: switching to '5c574563ff5a3707345cd40f507e4c0cdbfb438f'.
+2026-11-13T10:07:30.4021691Z 
+2026-11-13T10:07:30.4022076Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-13T10:07:30.4023082Z changes and commit them, and you can discard any commits you make in this
+2026-11-13T10:07:30.4024191Z state without impacting any branches by switching back to a branch.
+2026-11-13T10:07:30.4025509Z 
+2026-11-13T10:07:30.4026036Z If you want to create a new branch to retain commits you create, you may
+2026-11-13T10:07:30.4027256Z do so (now or later) by using -c with the switch command. Example:
+2026-11-13T10:07:30.4027734Z 
+2026-11-13T10:07:30.4027940Z   git switch -c <new-branch-name>
+2026-11-13T10:07:30.4028281Z 
+2026-11-13T10:07:30.4028490Z Or undo this operation with:
+2026-11-13T10:07:30.4028758Z 
+2026-11-13T10:07:30.4028922Z   git switch -
+2026-11-13T10:07:30.4029165Z 
+2026-11-13T10:07:30.4029576Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-13T10:07:30.4030198Z 
+2026-11-13T10:07:30.4030644Z HEAD is now at 5c57456 Preserve finite FLOAT8 weight statistics across input scales
+2026-11-13T10:07:30.4167672Z ##[endgroup]
+2026-11-13T10:07:30.4245556Z [command]/usr/bin/git log -1 --format=%H
+2026-11-13T10:07:30.4280677Z 5c574563ff5a3707345cd40f507e4c0cdbfb438f
+2026-11-13T10:07:30.4290916Z ##[group]Removing auth
+2026-11-13T10:07:30.4291257Z Removing SSH command configuration
+2026-11-13T10:07:30.4295567Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:07:30.4344733Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:07:30.4641975Z Removing HTTP extra header
+2026-11-13T10:07:30.4642545Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:07:30.4700842Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:07:30.4987373Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:07:30.4992803Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:07:30.5044923Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T10:07:30.5045851Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T10:07:30.5046834Z includeif.gitdir:/github/workspace/.git.path
+2026-11-13T10:07:30.5047395Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T10:07:30.5061842Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T10:07:30.5106173Z /home/runner/work/_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config
+2026-11-13T10:07:30.5121238Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-20a0bfee\-e534\-4c50\-8bc1\-908cf263a0b4\.config
+2026-11-13T10:07:30.5180251Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T10:07:30.5218142Z /home/runner/work/_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config
+2026-11-13T10:07:30.5229923Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-20a0bfee\-e534\-4c50\-8bc1\-908cf263a0b4\.config
+2026-11-13T10:07:30.5289848Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-13T10:07:30.5327681Z /github/runner_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config
+2026-11-13T10:07:30.5335835Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-20a0bfee\-e534\-4c50\-8bc1\-908cf263a0b4\.config
+2026-11-13T10:07:30.5387196Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T10:07:30.5424915Z /github/runner_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config
+2026-11-13T10:07:30.5432823Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-20a0bfee\-e534\-4c50\-8bc1\-908cf263a0b4\.config
+2026-11-13T10:07:30.5485886Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:07:30.5761277Z Removing credentials config '/home/runner/work/_temp/git-credentials-20a0bfee-e534-4c50-8bc1-908cf263a0b4.config'
+2026-11-13T10:07:30.5771589Z ##[endgroup]
+2026-11-13T10:07:30.6049382Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-11-13T10:07:30.6049832Z with:
+2026-11-13T10:07:30.6050046Z   python-version: 3.12
+2026-11-13T10:07:30.6050285Z   check-latest: false
+2026-11-13T10:07:30.6052874Z   token: ***
+2026-11-13T10:07:30.6053093Z   update-environment: true
+2026-11-13T10:07:30.6053340Z   allow-prereleases: false
+2026-11-13T10:07:30.6053572Z   freethreaded: false
+2026-11-13T10:07:30.6053798Z env:
+2026-11-13T10:07:30.6053984Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:07:30.6054221Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:07:30.6054529Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:07:30.6054829Z ##[endgroup]
+2026-11-13T10:07:30.7504792Z ##[group]Installed versions
+2026-11-13T10:07:30.7650228Z (node:2931) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:07:30.7651512Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:07:30.7652215Z Successfully set up CPython (3.12.16)
+2026-11-13T10:07:30.7652985Z ##[endgroup]
+2026-11-13T10:07:30.7789034Z ##[group]Run python -m venv "$RUNNER_TEMP/ort-validation-venv"
+2026-11-13T10:07:30.7789898Z [36;1mpython -m venv "$RUNNER_TEMP/ort-validation-venv"[0m
+2026-11-13T10:07:30.7790633Z [36;1mecho "$RUNNER_TEMP/ort-validation-venv/bin" >> "$GITHUB_PATH"[0m
+2026-11-13T10:07:30.7832506Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:07:30.7832798Z env:
+2026-11-13T10:07:30.7833013Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:07:30.7833274Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:07:30.7833590Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:07:30.7833978Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:30.7834431Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:07:30.7834859Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:30.7835242Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:30.7835681Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:30.7836063Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:07:30.7836388Z ##[endgroup]
+2026-11-13T10:07:33.7461417Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T10:07:33.7461858Z with:
+2026-11-13T10:07:33.7462073Z   name: cpu-native-wheel-a8246c0d
+2026-11-13T10:07:33.7462343Z   run-id: 43296543822
+2026-11-13T10:07:33.7464991Z   github-token: ***
+2026-11-13T10:07:33.7465259Z   path: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T10:07:33.7465567Z   merge-multiple: false
+2026-11-13T10:07:33.7465805Z   repository: Afloat16/onnxruntime
+2026-11-13T10:07:33.7466052Z env:
+2026-11-13T10:07:33.7466240Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:07:33.7466672Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:07:33.7466982Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:07:33.7467353Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:33.7467782Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:07:33.7468200Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:33.7468627Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:33.7469011Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:33.7469646Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:07:33.7470231Z ##[endgroup]
+2026-11-13T10:07:33.9092312Z Downloading single artifact
+2026-11-13T10:07:33.9194198Z (node:2966) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:07:33.9195474Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:07:33.9428961Z (node:2966) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T10:07:34.1684066Z Preparing to download the following artifacts:
+2026-11-13T10:07:34.1685660Z - cpu-native-wheel-a8246c0d (ID: 13982605959, Size: 30978382, Expected Digest: sha256:0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301)
+2026-11-13T10:07:34.1730226Z Downloading artifact '13982605959' from 'Afloat16/onnxruntime'
+2026-11-13T10:07:34.4742158Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/6682e059f91784baee0f176a816c789347a553a5901897c10ebf1feb950019db.zip
+2026-11-13T10:07:34.4744716Z Starting download of artifact to: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T10:07:34.8431743Z (node:2966) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T10:07:36.7256338Z SHA256 digest of downloaded artifact is 0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301
+2026-11-13T10:07:36.7257623Z Artifact download completed successfully.
+2026-11-13T10:07:36.7258195Z Total of 1 artifact(s) downloaded
+2026-11-13T10:07:36.7266973Z Download artifact has finished successfully
+2026-11-13T10:07:36.7455767Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T10:07:36.7456227Z with:
+2026-11-13T10:07:36.7456471Z   name: cpu-distribution-calibration-evidence
+2026-11-13T10:07:36.7457108Z   run-id: 43296543822
+2026-11-13T10:07:36.7459733Z   github-token: ***
+2026-11-13T10:07:36.7460001Z   path: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T10:07:36.7460314Z   merge-multiple: false
+2026-11-13T10:07:36.7460558Z   repository: Afloat16/onnxruntime
+2026-11-13T10:07:36.7460805Z env:
+2026-11-13T10:07:36.7460997Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:07:36.7484380Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:07:36.7484970Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:07:36.7485575Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:36.7486214Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:07:36.7487235Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:36.7487892Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:36.7488580Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:36.7489250Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:07:36.7489842Z ##[endgroup]
+2026-11-13T10:07:36.9096709Z Downloading single artifact
+2026-11-13T10:07:36.9200718Z (node:2978) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:07:36.9201996Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:07:36.9388285Z (node:2978) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T10:07:37.1264228Z Preparing to download the following artifacts:
+2026-11-13T10:07:37.1266250Z - cpu-distribution-calibration-evidence (ID: 13981818755, Size: 64428, Expected Digest: sha256:53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec)
+2026-11-13T10:07:37.1309737Z Downloading artifact '13981818755' from 'Afloat16/onnxruntime'
+2026-11-13T10:07:37.4612990Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/b5c359d12481e2fcd67c56939a89868631bef8eee9f9477d17c7aaf2174630ca.zip
+2026-11-13T10:07:37.4615470Z Starting download of artifact to: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T10:07:37.8039591Z (node:2978) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T10:07:37.9361140Z SHA256 digest of downloaded artifact is 53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec
+2026-11-13T10:07:37.9362257Z Artifact download completed successfully.
+2026-11-13T10:07:37.9363033Z Total of 1 artifact(s) downloaded
+2026-11-13T10:07:37.9368521Z Download artifact has finished successfully
+2026-11-13T10:07:37.9518442Z ##[group]Run python -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12
+2026-11-13T10:07:37.9519568Z [36;1mpython -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12[0m
+2026-11-13T10:07:37.9520326Z [36;1mgit fetch --no-tags origin 8dea1194e974fa07b1d2f07a190949c3a92cab80[0m
+2026-11-13T10:07:37.9520724Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:07:37.9520977Z [36;1mimport hashlib[0m
+2026-11-13T10:07:37.9521198Z [36;1mimport json[0m
+2026-11-13T10:07:37.9521410Z [36;1mimport os[0m
+2026-11-13T10:07:37.9521614Z [36;1mimport shutil[0m
+2026-11-13T10:07:37.9521837Z [36;1mimport subprocess[0m
+2026-11-13T10:07:37.9522085Z [36;1mfrom pathlib import Path[0m
+2026-11-13T10:07:37.9522344Z [36;1mimport onnxruntime[0m
+2026-11-13T10:07:37.9522621Z [36;1mfrom onnxruntime import quantization[0m
+2026-11-13T10:07:37.9523053Z [36;1mbuilt_commit = "8dea1194e974fa07b1d2f07a190949c3a92cab80"[0m
+2026-11-13T10:07:37.9523474Z [36;1mbase_commit = "a8246c0d094f1ab0d6bf236228e5e67683321cd7"[0m
+2026-11-13T10:07:37.9523983Z [36;1msource_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()[0m
+2026-11-13T10:07:37.9524742Z [36;1mprovenance = json.loads((Path(os.environ["RUNNER_TEMP"]) / "ort-build-evidence/ort-source-build-metadata.json").read_text())[0m
+2026-11-13T10:07:37.9525394Z [36;1massert provenance["source_commit"] == built_commit[0m
+2026-11-13T10:07:37.9525764Z [36;1mfor revision in (built_commit, source_commit):[0m
+2026-11-13T10:07:37.9526324Z [36;1m    paths = subprocess.check_output(["git", "diff", "--name-only", base_commit, revision], text=True).splitlines()[0m
+2026-11-13T10:07:37.9527594Z [36;1m    assert all(path.startswith(("onnxruntime/python/tools/quantization/", "onnxruntime/test/python/quantization/")) for path in paths), paths[0m
+2026-11-13T10:07:37.9528310Z [36;1msource = Path("onnxruntime/python/tools/quantization")[0m
+2026-11-13T10:07:37.9528699Z [36;1mdestination = Path(quantization.__file__).parent[0m
+2026-11-13T10:07:37.9529093Z [36;1mshutil.copytree(source, destination, dirs_exist_ok=True)[0m
+2026-11-13T10:07:37.9529478Z [36;1mfor cache in destination.rglob("__pycache__"):[0m
+2026-11-13T10:07:37.9529791Z [36;1m    shutil.rmtree(cache)[0m
+2026-11-13T10:07:37.9530031Z [36;1mhashes = {}[0m
+2026-11-13T10:07:37.9530271Z [36;1mfor path in source.rglob("*.py"):[0m
+2026-11-13T10:07:37.9530610Z [36;1m    installed = destination / path.relative_to(source)[0m
+2026-11-13T10:07:37.9531028Z [36;1m    assert installed.read_bytes() == path.read_bytes(), installed[0m
+2026-11-13T10:07:37.9531581Z [36;1m    hashes[str(path.relative_to(source))] = hashlib.sha256(installed.read_bytes()).hexdigest()[0m
+2026-11-13T10:07:37.9532169Z [36;1massert "CPUExecutionProvider" in onnxruntime.get_available_providers()[0m
+2026-11-13T10:07:37.9532759Z [36;1mmetadata = {[0m
+2026-11-13T10:07:37.9532999Z [36;1m    "source_commit": source_commit,[0m
+2026-11-13T10:07:37.9533315Z [36;1m    "native_build_source_commit": built_commit,[0m
+2026-11-13T10:07:37.9533661Z [36;1m    "common_native_source_base": base_commit,[0m
+2026-11-13T10:07:37.9533969Z [36;1m    "native_build_run": 43296543822,[0m
+2026-11-13T10:07:37.9534267Z [36;1m    "native_wheel_artifact": 13982605959,[0m
+2026-11-13T10:07:37.9534586Z [36;1m    "runtime_version": onnxruntime.__version__,[0m
+2026-11-13T10:07:37.9534912Z [36;1m    "runtime_path": onnxruntime.__file__,[0m
+2026-11-13T10:07:37.9535242Z [36;1m    "quantization_path": str(destination),[0m
+2026-11-13T10:07:37.9535549Z [36;1m    "quantization_sha256": hashes,[0m
+2026-11-13T10:07:37.9536071Z [36;1m    "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged.",[0m
+2026-11-13T10:07:37.9536901Z [36;1m}[0m
+2026-11-13T10:07:37.9537497Z [36;1mPath("ort-source-overlay-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")[0m
+2026-11-13T10:07:37.9538022Z [36;1mprint(json.dumps(metadata, indent=2))[0m
+2026-11-13T10:07:37.9538314Z [36;1mPY[0m
+2026-11-13T10:07:37.9560271Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:07:37.9560528Z env:
+2026-11-13T10:07:37.9560731Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:07:37.9560988Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:07:37.9561292Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:07:37.9561659Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:37.9562078Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:07:37.9562497Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:37.9562877Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:37.9563249Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:07:37.9563638Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:07:37.9563965Z ##[endgroup]
+2026-11-13T10:07:38.3626361Z Processing /home/runner/work/_temp/ort-built-wheel/onnxruntime-1.33.0-cp312-cp312-linux_x86_64.whl
+2026-11-13T10:07:38.6647240Z Collecting numpy==2.3.5
+2026-11-13T10:07:38.7111947Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-11-13T10:07:38.7954463Z Collecting onnx==1.20.1
+2026-11-13T10:07:38.8049308Z   Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.4 kB)
+2026-11-13T10:07:38.8346104Z Collecting ml_dtypes
+2026-11-13T10:07:38.8427657Z   Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+2026-11-13T10:07:38.8832629Z Collecting pytest==9.1.1
+2026-11-13T10:07:38.8912503Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-11-13T10:07:39.2460521Z Collecting ruff==0.12.12
+2026-11-13T10:07:39.2539287Z   Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2026-11-13T10:07:39.4319464Z Collecting protobuf>=4.25.1 (from onnx==1.20.1)
+2026-11-13T10:07:39.4400273Z   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+2026-11-13T10:07:39.4615884Z Collecting typing_extensions>=4.7.1 (from onnx==1.20.1)
+2026-11-13T10:07:39.4698498Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-13T10:07:39.4872938Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1)
+2026-11-13T10:07:39.4949868Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-13T10:07:39.5164432Z Collecting packaging>=22 (from pytest==9.1.1)
+2026-11-13T10:07:39.5241449Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-13T10:07:39.5422052Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1)
+2026-11-13T10:07:39.5500851Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-13T10:07:39.5752198Z Collecting pygments>=2.7.2 (from pytest==9.1.1)
+2026-11-13T10:07:39.5831551Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-13T10:07:39.6025467Z Collecting flatbuffers (from onnxruntime==1.33.0)
+2026-11-13T10:07:39.6102193Z   Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+2026-11-13T10:07:39.6604942Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-11-13T10:07:39.7352573Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 259.2 MB/s eta 0:00:00
+2026-11-13T10:07:39.7468131Z Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (17.5 MB)
+2026-11-13T10:07:39.8278464Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.5/17.5 MB 220.3 MB/s eta 0:00:00
+2026-11-13T10:07:39.8356295Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-11-13T10:07:39.8467432Z Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+2026-11-13T10:07:39.9188413Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 188.1 MB/s eta 0:00:00
+2026-11-13T10:07:39.9266158Z Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (409 kB)
+2026-11-13T10:07:39.9384588Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-13T10:07:39.9479635Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-13T10:07:39.9580333Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-13T10:07:39.9676139Z Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+2026-11-13T10:07:39.9781954Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-13T10:07:39.9855954Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 214.4 MB/s eta 0:00:00
+2026-11-13T10:07:39.9933731Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-13T10:07:40.0035760Z Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+2026-11-13T10:07:40.2021813Z Installing collected packages: flatbuffers, typing_extensions, ruff, pygments, protobuf, pluggy, packaging, numpy, iniconfig, pytest, onnxruntime, ml_dtypes, onnx
+2026-11-13T10:07:47.0127012Z Successfully installed flatbuffers-25.12.19 iniconfig-2.3.1 ml_dtypes-0.6.0 numpy-2.3.5 onnx-1.20.1 onnxruntime-1.33.0 packaging-26.3 pluggy-1.7.0 protobuf-7.36.2 pygments-2.21.0 pytest-9.1.1 ruff-0.12.12 typing_extensions-4.16.0
+2026-11-13T10:07:47.1165670Z 
+2026-11-13T10:07:47.1166368Z [notice] A new release of pip is available: 25.0.1 -> 26.3
+2026-11-13T10:07:47.1167167Z [notice] To update, run: pip install --upgrade pip
+2026-11-13T10:08:02.9202492Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T10:08:02.9203153Z  * branch              8dea1194e974fa07b1d2f07a190949c3a92cab80 -> FETCH_HEAD
+2026-11-13T10:08:03.0412783Z [0;93m2026-11-13 10:08:03.040911661 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T10:08:03.2049416Z {
+2026-11-13T10:08:03.2050106Z   "source_commit": "5c574563ff5a3707345cd40f507e4c0cdbfb438f",
+2026-11-13T10:08:03.2050984Z   "native_build_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+2026-11-13T10:08:03.2051912Z   "common_native_source_base": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+2026-11-13T10:08:03.2052635Z   "native_build_run": 43296543822,
+2026-11-13T10:08:03.2053145Z   "native_wheel_artifact": 13982605959,
+2026-11-13T10:08:03.2053644Z   "runtime_version": "1.33.0",
+2026-11-13T10:08:03.2054716Z   "runtime_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/__init__.py",
+2026-11-13T10:08:03.2056830Z   "quantization_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization",
+2026-11-13T10:08:03.2058105Z   "quantization_sha256": {
+2026-11-13T10:08:03.2058942Z     "onnx_model.py": "3d98ad52611d43a1e89a0e7cb5e2f376f850bf2640a783a5e627f9c21c7f74b8",
+2026-11-13T10:08:03.2060714Z     "cuda_quantizer.py": "1e4dbc4f780c06a281054aac00fbbb7e136dfee1c29eee350c3e3dd420310e55",
+2026-11-13T10:08:03.2061761Z     "registry.py": "342e55d91f62a64fcd4e4d721a0ac568af69c822a7557312d8bd69a4adc3a5f5",
+2026-11-13T10:08:03.2062711Z     "calibrate.py": "dd84a7663166b2eb013ac51c1184cd36c689786813d49916cd5a7b779b39bea0",
+2026-11-13T10:08:03.2063748Z     "matmul_nbits_quantizer.py": "04feb252358ee7f20758a732537adff49fb10c7e80e84e358a4eb4c763bc3903",
+2026-11-13T10:08:03.2064626Z     "shape_inference.py": "f1fc6a69fd829d29963ba6d90a6b81d16b7ef3536a7a0dffacf8e3858ef5c227",
+2026-11-13T10:08:03.2065303Z     "qdq_quantizer.py": "6c6c061ae90ea4a0d6a8b5d2314e764bf1b0c4245ed4dafcd72d1603cd69683b",
+2026-11-13T10:08:03.2065949Z     "qdq_loss_debug.py": "f8fcf18ea1e0081ba77ecb6664e67650c068bdf206f0d3ff63351833da480629",
+2026-11-13T10:08:03.2066917Z     "tensor_quant_overrides.py": "6df028cd14bf2919ead19d103aad77331fe4fde186a90f8a74f440384932a0c9",
+2026-11-13T10:08:03.2068336Z     "__init__.py": "e6a397c6f48639307150aa6d495826b3a3f3229220748a095837a592c9beac8c",
+2026-11-13T10:08:03.2069445Z     "static_quantize_runner.py": "656546050e54f699780c560b85b19209f9cbfdf6544a6bd046de4ea93d6c3a12",
+2026-11-13T10:08:03.2070218Z     "quant_utils.py": "dde7dfcc5c8af420f1ffae285c31c3e2ecce7d697497d6f70f57c7d7018dead9",
+2026-11-13T10:08:03.2070893Z     "matmul_bnb4_quantizer.py": "2afb1460ff720f0fee991f2f12434d4a154059f00847e96853151041735fcff6",
+2026-11-13T10:08:03.2071575Z     "onnx_quantizer.py": "f9c3705d631ff38231b4787f89e487274a8768122d79c11a3a6f0ce7caf62dc9",
+2026-11-13T10:08:03.2072160Z     "preprocess.py": "105d56a717cc3a81922596c1d3804bf4ae3e9801d8ef15a3e6d86fcf5b7ae1d7",
+2026-11-13T10:08:03.2072730Z     "base_quantizer.py": "750f1ae870b793a140938a83c9f72fa361ecf3e5c36257bc9482a6e1e0463335",
+2026-11-13T10:08:03.2073291Z     "quantize.py": "b96538a6a4f2311cf9af9ece760170b3d90c527cd7dfc4760ad8cafbbf694324",
+2026-11-13T10:08:03.2073928Z     "execution_providers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T10:08:03.2074572Z     "fusions/fusion.py": "f2f4cb00704942a8143f02b6539c9de94c14b64d4c1cfc8ace52e3fb89574112",
+2026-11-13T10:08:03.2075226Z     "fusions/replace_upsample_with_resize.py": "21663d11455fde7190b9aa04c334a798f8383059af561527ac309398b7cba3bc",
+2026-11-13T10:08:03.2075890Z     "fusions/__init__.py": "f05e55a909e2a9aedaec74ef9451aff14e65b6f059f9215ad936310ab822ab24",
+2026-11-13T10:08:03.2076741Z     "fusions/fusion_gelu.py": "a2216ab4e51cba690f6601f96dd4aa9ad7a898ce9611a7b0c0cd7cc29bf79b2c",
+2026-11-13T10:08:03.2077430Z     "fusions/fusion_layernorm.py": "5347c96082498172da1d61742ec120746b3fd7d8a9b27ff397cd1ba9b0806784",
+2026-11-13T10:08:03.2078038Z     "operators/conv.py": "be3bc477995318cfd45619453444abb19638e746b6907318cacfe54ec1b34d7e",
+2026-11-13T10:08:03.2078605Z     "operators/norm.py": "0da2c43dc5677e4c1a0fa7a94e0ac2ee1784f838e25814ecda8b0048c613f741",
+2026-11-13T10:08:03.2079193Z     "operators/maxpool.py": "b7357d17439efe5c35c9d22131ef0cc33f661fb395613cfee54031bc38dc265c",
+2026-11-13T10:08:03.2079796Z     "operators/where.py": "b43afc5d219013a56e43653f9a244db0e8b0efee9766478ef7a74cd67697e1e8",
+2026-11-13T10:08:03.2080402Z     "operators/activation.py": "63d8004592e07fedc847da426b135e541a06bb465889063c646e0a72dc3829ff",
+2026-11-13T10:08:03.2081089Z     "operators/qdq_base_operator.py": "833a553185bda598964606d9107a4a806b96a9c3a232cb18b61f93a7269ddac8",
+2026-11-13T10:08:03.2081710Z     "operators/pad.py": "92ee11d6df95801111f345685eb132ff8c41754a3dec363d7ac0df999d736b01",
+2026-11-13T10:08:03.2082306Z     "operators/concat.py": "731ec69fc8e1e1fa016e8a516f824f02836c4b23f500a737fe01969d5c891344",
+2026-11-13T10:08:03.2082892Z     "operators/lstm.py": "1cdd3fb3c00ded7503747824a1dbd773ba08e3172f4b63da9c6fe9238c613cec",
+2026-11-13T10:08:03.2083484Z     "operators/pooling.py": "65323c1632f093e79aa3bfaa638e5c0ac52da1b95956f27b3c86745bd629404c",
+2026-11-13T10:08:03.2084097Z     "operators/attention.py": "45b7d496416d2cfd4ee702e5c2fe47f18a2535e8dfd17cae07845fa8629595e3",
+2026-11-13T10:08:03.2084988Z     "operators/argmax.py": "86b3b40c8808df3c33956e8c7207d25b3f7b6d4bc7b96193b321f6ba11b540d1",
+2026-11-13T10:08:03.2085596Z     "operators/binary_op.py": "407cb36bfb9b087e8a2caa7b26d586a0d2d804e2d5c61b8287572b98860bf4ca",
+2026-11-13T10:08:03.2086196Z     "operators/matmul.py": "7d850ddaa686a670848662c50f2338a3e634a859b4b5c6efd6191bc60940d08e",
+2026-11-13T10:08:03.2087266Z     "operators/__init__.py": "7b531614058e27f1678fbea573c2e71b6dafd8ac22ff236f2a1d1aaa489d10a5",
+2026-11-13T10:08:03.2088343Z     "operators/direct_q8.py": "ed3514d7e2409b916efffe11a91c463e05f0aaa0f7ff472e4b44944788aa28d5",
+2026-11-13T10:08:03.2089401Z     "operators/gemm.py": "9077b95a0f33f0eb962ce2bd5f66b411ef268b80fba62a61269b327cfda6d1c4",
+2026-11-13T10:08:03.2090461Z     "operators/gather.py": "2cac2de86bcc9bcd327047580cf73bc8e0ecee1a52b832e279289bd7695b9b7a",
+2026-11-13T10:08:03.2091344Z     "operators/split.py": "1d76742cae13f2fb116e1c8723c0e30710a62769c0df321258cf486bdca50212",
+2026-11-13T10:08:03.2092134Z     "operators/base_operator.py": "74a29cf70d2a2e7afd1ceb4a4c6f222452993f037077956576efb544998fcaf9",
+2026-11-13T10:08:03.2092764Z     "operators/softmax.py": "377d90c9cf445eb62c4c84fd24e009804662f838740f81551c54ac98e226bd1d",
+2026-11-13T10:08:03.2093351Z     "operators/resize.py": "5caa4667dafb624f433982c041173f98acbe8ef884f375a74f8155eb908b4cb4",
+2026-11-13T10:08:03.2093980Z     "operators/embed_layernorm.py": "686ab6cb0e19b63be00b9fed78023f7c09f5f14120af54a126b5d3eedd7c2464",
+2026-11-13T10:08:03.2094625Z     "operators/gavgpool.py": "cdb2d953162af78b71f8e553656bfae005becbc32f9a4fb671740d6ca3352896",
+2026-11-13T10:08:03.2095276Z     "neural_compressor/onnx_model.py": "0f901eb2ee11bc2ec80a941e4072243ef472143b0e1becd020ad0de72f2d3563",
+2026-11-13T10:08:03.2095933Z     "neural_compressor/util.py": "20f54aa4817b69e5480e3bb456f460bcc3d53b9b12a8d1fecb038a182b968eaf",
+2026-11-13T10:08:03.2096892Z     "neural_compressor/weight_only.py": "2f7a7760a7dd7bbbd65a6ea0b46c876e2ce1fda0e34bccf0a54c946f6a676598",
+2026-11-13T10:08:03.2097590Z     "neural_compressor/__init__.py": "97eb008ba62d7bfb6234540b738dce6914085e0517358f1c091232e9db87f172",
+2026-11-13T10:08:03.2098262Z     "CalTableFlatBuffers/TrtTable.py": "eeb0e37992385ac644f978f88e601dbcceb10c6c42c256cb88889a87b05f1133",
+2026-11-13T10:08:03.2098947Z     "CalTableFlatBuffers/KeyValue.py": "fecc58656ee31b11d336456ad3e6e5fce4e8ab60dd31718e9e968756180dd8cb",
+2026-11-13T10:08:03.2099623Z     "CalTableFlatBuffers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T10:08:03.2100358Z     "execution_providers/qnn/quant_config.py": "07a58ddb57eaf0a4a17550bf86bebeee1c8c739a65a92b30368ad4629b9c68d4",
+2026-11-13T10:08:03.2101169Z     "execution_providers/qnn/fusion_lpnorm.py": "6767db32ff39da3cc2c9691f4d36acab90883d2bed0fe1161a6507d677c7cf5f",
+2026-11-13T10:08:03.2101949Z     "execution_providers/qnn/fusion_spacetodepth.py": "1fe6bea7151d14dc4e0c9bca81e6b251c65bc9297bb8b6c2c5ba43e5b0650575",
+2026-11-13T10:08:03.2102710Z     "execution_providers/qnn/__init__.py": "99a13e72b8e602904cfac188b98fcfce386542eb10afc0fe140840f5eaa6f758",
+2026-11-13T10:08:03.2103482Z     "execution_providers/qnn/mixed_precision_overrides_utils.py": "beff0aa9254a724556906333c169615ab64de047b45c09c1f325fee0b334da07",
+2026-11-13T10:08:03.2104267Z     "execution_providers/qnn/preprocess.py": "56997c1fa18cd53a176ca84706f9667c127c8a145b2265490c8177798b249665"
+2026-11-13T10:08:03.2104752Z   },
+2026-11-13T10:08:03.2105156Z   "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged."
+2026-11-13T10:08:03.2105628Z }
+2026-11-13T10:08:03.2519171Z ##[group]Run set -o pipefail
+2026-11-13T10:08:03.2519505Z [36;1mset -o pipefail[0m
+2026-11-13T10:08:03.2520595Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_float8_weight_statistics.py onnxruntime/test/python/quantization/test_quant_util.py 2>&1 | tee ort-patched.log[0m
+2026-11-13T10:08:03.2545412Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T10:08:03.2545778Z env:
+2026-11-13T10:08:03.2545978Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:08:03.2546250Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:08:03.2546823Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:08:03.2547228Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:03.2547673Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:08:03.2548171Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:03.2548565Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:03.2548952Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:03.2549341Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:08:03.2549671Z ##[endgroup]
+2026-11-13T10:08:03.3495647Z [0;93m2026-11-13 10:08:03.349142916 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T10:08:04.1844090Z .................                                       [100%]
+2026-11-13T10:08:04.1844849Z 17 passed, 161 subtests passed in 0.55s
+2026-11-13T10:08:04.2601154Z ##[group]Run python -P - <<'PY'
+2026-11-13T10:08:04.2601757Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:08:04.2602203Z [36;1mimport subprocess[0m
+2026-11-13T10:08:04.2602654Z [36;1mfrom pathlib import Path[0m
+2026-11-13T10:08:04.2603217Z [36;1mfrom onnxruntime.quantization import quant_utils[0m
+2026-11-13T10:08:04.2603834Z [36;1mtarget = Path(quant_utils.__file__)[0m
+2026-11-13T10:08:04.2605106Z [36;1mtarget.write_bytes(subprocess.check_output(["git", "show", "a8246c0d094f1ab0d6bf236228e5e67683321cd7:onnxruntime/python/tools/quantization/quant_utils.py"]))[0m
+2026-11-13T10:08:04.2606807Z [36;1mfor cache in target.parent.glob("__pycache__/quant_utils.*.pyc"):[0m
+2026-11-13T10:08:04.2607495Z [36;1m    cache.unlink()[0m
+2026-11-13T10:08:04.2607894Z [36;1mPY[0m
+2026-11-13T10:08:04.2640776Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:08:04.2641198Z env:
+2026-11-13T10:08:04.2641536Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:08:04.2642040Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:08:04.2642605Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:08:04.2643247Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:04.2643990Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:08:04.2644758Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:04.2645446Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:04.2646123Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:04.2647117Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:08:04.2647693Z ##[endgroup]
+2026-11-13T10:08:04.3738421Z [0;93m2026-11-13 10:08:04.373501326 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T10:08:04.5444793Z ##[group]Run set +e
+2026-11-13T10:08:04.5445093Z [36;1mset +e[0m
+2026-11-13T10:08:04.5445948Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_float8_weight_statistics.py > ort-baseline.log 2>&1[0m
+2026-11-13T10:08:04.5447120Z [36;1mresult=$?[0m
+2026-11-13T10:08:04.5447331Z [36;1mset -e[0m
+2026-11-13T10:08:04.5447729Z [36;1mcat ort-baseline.log[0m
+2026-11-13T10:08:04.5447979Z [36;1mtest "$result" -eq 1[0m
+2026-11-13T10:08:04.5448224Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:08:04.5448494Z [36;1mimport xml.etree.ElementTree as ET[0m
+2026-11-13T10:08:04.5448842Z [36;1mroot = ET.parse("ort-baseline.xml").getroot()[0m
+2026-11-13T10:08:04.5449491Z [36;1mfailed = {case.attrib["name"] for case in root.findall(".//testcase") if case.find("failure") is not None or case.find("error") is not None}[0m
+2026-11-13T10:08:04.5450128Z [36;1mrequired = {[0m
+2026-11-13T10:08:04.5450405Z [36;1m    "test_large_finite_weights_have_finite_scale",[0m
+2026-11-13T10:08:04.5450790Z [36;1m    "test_small_nonconstant_weights_have_nonzero_scale",[0m
+2026-11-13T10:08:04.5451207Z [36;1m    "test_quantized_codes_match_independent_scale_reference",[0m
+2026-11-13T10:08:04.5451604Z [36;1m    "test_native_cpu_dequantization_roundtrip",[0m
+2026-11-13T10:08:04.5451904Z [36;1m}[0m
+2026-11-13T10:08:04.5452173Z [36;1massert required <= failed, (required - failed, failed)[0m
+2026-11-13T10:08:04.5452645Z [36;1mprint("Confirmed original FLOAT8 statistics failures:", sorted(failed))[0m
+2026-11-13T10:08:04.5453046Z [36;1mPY[0m
+2026-11-13T10:08:04.5475305Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T10:08:04.5475660Z env:
+2026-11-13T10:08:04.5475859Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:08:04.5476108Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:08:04.5476434Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:08:04.5476986Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:04.5477421Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:08:04.5477852Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:04.5478232Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:04.5478614Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:04.5479008Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:08:04.5479344Z ##[endgroup]
+2026-11-13T10:08:05.3335605Z [0;93m2026-11-13 10:08:04.642840504 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T10:08:05.3338605Z ........                                   [100%]
+2026-11-13T10:08:05.3339210Z =================================== FAILURES ===================================
+2026-11-13T10:08:05.3340318Z _ TestFloat8WeightStatistics.test_large_finite_weights_have_finite_scale (dtype=<class 'numpy.float16'>, magnitude=60000) _
+2026-11-13T10:08:05.3341195Z 
+2026-11-13T10:08:05.3341898Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_large_finite_weights_have_finite_scale>
+2026-11-13T10:08:05.3342772Z 
+2026-11-13T10:08:05.3343029Z     def test_large_finite_weights_have_finite_scale(self):
+2026-11-13T10:08:05.3343948Z         for dtype, magnitude in ((np.float16, 60000), (np.float16, 1000), (np.float32, 1e30), (np.float32, 1e20)):
+2026-11-13T10:08:05.3344884Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3345527Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3346310Z                 zero, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3354222Z >               self.assertTrue(np.isfinite(scale))
+2026-11-13T10:08:05.3354605Z E               AssertionError: np.False_ is not true
+2026-11-13T10:08:05.3354834Z 
+2026-11-13T10:08:05.3355106Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:42: AssertionError
+2026-11-13T10:08:05.3355850Z _ TestFloat8WeightStatistics.test_large_finite_weights_have_finite_scale (dtype=<class 'numpy.float16'>, magnitude=1000) _
+2026-11-13T10:08:05.3356476Z 
+2026-11-13T10:08:05.3357206Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_large_finite_weights_have_finite_scale>
+2026-11-13T10:08:05.3357692Z 
+2026-11-13T10:08:05.3357846Z     def test_large_finite_weights_have_finite_scale(self):
+2026-11-13T10:08:05.3358368Z         for dtype, magnitude in ((np.float16, 60000), (np.float16, 1000), (np.float32, 1e30), (np.float32, 1e20)):
+2026-11-13T10:08:05.3358899Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3359261Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3359684Z                 zero, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3360127Z >               self.assertTrue(np.isfinite(scale))
+2026-11-13T10:08:05.3360445Z E               AssertionError: np.False_ is not true
+2026-11-13T10:08:05.3360654Z 
+2026-11-13T10:08:05.3360918Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:42: AssertionError
+2026-11-13T10:08:05.3361657Z _ TestFloat8WeightStatistics.test_large_finite_weights_have_finite_scale (dtype=<class 'numpy.float32'>, magnitude=1e+30) _
+2026-11-13T10:08:05.3362127Z 
+2026-11-13T10:08:05.3362496Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_large_finite_weights_have_finite_scale>
+2026-11-13T10:08:05.3362967Z 
+2026-11-13T10:08:05.3363106Z     def test_large_finite_weights_have_finite_scale(self):
+2026-11-13T10:08:05.3363622Z         for dtype, magnitude in ((np.float16, 60000), (np.float16, 1000), (np.float32, 1e30), (np.float32, 1e20)):
+2026-11-13T10:08:05.3364141Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3364497Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3364915Z                 zero, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3365344Z >               self.assertTrue(np.isfinite(scale))
+2026-11-13T10:08:05.3365661Z E               AssertionError: np.False_ is not true
+2026-11-13T10:08:05.3365856Z 
+2026-11-13T10:08:05.3366117Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:42: AssertionError
+2026-11-13T10:08:05.3367067Z _ TestFloat8WeightStatistics.test_large_finite_weights_have_finite_scale (dtype=<class 'numpy.float32'>, magnitude=1e+20) _
+2026-11-13T10:08:05.3367549Z 
+2026-11-13T10:08:05.3367910Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_large_finite_weights_have_finite_scale>
+2026-11-13T10:08:05.3368385Z 
+2026-11-13T10:08:05.3368531Z     def test_large_finite_weights_have_finite_scale(self):
+2026-11-13T10:08:05.3369032Z         for dtype, magnitude in ((np.float16, 60000), (np.float16, 1000), (np.float32, 1e30), (np.float32, 1e20)):
+2026-11-13T10:08:05.3369550Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3369898Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3370322Z                 zero, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3370760Z >               self.assertTrue(np.isfinite(scale))
+2026-11-13T10:08:05.3371071Z E               AssertionError: np.False_ is not true
+2026-11-13T10:08:05.3371273Z 
+2026-11-13T10:08:05.3371527Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:42: AssertionError
+2026-11-13T10:08:05.3372130Z _ TestFloat8WeightStatistics.test_native_cpu_dequantization_roundtrip (magnitude=1e+30) _
+2026-11-13T10:08:05.3372487Z 
+2026-11-13T10:08:05.3373007Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_native_cpu_dequantization_roundtrip>
+2026-11-13T10:08:05.3373465Z 
+2026-11-13T10:08:05.3373607Z     def test_native_cpu_dequantization_roundtrip(self):
+2026-11-13T10:08:05.3373923Z         for magnitude in (1e30, 1e-30):
+2026-11-13T10:08:05.3374346Z             with self.subTest(magnitude=magnitude), tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:08:05.3374933Z                 data = weight_values(np.float32, magnitude)
+2026-11-13T10:08:05.3375366Z                 zero, scale, quantized = quantize_data(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3375796Z                 expected_scale = reference_scale(data)
+2026-11-13T10:08:05.3376094Z                 model = helper.make_model(
+2026-11-13T10:08:05.3376372Z                     helper.make_graph(
+2026-11-13T10:08:05.3376877Z                         [
+2026-11-13T10:08:05.3377259Z                             helper.make_node("DequantizeLinear", ["weight", "scale", "zero"], ["bias"]),
+2026-11-13T10:08:05.3377723Z                             helper.make_node("Add", ["X", "bias"], ["Y"]),
+2026-11-13T10:08:05.3378035Z                         ],
+2026-11-13T10:08:05.3378276Z                         "float8_weight_statistics",
+2026-11-13T10:08:05.3378648Z                         [helper.make_tensor_value_info("X", TensorProto.FLOAT, [5])],
+2026-11-13T10:08:05.3379088Z                         [helper.make_tensor_value_info("Y", TensorProto.FLOAT, [5])],
+2026-11-13T10:08:05.3379441Z                         [
+2026-11-13T10:08:05.3379713Z                             numpy_helper.from_array(quantized, "weight"),
+2026-11-13T10:08:05.3380072Z                             numpy_helper.from_array(scale, "scale"),
+2026-11-13T10:08:05.3380414Z                             numpy_helper.from_array(zero, "zero"),
+2026-11-13T10:08:05.3380706Z                         ],
+2026-11-13T10:08:05.3380913Z                     ),
+2026-11-13T10:08:05.3381171Z                     opset_imports=[helper.make_opsetid("", 21)],
+2026-11-13T10:08:05.3381492Z                     ir_version=10,
+2026-11-13T10:08:05.3381722Z                 )
+2026-11-13T10:08:05.3381944Z                 onnx.checker.check_model(model)
+2026-11-13T10:08:05.3382258Z                 path = Path(directory) / "float8.onnx"
+2026-11-13T10:08:05.3382562Z                 onnx.save_model(model, path)
+2026-11-13T10:08:05.3382845Z                 stored = onnx.load_model(path)
+2026-11-13T10:08:05.3383285Z                 stored_scale = next(item for item in stored.graph.initializer if item.name == "scale")
+2026-11-13T10:08:05.3383876Z >               np.testing.assert_array_equal(numpy_helper.to_array(stored_scale), expected_scale)
+2026-11-13T10:08:05.3384308Z E               AssertionError: 
+2026-11-13T10:08:05.3384559Z E               Arrays are not equal
+2026-11-13T10:08:05.3384805Z E               
+2026-11-13T10:08:05.3385015Z E               +inf location mismatch:
+2026-11-13T10:08:05.3385303Z E                ACTUAL: array(inf, dtype=float32)
+2026-11-13T10:08:05.3385625Z E                DESIRED: array(7.066988e+27, dtype=float32)
+2026-11-13T10:08:05.3385843Z 
+2026-11-13T10:08:05.3386105Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:110: AssertionError
+2026-11-13T10:08:05.3386956Z _ TestFloat8WeightStatistics.test_native_cpu_dequantization_roundtrip (magnitude=1e-30) _
+2026-11-13T10:08:05.3387322Z 
+2026-11-13T10:08:05.3387680Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_native_cpu_dequantization_roundtrip>
+2026-11-13T10:08:05.3388147Z 
+2026-11-13T10:08:05.3388290Z     def test_native_cpu_dequantization_roundtrip(self):
+2026-11-13T10:08:05.3388605Z         for magnitude in (1e30, 1e-30):
+2026-11-13T10:08:05.3389028Z             with self.subTest(magnitude=magnitude), tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:08:05.3389501Z                 data = weight_values(np.float32, magnitude)
+2026-11-13T10:08:05.3390064Z >               zero, scale, quantized = quantize_data(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3390515Z                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:08:05.3390748Z 
+2026-11-13T10:08:05.3390957Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:85: 
+2026-11-13T10:08:05.3391414Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:08:05.3391643Z 
+2026-11-13T10:08:05.3391967Z data = array([-1.e-30, -5.e-31,  0.e+00,  5.e-31,  1.e-30], dtype=float32)
+2026-11-13T10:08:05.3392422Z qType = 17, symmetric = True, reduce_range = False, min_real_range = None
+2026-11-13T10:08:05.3392801Z rmin_override = None, rmax_override = None
+2026-11-13T10:08:05.3392990Z 
+2026-11-13T10:08:05.3393076Z     def quantize_data(
+2026-11-13T10:08:05.3393500Z         data, qType, symmetric, reduce_range=False, min_real_range=None, rmin_override=None, rmax_override=None
+2026-11-13T10:08:05.3394046Z     ) -> tuple[numpy.ndarray, numpy.ndarray, numpy.ndarray]:
+2026-11-13T10:08:05.3394370Z         """
+2026-11-13T10:08:05.3394572Z         :param data: data to quantize
+2026-11-13T10:08:05.3394855Z         :param qType: data type to quantize to.
+2026-11-13T10:08:05.3395226Z         :param symmetric: whether symmetric quantization is used or not.
+2026-11-13T10:08:05.3395772Z         :parameter reduce_range: True if the quantization range should be reduced. Defaults to False.
+2026-11-13T10:08:05.3396449Z         :parameter min_real_range: Minimum floating-point range (i.e., rmax - rmin) to enforce. Defaults to None.
+2026-11-13T10:08:05.3397337Z         :parameter rmin_override: The value of rmin to use if not None. Otherwise, uses min(data).
+2026-11-13T10:08:05.3397926Z         :parameter rmax_override: The value of rmax to use if not None. Otherwise, uses max(data).
+2026-11-13T10:08:05.3398472Z         :return: minimum, maximum, zero point, scale, and quantized weights
+2026-11-13T10:08:05.3398831Z     
+2026-11-13T10:08:05.3399076Z         To pack weights, we compute a linear transformation
+2026-11-13T10:08:05.3399380Z     
+2026-11-13T10:08:05.3399684Z         - when data `type == uint8` mode, from `[rmin, rmax]` -> :math:`[0, 2^{b-1}]` and
+2026-11-13T10:08:05.3400195Z         - when data `type == int8`, from `[-m , m]` -> :math:`[-(2^{b-1}-1), 2^{b-1}-1]` where
+2026-11-13T10:08:05.3400594Z             `m = max(abs(rmin), abs(rmax))`
+2026-11-13T10:08:05.3400847Z     
+2026-11-13T10:08:05.3401245Z         and add necessary intermediate nodes to transform quantized weight to full weight using the equation
+2026-11-13T10:08:05.3401723Z     
+2026-11-13T10:08:05.3401915Z         :math:`r = S(q-z)`, where
+2026-11-13T10:08:05.3402150Z     
+2026-11-13T10:08:05.3402332Z         - *r*: real original value
+2026-11-13T10:08:05.3402590Z         - *q*: quantized value
+2026-11-13T10:08:05.3402826Z         - *S*: scale
+2026-11-13T10:08:05.3403035Z         - *z*: zero point
+2026-11-13T10:08:05.3403248Z         """
+2026-11-13T10:08:05.3403476Z         zero_point, scale = compute_data_quant_params(
+2026-11-13T10:08:05.3403770Z             data,
+2026-11-13T10:08:05.3403968Z             qType,
+2026-11-13T10:08:05.3404174Z             symmetric,
+2026-11-13T10:08:05.3404378Z             reduce_range,
+2026-11-13T10:08:05.3404590Z             min_real_range,
+2026-11-13T10:08:05.3404891Z             rmin_override,
+2026-11-13T10:08:05.3405112Z             rmax_override,
+2026-11-13T10:08:05.3405330Z         )
+2026-11-13T10:08:05.3405551Z         if qType == TensorProto.FLOAT8E4M3FN:
+2026-11-13T10:08:05.3405958Z             quantized_data = quantize_nparray(qType, data, scale, zero_point)
+2026-11-13T10:08:05.3406424Z             if any((quantized_data.view(numpy.uint8).ravel() & 127) == 127):
+2026-11-13T10:08:05.3407115Z                 np_data = numpy.asarray(data)
+2026-11-13T10:08:05.3407398Z >               raise RuntimeError(
+2026-11-13T10:08:05.3407797Z                     f"One of the quantized value is NaN data in [{np_data.min()}, {np_data.max()}], "
+2026-11-13T10:08:05.3408521Z                     f"quantized_data in [{quantized_data.min()}, {quantized_data.max()}]."
+2026-11-13T10:08:05.3408900Z                 )
+2026-11-13T10:08:05.3409417Z E               RuntimeError: One of the quantized value is NaN data in [-1.0000000031710769e-30, 1.0000000031710769e-30], quantized_data in [nan, nan].
+2026-11-13T10:08:05.3409903Z 
+2026-11-13T10:08:05.3410272Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/quant_utils.py:609: RuntimeError
+2026-11-13T10:08:05.3411199Z _ TestFloat8WeightStatistics.test_ordinary_scale_dtype_and_options (dtype=<class 'numpy.float16'>, symmetric=False) _
+2026-11-13T10:08:05.3411657Z 
+2026-11-13T10:08:05.3412013Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_ordinary_scale_dtype_and_options>
+2026-11-13T10:08:05.3412454Z 
+2026-11-13T10:08:05.3412586Z     def test_ordinary_scale_dtype_and_options(self):
+2026-11-13T10:08:05.3412907Z         for dtype in (np.float16, np.float32):
+2026-11-13T10:08:05.3413203Z             for symmetric in (False, True):
+2026-11-13T10:08:05.3413531Z                 with self.subTest(dtype=dtype, symmetric=symmetric):
+2026-11-13T10:08:05.3413903Z                     data = np.array([-3, -1, 0, 2, 5], dtype=dtype)
+2026-11-13T10:08:05.3414245Z                     zero, scale = compute_data_quant_params(
+2026-11-13T10:08:05.3414712Z                         data, TensorProto.FLOAT8E4M3FN, symmetric, rmin_override=-100, rmax_override=100
+2026-11-13T10:08:05.3415150Z                     )
+2026-11-13T10:08:05.3415445Z >                   np.testing.assert_array_equal(scale, reference_scale(data))
+2026-11-13T10:08:05.3415803Z E                   AssertionError: 
+2026-11-13T10:08:05.3416064Z E                   Arrays are not equal
+2026-11-13T10:08:05.3416316Z E                   
+2026-11-13T10:08:05.3416793Z E                   Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3417151Z E                   Max absolute difference among violations: 1.526e-05
+2026-11-13T10:08:05.3417531Z E                   Max relative difference among violations: 0.00056
+2026-11-13T10:08:05.3417881Z E                    ACTUAL: array(0.02725, dtype=float16)
+2026-11-13T10:08:05.3418203Z E                    DESIRED: array(0.02727, dtype=float16)
+2026-11-13T10:08:05.3418407Z 
+2026-11-13T10:08:05.3418672Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:142: AssertionError
+2026-11-13T10:08:05.3419381Z _ TestFloat8WeightStatistics.test_ordinary_scale_dtype_and_options (dtype=<class 'numpy.float16'>, symmetric=True) _
+2026-11-13T10:08:05.3419829Z 
+2026-11-13T10:08:05.3420182Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_ordinary_scale_dtype_and_options>
+2026-11-13T10:08:05.3420627Z 
+2026-11-13T10:08:05.3420751Z     def test_ordinary_scale_dtype_and_options(self):
+2026-11-13T10:08:05.3421071Z         for dtype in (np.float16, np.float32):
+2026-11-13T10:08:05.3421368Z             for symmetric in (False, True):
+2026-11-13T10:08:05.3421707Z                 with self.subTest(dtype=dtype, symmetric=symmetric):
+2026-11-13T10:08:05.3422077Z                     data = np.array([-3, -1, 0, 2, 5], dtype=dtype)
+2026-11-13T10:08:05.3422416Z                     zero, scale = compute_data_quant_params(
+2026-11-13T10:08:05.3422906Z                         data, TensorProto.FLOAT8E4M3FN, symmetric, rmin_override=-100, rmax_override=100
+2026-11-13T10:08:05.3423335Z                     )
+2026-11-13T10:08:05.3423631Z >                   np.testing.assert_array_equal(scale, reference_scale(data))
+2026-11-13T10:08:05.3423996Z E                   AssertionError: 
+2026-11-13T10:08:05.3424251Z E                   Arrays are not equal
+2026-11-13T10:08:05.3424500Z E                   
+2026-11-13T10:08:05.3424727Z E                   Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3425065Z E                   Max absolute difference among violations: 1.526e-05
+2026-11-13T10:08:05.3425437Z E                   Max relative difference among violations: 0.00056
+2026-11-13T10:08:05.3425905Z E                    ACTUAL: array(0.02725, dtype=float16)
+2026-11-13T10:08:05.3426230Z E                    DESIRED: array(0.02727, dtype=float16)
+2026-11-13T10:08:05.3426434Z 
+2026-11-13T10:08:05.3426822Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:142: AssertionError
+2026-11-13T10:08:05.3427596Z _ TestFloat8WeightStatistics.test_quantized_codes_match_independent_scale_reference (dtype=<class 'numpy.float16'>, magnitude=60000) _
+2026-11-13T10:08:05.3428235Z 
+2026-11-13T10:08:05.3428646Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_quantized_codes_match_independent_scale_reference>
+2026-11-13T10:08:05.3429147Z 
+2026-11-13T10:08:05.3429321Z     def test_quantized_codes_match_independent_scale_reference(self):
+2026-11-13T10:08:05.3429679Z         for dtype, magnitude in (
+2026-11-13T10:08:05.3429932Z             (np.float16, 60000),
+2026-11-13T10:08:05.3430171Z             (np.float16, 1e-4),
+2026-11-13T10:08:05.3430408Z             (np.float32, 1e30),
+2026-11-13T10:08:05.3430641Z             (np.float32, 1e-30),
+2026-11-13T10:08:05.3430875Z             (np.float16, 1),
+2026-11-13T10:08:05.3431101Z             (np.float32, 1),
+2026-11-13T10:08:05.3431326Z         ):
+2026-11-13T10:08:05.3431571Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3431918Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3432322Z                 _, scale, quantized = quantize_data(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3432759Z                 expected_scale = reference_scale(data)
+2026-11-13T10:08:05.3433057Z                 expected = np.array(
+2026-11-13T10:08:05.3433386Z                     [float(value) / float(expected_scale) for value in data],
+2026-11-13T10:08:05.3433738Z                     dtype=float8_e4m3fn,
+2026-11-13T10:08:05.3433981Z                 )
+2026-11-13T10:08:05.3434270Z                 self.assertEqual(quantized.dtype, np.dtype(float8_e4m3fn))
+2026-11-13T10:08:05.3434679Z >               np.testing.assert_array_equal(scale, expected_scale)
+2026-11-13T10:08:05.3435009Z E               AssertionError: 
+2026-11-13T10:08:05.3435253Z E               Arrays are not equal
+2026-11-13T10:08:05.3435492Z E               
+2026-11-13T10:08:05.3435701Z E               +inf location mismatch:
+2026-11-13T10:08:05.3435980Z E                ACTUAL: array(inf, dtype=float16)
+2026-11-13T10:08:05.3436287Z E                DESIRED: array(424., dtype=float16)
+2026-11-13T10:08:05.3436679Z 
+2026-11-13T10:08:05.3437048Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:77: AssertionError
+2026-11-13T10:08:05.3438036Z _ TestFloat8WeightStatistics.test_quantized_codes_match_independent_scale_reference (dtype=<class 'numpy.float16'>, magnitude=0.0001) _
+2026-11-13T10:08:05.3438550Z 
+2026-11-13T10:08:05.3438964Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_quantized_codes_match_independent_scale_reference>
+2026-11-13T10:08:05.3439466Z 
+2026-11-13T10:08:05.3439651Z     def test_quantized_codes_match_independent_scale_reference(self):
+2026-11-13T10:08:05.3440010Z         for dtype, magnitude in (
+2026-11-13T10:08:05.3440254Z             (np.float16, 60000),
+2026-11-13T10:08:05.3440493Z             (np.float16, 1e-4),
+2026-11-13T10:08:05.3440721Z             (np.float32, 1e30),
+2026-11-13T10:08:05.3440952Z             (np.float32, 1e-30),
+2026-11-13T10:08:05.3441308Z             (np.float16, 1),
+2026-11-13T10:08:05.3441566Z             (np.float32, 1),
+2026-11-13T10:08:05.3441778Z         ):
+2026-11-13T10:08:05.3442025Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3442414Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3442959Z >               _, scale, quantized = quantize_data(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3443450Z                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:08:05.3443757Z 
+2026-11-13T10:08:05.3444219Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:70: 
+2026-11-13T10:08:05.3444776Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:08:05.3445070Z 
+2026-11-13T10:08:05.3445343Z data = array([-1.e-04, -5.e-05,  0.e+00,  5.e-05,  1.e-04], dtype=float16)
+2026-11-13T10:08:05.3445793Z qType = 17, symmetric = True, reduce_range = False, min_real_range = None
+2026-11-13T10:08:05.3446300Z rmin_override = None, rmax_override = None
+2026-11-13T10:08:05.3446786Z 
+2026-11-13T10:08:05.3446921Z     def quantize_data(
+2026-11-13T10:08:05.3447356Z         data, qType, symmetric, reduce_range=False, min_real_range=None, rmin_override=None, rmax_override=None
+2026-11-13T10:08:05.3447895Z     ) -> tuple[numpy.ndarray, numpy.ndarray, numpy.ndarray]:
+2026-11-13T10:08:05.3448214Z         """
+2026-11-13T10:08:05.3448413Z         :param data: data to quantize
+2026-11-13T10:08:05.3448696Z         :param qType: data type to quantize to.
+2026-11-13T10:08:05.3449070Z         :param symmetric: whether symmetric quantization is used or not.
+2026-11-13T10:08:05.3449598Z         :parameter reduce_range: True if the quantization range should be reduced. Defaults to False.
+2026-11-13T10:08:05.3450263Z         :parameter min_real_range: Minimum floating-point range (i.e., rmax - rmin) to enforce. Defaults to None.
+2026-11-13T10:08:05.3450933Z         :parameter rmin_override: The value of rmin to use if not None. Otherwise, uses min(data).
+2026-11-13T10:08:05.3451533Z         :parameter rmax_override: The value of rmax to use if not None. Otherwise, uses max(data).
+2026-11-13T10:08:05.3452061Z         :return: minimum, maximum, zero point, scale, and quantized weights
+2026-11-13T10:08:05.3452411Z     
+2026-11-13T10:08:05.3452649Z         To pack weights, we compute a linear transformation
+2026-11-13T10:08:05.3452947Z     
+2026-11-13T10:08:05.3453249Z         - when data `type == uint8` mode, from `[rmin, rmax]` -> :math:`[0, 2^{b-1}]` and
+2026-11-13T10:08:05.3453759Z         - when data `type == int8`, from `[-m , m]` -> :math:`[-(2^{b-1}-1), 2^{b-1}-1]` where
+2026-11-13T10:08:05.3454156Z             `m = max(abs(rmin), abs(rmax))`
+2026-11-13T10:08:05.3454410Z     
+2026-11-13T10:08:05.3454797Z         and add necessary intermediate nodes to transform quantized weight to full weight using the equation
+2026-11-13T10:08:05.3455269Z     
+2026-11-13T10:08:05.3455451Z         :math:`r = S(q-z)`, where
+2026-11-13T10:08:05.3455688Z     
+2026-11-13T10:08:05.3455873Z         - *r*: real original value
+2026-11-13T10:08:05.3456122Z         - *q*: quantized value
+2026-11-13T10:08:05.3456350Z         - *S*: scale
+2026-11-13T10:08:05.3456809Z         - *z*: zero point
+2026-11-13T10:08:05.3457026Z         """
+2026-11-13T10:08:05.3457245Z         zero_point, scale = compute_data_quant_params(
+2026-11-13T10:08:05.3457527Z             data,
+2026-11-13T10:08:05.3457719Z             qType,
+2026-11-13T10:08:05.3457916Z             symmetric,
+2026-11-13T10:08:05.3458118Z             reduce_range,
+2026-11-13T10:08:05.3458340Z             min_real_range,
+2026-11-13T10:08:05.3458556Z             rmin_override,
+2026-11-13T10:08:05.3458770Z             rmax_override,
+2026-11-13T10:08:05.3458975Z         )
+2026-11-13T10:08:05.3459183Z         if qType == TensorProto.FLOAT8E4M3FN:
+2026-11-13T10:08:05.3459555Z             quantized_data = quantize_nparray(qType, data, scale, zero_point)
+2026-11-13T10:08:05.3459999Z             if any((quantized_data.view(numpy.uint8).ravel() & 127) == 127):
+2026-11-13T10:08:05.3460364Z                 np_data = numpy.asarray(data)
+2026-11-13T10:08:05.3460642Z >               raise RuntimeError(
+2026-11-13T10:08:05.3461032Z                     f"One of the quantized value is NaN data in [{np_data.min()}, {np_data.max()}], "
+2026-11-13T10:08:05.3461550Z                     f"quantized_data in [{quantized_data.min()}, {quantized_data.max()}]."
+2026-11-13T10:08:05.3461913Z                 )
+2026-11-13T10:08:05.3462561Z E               RuntimeError: One of the quantized value is NaN data in [-0.00010001659393310547, 0.00010001659393310547], quantized_data in [nan, nan].
+2026-11-13T10:08:05.3463066Z 
+2026-11-13T10:08:05.3463430Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/quant_utils.py:609: RuntimeError
+2026-11-13T10:08:05.3464295Z _ TestFloat8WeightStatistics.test_quantized_codes_match_independent_scale_reference (dtype=<class 'numpy.float32'>, magnitude=1e+30) _
+2026-11-13T10:08:05.3464919Z 
+2026-11-13T10:08:05.3465334Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_quantized_codes_match_independent_scale_reference>
+2026-11-13T10:08:05.3465833Z 
+2026-11-13T10:08:05.3466010Z     def test_quantized_codes_match_independent_scale_reference(self):
+2026-11-13T10:08:05.3466369Z         for dtype, magnitude in (
+2026-11-13T10:08:05.3466750Z             (np.float16, 60000),
+2026-11-13T10:08:05.3466991Z             (np.float16, 1e-4),
+2026-11-13T10:08:05.3467222Z             (np.float32, 1e30),
+2026-11-13T10:08:05.3467455Z             (np.float32, 1e-30),
+2026-11-13T10:08:05.3467692Z             (np.float16, 1),
+2026-11-13T10:08:05.3467928Z             (np.float32, 1),
+2026-11-13T10:08:05.3468142Z         ):
+2026-11-13T10:08:05.3468384Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3468732Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3469136Z                 _, scale, quantized = quantize_data(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3469560Z                 expected_scale = reference_scale(data)
+2026-11-13T10:08:05.3469848Z                 expected = np.array(
+2026-11-13T10:08:05.3470171Z                     [float(value) / float(expected_scale) for value in data],
+2026-11-13T10:08:05.3470518Z                     dtype=float8_e4m3fn,
+2026-11-13T10:08:05.3470771Z                 )
+2026-11-13T10:08:05.3471054Z                 self.assertEqual(quantized.dtype, np.dtype(float8_e4m3fn))
+2026-11-13T10:08:05.3471471Z >               np.testing.assert_array_equal(scale, expected_scale)
+2026-11-13T10:08:05.3471793Z E               AssertionError: 
+2026-11-13T10:08:05.3472034Z E               Arrays are not equal
+2026-11-13T10:08:05.3472279Z E               
+2026-11-13T10:08:05.3472489Z E               +inf location mismatch:
+2026-11-13T10:08:05.3472773Z E                ACTUAL: array(inf, dtype=float32)
+2026-11-13T10:08:05.3473086Z E                DESIRED: array(7.066988e+27, dtype=float32)
+2026-11-13T10:08:05.3473307Z 
+2026-11-13T10:08:05.3473572Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:77: AssertionError
+2026-11-13T10:08:05.3474448Z _ TestFloat8WeightStatistics.test_quantized_codes_match_independent_scale_reference (dtype=<class 'numpy.float32'>, magnitude=1e-30) _
+2026-11-13T10:08:05.3474957Z 
+2026-11-13T10:08:05.3475376Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_quantized_codes_match_independent_scale_reference>
+2026-11-13T10:08:05.3475881Z 
+2026-11-13T10:08:05.3476057Z     def test_quantized_codes_match_independent_scale_reference(self):
+2026-11-13T10:08:05.3476416Z         for dtype, magnitude in (
+2026-11-13T10:08:05.3476779Z             (np.float16, 60000),
+2026-11-13T10:08:05.3477022Z             (np.float16, 1e-4),
+2026-11-13T10:08:05.3477250Z             (np.float32, 1e30),
+2026-11-13T10:08:05.3477476Z             (np.float32, 1e-30),
+2026-11-13T10:08:05.3477706Z             (np.float16, 1),
+2026-11-13T10:08:05.3477931Z             (np.float32, 1),
+2026-11-13T10:08:05.3478140Z         ):
+2026-11-13T10:08:05.3478382Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3478726Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3479127Z >               _, scale, quantized = quantize_data(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3479558Z                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:08:05.3479791Z 
+2026-11-13T10:08:05.3480145Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:70: 
+2026-11-13T10:08:05.3480593Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:08:05.3480825Z 
+2026-11-13T10:08:05.3481001Z data = array([-1.e-30, -5.e-31,  0.e+00,  5.e-31,  1.e-30], dtype=float32)
+2026-11-13T10:08:05.3481437Z qType = 17, symmetric = True, reduce_range = False, min_real_range = None
+2026-11-13T10:08:05.3481814Z rmin_override = None, rmax_override = None
+2026-11-13T10:08:05.3482113Z 
+2026-11-13T10:08:05.3482199Z     def quantize_data(
+2026-11-13T10:08:05.3482619Z         data, qType, symmetric, reduce_range=False, min_real_range=None, rmin_override=None, rmax_override=None
+2026-11-13T10:08:05.3483164Z     ) -> tuple[numpy.ndarray, numpy.ndarray, numpy.ndarray]:
+2026-11-13T10:08:05.3483477Z         """
+2026-11-13T10:08:05.3483680Z         :param data: data to quantize
+2026-11-13T10:08:05.3483960Z         :param qType: data type to quantize to.
+2026-11-13T10:08:05.3484334Z         :param symmetric: whether symmetric quantization is used or not.
+2026-11-13T10:08:05.3484864Z         :parameter reduce_range: True if the quantization range should be reduced. Defaults to False.
+2026-11-13T10:08:05.3485529Z         :parameter min_real_range: Minimum floating-point range (i.e., rmax - rmin) to enforce. Defaults to None.
+2026-11-13T10:08:05.3486179Z         :parameter rmin_override: The value of rmin to use if not None. Otherwise, uses min(data).
+2026-11-13T10:08:05.3487076Z         :parameter rmax_override: The value of rmax to use if not None. Otherwise, uses max(data).
+2026-11-13T10:08:05.3487611Z         :return: minimum, maximum, zero point, scale, and quantized weights
+2026-11-13T10:08:05.3487963Z     
+2026-11-13T10:08:05.3488200Z         To pack weights, we compute a linear transformation
+2026-11-13T10:08:05.3488501Z     
+2026-11-13T10:08:05.3488797Z         - when data `type == uint8` mode, from `[rmin, rmax]` -> :math:`[0, 2^{b-1}]` and
+2026-11-13T10:08:05.3489303Z         - when data `type == int8`, from `[-m , m]` -> :math:`[-(2^{b-1}-1), 2^{b-1}-1]` where
+2026-11-13T10:08:05.3489707Z             `m = max(abs(rmin), abs(rmax))`
+2026-11-13T10:08:05.3489961Z     
+2026-11-13T10:08:05.3490358Z         and add necessary intermediate nodes to transform quantized weight to full weight using the equation
+2026-11-13T10:08:05.3490820Z     
+2026-11-13T10:08:05.3491003Z         :math:`r = S(q-z)`, where
+2026-11-13T10:08:05.3491236Z     
+2026-11-13T10:08:05.3491428Z         - *r*: real original value
+2026-11-13T10:08:05.3491679Z         - *q*: quantized value
+2026-11-13T10:08:05.3491908Z         - *S*: scale
+2026-11-13T10:08:05.3492114Z         - *z*: zero point
+2026-11-13T10:08:05.3492323Z         """
+2026-11-13T10:08:05.3492549Z         zero_point, scale = compute_data_quant_params(
+2026-11-13T10:08:05.3492841Z             data,
+2026-11-13T10:08:05.3493029Z             qType,
+2026-11-13T10:08:05.3493218Z             symmetric,
+2026-11-13T10:08:05.3493420Z             reduce_range,
+2026-11-13T10:08:05.3493637Z             min_real_range,
+2026-11-13T10:08:05.3493857Z             rmin_override,
+2026-11-13T10:08:05.3494071Z             rmax_override,
+2026-11-13T10:08:05.3494279Z         )
+2026-11-13T10:08:05.3494491Z         if qType == TensorProto.FLOAT8E4M3FN:
+2026-11-13T10:08:05.3494866Z             quantized_data = quantize_nparray(qType, data, scale, zero_point)
+2026-11-13T10:08:05.3495314Z             if any((quantized_data.view(numpy.uint8).ravel() & 127) == 127):
+2026-11-13T10:08:05.3495682Z                 np_data = numpy.asarray(data)
+2026-11-13T10:08:05.3495955Z >               raise RuntimeError(
+2026-11-13T10:08:05.3496345Z                     f"One of the quantized value is NaN data in [{np_data.min()}, {np_data.max()}], "
+2026-11-13T10:08:05.3497141Z                     f"quantized_data in [{quantized_data.min()}, {quantized_data.max()}]."
+2026-11-13T10:08:05.3497512Z                 )
+2026-11-13T10:08:05.3498166Z E               RuntimeError: One of the quantized value is NaN data in [-1.0000000031710769e-30, 1.0000000031710769e-30], quantized_data in [nan, nan].
+2026-11-13T10:08:05.3498670Z 
+2026-11-13T10:08:05.3499031Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/quant_utils.py:609: RuntimeError
+2026-11-13T10:08:05.3499892Z _ TestFloat8WeightStatistics.test_quantized_codes_match_independent_scale_reference (dtype=<class 'numpy.float16'>, magnitude=1) _
+2026-11-13T10:08:05.3500386Z 
+2026-11-13T10:08:05.3500908Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_quantized_codes_match_independent_scale_reference>
+2026-11-13T10:08:05.3501413Z 
+2026-11-13T10:08:05.3501595Z     def test_quantized_codes_match_independent_scale_reference(self):
+2026-11-13T10:08:05.3501954Z         for dtype, magnitude in (
+2026-11-13T10:08:05.3502202Z             (np.float16, 60000),
+2026-11-13T10:08:05.3502442Z             (np.float16, 1e-4),
+2026-11-13T10:08:05.3502673Z             (np.float32, 1e30),
+2026-11-13T10:08:05.3502905Z             (np.float32, 1e-30),
+2026-11-13T10:08:05.3503146Z             (np.float16, 1),
+2026-11-13T10:08:05.3503372Z             (np.float32, 1),
+2026-11-13T10:08:05.3503585Z         ):
+2026-11-13T10:08:05.3503836Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3504189Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3504635Z                 _, scale, quantized = quantize_data(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3505059Z                 expected_scale = reference_scale(data)
+2026-11-13T10:08:05.3505352Z                 expected = np.array(
+2026-11-13T10:08:05.3505676Z                     [float(value) / float(expected_scale) for value in data],
+2026-11-13T10:08:05.3506031Z                     dtype=float8_e4m3fn,
+2026-11-13T10:08:05.3506283Z                 )
+2026-11-13T10:08:05.3506789Z                 self.assertEqual(quantized.dtype, np.dtype(float8_e4m3fn))
+2026-11-13T10:08:05.3507210Z >               np.testing.assert_array_equal(scale, expected_scale)
+2026-11-13T10:08:05.3507535Z E               AssertionError: 
+2026-11-13T10:08:05.3507775Z E               Arrays are not equal
+2026-11-13T10:08:05.3508005Z E               
+2026-11-13T10:08:05.3508220Z E               Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3508553Z E               Max absolute difference among violations: 3.8e-06
+2026-11-13T10:08:05.3508916Z E               Max relative difference among violations: 0.00054
+2026-11-13T10:08:05.3509254Z E                ACTUAL: array(0.007065, dtype=float16)
+2026-11-13T10:08:05.3509563Z E                DESIRED: array(0.00707, dtype=float16)
+2026-11-13T10:08:05.3509754Z 
+2026-11-13T10:08:05.3510014Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:77: AssertionError
+2026-11-13T10:08:05.3510770Z _ TestFloat8WeightStatistics.test_small_nonconstant_weights_have_nonzero_scale (dtype=<class 'numpy.float16'>, magnitude=0.0001) _
+2026-11-13T10:08:05.3511264Z 
+2026-11-13T10:08:05.3511658Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_small_nonconstant_weights_have_nonzero_scale>
+2026-11-13T10:08:05.3512149Z 
+2026-11-13T10:08:05.3512311Z     def test_small_nonconstant_weights_have_nonzero_scale(self):
+2026-11-13T10:08:05.3512846Z         for dtype, magnitude in ((np.float16, 1e-4), (np.float16, 1e-3), (np.float32, 1e-30), (np.float32, 1e-24)):
+2026-11-13T10:08:05.3513362Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3513709Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3514132Z                 zero, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3514567Z                 self.assertTrue(np.isfinite(scale))
+2026-11-13T10:08:05.3514877Z >               self.assertGreater(float(scale), 0)
+2026-11-13T10:08:05.3515183Z E               AssertionError: 0.0 not greater than 0
+2026-11-13T10:08:05.3515388Z 
+2026-11-13T10:08:05.3515774Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:54: AssertionError
+2026-11-13T10:08:05.3516764Z _ TestFloat8WeightStatistics.test_small_nonconstant_weights_have_nonzero_scale (dtype=<class 'numpy.float16'>, magnitude=0.001) _
+2026-11-13T10:08:05.3517292Z 
+2026-11-13T10:08:05.3517684Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_small_nonconstant_weights_have_nonzero_scale>
+2026-11-13T10:08:05.3518170Z 
+2026-11-13T10:08:05.3518324Z     def test_small_nonconstant_weights_have_nonzero_scale(self):
+2026-11-13T10:08:05.3518988Z         for dtype, magnitude in ((np.float16, 1e-4), (np.float16, 1e-3), (np.float32, 1e-30), (np.float32, 1e-24)):
+2026-11-13T10:08:05.3519507Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3519849Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3520277Z                 zero, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3520705Z                 self.assertTrue(np.isfinite(scale))
+2026-11-13T10:08:05.3521011Z                 self.assertGreater(float(scale), 0)
+2026-11-13T10:08:05.3521329Z                 self.assertEqual(scale.dtype, data.dtype)
+2026-11-13T10:08:05.3521713Z >               np.testing.assert_array_equal(scale, reference_scale(data))
+2026-11-13T10:08:05.3522073Z E               AssertionError: 
+2026-11-13T10:08:05.3522317Z E               Arrays are not equal
+2026-11-13T10:08:05.3522595Z E               
+2026-11-13T10:08:05.3522819Z E               Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3523149Z E               Max absolute difference among violations: 2.e-07
+2026-11-13T10:08:05.3523504Z E               Max relative difference among violations: 0.0252
+2026-11-13T10:08:05.3523833Z E                ACTUAL: array(6.9e-06, dtype=float16)
+2026-11-13T10:08:05.3524142Z E                DESIRED: array(7.1e-06, dtype=float16)
+2026-11-13T10:08:05.3524344Z 
+2026-11-13T10:08:05.3524602Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:56: AssertionError
+2026-11-13T10:08:05.3525346Z _ TestFloat8WeightStatistics.test_small_nonconstant_weights_have_nonzero_scale (dtype=<class 'numpy.float32'>, magnitude=1e-30) _
+2026-11-13T10:08:05.3525842Z 
+2026-11-13T10:08:05.3526230Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_small_nonconstant_weights_have_nonzero_scale>
+2026-11-13T10:08:05.3526994Z 
+2026-11-13T10:08:05.3527159Z     def test_small_nonconstant_weights_have_nonzero_scale(self):
+2026-11-13T10:08:05.3527690Z         for dtype, magnitude in ((np.float16, 1e-4), (np.float16, 1e-3), (np.float32, 1e-30), (np.float32, 1e-24)):
+2026-11-13T10:08:05.3528201Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3528537Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3528948Z                 zero, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3529372Z                 self.assertTrue(np.isfinite(scale))
+2026-11-13T10:08:05.3529679Z >               self.assertGreater(float(scale), 0)
+2026-11-13T10:08:05.3529985Z E               AssertionError: 0.0 not greater than 0
+2026-11-13T10:08:05.3530182Z 
+2026-11-13T10:08:05.3530441Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:54: AssertionError
+2026-11-13T10:08:05.3531185Z _ TestFloat8WeightStatistics.test_small_nonconstant_weights_have_nonzero_scale (dtype=<class 'numpy.float32'>, magnitude=1e-24) _
+2026-11-13T10:08:05.3531675Z 
+2026-11-13T10:08:05.3532063Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_small_nonconstant_weights_have_nonzero_scale>
+2026-11-13T10:08:05.3532547Z 
+2026-11-13T10:08:05.3532696Z     def test_small_nonconstant_weights_have_nonzero_scale(self):
+2026-11-13T10:08:05.3533213Z         for dtype, magnitude in ((np.float16, 1e-4), (np.float16, 1e-3), (np.float32, 1e-30), (np.float32, 1e-24)):
+2026-11-13T10:08:05.3533732Z             with self.subTest(dtype=dtype, magnitude=magnitude):
+2026-11-13T10:08:05.3534201Z                 data = weight_values(dtype, magnitude)
+2026-11-13T10:08:05.3534624Z                 zero, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, True)
+2026-11-13T10:08:05.3535046Z                 self.assertTrue(np.isfinite(scale))
+2026-11-13T10:08:05.3535350Z >               self.assertGreater(float(scale), 0)
+2026-11-13T10:08:05.3535651Z E               AssertionError: 0.0 not greater than 0
+2026-11-13T10:08:05.3535966Z 
+2026-11-13T10:08:05.3536216Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:54: AssertionError
+2026-11-13T10:08:05.3537245Z _ TestFloat8WeightStatistics.test_strided_readonly_weights_preserve_input (dtype=<class 'numpy.float16'>) _
+2026-11-13T10:08:05.3537681Z 
+2026-11-13T10:08:05.3538059Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_strided_readonly_weights_preserve_input>
+2026-11-13T10:08:05.3538693Z 
+2026-11-13T10:08:05.3538846Z     def test_strided_readonly_weights_preserve_input(self):
+2026-11-13T10:08:05.3539261Z         for dtype, magnitude in ((np.float16, 60000), (np.float32, 1e-30)):
+2026-11-13T10:08:05.3539631Z             with self.subTest(dtype=dtype):
+2026-11-13T10:08:05.3540035Z                 data = np.tile(weight_values(dtype, magnitude), (3, 1)).T[::-1, ::2]
+2026-11-13T10:08:05.3540415Z                 data.flags.writeable = False
+2026-11-13T10:08:05.3540694Z                 before = data.copy()
+2026-11-13T10:08:05.3541088Z                 _, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, False)
+2026-11-13T10:08:05.3541572Z >               np.testing.assert_array_equal(scale, reference_scale(data))
+2026-11-13T10:08:05.3541925Z E               AssertionError: 
+2026-11-13T10:08:05.3542179Z E               Arrays are not equal
+2026-11-13T10:08:05.3542419Z E               
+2026-11-13T10:08:05.3542632Z E               +inf location mismatch:
+2026-11-13T10:08:05.3542915Z E                ACTUAL: array(inf, dtype=float16)
+2026-11-13T10:08:05.3543225Z E                DESIRED: array(424., dtype=float16)
+2026-11-13T10:08:05.3543426Z 
+2026-11-13T10:08:05.3543684Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:130: AssertionError
+2026-11-13T10:08:05.3544368Z _ TestFloat8WeightStatistics.test_strided_readonly_weights_preserve_input (dtype=<class 'numpy.float32'>) _
+2026-11-13T10:08:05.3544789Z 
+2026-11-13T10:08:05.3545162Z self = <test_float8_weight_statistics.TestFloat8WeightStatistics testMethod=test_strided_readonly_weights_preserve_input>
+2026-11-13T10:08:05.3545633Z 
+2026-11-13T10:08:05.3545782Z     def test_strided_readonly_weights_preserve_input(self):
+2026-11-13T10:08:05.3546183Z         for dtype, magnitude in ((np.float16, 60000), (np.float32, 1e-30)):
+2026-11-13T10:08:05.3546783Z             with self.subTest(dtype=dtype):
+2026-11-13T10:08:05.3547167Z                 data = np.tile(weight_values(dtype, magnitude), (3, 1)).T[::-1, ::2]
+2026-11-13T10:08:05.3547599Z                 data.flags.writeable = False
+2026-11-13T10:08:05.3548065Z                 before = data.copy()
+2026-11-13T10:08:05.3548726Z                 _, scale = compute_data_quant_params(data, TensorProto.FLOAT8E4M3FN, False)
+2026-11-13T10:08:05.3549387Z >               np.testing.assert_array_equal(scale, reference_scale(data))
+2026-11-13T10:08:05.3549739Z E               AssertionError: 
+2026-11-13T10:08:05.3549988Z E               Arrays are not equal
+2026-11-13T10:08:05.3550224Z E               
+2026-11-13T10:08:05.3550440Z E               Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3550784Z E               Max absolute difference among violations: 7.066988e-33
+2026-11-13T10:08:05.3551153Z E               Max relative difference among violations: 1.
+2026-11-13T10:08:05.3551477Z E                ACTUAL: array(0., dtype=float32)
+2026-11-13T10:08:05.3551794Z E                DESIRED: array(7.066988e-33, dtype=float32)
+2026-11-13T10:08:05.3552007Z 
+2026-11-13T10:08:05.3552280Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py:130: AssertionError
+2026-11-13T10:08:05.3552988Z =============================== warnings summary ===============================
+2026-11-13T10:08:05.3553698Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_large_finite_weights_have_finite_scale
+2026-11-13T10:08:05.3554685Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_large_finite_weights_have_finite_scale
+2026-11-13T10:08:05.3555779Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_large_finite_weights_have_finite_scale
+2026-11-13T10:08:05.3557020Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_large_finite_weights_have_finite_scale
+2026-11-13T10:08:05.3557999Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_native_cpu_dequantization_roundtrip
+2026-11-13T10:08:05.3559016Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference
+2026-11-13T10:08:05.3560068Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference
+2026-11-13T10:08:05.3561091Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_strided_readonly_weights_preserve_input
+2026-11-13T10:08:05.3562116Z   /home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/numpy/_core/_methods.py:193: RuntimeWarning: overflow encountered in multiply
+2026-11-13T10:08:05.3562767Z     x = um.multiply(x, x, out=x)
+2026-11-13T10:08:05.3562927Z 
+2026-11-13T10:08:05.3563370Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_native_cpu_dequantization_roundtrip
+2026-11-13T10:08:05.3564377Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference
+2026-11-13T10:08:05.3565421Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference
+2026-11-13T10:08:05.3566760Z   /home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnx/reference/ops/op_quantize_linear.py:136: RuntimeWarning: divide by zero encountered in divide
+2026-11-13T10:08:05.3567528Z     x = x / y_scale
+2026-11-13T10:08:05.3567654Z 
+2026-11-13T10:08:05.3568100Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_native_cpu_dequantization_roundtrip
+2026-11-13T10:08:05.3569111Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference
+2026-11-13T10:08:05.3570163Z onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference
+2026-11-13T10:08:05.3571256Z   /home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnx/reference/ops/op_quantize_linear.py:136: RuntimeWarning: invalid value encountered in divide
+2026-11-13T10:08:05.3571962Z     x = x / y_scale
+2026-11-13T10:08:05.3572080Z 
+2026-11-13T10:08:05.3572297Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-11-13T10:08:05.3572740Z =========================== short test summary info ============================
+2026-11-13T10:08:05.3573764Z SUBFAILED(dtype=<class 'numpy.float16'>, magnitude=60000) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_large_finite_weights_have_finite_scale - AssertionError: np.False_ is not true
+2026-11-13T10:08:05.3575529Z SUBFAILED(dtype=<class 'numpy.float16'>, magnitude=1000) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_large_finite_weights_have_finite_scale - AssertionError: np.False_ is not true
+2026-11-13T10:08:05.3577426Z SUBFAILED(dtype=<class 'numpy.float32'>, magnitude=1e+30) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_large_finite_weights_have_finite_scale - AssertionError: np.False_ is not true
+2026-11-13T10:08:05.3579045Z SUBFAILED(dtype=<class 'numpy.float32'>, magnitude=1e+20) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_large_finite_weights_have_finite_scale - AssertionError: np.False_ is not true
+2026-11-13T10:08:05.3580621Z SUBFAILED(magnitude=1e+30) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_native_cpu_dequantization_roundtrip - AssertionError: 
+2026-11-13T10:08:05.3581394Z Arrays are not equal
+2026-11-13T10:08:05.3581527Z 
+2026-11-13T10:08:05.3581613Z +inf location mismatch:
+2026-11-13T10:08:05.3581846Z  ACTUAL: array(inf, dtype=float32)
+2026-11-13T10:08:05.3582124Z  DESIRED: array(7.066988e+27, dtype=float32)
+2026-11-13T10:08:05.3583293Z SUBFAILED(magnitude=1e-30) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_native_cpu_dequantization_roundtrip - RuntimeError: One of the quantized value is NaN data in [-1.0000000031710769e-30, 1.0000000031710769e-30], quantized_data in [nan, nan].
+2026-11-13T10:08:05.3585062Z SUBFAILED(dtype=<class 'numpy.float16'>, symmetric=False) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_ordinary_scale_dtype_and_options - AssertionError: 
+2026-11-13T10:08:05.3586792Z Arrays are not equal
+2026-11-13T10:08:05.3587012Z 
+2026-11-13T10:08:05.3587159Z Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3587639Z Max absolute difference among violations: 1.526e-05
+2026-11-13T10:08:05.3588215Z Max relative difference among violations: 0.00056
+2026-11-13T10:08:05.3588540Z  ACTUAL: array(0.02725, dtype=float16)
+2026-11-13T10:08:05.3588818Z  DESIRED: array(0.02727, dtype=float16)
+2026-11-13T10:08:05.3589693Z SUBFAILED(dtype=<class 'numpy.float16'>, symmetric=True) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_ordinary_scale_dtype_and_options - AssertionError: 
+2026-11-13T10:08:05.3590555Z Arrays are not equal
+2026-11-13T10:08:05.3590690Z 
+2026-11-13T10:08:05.3590783Z Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3591077Z Max absolute difference among violations: 1.526e-05
+2026-11-13T10:08:05.3591412Z Max relative difference among violations: 0.00056
+2026-11-13T10:08:05.3591717Z  ACTUAL: array(0.02725, dtype=float16)
+2026-11-13T10:08:05.3591984Z  DESIRED: array(0.02727, dtype=float16)
+2026-11-13T10:08:05.3592916Z SUBFAILED(dtype=<class 'numpy.float16'>, magnitude=60000) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference - AssertionError: 
+2026-11-13T10:08:05.3593839Z Arrays are not equal
+2026-11-13T10:08:05.3593967Z 
+2026-11-13T10:08:05.3594059Z +inf location mismatch:
+2026-11-13T10:08:05.3594291Z  ACTUAL: array(inf, dtype=float16)
+2026-11-13T10:08:05.3594555Z  DESIRED: array(424., dtype=float16)
+2026-11-13T10:08:05.3595830Z SUBFAILED(dtype=<class 'numpy.float16'>, magnitude=0.0001) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference - RuntimeError: One of the quantized value is NaN data in [-0.00010001659393310547, 0.00010001659393310547], quantized_data in [nan, nan].
+2026-11-13T10:08:05.3598060Z SUBFAILED(dtype=<class 'numpy.float32'>, magnitude=1e+30) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference - AssertionError: 
+2026-11-13T10:08:05.3598977Z Arrays are not equal
+2026-11-13T10:08:05.3599106Z 
+2026-11-13T10:08:05.3599199Z +inf location mismatch:
+2026-11-13T10:08:05.3599619Z  ACTUAL: array(inf, dtype=float32)
+2026-11-13T10:08:05.3599909Z  DESIRED: array(7.066988e+27, dtype=float32)
+2026-11-13T10:08:05.3601213Z SUBFAILED(dtype=<class 'numpy.float32'>, magnitude=1e-30) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference - RuntimeError: One of the quantized value is NaN data in [-1.0000000031710769e-30, 1.0000000031710769e-30], quantized_data in [nan, nan].
+2026-11-13T10:08:05.3603251Z SUBFAILED(dtype=<class 'numpy.float16'>, magnitude=1) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_quantized_codes_match_independent_scale_reference - AssertionError: 
+2026-11-13T10:08:05.3604149Z Arrays are not equal
+2026-11-13T10:08:05.3604274Z 
+2026-11-13T10:08:05.3604373Z Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3604658Z Max absolute difference among violations: 3.8e-06
+2026-11-13T10:08:05.3604987Z Max relative difference among violations: 0.00054
+2026-11-13T10:08:05.3605287Z  ACTUAL: array(0.007065, dtype=float16)
+2026-11-13T10:08:05.3605551Z  DESIRED: array(0.00707, dtype=float16)
+2026-11-13T10:08:05.3606793Z SUBFAILED(dtype=<class 'numpy.float16'>, magnitude=0.0001) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_small_nonconstant_weights_have_nonzero_scale - AssertionError: 0.0 not greater than 0
+2026-11-13T10:08:05.3608415Z SUBFAILED(dtype=<class 'numpy.float16'>, magnitude=0.001) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_small_nonconstant_weights_have_nonzero_scale - AssertionError: 
+2026-11-13T10:08:05.3609304Z Arrays are not equal
+2026-11-13T10:08:05.3609436Z 
+2026-11-13T10:08:05.3609528Z Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3609809Z Max absolute difference among violations: 2.e-07
+2026-11-13T10:08:05.3610129Z Max relative difference among violations: 0.0252
+2026-11-13T10:08:05.3610429Z  ACTUAL: array(6.9e-06, dtype=float16)
+2026-11-13T10:08:05.3610700Z  DESIRED: array(7.1e-06, dtype=float16)
+2026-11-13T10:08:05.3611662Z SUBFAILED(dtype=<class 'numpy.float32'>, magnitude=1e-30) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_small_nonconstant_weights_have_nonzero_scale - AssertionError: 0.0 not greater than 0
+2026-11-13T10:08:05.3613331Z SUBFAILED(dtype=<class 'numpy.float32'>, magnitude=1e-24) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_small_nonconstant_weights_have_nonzero_scale - AssertionError: 0.0 not greater than 0
+2026-11-13T10:08:05.3614863Z SUBFAILED(dtype=<class 'numpy.float16'>) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_strided_readonly_weights_preserve_input - AssertionError: 
+2026-11-13T10:08:05.3615686Z Arrays are not equal
+2026-11-13T10:08:05.3615815Z 
+2026-11-13T10:08:05.3615903Z +inf location mismatch:
+2026-11-13T10:08:05.3616140Z  ACTUAL: array(inf, dtype=float16)
+2026-11-13T10:08:05.3616397Z  DESIRED: array(424., dtype=float16)
+2026-11-13T10:08:05.3617332Z SUBFAILED(dtype=<class 'numpy.float32'>) onnxruntime/test/python/quantization/test_float8_weight_statistics.py::TestFloat8WeightStatistics::test_strided_readonly_weights_preserve_input - AssertionError: 
+2026-11-13T10:08:05.3618159Z Arrays are not equal
+2026-11-13T10:08:05.3618287Z 
+2026-11-13T10:08:05.3618383Z Mismatched elements: 1 / 1 (100%)
+2026-11-13T10:08:05.3618675Z Max absolute difference among violations: 7.066988e-33
+2026-11-13T10:08:05.3619008Z Max relative difference among violations: 1.
+2026-11-13T10:08:05.3619293Z  ACTUAL: array(0., dtype=float32)
+2026-11-13T10:08:05.3619564Z  DESIRED: array(7.066988e-33, dtype=float32)
+2026-11-13T10:08:05.3619904Z 19 failed, 8 passed, 14 warnings, 11 subtests passed in 0.44s
+2026-11-13T10:08:05.3621355Z Confirmed original FLOAT8 statistics failures: ['test_large_finite_weights_have_finite_scale', 'test_native_cpu_dequantization_roundtrip', 'test_ordinary_scale_dtype_and_options', 'test_quantized_codes_match_independent_scale_reference', 'test_small_nonconstant_weights_have_nonzero_scale', 'test_strided_readonly_weights_preserve_input']
+2026-11-13T10:08:05.3653988Z ##[group]Run python -m ruff check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_float8_weight_statistics.py
+2026-11-13T10:08:05.3655295Z [36;1mpython -m ruff check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_float8_weight_statistics.py[0m
+2026-11-13T10:08:05.3656399Z [36;1mpython -m ruff format --diff onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_float8_weight_statistics.py || true[0m
+2026-11-13T10:08:05.3657867Z [36;1mpython -m ruff format --check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_float8_weight_statistics.py[0m
+2026-11-13T10:08:05.3658567Z [36;1mgit diff --check[0m
+2026-11-13T10:08:05.3679043Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:08:05.3679292Z env:
+2026-11-13T10:08:05.3679489Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:08:05.3679786Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:08:05.3680103Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:08:05.3680485Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:05.3680906Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:08:05.3681347Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:05.3681734Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:05.3682234Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:05.3682850Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:08:05.3683275Z ##[endgroup]
+2026-11-13T10:08:05.4026919Z All checks passed!
+2026-11-13T10:08:05.4341851Z 2 files already formatted
+2026-11-13T10:08:05.4594129Z 2 files already formatted
+2026-11-13T10:08:05.9845805Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-13T10:08:05.9846243Z with:
+2026-11-13T10:08:05.9846486Z   name: native-float8-weight-statistics-evidence
+2026-11-13T10:08:05.9847347Z   path: ort-source-overlay-metadata.json
+ort-patched.log
+ort-patched.xml
+ort-baseline.log
+ort-baseline.xml
+
+2026-11-13T10:08:05.9847881Z   if-no-files-found: warn
+2026-11-13T10:08:05.9848137Z   compression-level: 6
+2026-11-13T10:08:05.9848361Z   overwrite: false
+2026-11-13T10:08:05.9848575Z   include-hidden-files: false
+2026-11-13T10:08:05.9848814Z   archive: true
+2026-11-13T10:08:05.9849003Z env:
+2026-11-13T10:08:05.9849188Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:08:05.9849430Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:08:05.9849735Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:08:05.9850121Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:05.9850570Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:08:05.9850994Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:05.9851368Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:05.9851746Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:08:05.9852151Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:08:05.9852477Z ##[endgroup]
+2026-11-13T10:08:06.1459363Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-13T10:08:06.1462532Z The least common ancestor is /home/runner/work/onnxruntime/onnxruntime. This will be the root directory of the artifact
+2026-11-13T10:08:06.1463964Z With the provided path, there will be 5 files uploaded
+2026-11-13T10:08:06.1464995Z Artifact name is valid!
+2026-11-13T10:08:06.1465987Z Root directory input is valid!
+2026-11-13T10:08:06.5142298Z Uploading artifact: native-float8-weight-statistics-evidence.zip
+2026-11-13T10:08:06.5184802Z Beginning upload of artifact content to blob storage
+2026-11-13T10:08:06.8614638Z Uploaded bytes 11773
+2026-11-13T10:08:06.9409802Z Finished uploading artifact content to blob storage!
+2026-11-13T10:08:06.9410855Z SHA256 digest of uploaded artifact is 328457edb78844d22d92106caa48d8ca21162c16883fb0530afc6b0b08e4f9f4
+2026-11-13T10:08:06.9411645Z Finalizing artifact upload
+2026-11-13T10:08:07.4587224Z Artifact native-float8-weight-statistics-evidence successfully finalized. Artifact ID 14026874712
+2026-11-13T10:08:07.4589434Z Artifact native-float8-weight-statistics-evidence has been successfully uploaded! Final size is 11773 bytes. Artifact ID is 14026874712
+2026-11-13T10:08:07.4592034Z Artifact download URL: https://github.com/Afloat16/onnxruntime/actions/runs/43406537495/artifacts/14026874712
+2026-11-13T10:08:07.4783520Z Post job cleanup.
+2026-11-13T10:08:07.6080416Z (node:3120) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:08:07.6081359Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:08:07.6275070Z Post job cleanup.
+2026-11-13T10:08:07.7307664Z [command]/usr/bin/git version
+2026-11-13T10:08:07.7375472Z git version 2.56.1
+2026-11-13T10:08:07.7422414Z Temporarily overriding HOME='/home/runner/work/_temp/d79ff732-8001-4f5c-8bbb-2df215f73a0a' before making global git config changes
+2026-11-13T10:08:07.7423427Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T10:08:07.7429425Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:08:07.7471658Z Removing SSH command configuration
+2026-11-13T10:08:07.7480022Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:08:07.7526972Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:08:07.7838172Z Removing HTTP extra header
+2026-11-13T10:08:07.7839328Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:08:07.7876363Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:08:07.8191608Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:08:07.8201698Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:08:07.8252770Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:08:07.8706108Z Cleaning up orphan processes
+2026-11-13T10:08:07.9209503Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
