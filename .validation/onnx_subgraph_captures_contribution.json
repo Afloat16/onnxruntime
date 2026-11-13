@@ -1,0 +1,62 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "default_branch": "main",
+  "fork": "Afloat16/onnxruntime",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "commit": "16f7f332eac743749ade445f8cecc7f2d4d688b2",
+  "branch": "fix/quantization-subgraph-captured-inputs-20261112",
+  "title": "Preserve captured subgraph dependencies in quantization graph utilities",
+  "body": "### Description\n\nThe quantization ONNXModel utilities only consider a node's explicit inputs. Values captured by an If or Loop subgraph are consequently missing from topological dependencies and unused-constant analysis. A valid model can be reordered so a capture precedes its producer, or lose a constant/initializer used only inside a subgraph.\n\nCollect lexical dependencies recursively from GRAPH and GRAPHS attributes, including graph outputs that directly reference an outer value. Subtract each subgraph's formal inputs, dense/sparse initializers and local node outputs so local names correctly shadow outer values. Use this input set for both topological sorting and constant cleanup.\n\nThis addresses one missing-dependency problem in both consumers. It does not reorder subgraph-internal nodes or change the separate transformers.OnnxModel implementation.\n\n### Validation\n\n- Eight new unittest methods cover native If/Loop execution, nested captures, save/reload, captured constants and initializers, local-name shadowing, duplicate explicit inputs, and missing/cyclic capture rejection.\n- The GRAPHS attribute control checks dependency ordering only; no custom operator execution is claimed.\n- New and existing model graph tests: **11 methods passed, 9 subtests passed**.\n- Restoring the original implementation produces **2 failing test methods and 9 failing subtests**, with 6 completed methods. Failures identify invalid ordering and removal of live captured values.\n- Ruff lint/format and `git diff --check` passed.\n\nExact-source native validation: https://github.com/Afloat16/onnxruntime/actions/runs/43401505086\n\nThe native runtime comes from the repository's official CPU Release build.py/CMake build at 8dea1194e974fa07b1d2f07a190949c3a92cab80. Its C++ sources match base a8246c0d094f1ab0d6bf236228e5e67683321cd7. The validation installs that built wheel and overlays the complete quantization package from this exact patch, verifying every Python file byte-for-byte and recording a SHA-256 manifest. Tests use normal native imports. This is targeted Linux CPU validation, not GPU execution or the full C++ suite.\n\n### Motivation and Context\n\nControl-flow subgraphs use ONNX lexical scoping. Graph transformations must retain and order those dependencies just as they do explicit node inputs.",
+  "prefilled_url": "https://github.com/microsoft/onnxruntime/compare/main...Afloat16:fix/quantization-subgraph-captured-inputs-20261112?expand=1&title=Preserve%20captured%20subgraph%20dependencies%20in%20quantization%20graph%20utilities&body=%23%23%23%20Description%0A%0AThe%20quantization%20ONNXModel%20utilities%20only%20consider%20a%20node's%20explicit%20inputs.%20Values%20captured%20by%20an%20If%20or%20Loop%20subgraph%20are%20consequently%20missing%20from%20topological%20dependencies%20and%20unused-constant%20analysis.%20A%20valid%20model%20can%20be%20reordered%20so%20a%20capture%20precedes%20its%20producer%2C%20or%20lose%20a%20constant%2Finitializer%20used%20only%20inside%20a%20subgraph.%0A%0ACollect%20lexical%20dependencies%20recursively%20from%20GRAPH%20and%20GRAPHS%20attributes%2C%20including%20graph%20outputs%20that%20directly%20reference%20an%20outer%20value.%20Subtract%20each%20subgraph's%20formal%20inputs%2C%20dense%2Fsparse%20initializers%20and%20local%20node%20outputs%20so%20local%20names%20correctly%20shadow%20outer%20values.%20Use%20this%20input%20set%20for%20both%20topological%20sorting%20and%20constant%20cleanup.%0A%0AThis%20addresses%20one%20missing-dependency%20problem%20in%20both%20consumers.%20It%20does%20not%20reorder%20subgraph-internal%20nodes%20or%20change%20the%20separate%20transformers.OnnxModel%20implementation.%0A%0A%23%23%23%20Validation%0A%0A-%20Eight%20new%20unittest%20methods%20cover%20native%20If%2FLoop%20execution%2C%20nested%20captures%2C%20save%2Freload%2C%20captured%20constants%20and%20initializers%2C%20local-name%20shadowing%2C%20duplicate%20explicit%20inputs%2C%20and%20missing%2Fcyclic%20capture%20rejection.%0A-%20The%20GRAPHS%20attribute%20control%20checks%20dependency%20ordering%20only%3B%20no%20custom%20operator%20execution%20is%20claimed.%0A-%20New%20and%20existing%20model%20graph%20tests%3A%20**11%20methods%20passed%2C%209%20subtests%20passed**.%0A-%20Restoring%20the%20original%20implementation%20produces%20**2%20failing%20test%20methods%20and%209%20failing%20subtests**%2C%20with%206%20completed%20methods.%20Failures%20identify%20invalid%20ordering%20and%20removal%20of%20live%20captured%20values.%0A-%20Ruff%20lint%2Fformat%20and%20%60git%20diff%20--check%60%20passed.%0A%0AExact-source%20native%20validation%3A%20https%3A%2F%2Fgithub.com%2FAfloat16%2Fonnxruntime%2Factions%2Fruns%2F43401505086%0A%0AThe%20native%20runtime%20comes%20from%20the%20repository's%20official%20CPU%20Release%20build.py%2FCMake%20build%20at%208dea1194e974fa07b1d2f07a190949c3a92cab80.%20Its%20C%2B%2B%20sources%20match%20base%20a8246c0d094f1ab0d6bf236228e5e67683321cd7.%20The%20validation%20installs%20that%20built%20wheel%20and%20overlays%20the%20complete%20quantization%20package%20from%20this%20exact%20patch%2C%20verifying%20every%20Python%20file%20byte-for-byte%20and%20recording%20a%20SHA-256%20manifest.%20Tests%20use%20normal%20native%20imports.%20This%20is%20targeted%20Linux%20CPU%20validation%2C%20not%20GPU%20execution%20or%20the%20full%20C%2B%2B%20suite.%0A%0A%23%23%23%20Motivation%20and%20Context%0A%0AControl-flow%20subgraphs%20use%20ONNX%20lexical%20scoping.%20Graph%20transformations%20must%20retain%20and%20order%20those%20dependencies%20just%20as%20they%20do%20explicit%20node%20inputs.",
+  "pr_url": null,
+  "pr_status": "ready",
+  "merged_at": null,
+  "counts_as_upstream_merged": false,
+  "novelty": {
+    "classification": "genuinely_new",
+    "file_history_entries": 37,
+    "actual_patches_read": [
+      7913,
+      8012,
+      16003,
+      7833,
+      6735
+    ],
+    "all_state_searches": [
+      "topological_sort subgraph",
+      "quantization topological",
+      "onnx_model.py implicit",
+      "quantization lexical",
+      "remove_unused_constant",
+      "quantization captured"
+    ],
+    "same_root_cause": "Subgraph lexical dependencies are missing from both model sorting and unused constant cleanup; addressed together as one improvement.",
+    "personal_history": "No preexisting ONNX Runtime contribution; new task-created fork and independent source branch."
+  },
+  "validation": {
+    "run_id": 43401505086,
+    "job_id": 131805198982,
+    "conclusion": "success",
+    "artifact_id": 14025566992,
+    "new_methods": 8,
+    "new_subcases": 9,
+    "fixed": "11 passed methods, 9 subtests passed",
+    "baseline": "11 failures (2 methods, 9 subtests), 6 completed methods",
+    "runtime_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+    "runtime_build_run": 43296543822,
+    "runtime_wheel_artifact": 13982605959,
+    "native_sources_match_base": true,
+    "exact_python_overlay_commit": "16f7f332eac743749ade445f8cecc7f2d4d688b2",
+    "lint": "Ruff 0.12.12 check/format and git diff --check passed"
+  },
+  "limitations": [
+    "Quantization ONNXModel external lexical dependencies only, not subgraph-internal sorting or transformers.OnnxModel.",
+    "Targeted Linux native CPU only; GRAPHS custom operator control is structural."
+  ],
+  "source_files": [
+    "onnxruntime/python/tools/quantization/onnx_model.py",
+    "onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py"
+  ]
+}
