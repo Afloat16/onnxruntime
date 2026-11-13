@@ -29,5 +29,6 @@
     "NumPy shifted odd-element array temporarily consumes about half the input byte length; report measured memory tradeoff.",
     "No whole-model quantization time or model-accuracy claim."
   ],
-  "commit": "877a86f4e8d693293fc8dfd9ffbc846e69fa60ef"
+  "commit": "69d25814acc9e403ee919e95969efa7cdd2d1236",
+  "validation_note": "Previous exact native tests passed; source change is test formatting only (Python AST identical). Final exact-SHA workflow rerun pending."
 }
