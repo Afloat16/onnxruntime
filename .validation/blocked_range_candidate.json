@@ -17,5 +17,6 @@
     "baseline_passed_subtests": 12,
     "note": "Local source and tests completed before workspace became unavailable; remote test text reconstructed from exact tool-visible file contents and will be revalidated on hosted source build."
   },
-  "validation_note": "The official CPU build completed. Initial pytest collection shadowed the installed runtime. Follow-up uses the verified official-source-built CPU runtime at the same C++ base, preimports that runtime, overlays exact quantization Python bytes, and reruns the original tests."
+  "validation_note": "The official CPU build completed. Initial pytest collection shadowed the installed runtime. Follow-up uses the verified official-source-built CPU runtime at the same C++ base, preimports that runtime, overlays exact quantization Python bytes, and reruns the original tests.",
+  "workflow_reenabled_at": "2026-11-13T09:22:56.062Z"
 }
