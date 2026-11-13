@@ -33,7 +33,14 @@
     "Quantization ONNXModel graph utilities, not the separate transformers.OnnxModel implementation.",
     "Native results pending; Graphs custom-attribute case checks ordering only, not an unsupported custom execution kernel."
   ],
-  "commit": "16f7f332eac743749ade445f8cecc7f2d4d688b2",
-  "validation_note": "Previous exact native tests passed; source change is test formatting only (Python AST identical). Final exact-SHA workflow rerun pending. Normalize the single trailing newline printed by the formatter log; semantics and production code unchanged.",
-  "workflow_reenabled_at": "2026-11-13T09:22:59.028Z"
+  "commit": "ff57d2442bf826c42f0dd70c96b1e6b7001447e1",
+  "validation_note": "Validate the sparse initializer source-seeding fix on the unchanged official source-built CPU wheel. Restore the current PR parent helper to prove the two new sparse-capture methods fail before the fix.",
+  "workflow_reenabled_at": "2026-11-13T09:22:59.028Z",
+  "followup": {
+    "parent_commit": "16f7f332eac743749ade445f8cecc7f2d4d688b2",
+    "review_comment": 4561943335,
+    "reviewed_tree": "b5037e751d754c9084782390a742ef0152fc9f6a",
+    "new_test_methods": 2,
+    "new_subcases": 4
+  }
 }
