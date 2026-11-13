@@ -1,0 +1,35 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "fork": "Afloat16/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "base_tree": "ada396d3d22a607ae65ae1140ac5e66a057fc692",
+  "branch": "fix/quantization-scalar-empty-tensors-20261113",
+  "files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_quantize_data_shapes.py"
+  ],
+  "novelty": {
+    "classification": "genuinely_new",
+    "history_entries": 65,
+    "actual_patches_read": [
+      9640
+    ],
+    "all_state_queries": [
+      "compute_data_quant_params",
+      "quantize_data scalar",
+      "empty quantize_data",
+      "len(data) quantization"
+    ],
+    "excluded_matches": [
+      1057,
+      11415,
+      20949
+    ],
+    "personal_fork": "Fork created this task; all branches/PRs are current independent fixes; no scalar/empty shape helper work."
+  },
+  "status": "awaiting_native_validation",
+  "scope": "Use total element count instead of first-axis length for scalar and multidimensional empty integer quantization inputs.",
+  "commit": "be74e3b96032bfdc7060e1a91625de54d1bf773f"
+}

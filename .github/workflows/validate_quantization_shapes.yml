@@ -1,0 +1,145 @@
+name: Validate scalar and empty quantization on source-built CPU runtime
+on:
+  push:
+    branches: [validation/cpu-quantization-shapes-20261113]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  native-cpu:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
+      PYTHONPATH: onnxruntime/test/python/quantization
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: be74e3b96032bfdc7060e1a91625de54d1bf773f
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Create isolated native test environment
+        run: |
+          python -m venv "$RUNNER_TEMP/ort-validation-venv"
+          echo "$RUNNER_TEMP/ort-validation-venv/bin" >> "$GITHUB_PATH"
+      - name: Download the official-source-built CPU wheel
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: cpu-native-wheel-a8246c0d
+          run-id: 43296543822
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/ort-built-wheel
+      - name: Download exact build provenance
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: cpu-distribution-calibration-evidence
+          run-id: 43296543822
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/ort-build-evidence
+      - name: Install runtime and exact quantization source
+        run: |
+          python -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12
+          git fetch --no-tags origin 8dea1194e974fa07b1d2f07a190949c3a92cab80
+          python -P - <<'PY'
+          import hashlib
+          import json
+          import os
+          import shutil
+          import subprocess
+          from pathlib import Path
+          import onnxruntime
+          from onnxruntime import quantization
+          built_commit = "8dea1194e974fa07b1d2f07a190949c3a92cab80"
+          base_commit = "a8246c0d094f1ab0d6bf236228e5e67683321cd7"
+          source_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+          provenance = json.loads((Path(os.environ["RUNNER_TEMP"]) / "ort-build-evidence/ort-source-build-metadata.json").read_text())
+          assert provenance["source_commit"] == built_commit
+          for revision in (built_commit, source_commit):
+              paths = subprocess.check_output(["git", "diff", "--name-only", base_commit, revision], text=True).splitlines()
+              assert all(path.startswith(("onnxruntime/python/tools/quantization/", "onnxruntime/test/python/quantization/")) for path in paths), paths
+          source = Path("onnxruntime/python/tools/quantization")
+          destination = Path(quantization.__file__).parent
+          shutil.copytree(source, destination, dirs_exist_ok=True)
+          for cache in destination.rglob("__pycache__"):
+              shutil.rmtree(cache)
+          hashes = {}
+          for path in source.rglob("*.py"):
+              installed = destination / path.relative_to(source)
+              assert installed.read_bytes() == path.read_bytes(), installed
+              hashes[str(path.relative_to(source))] = hashlib.sha256(installed.read_bytes()).hexdigest()
+          assert "CPUExecutionProvider" in onnxruntime.get_available_providers()
+          metadata = {
+              "source_commit": source_commit,
+              "native_build_source_commit": built_commit,
+              "common_native_source_base": base_commit,
+              "native_build_run": 43296543822,
+              "native_wheel_artifact": 13982605959,
+              "runtime_version": onnxruntime.__version__,
+              "runtime_path": onnxruntime.__file__,
+              "quantization_path": str(destination),
+              "quantization_sha256": hashes,
+              "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged.",
+          }
+          Path("ort-source-overlay-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
+          print(json.dumps(metadata, indent=2))
+          PY
+      - name: Run patched helpers and related native quantization tests
+        shell: bash
+        run: |
+          set -o pipefail
+          python -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_quantize_data_shapes.py onnxruntime/test/python/quantization/test_quant_util.py 2>&1 | tee ort-patched.log
+      - name: Restore original helper implementation in the same runtime
+        run: |
+          python -P - <<'PY'
+          import subprocess
+          from pathlib import Path
+          from onnxruntime.quantization import quant_utils
+          target = Path(quant_utils.__file__)
+          target.write_bytes(subprocess.check_output(["git", "show", "a8246c0d094f1ab0d6bf236228e5e67683321cd7:onnxruntime/python/tools/quantization/quant_utils.py"]))
+          for cache in target.parent.glob("__pycache__/quant_utils.*.pyc"):
+              cache.unlink()
+          PY
+      - name: Confirm baseline shape failures and passing controls
+        shell: bash
+        run: |
+          set +e
+          python -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_quantize_data_shapes.py > ort-baseline.log 2>&1
+          result=$?
+          set -e
+          cat ort-baseline.log
+          test "$result" -eq 1
+          python -P - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse("ort-baseline.xml").getroot()
+          failed = {case.attrib["name"] for case in root.findall(".//testcase") if case.find("failure") is not None or case.find("error") is not None}
+          required = {
+              "test_scalar_quantization_matches_single_element_tensor",
+              "test_empty_tensors_keep_shape_and_default_parameters",
+              "test_scalar_known_scale_zero_point_and_code",
+              "test_native_cpu_scalar_quantization_and_serialization",
+          }
+          assert required <= failed, (required - failed, failed)
+          print("Confirmed original scalar/empty shape failures:", sorted(failed))
+          PY
+      - name: Check final patch formatting
+        if: always()
+        run: |
+          python -m ruff check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_quantize_data_shapes.py
+          python -m ruff format --diff onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_quantize_data_shapes.py || true
+          python -m ruff format --check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_quantize_data_shapes.py
+          git diff --check
+      - name: Save native execution evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-quantization-shapes-evidence
+          path: |
+            ort-source-overlay-metadata.json
+            ort-patched.log
+            ort-patched.xml
+            ort-baseline.log
+            ort-baseline.xml
