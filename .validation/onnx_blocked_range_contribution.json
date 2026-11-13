@@ -1,0 +1,60 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "default_branch": "main",
+  "fork": "Afloat16/onnxruntime",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "commit": "8554dd5683f4d6e492d38b530d6d4f14755680f5",
+  "branch": "fix/blocked-quantization-range-overflow-20261112",
+  "title": "Prevent range overflow in blocked quantization",
+  "body": "### Description\nBlocked quantization computes the difference between the maximum and minimum weights in the input dtype. Opposite-sign float16 weights near 60000, or float32 weights near 2e38, overflow that subtraction even though the resulting scale is representable. Infinite scales then corrupt the quantized weights.\n\nPromote both range endpoints to float64 before subtracting them. The final scale still uses the weight dtype, and the existing zero-point, symmetry, clipping, block layout and degenerate-range rules are retained.\n\n### Validation\n- Added 8 unittest methods with 40 subcases covering float16/float32, both axes, int8/uint8, symmetric/asymmetric ranges, same-sign symmetric ranges, read-only noncontiguous weights, and ordinary/small/zero-range controls.\n- An independent Python-float calculation checks every block's scale and zero point.\n- Native CPU blocked DequantizeLinear and actual static QDQ quantization followed by MatMul verify finite persisted scales and inference results. Graph optimization is disabled for these integration checks.\n- New tests plus existing quantization utility and block-size tests: **25 methods passed, 183 subtests passed**.\n- Restoring the original implementation yields **28 failing subtests**, 8 completed methods and 12 passing subtests.\n- Ruff lint/format and `git diff --check` passed.\n\nNative validation: https://github.com/Afloat16/onnxruntime/actions/runs/43400845218\n\nThe runtime was built with the official CPU Release build.py/CMake path from commit 8dea1194e974fa07b1d2f07a190949c3a92cab80, whose C++ sources match base a8246c0d094f1ab0d6bf236228e5e67683321cd7. This run installs that built wheel, verifies the matching native-source baseline, and overlays the complete quantization Python package from this exact patch with byte-for-byte checks and a SHA-256 manifest. It uses ordinary native imports. This is targeted Linux CPU validation, not a GPU or full C++ test-suite result.\n\n### Motivation and Context\nFinite weight ranges should produce finite scales when those scales fit in the original dtype. This fixes the blocked helper's intermediate range subtraction; it does not change the quantization algorithm or claim a general model-accuracy improvement.",
+  "prefilled_url": "https://github.com/microsoft/onnxruntime/compare/main...Afloat16:fix/blocked-quantization-range-overflow-20261112?expand=1&title=Prevent%20range%20overflow%20in%20blocked%20quantization&body=%23%23%23%20Description%0ABlocked%20quantization%20computes%20the%20difference%20between%20the%20maximum%20and%20minimum%20weights%20in%20the%20input%20dtype.%20Opposite-sign%20float16%20weights%20near%2060000%2C%20or%20float32%20weights%20near%202e38%2C%20overflow%20that%20subtraction%20even%20though%20the%20resulting%20scale%20is%20representable.%20Infinite%20scales%20then%20corrupt%20the%20quantized%20weights.%0A%0APromote%20both%20range%20endpoints%20to%20float64%20before%20subtracting%20them.%20The%20final%20scale%20still%20uses%20the%20weight%20dtype%2C%20and%20the%20existing%20zero-point%2C%20symmetry%2C%20clipping%2C%20block%20layout%20and%20degenerate-range%20rules%20are%20retained.%0A%0A%23%23%23%20Validation%0A-%20Added%208%20unittest%20methods%20with%2040%20subcases%20covering%20float16%2Ffloat32%2C%20both%20axes%2C%20int8%2Fuint8%2C%20symmetric%2Fasymmetric%20ranges%2C%20same-sign%20symmetric%20ranges%2C%20read-only%20noncontiguous%20weights%2C%20and%20ordinary%2Fsmall%2Fzero-range%20controls.%0A-%20An%20independent%20Python-float%20calculation%20checks%20every%20block's%20scale%20and%20zero%20point.%0A-%20Native%20CPU%20blocked%20DequantizeLinear%20and%20actual%20static%20QDQ%20quantization%20followed%20by%20MatMul%20verify%20finite%20persisted%20scales%20and%20inference%20results.%20Graph%20optimization%20is%20disabled%20for%20these%20integration%20checks.%0A-%20New%20tests%20plus%20existing%20quantization%20utility%20and%20block-size%20tests%3A%20**25%20methods%20passed%2C%20183%20subtests%20passed**.%0A-%20Restoring%20the%20original%20implementation%20yields%20**28%20failing%20subtests**%2C%208%20completed%20methods%20and%2012%20passing%20subtests.%0A-%20Ruff%20lint%2Fformat%20and%20%60git%20diff%20--check%60%20passed.%0A%0ANative%20validation%3A%20https%3A%2F%2Fgithub.com%2FAfloat16%2Fonnxruntime%2Factions%2Fruns%2F43400845218%0A%0AThe%20runtime%20was%20built%20with%20the%20official%20CPU%20Release%20build.py%2FCMake%20path%20from%20commit%208dea1194e974fa07b1d2f07a190949c3a92cab80%2C%20whose%20C%2B%2B%20sources%20match%20base%20a8246c0d094f1ab0d6bf236228e5e67683321cd7.%20This%20run%20installs%20that%20built%20wheel%2C%20verifies%20the%20matching%20native-source%20baseline%2C%20and%20overlays%20the%20complete%20quantization%20Python%20package%20from%20this%20exact%20patch%20with%20byte-for-byte%20checks%20and%20a%20SHA-256%20manifest.%20It%20uses%20ordinary%20native%20imports.%20This%20is%20targeted%20Linux%20CPU%20validation%2C%20not%20a%20GPU%20or%20full%20C%2B%2B%20test-suite%20result.%0A%0A%23%23%23%20Motivation%20and%20Context%0AFinite%20weight%20ranges%20should%20produce%20finite%20scales%20when%20those%20scales%20fit%20in%20the%20original%20dtype.%20This%20fixes%20the%20blocked%20helper's%20intermediate%20range%20subtraction%3B%20it%20does%20not%20change%20the%20quantization%20algorithm%20or%20claim%20a%20general%20model-accuracy%20improvement.",
+  "pr_url": null,
+  "pr_status": "ready",
+  "merged_at": null,
+  "counts_as_upstream_merged": false,
+  "novelty": {
+    "classification": "genuinely_new",
+    "personal_history": "ONNX fork was created for this task; all current source branches and prior PR history inspected. No preexisting blocked-range fix.",
+    "upstream_history_entries": 65,
+    "relevant_patches_read": [
+      28522,
+      33104,
+      33239
+    ],
+    "distinctions": "28522 introduced blocked quantization; 33104 fixes the scalar scale helper; 33239 adjusts the lower scale bound. None promotes endpoints before blocked range subtraction.",
+    "all_state_searches": [
+      "blocked quantization overflow",
+      "compute_scale_zp_blocked overflow",
+      "range float16 blocked"
+    ]
+  },
+  "validation": {
+    "runtime_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+    "runtime_build_run": 43296543822,
+    "runtime_wheel_artifact": 13982605959,
+    "native_sources_match_base": true,
+    "exact_python_overlay_commit": "8554dd5683f4d6e492d38b530d6d4f14755680f5",
+    "run_id": 43400845218,
+    "job_id": 131803007436,
+    "conclusion": "success",
+    "artifact_id": 14025071820,
+    "new_methods": 8,
+    "new_subcases": 40,
+    "fixed": "25 passed methods, 183 subtests passed",
+    "baseline": "28 failed subtests, 8 passed methods, 12 subtests passed",
+    "lint": "Ruff 0.12.12 check and format; git diff --check passed",
+    "initial_build_attempt": "Official CPU build succeeded, but initial collection shadowed the installed runtime; no tests from that failed collection are counted."
+  },
+  "limitations": [
+    "Targeted Linux CPU, no GPU/full C++ suite.",
+    "Integration checks disable graph optimization; no claim about separate QLinearMatMul kernel limitations.",
+    "Same-base official source-built runtime is reused with exact Python overlay.",
+    "No universal model-quality improvement claimed."
+  ],
+  "source_files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_blocked_quantization_range.py"
+  ]
+}

@@ -1,0 +1,1319 @@
+﻿2026-11-13T09:23:03.0908178Z Current runner version: '2.338.2'
+2026-11-13T09:23:03.0945427Z ##[group]Runner Image Provisioner
+2026-11-13T09:23:03.0946918Z Hosted Compute Agent
+2026-11-13T09:23:03.0947844Z Version: 20261028.624
+2026-11-13T09:23:03.0949242Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-13T09:23:03.0950513Z Build Date: 2026-10-28T21:51:42Z
+2026-11-13T09:23:03.0951651Z Worker ID: {49511f9b-e890-42d9-a6ea-48d264c70043}
+2026-11-13T09:23:03.0952871Z Region: eastus
+2026-11-13T09:23:03.0953763Z Cloud: Azure
+2026-11-13T09:23:03.0954649Z ##[endgroup]
+2026-11-13T09:23:03.0957032Z ##[group]Operating System
+2026-11-13T09:23:03.0958061Z Ubuntu
+2026-11-13T09:23:03.0959356Z 24.04.5
+2026-11-13T09:23:03.0960239Z LTS
+2026-11-13T09:23:03.0961140Z ##[endgroup]
+2026-11-13T09:23:03.0962068Z ##[group]Runner Image
+2026-11-13T09:23:03.0963040Z Image: ubuntu-24.04
+2026-11-13T09:23:03.0964256Z Version: 20261101.360.1
+2026-11-13T09:23:03.0966360Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261101.360/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-13T09:23:03.0969990Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261101.360
+2026-11-13T09:23:03.0971824Z ##[endgroup]
+2026-11-13T09:23:03.0973893Z ##[group]GITHUB_TOKEN Permissions
+2026-11-13T09:23:03.0976807Z Actions: read
+2026-11-13T09:23:03.0977828Z Contents: read
+2026-11-13T09:23:03.0979171Z Metadata: read
+2026-11-13T09:23:03.0980237Z ##[endgroup]
+2026-11-13T09:23:03.0983380Z Secret source: Actions
+2026-11-13T09:23:03.0984966Z Cache mode: write
+2026-11-13T09:23:03.0986568Z Prepare workflow directory
+2026-11-13T09:23:03.1561938Z Prepare all required actions
+2026-11-13T09:23:03.1635459Z Getting action download info
+2026-11-13T09:23:03.3737039Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-13T09:23:03.4580907Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-11-13T09:23:03.6037786Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-13T09:23:03.8357448Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-13T09:23:04.0723564Z Complete job name: native-cpu
+2026-11-13T09:23:04.1675646Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-13T09:23:04.1676744Z with:
+2026-11-13T09:23:04.1677224Z   ref: 8554dd5683f4d6e492d38b530d6d4f14755680f5
+2026-11-13T09:23:04.1677813Z   fetch-depth: 2
+2026-11-13T09:23:04.1678289Z   persist-credentials: false
+2026-11-13T09:23:04.1679056Z   repository: Afloat16/onnxruntime
+2026-11-13T09:23:04.1683020Z   token: ***
+2026-11-13T09:23:04.1683459Z   ssh-strict: true
+2026-11-13T09:23:04.1683900Z   ssh-user: git
+2026-11-13T09:23:04.1684312Z   clean: true
+2026-11-13T09:23:04.1684760Z   sparse-checkout-cone-mode: true
+2026-11-13T09:23:04.1685316Z   fetch-tags: false
+2026-11-13T09:23:04.1685755Z   show-progress: true
+2026-11-13T09:23:04.1686194Z   lfs: false
+2026-11-13T09:23:04.1686610Z   submodules: false
+2026-11-13T09:23:04.1687062Z   set-safe-directory: true
+2026-11-13T09:23:04.1687562Z   allow-unsafe-pr-checkout: false
+2026-11-13T09:23:04.1688422Z env:
+2026-11-13T09:23:04.1689012Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:04.1689552Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:04.1690154Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:04.1690777Z ##[endgroup]
+2026-11-13T09:23:04.4437216Z Syncing repository: Afloat16/onnxruntime
+2026-11-13T09:23:04.4441099Z ##[group]Getting Git version info
+2026-11-13T09:23:04.4442291Z Working directory is '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T09:23:04.4444398Z [command]/usr/bin/git version
+2026-11-13T09:23:04.4511601Z git version 2.56.0
+2026-11-13T09:23:04.4537568Z ##[endgroup]
+2026-11-13T09:23:04.4549095Z Temporarily overriding HOME='/home/runner/work/_temp/c409b85f-c4fc-40f5-a6f3-d4594e6af8f0' before making global git config changes
+2026-11-13T09:23:04.4553594Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T09:23:04.4557610Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T09:23:04.4606984Z Deleting the contents of '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T09:23:04.4610849Z ##[group]Determining repository object format
+2026-11-13T09:23:04.4613522Z ##[endgroup]
+2026-11-13T09:23:04.4615689Z ##[group]Initializing the repository
+2026-11-13T09:23:04.4617966Z [command]/usr/bin/git init /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T09:23:04.4715877Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-13T09:23:04.4719646Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-13T09:23:04.4723219Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-13T09:23:04.4727112Z hint: call:
+2026-11-13T09:23:04.4729420Z hint:
+2026-11-13T09:23:04.4731708Z hint: 	git config --global init.defaultBranch <name>
+2026-11-13T09:23:04.4734404Z hint:
+2026-11-13T09:23:04.4737179Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-13T09:23:04.4740577Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-13T09:23:04.4743535Z hint:
+2026-11-13T09:23:04.4745026Z hint: 	git branch -m <name>
+2026-11-13T09:23:04.4746753Z hint:
+2026-11-13T09:23:04.4748604Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-13T09:23:04.4751937Z Initialized empty Git repository in /home/runner/work/onnxruntime/onnxruntime/.git/
+2026-11-13T09:23:04.4756998Z [command]/usr/bin/git remote add origin https://github.com/Afloat16/onnxruntime
+2026-11-13T09:23:04.4803707Z ##[endgroup]
+2026-11-13T09:23:04.4806062Z ##[group]Disabling automatic garbage collection
+2026-11-13T09:23:04.4808033Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-13T09:23:04.4844687Z ##[endgroup]
+2026-11-13T09:23:04.4846595Z ##[group]Setting up auth
+2026-11-13T09:23:04.4848102Z Removing SSH command configuration
+2026-11-13T09:23:04.4851815Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T09:23:04.4893234Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T09:23:04.5320801Z Removing HTTP extra header
+2026-11-13T09:23:04.5326049Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T09:23:04.5378011Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T09:23:04.5631429Z Removing includeIf entries pointing to credentials config files
+2026-11-13T09:23:04.5635912Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T09:23:04.5690552Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T09:23:04.5937511Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-13T09:23:04.5987553Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path /home/runner/work/_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config
+2026-11-13T09:23:04.6030786Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config
+2026-11-13T09:23:04.6076174Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config
+2026-11-13T09:23:04.6125082Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config
+2026-11-13T09:23:04.6167529Z ##[endgroup]
+2026-11-13T09:23:04.6169466Z ##[group]Fetching the repository
+2026-11-13T09:23:04.6174292Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin 8554dd5683f4d6e492d38b530d6d4f14755680f5
+2026-11-13T09:23:17.2629755Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T09:23:17.2630518Z  * branch            8554dd5683f4d6e492d38b530d6d4f14755680f5 -> FETCH_HEAD
+2026-11-13T09:23:17.2643237Z [command]/usr/bin/git rev-parse --verify --quiet 8554dd5683f4d6e492d38b530d6d4f14755680f5^{object}
+2026-11-13T09:23:17.2687916Z 8554dd5683f4d6e492d38b530d6d4f14755680f5
+2026-11-13T09:23:17.2696036Z ##[endgroup]
+2026-11-13T09:23:17.2696873Z ##[group]Determining the checkout info
+2026-11-13T09:23:17.2710346Z ##[endgroup]
+2026-11-13T09:23:17.2711152Z [command]/usr/bin/git sparse-checkout disable
+2026-11-13T09:23:17.2801987Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-13T09:23:17.2852650Z ##[group]Checking out the ref
+2026-11-13T09:23:17.2853810Z [command]/usr/bin/git checkout --progress --force 8554dd5683f4d6e492d38b530d6d4f14755680f5
+2026-11-13T09:23:18.3591585Z Updating files:  73% (8565/11668)
+2026-11-13T09:23:18.6160136Z Updating files:  74% (8635/11668)
+2026-11-13T09:23:18.6239419Z Updating files:  75% (8751/11668)
+2026-11-13T09:23:18.6354189Z Updating files:  76% (8868/11668)
+2026-11-13T09:23:18.7150337Z Updating files:  77% (8985/11668)
+2026-11-13T09:23:18.8261595Z Updating files:  78% (9102/11668)
+2026-11-13T09:23:18.8317598Z Updating files:  79% (9218/11668)
+2026-11-13T09:23:18.9329117Z Updating files:  80% (9335/11668)
+2026-11-13T09:23:19.1687630Z Updating files:  81% (9452/11668)
+2026-11-13T09:23:19.1945132Z Updating files:  82% (9568/11668)
+2026-11-13T09:23:19.2028358Z Updating files:  83% (9685/11668)
+2026-11-13T09:23:19.2106208Z Updating files:  84% (9802/11668)
+2026-11-13T09:23:19.2186443Z Updating files:  85% (9918/11668)
+2026-11-13T09:23:19.2264699Z Updating files:  86% (10035/11668)
+2026-11-13T09:23:19.2395468Z Updating files:  87% (10152/11668)
+2026-11-13T09:23:19.2462605Z Updating files:  88% (10268/11668)
+2026-11-13T09:23:19.2520611Z Updating files:  89% (10385/11668)
+2026-11-13T09:23:19.2576414Z Updating files:  90% (10502/11668)
+2026-11-13T09:23:19.2644262Z Updating files:  91% (10618/11668)
+2026-11-13T09:23:19.2711862Z Updating files:  92% (10735/11668)
+2026-11-13T09:23:19.2767927Z Updating files:  93% (10852/11668)
+2026-11-13T09:23:19.2830625Z Updating files:  94% (10968/11668)
+2026-11-13T09:23:19.2911906Z Updating files:  95% (11085/11668)
+2026-11-13T09:23:19.2967060Z Updating files:  96% (11202/11668)
+2026-11-13T09:23:19.2997163Z Updating files:  97% (11318/11668)
+2026-11-13T09:23:19.3030869Z Updating files:  97% (11374/11668)
+2026-11-13T09:23:19.3110512Z Updating files:  98% (11435/11668)
+2026-11-13T09:23:19.6478306Z Updating files:  99% (11552/11668)
+2026-11-13T09:23:19.6479046Z Updating files: 100% (11668/11668)
+2026-11-13T09:23:19.6479358Z Updating files: 100% (11668/11668), done.
+2026-11-13T09:23:19.6596050Z Note: switching to '8554dd5683f4d6e492d38b530d6d4f14755680f5'.
+2026-11-13T09:23:19.6596502Z 
+2026-11-13T09:23:19.6596823Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-13T09:23:19.6597626Z changes and commit them, and you can discard any commits you make in this
+2026-11-13T09:23:19.6598777Z state without impacting any branches by switching back to a branch.
+2026-11-13T09:23:19.6599296Z 
+2026-11-13T09:23:19.6599631Z If you want to create a new branch to retain commits you create, you may
+2026-11-13T09:23:19.6600432Z do so (now or later) by using -c with the switch command. Example:
+2026-11-13T09:23:19.6601253Z 
+2026-11-13T09:23:19.6601432Z   git switch -c <new-branch-name>
+2026-11-13T09:23:19.6601739Z 
+2026-11-13T09:23:19.6601902Z Or undo this operation with:
+2026-11-13T09:23:19.6602176Z 
+2026-11-13T09:23:19.6602341Z   git switch -
+2026-11-13T09:23:19.6602540Z 
+2026-11-13T09:23:19.6602903Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-13T09:23:19.6603444Z 
+2026-11-13T09:23:19.6603830Z HEAD is now at 8554dd5 Prevent finite blocked quantization ranges from overflowing
+2026-11-13T09:23:19.6736472Z ##[endgroup]
+2026-11-13T09:23:19.6799034Z [command]/usr/bin/git log -1 --format=%H
+2026-11-13T09:23:19.6837704Z 8554dd5683f4d6e492d38b530d6d4f14755680f5
+2026-11-13T09:23:19.6847240Z ##[group]Removing auth
+2026-11-13T09:23:19.6847666Z Removing SSH command configuration
+2026-11-13T09:23:19.6854178Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T09:23:19.6900780Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T09:23:19.7168729Z Removing HTTP extra header
+2026-11-13T09:23:19.7175598Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T09:23:19.7231341Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T09:23:19.7492898Z Removing includeIf entries pointing to credentials config files
+2026-11-13T09:23:19.7497305Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T09:23:19.7540618Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T09:23:19.7541627Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T09:23:19.7542596Z includeif.gitdir:/github/workspace/.git.path
+2026-11-13T09:23:19.7543267Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T09:23:19.7553670Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T09:23:19.7595021Z /home/runner/work/_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config
+2026-11-13T09:23:19.7611213Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-72de58f6\-2bd8\-4125\-9b8d\-359812a1999a\.config
+2026-11-13T09:23:19.7659348Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T09:23:19.7694352Z /home/runner/work/_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config
+2026-11-13T09:23:19.7704700Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-72de58f6\-2bd8\-4125\-9b8d\-359812a1999a\.config
+2026-11-13T09:23:19.7759293Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-13T09:23:19.7795317Z /github/runner_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config
+2026-11-13T09:23:19.7803814Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-72de58f6\-2bd8\-4125\-9b8d\-359812a1999a\.config
+2026-11-13T09:23:19.7852080Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T09:23:19.7887175Z /github/runner_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config
+2026-11-13T09:23:19.7895662Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-72de58f6\-2bd8\-4125\-9b8d\-359812a1999a\.config
+2026-11-13T09:23:19.7941176Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T09:23:19.8200256Z Removing credentials config '/home/runner/work/_temp/git-credentials-72de58f6-2bd8-4125-9b8d-359812a1999a.config'
+2026-11-13T09:23:19.8243108Z ##[endgroup]
+2026-11-13T09:23:19.8500461Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-11-13T09:23:19.8500887Z with:
+2026-11-13T09:23:19.8501093Z   python-version: 3.12
+2026-11-13T09:23:19.8501316Z   check-latest: false
+2026-11-13T09:23:19.8504016Z   token: ***
+2026-11-13T09:23:19.8504236Z   update-environment: true
+2026-11-13T09:23:19.8504478Z   allow-prereleases: false
+2026-11-13T09:23:19.8504702Z   freethreaded: false
+2026-11-13T09:23:19.8504906Z env:
+2026-11-13T09:23:19.8505083Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:19.8505314Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:19.8505613Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:19.8505925Z ##[endgroup]
+2026-11-13T09:23:19.9927927Z ##[group]Installed versions
+2026-11-13T09:23:20.0022728Z (node:2415) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T09:23:20.0024204Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T09:23:20.0025273Z Successfully set up CPython (3.12.16)
+2026-11-13T09:23:20.0026040Z ##[endgroup]
+2026-11-13T09:23:20.0213856Z ##[group]Run python -m venv "$RUNNER_TEMP/ort-validation-venv"
+2026-11-13T09:23:20.0214424Z [36;1mpython -m venv "$RUNNER_TEMP/ort-validation-venv"[0m
+2026-11-13T09:23:20.0214874Z [36;1mecho "$RUNNER_TEMP/ort-validation-venv/bin" >> "$GITHUB_PATH"[0m
+2026-11-13T09:23:20.0247585Z shell: /usr/bin/bash -e {0}
+2026-11-13T09:23:20.0247855Z env:
+2026-11-13T09:23:20.0248059Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:20.0248313Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:20.0248926Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:20.0249432Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:20.0249891Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:23:20.0250318Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:20.0250697Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:20.0251116Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:20.0251496Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:23:20.0251816Z ##[endgroup]
+2026-11-13T09:23:22.8305356Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T09:23:22.8305807Z with:
+2026-11-13T09:23:22.8306043Z   name: cpu-native-wheel-a8246c0d
+2026-11-13T09:23:22.8306304Z   run-id: 43296543822
+2026-11-13T09:23:22.8309213Z   github-token: ***
+2026-11-13T09:23:22.8309492Z   path: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T09:23:22.8309802Z   merge-multiple: false
+2026-11-13T09:23:22.8310058Z   repository: Afloat16/onnxruntime
+2026-11-13T09:23:22.8310304Z env:
+2026-11-13T09:23:22.8310487Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:22.8310726Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:22.8311037Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:22.8311405Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:22.8311825Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:23:22.8312253Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:22.8312657Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:22.8313041Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:22.8313420Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:23:22.8313760Z ##[endgroup]
+2026-11-13T09:23:22.9860561Z Downloading single artifact
+2026-11-13T09:23:22.9961875Z (node:2452) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T09:23:22.9963091Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T09:23:23.0179696Z (node:2452) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T09:23:23.2751738Z Preparing to download the following artifacts:
+2026-11-13T09:23:23.2752904Z - cpu-native-wheel-a8246c0d (ID: 13982605959, Size: 30978382, Expected Digest: sha256:0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301)
+2026-11-13T09:23:23.2794231Z Downloading artifact '13982605959' from 'Afloat16/onnxruntime'
+2026-11-13T09:23:23.6061074Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/6682e059f91784baee0f176a816c789347a553a5901897c10ebf1feb950019db.zip
+2026-11-13T09:23:23.6063827Z Starting download of artifact to: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T09:23:23.6944134Z (node:2452) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T09:23:24.1032468Z SHA256 digest of downloaded artifact is 0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301
+2026-11-13T09:23:24.1033493Z Artifact download completed successfully.
+2026-11-13T09:23:24.1034098Z Total of 1 artifact(s) downloaded
+2026-11-13T09:23:24.1041342Z Download artifact has finished successfully
+2026-11-13T09:23:24.1261341Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T09:23:24.1261777Z with:
+2026-11-13T09:23:24.1262023Z   name: cpu-distribution-calibration-evidence
+2026-11-13T09:23:24.1262317Z   run-id: 43296543822
+2026-11-13T09:23:24.1264945Z   github-token: ***
+2026-11-13T09:23:24.1265223Z   path: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T09:23:24.1265541Z   merge-multiple: false
+2026-11-13T09:23:24.1265782Z   repository: Afloat16/onnxruntime
+2026-11-13T09:23:24.1266026Z env:
+2026-11-13T09:23:24.1266208Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:24.1266445Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:24.1266754Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:24.1267120Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:24.1267551Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:23:24.1267992Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:24.1268373Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:24.1269060Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:24.1291291Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:23:24.1291659Z ##[endgroup]
+2026-11-13T09:23:24.2854779Z Downloading single artifact
+2026-11-13T09:23:24.2952366Z (node:2464) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T09:23:24.2953247Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T09:23:24.3143902Z (node:2464) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T09:23:24.5366001Z Preparing to download the following artifacts:
+2026-11-13T09:23:24.5367423Z - cpu-distribution-calibration-evidence (ID: 13981818755, Size: 64428, Expected Digest: sha256:53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec)
+2026-11-13T09:23:24.5403341Z Downloading artifact '13981818755' from 'Afloat16/onnxruntime'
+2026-11-13T09:23:24.8522442Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/b5c359d12481e2fcd67c56939a89868631bef8eee9f9477d17c7aaf2174630ca.zip
+2026-11-13T09:23:24.8524923Z Starting download of artifact to: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T09:23:24.9302191Z (node:2464) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T09:23:24.9405165Z SHA256 digest of downloaded artifact is 53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec
+2026-11-13T09:23:24.9406246Z Artifact download completed successfully.
+2026-11-13T09:23:24.9406777Z Total of 1 artifact(s) downloaded
+2026-11-13T09:23:24.9411927Z Download artifact has finished successfully
+2026-11-13T09:23:24.9548931Z ##[group]Run python -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12
+2026-11-13T09:23:24.9550095Z [36;1mpython -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12[0m
+2026-11-13T09:23:24.9550860Z [36;1mgit fetch --no-tags origin 8dea1194e974fa07b1d2f07a190949c3a92cab80[0m
+2026-11-13T09:23:24.9551254Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T09:23:24.9551503Z [36;1mimport hashlib[0m
+2026-11-13T09:23:24.9551718Z [36;1mimport json[0m
+2026-11-13T09:23:24.9551923Z [36;1mimport os[0m
+2026-11-13T09:23:24.9552121Z [36;1mimport shutil[0m
+2026-11-13T09:23:24.9552342Z [36;1mimport subprocess[0m
+2026-11-13T09:23:24.9552584Z [36;1mfrom pathlib import Path[0m
+2026-11-13T09:23:24.9552844Z [36;1mimport onnxruntime[0m
+2026-11-13T09:23:24.9553107Z [36;1mfrom onnxruntime import quantization[0m
+2026-11-13T09:23:24.9553511Z [36;1mbuilt_commit = "8dea1194e974fa07b1d2f07a190949c3a92cab80"[0m
+2026-11-13T09:23:24.9553931Z [36;1mbase_commit = "a8246c0d094f1ab0d6bf236228e5e67683321cd7"[0m
+2026-11-13T09:23:24.9554447Z [36;1msource_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()[0m
+2026-11-13T09:23:24.9555220Z [36;1mprovenance = json.loads((Path(os.environ["RUNNER_TEMP"]) / "ort-build-evidence/ort-source-build-metadata.json").read_text())[0m
+2026-11-13T09:23:24.9555862Z [36;1massert provenance["source_commit"] == built_commit[0m
+2026-11-13T09:23:24.9556343Z [36;1mfor revision in (built_commit, source_commit):[0m
+2026-11-13T09:23:24.9556901Z [36;1m    paths = subprocess.check_output(["git", "diff", "--name-only", base_commit, revision], text=True).splitlines()[0m
+2026-11-13T09:23:24.9557779Z [36;1m    assert all(path.startswith(("onnxruntime/python/tools/quantization/", "onnxruntime/test/python/quantization/")) for path in paths), paths[0m
+2026-11-13T09:23:24.9558887Z [36;1msource = Path("onnxruntime/python/tools/quantization")[0m
+2026-11-13T09:23:24.9559371Z [36;1mdestination = Path(quantization.__file__).parent[0m
+2026-11-13T09:23:24.9559780Z [36;1mshutil.copytree(source, destination, dirs_exist_ok=True)[0m
+2026-11-13T09:23:24.9560172Z [36;1mfor cache in destination.rglob("__pycache__"):[0m
+2026-11-13T09:23:24.9560495Z [36;1m    shutil.rmtree(cache)[0m
+2026-11-13T09:23:24.9560735Z [36;1mhashes = {}[0m
+2026-11-13T09:23:24.9560966Z [36;1mfor path in source.rglob("*.py"):[0m
+2026-11-13T09:23:24.9561300Z [36;1m    installed = destination / path.relative_to(source)[0m
+2026-11-13T09:23:24.9561716Z [36;1m    assert installed.read_bytes() == path.read_bytes(), installed[0m
+2026-11-13T09:23:24.9562266Z [36;1m    hashes[str(path.relative_to(source))] = hashlib.sha256(installed.read_bytes()).hexdigest()[0m
+2026-11-13T09:23:24.9562858Z [36;1massert "CPUExecutionProvider" in onnxruntime.get_available_providers()[0m
+2026-11-13T09:23:24.9563257Z [36;1mmetadata = {[0m
+2026-11-13T09:23:24.9563500Z [36;1m    "source_commit": source_commit,[0m
+2026-11-13T09:23:24.9563815Z [36;1m    "native_build_source_commit": built_commit,[0m
+2026-11-13T09:23:24.9564349Z [36;1m    "common_native_source_base": base_commit,[0m
+2026-11-13T09:23:24.9564656Z [36;1m    "native_build_run": 43296543822,[0m
+2026-11-13T09:23:24.9564951Z [36;1m    "native_wheel_artifact": 13982605959,[0m
+2026-11-13T09:23:24.9565268Z [36;1m    "runtime_version": onnxruntime.__version__,[0m
+2026-11-13T09:23:24.9565588Z [36;1m    "runtime_path": onnxruntime.__file__,[0m
+2026-11-13T09:23:24.9565904Z [36;1m    "quantization_path": str(destination),[0m
+2026-11-13T09:23:24.9566213Z [36;1m    "quantization_sha256": hashes,[0m
+2026-11-13T09:23:24.9566736Z [36;1m    "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged.",[0m
+2026-11-13T09:23:24.9567244Z [36;1m}[0m
+2026-11-13T09:23:24.9567791Z [36;1mPath("ort-source-overlay-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")[0m
+2026-11-13T09:23:24.9568294Z [36;1mprint(json.dumps(metadata, indent=2))[0m
+2026-11-13T09:23:24.9568882Z [36;1mPY[0m
+2026-11-13T09:23:24.9591002Z shell: /usr/bin/bash -e {0}
+2026-11-13T09:23:24.9591255Z env:
+2026-11-13T09:23:24.9591450Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:24.9591696Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:24.9592005Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:24.9592379Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:24.9592805Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:23:24.9593263Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:24.9593640Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:24.9594017Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:24.9594399Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:23:24.9594722Z ##[endgroup]
+2026-11-13T09:23:25.3597405Z Processing /home/runner/work/_temp/ort-built-wheel/onnxruntime-1.33.0-cp312-cp312-linux_x86_64.whl
+2026-11-13T09:23:25.6242343Z Collecting numpy==2.3.5
+2026-11-13T09:23:25.6535781Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-11-13T09:23:25.7239347Z Collecting onnx==1.20.1
+2026-11-13T09:23:25.7288520Z   Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.4 kB)
+2026-11-13T09:23:25.7533584Z Collecting ml_dtypes
+2026-11-13T09:23:25.7564515Z   Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+2026-11-13T09:23:25.7907609Z Collecting pytest==9.1.1
+2026-11-13T09:23:25.7937578Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-11-13T09:23:26.1166497Z Collecting ruff==0.12.12
+2026-11-13T09:23:26.1204177Z   Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2026-11-13T09:23:26.2919059Z Collecting protobuf>=4.25.1 (from onnx==1.20.1)
+2026-11-13T09:23:26.2950907Z   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+2026-11-13T09:23:26.3115490Z Collecting typing_extensions>=4.7.1 (from onnx==1.20.1)
+2026-11-13T09:23:26.3146557Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-13T09:23:26.3274089Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1)
+2026-11-13T09:23:26.3303075Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-13T09:23:26.3478247Z Collecting packaging>=22 (from pytest==9.1.1)
+2026-11-13T09:23:26.3511028Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-13T09:23:26.3663181Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1)
+2026-11-13T09:23:26.3692339Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-13T09:23:26.3888253Z Collecting pygments>=2.7.2 (from pytest==9.1.1)
+2026-11-13T09:23:26.3920201Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-13T09:23:26.4055230Z Collecting flatbuffers (from onnxruntime==1.33.0)
+2026-11-13T09:23:26.4084176Z   Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+2026-11-13T09:23:26.4566230Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-11-13T09:23:26.5217187Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 270.9 MB/s eta 0:00:00
+2026-11-13T09:23:26.5263790Z Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (17.5 MB)
+2026-11-13T09:23:26.5973213Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.5/17.5 MB 253.2 MB/s eta 0:00:00
+2026-11-13T09:23:26.6011186Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-11-13T09:23:26.6076762Z Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+2026-11-13T09:23:26.6731266Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 210.0 MB/s eta 0:00:00
+2026-11-13T09:23:26.6761664Z Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (409 kB)
+2026-11-13T09:23:26.6827189Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-13T09:23:26.6887583Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-13T09:23:26.6937022Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-13T09:23:26.6985331Z Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+2026-11-13T09:23:26.7039052Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-13T09:23:26.7105390Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 226.5 MB/s eta 0:00:00
+2026-11-13T09:23:26.7135710Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-13T09:23:26.7189094Z Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+2026-11-13T09:23:26.9149256Z Installing collected packages: flatbuffers, typing_extensions, ruff, pygments, protobuf, pluggy, packaging, numpy, iniconfig, pytest, onnxruntime, ml_dtypes, onnx
+2026-11-13T09:23:33.7772482Z Successfully installed flatbuffers-25.12.19 iniconfig-2.3.1 ml_dtypes-0.6.0 numpy-2.3.5 onnx-1.20.1 onnxruntime-1.33.0 packaging-26.3 pluggy-1.7.0 protobuf-7.36.2 pygments-2.21.0 pytest-9.1.1 ruff-0.12.12 typing_extensions-4.16.0
+2026-11-13T09:23:33.8631566Z 
+2026-11-13T09:23:33.8632361Z [notice] A new release of pip is available: 25.0.1 -> 26.3
+2026-11-13T09:23:33.8633353Z [notice] To update, run: pip install --upgrade pip
+2026-11-13T09:23:47.7620841Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T09:23:47.7621661Z  * branch              8dea1194e974fa07b1d2f07a190949c3a92cab80 -> FETCH_HEAD
+2026-11-13T09:23:47.9428849Z [0;93m2026-11-13 09:23:47.942522022 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T09:23:48.1013423Z {
+2026-11-13T09:23:48.1013959Z   "source_commit": "8554dd5683f4d6e492d38b530d6d4f14755680f5",
+2026-11-13T09:23:48.1014663Z   "native_build_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+2026-11-13T09:23:48.1015433Z   "common_native_source_base": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+2026-11-13T09:23:48.1016009Z   "native_build_run": 43296543822,
+2026-11-13T09:23:48.1016405Z   "native_wheel_artifact": 13982605959,
+2026-11-13T09:23:48.1016838Z   "runtime_version": "1.33.0",
+2026-11-13T09:23:48.1017720Z   "runtime_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/__init__.py",
+2026-11-13T09:23:48.1019447Z   "quantization_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization",
+2026-11-13T09:23:48.1020424Z   "quantization_sha256": {
+2026-11-13T09:23:48.1020938Z     "base_quantizer.py": "750f1ae870b793a140938a83c9f72fa361ecf3e5c36257bc9482a6e1e0463335",
+2026-11-13T09:23:48.1021624Z     "preprocess.py": "105d56a717cc3a81922596c1d3804bf4ae3e9801d8ef15a3e6d86fcf5b7ae1d7",
+2026-11-13T09:23:48.1022325Z     "static_quantize_runner.py": "656546050e54f699780c560b85b19209f9cbfdf6544a6bd046de4ea93d6c3a12",
+2026-11-13T09:23:48.1023798Z     "quantize.py": "b96538a6a4f2311cf9af9ece760170b3d90c527cd7dfc4760ad8cafbbf694324",
+2026-11-13T09:23:48.1024921Z     "matmul_bnb4_quantizer.py": "2afb1460ff720f0fee991f2f12434d4a154059f00847e96853151041735fcff6",
+2026-11-13T09:23:48.1025747Z     "calibrate.py": "dd84a7663166b2eb013ac51c1184cd36c689786813d49916cd5a7b779b39bea0",
+2026-11-13T09:23:48.1026310Z     "__init__.py": "e6a397c6f48639307150aa6d495826b3a3f3229220748a095837a592c9beac8c",
+2026-11-13T09:23:48.1026883Z     "onnx_quantizer.py": "f9c3705d631ff38231b4787f89e487274a8768122d79c11a3a6f0ce7caf62dc9",
+2026-11-13T09:23:48.1027463Z     "onnx_model.py": "3d98ad52611d43a1e89a0e7cb5e2f376f850bf2640a783a5e627f9c21c7f74b8",
+2026-11-13T09:23:48.1028269Z     "matmul_nbits_quantizer.py": "04feb252358ee7f20758a732537adff49fb10c7e80e84e358a4eb4c763bc3903",
+2026-11-13T09:23:48.1029200Z     "registry.py": "342e55d91f62a64fcd4e4d721a0ac568af69c822a7557312d8bd69a4adc3a5f5",
+2026-11-13T09:23:48.1029795Z     "cuda_quantizer.py": "1e4dbc4f780c06a281054aac00fbbb7e136dfee1c29eee350c3e3dd420310e55",
+2026-11-13T09:23:48.1030384Z     "qdq_loss_debug.py": "f8fcf18ea1e0081ba77ecb6664e67650c068bdf206f0d3ff63351833da480629",
+2026-11-13T09:23:48.1030993Z     "tensor_quant_overrides.py": "6df028cd14bf2919ead19d103aad77331fe4fde186a90f8a74f440384932a0c9",
+2026-11-13T09:23:48.1031589Z     "quant_utils.py": "905e41d24d7509eeb70552f753b02221f3dded070087dffd68ffaf2424a6ab80",
+2026-11-13T09:23:48.1032174Z     "shape_inference.py": "f1fc6a69fd829d29963ba6d90a6b81d16b7ef3536a7a0dffacf8e3858ef5c227",
+2026-11-13T09:23:48.1032763Z     "qdq_quantizer.py": "6c6c061ae90ea4a0d6a8b5d2314e764bf1b0c4245ed4dafcd72d1603cd69683b",
+2026-11-13T09:23:48.1033428Z     "fusions/replace_upsample_with_resize.py": "21663d11455fde7190b9aa04c334a798f8383059af561527ac309398b7cba3bc",
+2026-11-13T09:23:48.1034100Z     "fusions/__init__.py": "f05e55a909e2a9aedaec74ef9451aff14e65b6f059f9215ad936310ab822ab24",
+2026-11-13T09:23:48.1034690Z     "fusions/fusion.py": "f2f4cb00704942a8143f02b6539c9de94c14b64d4c1cfc8ace52e3fb89574112",
+2026-11-13T09:23:48.1035302Z     "fusions/fusion_gelu.py": "a2216ab4e51cba690f6601f96dd4aa9ad7a898ce9611a7b0c0cd7cc29bf79b2c",
+2026-11-13T09:23:48.1035938Z     "fusions/fusion_layernorm.py": "5347c96082498172da1d61742ec120746b3fd7d8a9b27ff397cd1ba9b0806784",
+2026-11-13T09:23:48.1036624Z     "CalTableFlatBuffers/KeyValue.py": "fecc58656ee31b11d336456ad3e6e5fce4e8ab60dd31718e9e968756180dd8cb",
+2026-11-13T09:23:48.1037316Z     "CalTableFlatBuffers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T09:23:48.1037996Z     "CalTableFlatBuffers/TrtTable.py": "eeb0e37992385ac644f978f88e601dbcceb10c6c42c256cb88889a87b05f1133",
+2026-11-13T09:23:48.1038898Z     "operators/conv.py": "be3bc477995318cfd45619453444abb19638e746b6907318cacfe54ec1b34d7e",
+2026-11-13T09:23:48.1039506Z     "operators/maxpool.py": "b7357d17439efe5c35c9d22131ef0cc33f661fb395613cfee54031bc38dc265c",
+2026-11-13T09:23:48.1040112Z     "operators/argmax.py": "86b3b40c8808df3c33956e8c7207d25b3f7b6d4bc7b96193b321f6ba11b540d1",
+2026-11-13T09:23:48.1040699Z     "operators/softmax.py": "377d90c9cf445eb62c4c84fd24e009804662f838740f81551c54ac98e226bd1d",
+2026-11-13T09:23:48.1041314Z     "operators/activation.py": "63d8004592e07fedc847da426b135e541a06bb465889063c646e0a72dc3829ff",
+2026-11-13T09:23:48.1042053Z     "operators/embed_layernorm.py": "686ab6cb0e19b63be00b9fed78023f7c09f5f14120af54a126b5d3eedd7c2464",
+2026-11-13T09:23:48.1042682Z     "operators/where.py": "b43afc5d219013a56e43653f9a244db0e8b0efee9766478ef7a74cd67697e1e8",
+2026-11-13T09:23:48.1043265Z     "operators/norm.py": "0da2c43dc5677e4c1a0fa7a94e0ac2ee1784f838e25814ecda8b0048c613f741",
+2026-11-13T09:23:48.1043865Z     "operators/binary_op.py": "407cb36bfb9b087e8a2caa7b26d586a0d2d804e2d5c61b8287572b98860bf4ca",
+2026-11-13T09:23:48.1044459Z     "operators/gemm.py": "9077b95a0f33f0eb962ce2bd5f66b411ef268b80fba62a61269b327cfda6d1c4",
+2026-11-13T09:23:48.1045230Z     "operators/qdq_base_operator.py": "833a553185bda598964606d9107a4a806b96a9c3a232cb18b61f93a7269ddac8",
+2026-11-13T09:23:48.1045856Z     "operators/pad.py": "92ee11d6df95801111f345685eb132ff8c41754a3dec363d7ac0df999d736b01",
+2026-11-13T09:23:48.1046449Z     "operators/pooling.py": "65323c1632f093e79aa3bfaa638e5c0ac52da1b95956f27b3c86745bd629404c",
+2026-11-13T09:23:48.1047069Z     "operators/base_operator.py": "74a29cf70d2a2e7afd1ceb4a4c6f222452993f037077956576efb544998fcaf9",
+2026-11-13T09:23:48.1047691Z     "operators/__init__.py": "7b531614058e27f1678fbea573c2e71b6dafd8ac22ff236f2a1d1aaa489d10a5",
+2026-11-13T09:23:48.1048306Z     "operators/lstm.py": "1cdd3fb3c00ded7503747824a1dbd773ba08e3172f4b63da9c6fe9238c613cec",
+2026-11-13T09:23:48.1049188Z     "operators/gather.py": "2cac2de86bcc9bcd327047580cf73bc8e0ecee1a52b832e279289bd7695b9b7a",
+2026-11-13T09:23:48.1049938Z     "operators/direct_q8.py": "ed3514d7e2409b916efffe11a91c463e05f0aaa0f7ff472e4b44944788aa28d5",
+2026-11-13T09:23:48.1050559Z     "operators/concat.py": "731ec69fc8e1e1fa016e8a516f824f02836c4b23f500a737fe01969d5c891344",
+2026-11-13T09:23:48.1051158Z     "operators/matmul.py": "7d850ddaa686a670848662c50f2338a3e634a859b4b5c6efd6191bc60940d08e",
+2026-11-13T09:23:48.1051776Z     "operators/attention.py": "45b7d496416d2cfd4ee702e5c2fe47f18a2535e8dfd17cae07845fa8629595e3",
+2026-11-13T09:23:48.1052386Z     "operators/split.py": "1d76742cae13f2fb116e1c8723c0e30710a62769c0df321258cf486bdca50212",
+2026-11-13T09:23:48.1052997Z     "operators/gavgpool.py": "cdb2d953162af78b71f8e553656bfae005becbc32f9a4fb671740d6ca3352896",
+2026-11-13T09:23:48.1053605Z     "operators/resize.py": "5caa4667dafb624f433982c041173f98acbe8ef884f375a74f8155eb908b4cb4",
+2026-11-13T09:23:48.1054230Z     "neural_compressor/util.py": "20f54aa4817b69e5480e3bb456f460bcc3d53b9b12a8d1fecb038a182b968eaf",
+2026-11-13T09:23:48.1054882Z     "neural_compressor/__init__.py": "97eb008ba62d7bfb6234540b738dce6914085e0517358f1c091232e9db87f172",
+2026-11-13T09:23:48.1055546Z     "neural_compressor/onnx_model.py": "0f901eb2ee11bc2ec80a941e4072243ef472143b0e1becd020ad0de72f2d3563",
+2026-11-13T09:23:48.1056253Z     "neural_compressor/weight_only.py": "2f7a7760a7dd7bbbd65a6ea0b46c876e2ce1fda0e34bccf0a54c946f6a676598",
+2026-11-13T09:23:48.1056941Z     "execution_providers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T09:23:48.1057652Z     "execution_providers/qnn/preprocess.py": "56997c1fa18cd53a176ca84706f9667c127c8a145b2265490c8177798b249665",
+2026-11-13T09:23:48.1058682Z     "execution_providers/qnn/mixed_precision_overrides_utils.py": "beff0aa9254a724556906333c169615ab64de047b45c09c1f325fee0b334da07",
+2026-11-13T09:23:48.1059552Z     "execution_providers/qnn/fusion_lpnorm.py": "6767db32ff39da3cc2c9691f4d36acab90883d2bed0fe1161a6507d677c7cf5f",
+2026-11-13T09:23:48.1060338Z     "execution_providers/qnn/quant_config.py": "07a58ddb57eaf0a4a17550bf86bebeee1c8c739a65a92b30368ad4629b9c68d4",
+2026-11-13T09:23:48.1061125Z     "execution_providers/qnn/fusion_spacetodepth.py": "1fe6bea7151d14dc4e0c9bca81e6b251c65bc9297bb8b6c2c5ba43e5b0650575",
+2026-11-13T09:23:48.1061896Z     "execution_providers/qnn/__init__.py": "99a13e72b8e602904cfac188b98fcfce386542eb10afc0fe140840f5eaa6f758"
+2026-11-13T09:23:48.1062366Z   },
+2026-11-13T09:23:48.1062773Z   "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged."
+2026-11-13T09:23:48.1063246Z }
+2026-11-13T09:23:48.1449219Z ##[group]Run set -o pipefail
+2026-11-13T09:23:48.1449813Z [36;1mset -o pipefail[0m
+2026-11-13T09:23:48.1452191Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_blocked_quantization_range.py onnxruntime/test/python/quantization/test_quant_util.py onnxruntime/test/python/quantization/test_qdq_block_size.py 2>&1 | tee ort-patched.log[0m
+2026-11-13T09:23:48.1483231Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T09:23:48.1483741Z env:
+2026-11-13T09:23:48.1483939Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:48.1484184Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:48.1484488Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:48.1484877Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:48.1485312Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:23:48.1485777Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:48.1486157Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:48.1486531Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:48.1486910Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:23:48.1487232Z ##[endgroup]
+2026-11-13T09:23:48.2402619Z [0;93m2026-11-13 09:23:48.239797583 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T09:23:49.1036192Z ............ [ 48%]
+2026-11-13T09:23:49.3422431Z .............         [100%]
+2026-11-13T09:23:49.3423092Z =============================== warnings summary ===============================
+2026-11-13T09:23:49.3423679Z onnxruntime/test/python/quantization/op_test_utils.py:189
+2026-11-13T09:23:49.3425310Z   /home/runner/work/onnxruntime/onnxruntime/onnxruntime/test/python/quantization/op_test_utils.py:189: PytestCollectionWarning: cannot collect test class 'TestDataFeeds' because it has a __init__ constructor (from: onnxruntime/test/python/quantization/test_qdq_block_size.py)
+2026-11-13T09:23:49.3426909Z     class TestDataFeeds(CalibrationDataReader):
+2026-11-13T09:23:49.3427243Z 
+2026-11-13T09:23:49.3427505Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-11-13T09:23:49.3428025Z 25 passed, 1 warning, 183 subtests passed in 0.64s
+2026-11-13T09:23:49.3985411Z ##[group]Run python -P - <<'PY'
+2026-11-13T09:23:49.3986039Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T09:23:49.3986518Z [36;1mimport subprocess[0m
+2026-11-13T09:23:49.3986984Z [36;1mfrom pathlib import Path[0m
+2026-11-13T09:23:49.3987606Z [36;1mfrom onnxruntime.quantization import quant_utils[0m
+2026-11-13T09:23:49.3988269Z [36;1mtarget = Path(quant_utils.__file__)[0m
+2026-11-13T09:23:49.3989953Z [36;1mtarget.write_bytes(subprocess.check_output(["git", "show", "a8246c0d094f1ab0d6bf236228e5e67683321cd7:onnxruntime/python/tools/quantization/quant_utils.py"]))[0m
+2026-11-13T09:23:49.3991438Z [36;1mfor cache in target.parent.glob("__pycache__/quant_utils.*.pyc"):[0m
+2026-11-13T09:23:49.3992146Z [36;1m    cache.unlink()[0m
+2026-11-13T09:23:49.3992563Z [36;1mPY[0m
+2026-11-13T09:23:49.4024395Z shell: /usr/bin/bash -e {0}
+2026-11-13T09:23:49.4024830Z env:
+2026-11-13T09:23:49.4025174Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:49.4025715Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:49.4026274Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:49.4026972Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:49.4027734Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:23:49.4028522Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:49.4029489Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:49.4030195Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:49.4030918Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:23:49.4031496Z ##[endgroup]
+2026-11-13T09:23:49.5047807Z [0;93m2026-11-13 09:23:49.504396937 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T09:23:49.6574915Z ##[group]Run set +e
+2026-11-13T09:23:49.6575218Z [36;1mset +e[0m
+2026-11-13T09:23:49.6576078Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_blocked_quantization_range.py > ort-baseline.log 2>&1[0m
+2026-11-13T09:23:49.6576985Z [36;1mresult=$?[0m
+2026-11-13T09:23:49.6577187Z [36;1mset -e[0m
+2026-11-13T09:23:49.6577392Z [36;1mcat ort-baseline.log[0m
+2026-11-13T09:23:49.6577632Z [36;1mtest "$result" -eq 1[0m
+2026-11-13T09:23:49.6577871Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T09:23:49.6578135Z [36;1mimport xml.etree.ElementTree as ET[0m
+2026-11-13T09:23:49.6578477Z [36;1mroot = ET.parse("ort-baseline.xml").getroot()[0m
+2026-11-13T09:23:49.6579483Z [36;1mfailed = {case.attrib["name"] for case in root.findall(".//testcase") if case.find("failure") is not None or case.find("error") is not None}[0m
+2026-11-13T09:23:49.6580129Z [36;1mrequired = {[0m
+2026-11-13T09:23:49.6580360Z [36;1m    "test_large_float16_ranges",[0m
+2026-11-13T09:23:49.6580637Z [36;1m    "test_large_float32_ranges",[0m
+2026-11-13T09:23:49.6580973Z [36;1m    "test_static_quantization_uses_finite_block_scales",[0m
+2026-11-13T09:23:49.6581363Z [36;1m    "test_native_cpu_blocked_dequantization",[0m
+2026-11-13T09:23:49.6581654Z [36;1m}[0m
+2026-11-13T09:23:49.6581916Z [36;1massert required <= failed, (required - failed, failed)[0m
+2026-11-13T09:23:49.6582374Z [36;1mprint("Confirmed original blocked-range failures:", sorted(failed))[0m
+2026-11-13T09:23:49.6582758Z [36;1mPY[0m
+2026-11-13T09:23:49.6603775Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T09:23:49.6604116Z env:
+2026-11-13T09:23:49.6604309Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:49.6604551Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:49.6604862Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:49.6605253Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:49.6605678Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:23:49.6606112Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:49.6606493Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:49.6606878Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:49.6607271Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:23:49.6607603Z ##[endgroup]
+2026-11-13T09:23:50.4691644Z [0;93m2026-11-13 09:23:49.751226509 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T09:23:50.4694539Z ........                         [100%]
+2026-11-13T09:23:50.4695389Z =================================== FAILURES ===================================
+2026-11-13T09:23:50.4696837Z _ TestBlockedQuantizationRange.test_large_float16_ranges (axis=0, quant_type=3, symmetric=False) _
+2026-11-13T09:23:50.4697755Z 
+2026-11-13T09:23:50.4712182Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float16_ranges>
+2026-11-13T09:23:50.4713027Z 
+2026-11-13T09:23:50.4713206Z     def test_large_float16_ranges(self):
+2026-11-13T09:23:50.4713664Z         for axis in (0, 1):
+2026-11-13T09:23:50.4714221Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4714803Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4715484Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4716312Z >                       self._check_parameters(_weights(np.float16), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4717506Z 
+2026-11-13T09:23:50.4718214Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:79: 
+2026-11-13T09:23:50.4719396Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4720343Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4721250Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4721811Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4722677Z _ TestBlockedQuantizationRange.test_large_float16_ranges (axis=0, quant_type=3, symmetric=True) _
+2026-11-13T09:23:50.4723372Z 
+2026-11-13T09:23:50.4723976Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float16_ranges>
+2026-11-13T09:23:50.4724736Z 
+2026-11-13T09:23:50.4724879Z     def test_large_float16_ranges(self):
+2026-11-13T09:23:50.4725160Z         for axis in (0, 1):
+2026-11-13T09:23:50.4725466Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4725846Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4726290Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4726845Z >                       self._check_parameters(_weights(np.float16), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4727168Z 
+2026-11-13T09:23:50.4727524Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:79: 
+2026-11-13T09:23:50.4727983Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4728506Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4729346Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4729659Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4730160Z _ TestBlockedQuantizationRange.test_large_float16_ranges (axis=0, quant_type=2, symmetric=False) _
+2026-11-13T09:23:50.4730570Z 
+2026-11-13T09:23:50.4730909Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float16_ranges>
+2026-11-13T09:23:50.4731328Z 
+2026-11-13T09:23:50.4731434Z     def test_large_float16_ranges(self):
+2026-11-13T09:23:50.4731709Z         for axis in (0, 1):
+2026-11-13T09:23:50.4732016Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4732374Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4732781Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4733334Z >                       self._check_parameters(_weights(np.float16), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4733664Z 
+2026-11-13T09:23:50.4733893Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:79: 
+2026-11-13T09:23:50.4734346Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4735064Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4735802Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4736113Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4736589Z _ TestBlockedQuantizationRange.test_large_float16_ranges (axis=0, quant_type=2, symmetric=True) _
+2026-11-13T09:23:50.4736987Z 
+2026-11-13T09:23:50.4737305Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float16_ranges>
+2026-11-13T09:23:50.4737729Z 
+2026-11-13T09:23:50.4737836Z     def test_large_float16_ranges(self):
+2026-11-13T09:23:50.4738117Z         for axis in (0, 1):
+2026-11-13T09:23:50.4738423Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4739079Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4739496Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4740026Z >                       self._check_parameters(_weights(np.float16), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4740673Z 
+2026-11-13T09:23:50.4740913Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:79: 
+2026-11-13T09:23:50.4741372Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4741895Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4742387Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4742688Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4743165Z _ TestBlockedQuantizationRange.test_large_float16_ranges (axis=1, quant_type=3, symmetric=False) _
+2026-11-13T09:23:50.4743560Z 
+2026-11-13T09:23:50.4743879Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float16_ranges>
+2026-11-13T09:23:50.4744302Z 
+2026-11-13T09:23:50.4744400Z     def test_large_float16_ranges(self):
+2026-11-13T09:23:50.4744678Z         for axis in (0, 1):
+2026-11-13T09:23:50.4744990Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4745343Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4745748Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4746290Z >                       self._check_parameters(_weights(np.float16), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4746608Z 
+2026-11-13T09:23:50.4746823Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:79: 
+2026-11-13T09:23:50.4747270Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4747780Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4748270Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4748893Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4749748Z _ TestBlockedQuantizationRange.test_large_float16_ranges (axis=1, quant_type=3, symmetric=True) _
+2026-11-13T09:23:50.4750175Z 
+2026-11-13T09:23:50.4750509Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float16_ranges>
+2026-11-13T09:23:50.4750946Z 
+2026-11-13T09:23:50.4751045Z     def test_large_float16_ranges(self):
+2026-11-13T09:23:50.4751318Z         for axis in (0, 1):
+2026-11-13T09:23:50.4751624Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4751980Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4752394Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4752931Z >                       self._check_parameters(_weights(np.float16), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4753249Z 
+2026-11-13T09:23:50.4753470Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:79: 
+2026-11-13T09:23:50.4753925Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4754447Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4754936Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4755232Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4755711Z _ TestBlockedQuantizationRange.test_large_float16_ranges (axis=1, quant_type=2, symmetric=False) _
+2026-11-13T09:23:50.4756111Z 
+2026-11-13T09:23:50.4756433Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float16_ranges>
+2026-11-13T09:23:50.4756853Z 
+2026-11-13T09:23:50.4756954Z     def test_large_float16_ranges(self):
+2026-11-13T09:23:50.4757240Z         for axis in (0, 1):
+2026-11-13T09:23:50.4757548Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4757900Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4758304Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4759464Z >                       self._check_parameters(_weights(np.float16), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4759795Z 
+2026-11-13T09:23:50.4760023Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:79: 
+2026-11-13T09:23:50.4760475Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4760989Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4761477Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4761773Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4762242Z _ TestBlockedQuantizationRange.test_large_float16_ranges (axis=1, quant_type=2, symmetric=True) _
+2026-11-13T09:23:50.4762630Z 
+2026-11-13T09:23:50.4762945Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float16_ranges>
+2026-11-13T09:23:50.4763368Z 
+2026-11-13T09:23:50.4763478Z     def test_large_float16_ranges(self):
+2026-11-13T09:23:50.4763745Z         for axis in (0, 1):
+2026-11-13T09:23:50.4764044Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4764392Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4764814Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4765339Z >                       self._check_parameters(_weights(np.float16), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4765659Z 
+2026-11-13T09:23:50.4765871Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:79: 
+2026-11-13T09:23:50.4766318Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4766832Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4767318Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4767613Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4768092Z _ TestBlockedQuantizationRange.test_large_float32_ranges (axis=0, quant_type=3, symmetric=False) _
+2026-11-13T09:23:50.4768482Z 
+2026-11-13T09:23:50.4769067Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float32_ranges>
+2026-11-13T09:23:50.4769492Z 
+2026-11-13T09:23:50.4769593Z     def test_large_float32_ranges(self):
+2026-11-13T09:23:50.4769854Z         for axis in (0, 1):
+2026-11-13T09:23:50.4770155Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4770501Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4770897Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4771426Z >                       self._check_parameters(_weights(np.float32), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4771744Z 
+2026-11-13T09:23:50.4771957Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:86: 
+2026-11-13T09:23:50.4772410Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4772917Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4773407Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4773702Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4774161Z _ TestBlockedQuantizationRange.test_large_float32_ranges (axis=0, quant_type=3, symmetric=True) _
+2026-11-13T09:23:50.4774538Z 
+2026-11-13T09:23:50.4774862Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float32_ranges>
+2026-11-13T09:23:50.4775279Z 
+2026-11-13T09:23:50.4775375Z     def test_large_float32_ranges(self):
+2026-11-13T09:23:50.4775638Z         for axis in (0, 1):
+2026-11-13T09:23:50.4775930Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4776273Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4776920Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4777448Z >                       self._check_parameters(_weights(np.float32), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4777760Z 
+2026-11-13T09:23:50.4777983Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:86: 
+2026-11-13T09:23:50.4778757Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4779339Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4779828Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4780123Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4780594Z _ TestBlockedQuantizationRange.test_large_float32_ranges (axis=0, quant_type=2, symmetric=False) _
+2026-11-13T09:23:50.4780988Z 
+2026-11-13T09:23:50.4781298Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float32_ranges>
+2026-11-13T09:23:50.4781738Z 
+2026-11-13T09:23:50.4781836Z     def test_large_float32_ranges(self):
+2026-11-13T09:23:50.4782098Z         for axis in (0, 1):
+2026-11-13T09:23:50.4782397Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4782744Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4783141Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4783671Z >                       self._check_parameters(_weights(np.float32), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4783988Z 
+2026-11-13T09:23:50.4784202Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:86: 
+2026-11-13T09:23:50.4784646Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4785160Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4785648Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4785952Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4786418Z _ TestBlockedQuantizationRange.test_large_float32_ranges (axis=0, quant_type=2, symmetric=True) _
+2026-11-13T09:23:50.4786807Z 
+2026-11-13T09:23:50.4787126Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float32_ranges>
+2026-11-13T09:23:50.4787540Z 
+2026-11-13T09:23:50.4787642Z     def test_large_float32_ranges(self):
+2026-11-13T09:23:50.4787904Z         for axis in (0, 1):
+2026-11-13T09:23:50.4788203Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4788691Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4789116Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4789645Z >                       self._check_parameters(_weights(np.float32), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4789961Z 
+2026-11-13T09:23:50.4790191Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:86: 
+2026-11-13T09:23:50.4790632Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4791136Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4791622Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4791914Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4792380Z _ TestBlockedQuantizationRange.test_large_float32_ranges (axis=1, quant_type=3, symmetric=False) _
+2026-11-13T09:23:50.4792768Z 
+2026-11-13T09:23:50.4793084Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float32_ranges>
+2026-11-13T09:23:50.4793504Z 
+2026-11-13T09:23:50.4793605Z     def test_large_float32_ranges(self):
+2026-11-13T09:23:50.4793867Z         for axis in (0, 1):
+2026-11-13T09:23:50.4794160Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4794652Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4795146Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4795676Z >                       self._check_parameters(_weights(np.float32), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4795992Z 
+2026-11-13T09:23:50.4796204Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:86: 
+2026-11-13T09:23:50.4796645Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4797196Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4797677Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4797970Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4798431Z _ TestBlockedQuantizationRange.test_large_float32_ranges (axis=1, quant_type=3, symmetric=True) _
+2026-11-13T09:23:50.4798956Z 
+2026-11-13T09:23:50.4799280Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float32_ranges>
+2026-11-13T09:23:50.4799704Z 
+2026-11-13T09:23:50.4799800Z     def test_large_float32_ranges(self):
+2026-11-13T09:23:50.4800063Z         for axis in (0, 1):
+2026-11-13T09:23:50.4800366Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4800718Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4801117Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4801638Z >                       self._check_parameters(_weights(np.float32), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4801956Z 
+2026-11-13T09:23:50.4802167Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:86: 
+2026-11-13T09:23:50.4802606Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4803112Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4803601Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4803898Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4804365Z _ TestBlockedQuantizationRange.test_large_float32_ranges (axis=1, quant_type=2, symmetric=False) _
+2026-11-13T09:23:50.4804745Z 
+2026-11-13T09:23:50.4805063Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float32_ranges>
+2026-11-13T09:23:50.4805483Z 
+2026-11-13T09:23:50.4805577Z     def test_large_float32_ranges(self):
+2026-11-13T09:23:50.4805835Z         for axis in (0, 1):
+2026-11-13T09:23:50.4806123Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4806470Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4806871Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4807398Z >                       self._check_parameters(_weights(np.float32), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4807712Z 
+2026-11-13T09:23:50.4807931Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:86: 
+2026-11-13T09:23:50.4808369Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4809023Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4809506Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4809797Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4810259Z _ TestBlockedQuantizationRange.test_large_float32_ranges (axis=1, quant_type=2, symmetric=True) _
+2026-11-13T09:23:50.4810641Z 
+2026-11-13T09:23:50.4810964Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_large_float32_ranges>
+2026-11-13T09:23:50.4811375Z 
+2026-11-13T09:23:50.4811474Z     def test_large_float32_ranges(self):
+2026-11-13T09:23:50.4811732Z         for axis in (0, 1):
+2026-11-13T09:23:50.4812337Z             for quant_type in (TensorProto.INT8, TensorProto.UINT8):
+2026-11-13T09:23:50.4812687Z                 for symmetric in (False, True):
+2026-11-13T09:23:50.4813083Z                     with self.subTest(axis=axis, quant_type=quant_type, symmetric=symmetric):
+2026-11-13T09:23:50.4813600Z >                       self._check_parameters(_weights(np.float32), quant_type, axis, symmetric)
+2026-11-13T09:23:50.4813916Z 
+2026-11-13T09:23:50.4814134Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:86: 
+2026-11-13T09:23:50.4814574Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4815081Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4815560Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4815852Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4816368Z _ TestBlockedQuantizationRange.test_native_cpu_blocked_dequantization (dtype=<class 'numpy.float16'>, axis=0) _
+2026-11-13T09:23:50.4816824Z 
+2026-11-13T09:23:50.4817194Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_native_cpu_blocked_dequantization>
+2026-11-13T09:23:50.4817668Z 
+2026-11-13T09:23:50.4817804Z     def test_native_cpu_blocked_dequantization(self):
+2026-11-13T09:23:50.4818134Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4818414Z             for axis in (0, 1):
+2026-11-13T09:23:50.4818904Z                 with self.subTest(dtype=dtype, axis=axis):
+2026-11-13T09:23:50.4819226Z                     weight = _weights(dtype)
+2026-11-13T09:23:50.4819646Z                     zero, scale = compute_scale_zp_blocked(weight, TensorProto.INT8, axis, 2, True)
+2026-11-13T09:23:50.4820094Z                     quantized = quantize_onnx_initializer(
+2026-11-13T09:23:50.4820583Z                         numpy_helper.from_array(weight, "W"), TensorProto.INT8, zero, scale, axis=axis, block_size=2
+2026-11-13T09:23:50.4821060Z                     )
+2026-11-13T09:23:50.4821289Z                     node = helper.make_node(
+2026-11-13T09:23:50.4821728Z                         "DequantizeLinear", [quantized.name, "scale", "zero"], ["Y"], axis=axis, block_size=2
+2026-11-13T09:23:50.4822162Z                     )
+2026-11-13T09:23:50.4822383Z                     graph = helper.make_graph(
+2026-11-13T09:23:50.4822653Z                         [node],
+2026-11-13T09:23:50.4822902Z                         "blocked_dequantization",
+2026-11-13T09:23:50.4823176Z                         [],
+2026-11-13T09:23:50.4823387Z                         [
+2026-11-13T09:23:50.4823640Z                             helper.make_tensor_value_info(
+2026-11-13T09:23:50.4824037Z                                 "Y", helper.np_dtype_to_tensor_dtype(weight.dtype), weight.shape
+2026-11-13T09:23:50.4824408Z                             )
+2026-11-13T09:23:50.4824629Z                         ],
+2026-11-13T09:23:50.4825039Z                         [quantized, numpy_helper.from_array(scale, "scale"), numpy_helper.from_array(zero, "zero")],
+2026-11-13T09:23:50.4825501Z                     )
+2026-11-13T09:23:50.4825891Z                     model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 21)], ir_version=10)
+2026-11-13T09:23:50.4826370Z                     onnx.checker.check_model(model)
+2026-11-13T09:23:50.4826678Z                     options = ort.SessionOptions()
+2026-11-13T09:23:50.4827123Z                     options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
+2026-11-13T09:23:50.4827565Z                     session = ort.InferenceSession(
+2026-11-13T09:23:50.4827987Z                         model.SerializeToString(), options, providers=["CPUExecutionProvider"]
+2026-11-13T09:23:50.4828381Z                     )
+2026-11-13T09:23:50.4828743Z                     actual = session.run(None, {})[0]
+2026-11-13T09:23:50.4829151Z                     _, expected_scale = _reference(weight, TensorProto.INT8, axis, 2, True)
+2026-11-13T09:23:50.4829975Z                     expanded = np.take(np.repeat(expected_scale, 2, axis=axis), range(weight.shape[axis]), axis=axis)
+2026-11-13T09:23:50.4830626Z                     expected_codes = np.clip(np.rint(weight.astype(np.float64) / expanded), -127, 127)
+2026-11-13T09:23:50.4831174Z                     expected = (expected_codes * expanded.astype(np.float64)).astype(dtype)
+2026-11-13T09:23:50.4831619Z                     self.assertEqual(actual.dtype, weight.dtype)
+2026-11-13T09:23:50.4831975Z >                   self.assertTrue(np.isfinite(actual).all())
+2026-11-13T09:23:50.4832312Z E                   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4832525Z 
+2026-11-13T09:23:50.4832790Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:150: AssertionError
+2026-11-13T09:23:50.4833495Z _ TestBlockedQuantizationRange.test_native_cpu_blocked_dequantization (dtype=<class 'numpy.float16'>, axis=1) _
+2026-11-13T09:23:50.4833939Z 
+2026-11-13T09:23:50.4834322Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_native_cpu_blocked_dequantization>
+2026-11-13T09:23:50.4834795Z 
+2026-11-13T09:23:50.4834929Z     def test_native_cpu_blocked_dequantization(self):
+2026-11-13T09:23:50.4835254Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4835534Z             for axis in (0, 1):
+2026-11-13T09:23:50.4835807Z                 with self.subTest(dtype=dtype, axis=axis):
+2026-11-13T09:23:50.4836116Z                     weight = _weights(dtype)
+2026-11-13T09:23:50.4836530Z                     zero, scale = compute_scale_zp_blocked(weight, TensorProto.INT8, axis, 2, True)
+2026-11-13T09:23:50.4836976Z                     quantized = quantize_onnx_initializer(
+2026-11-13T09:23:50.4837468Z                         numpy_helper.from_array(weight, "W"), TensorProto.INT8, zero, scale, axis=axis, block_size=2
+2026-11-13T09:23:50.4837920Z                     )
+2026-11-13T09:23:50.4838133Z                     node = helper.make_node(
+2026-11-13T09:23:50.4838718Z                         "DequantizeLinear", [quantized.name, "scale", "zero"], ["Y"], axis=axis, block_size=2
+2026-11-13T09:23:50.4839261Z                     )
+2026-11-13T09:23:50.4839477Z                     graph = helper.make_graph(
+2026-11-13T09:23:50.4839745Z                         [node],
+2026-11-13T09:23:50.4839991Z                         "blocked_dequantization",
+2026-11-13T09:23:50.4840261Z                         [],
+2026-11-13T09:23:50.4840474Z                         [
+2026-11-13T09:23:50.4840718Z                             helper.make_tensor_value_info(
+2026-11-13T09:23:50.4841113Z                                 "Y", helper.np_dtype_to_tensor_dtype(weight.dtype), weight.shape
+2026-11-13T09:23:50.4841488Z                             )
+2026-11-13T09:23:50.4841708Z                         ],
+2026-11-13T09:23:50.4842113Z                         [quantized, numpy_helper.from_array(scale, "scale"), numpy_helper.from_array(zero, "zero")],
+2026-11-13T09:23:50.4842570Z                     )
+2026-11-13T09:23:50.4842965Z                     model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 21)], ir_version=10)
+2026-11-13T09:23:50.4843439Z                     onnx.checker.check_model(model)
+2026-11-13T09:23:50.4843751Z                     options = ort.SessionOptions()
+2026-11-13T09:23:50.4844190Z                     options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
+2026-11-13T09:23:50.4844633Z                     session = ort.InferenceSession(
+2026-11-13T09:23:50.4845054Z                         model.SerializeToString(), options, providers=["CPUExecutionProvider"]
+2026-11-13T09:23:50.4845451Z                     )
+2026-11-13T09:23:50.4845671Z                     actual = session.run(None, {})[0]
+2026-11-13T09:23:50.4846067Z                     _, expected_scale = _reference(weight, TensorProto.INT8, axis, 2, True)
+2026-11-13T09:23:50.4846661Z                     expanded = np.take(np.repeat(expected_scale, 2, axis=axis), range(weight.shape[axis]), axis=axis)
+2026-11-13T09:23:50.4847512Z                     expected_codes = np.clip(np.rint(weight.astype(np.float64) / expanded), -127, 127)
+2026-11-13T09:23:50.4848057Z                     expected = (expected_codes * expanded.astype(np.float64)).astype(dtype)
+2026-11-13T09:23:50.4848625Z                     self.assertEqual(actual.dtype, weight.dtype)
+2026-11-13T09:23:50.4848989Z >                   self.assertTrue(np.isfinite(actual).all())
+2026-11-13T09:23:50.4849321Z E                   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4849531Z 
+2026-11-13T09:23:50.4849791Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:150: AssertionError
+2026-11-13T09:23:50.4850497Z _ TestBlockedQuantizationRange.test_native_cpu_blocked_dequantization (dtype=<class 'numpy.float32'>, axis=0) _
+2026-11-13T09:23:50.4850933Z 
+2026-11-13T09:23:50.4851304Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_native_cpu_blocked_dequantization>
+2026-11-13T09:23:50.4851776Z 
+2026-11-13T09:23:50.4851908Z     def test_native_cpu_blocked_dequantization(self):
+2026-11-13T09:23:50.4852226Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4852502Z             for axis in (0, 1):
+2026-11-13T09:23:50.4852774Z                 with self.subTest(dtype=dtype, axis=axis):
+2026-11-13T09:23:50.4853097Z                     weight = _weights(dtype)
+2026-11-13T09:23:50.4853517Z                     zero, scale = compute_scale_zp_blocked(weight, TensorProto.INT8, axis, 2, True)
+2026-11-13T09:23:50.4853959Z                     quantized = quantize_onnx_initializer(
+2026-11-13T09:23:50.4854440Z                         numpy_helper.from_array(weight, "W"), TensorProto.INT8, zero, scale, axis=axis, block_size=2
+2026-11-13T09:23:50.4854893Z                     )
+2026-11-13T09:23:50.4855122Z                     node = helper.make_node(
+2026-11-13T09:23:50.4855562Z                         "DequantizeLinear", [quantized.name, "scale", "zero"], ["Y"], axis=axis, block_size=2
+2026-11-13T09:23:50.4856000Z                     )
+2026-11-13T09:23:50.4856220Z                     graph = helper.make_graph(
+2026-11-13T09:23:50.4856483Z                         [node],
+2026-11-13T09:23:50.4856730Z                         "blocked_dequantization",
+2026-11-13T09:23:50.4857004Z                         [],
+2026-11-13T09:23:50.4857217Z                         [
+2026-11-13T09:23:50.4857456Z                             helper.make_tensor_value_info(
+2026-11-13T09:23:50.4857846Z                                 "Y", helper.np_dtype_to_tensor_dtype(weight.dtype), weight.shape
+2026-11-13T09:23:50.4858214Z                             )
+2026-11-13T09:23:50.4858436Z                         ],
+2026-11-13T09:23:50.4859062Z                         [quantized, numpy_helper.from_array(scale, "scale"), numpy_helper.from_array(zero, "zero")],
+2026-11-13T09:23:50.4859516Z                     )
+2026-11-13T09:23:50.4859904Z                     model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 21)], ir_version=10)
+2026-11-13T09:23:50.4860390Z                     onnx.checker.check_model(model)
+2026-11-13T09:23:50.4860699Z                     options = ort.SessionOptions()
+2026-11-13T09:23:50.4861139Z                     options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
+2026-11-13T09:23:50.4861582Z                     session = ort.InferenceSession(
+2026-11-13T09:23:50.4862006Z                         model.SerializeToString(), options, providers=["CPUExecutionProvider"]
+2026-11-13T09:23:50.4862404Z                     )
+2026-11-13T09:23:50.4862625Z                     actual = session.run(None, {})[0]
+2026-11-13T09:23:50.4863021Z                     _, expected_scale = _reference(weight, TensorProto.INT8, axis, 2, True)
+2026-11-13T09:23:50.4863609Z                     expanded = np.take(np.repeat(expected_scale, 2, axis=axis), range(weight.shape[axis]), axis=axis)
+2026-11-13T09:23:50.4864239Z                     expected_codes = np.clip(np.rint(weight.astype(np.float64) / expanded), -127, 127)
+2026-11-13T09:23:50.4865031Z                     expected = (expected_codes * expanded.astype(np.float64)).astype(dtype)
+2026-11-13T09:23:50.4865482Z                     self.assertEqual(actual.dtype, weight.dtype)
+2026-11-13T09:23:50.4865843Z >                   self.assertTrue(np.isfinite(actual).all())
+2026-11-13T09:23:50.4866174Z E                   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4866379Z 
+2026-11-13T09:23:50.4866652Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:150: AssertionError
+2026-11-13T09:23:50.4867359Z _ TestBlockedQuantizationRange.test_native_cpu_blocked_dequantization (dtype=<class 'numpy.float32'>, axis=1) _
+2026-11-13T09:23:50.4867803Z 
+2026-11-13T09:23:50.4868169Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_native_cpu_blocked_dequantization>
+2026-11-13T09:23:50.4868786Z 
+2026-11-13T09:23:50.4868918Z     def test_native_cpu_blocked_dequantization(self):
+2026-11-13T09:23:50.4869254Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4869552Z             for axis in (0, 1):
+2026-11-13T09:23:50.4869822Z                 with self.subTest(dtype=dtype, axis=axis):
+2026-11-13T09:23:50.4870132Z                     weight = _weights(dtype)
+2026-11-13T09:23:50.4870547Z                     zero, scale = compute_scale_zp_blocked(weight, TensorProto.INT8, axis, 2, True)
+2026-11-13T09:23:50.4870994Z                     quantized = quantize_onnx_initializer(
+2026-11-13T09:23:50.4871483Z                         numpy_helper.from_array(weight, "W"), TensorProto.INT8, zero, scale, axis=axis, block_size=2
+2026-11-13T09:23:50.4871937Z                     )
+2026-11-13T09:23:50.4872157Z                     node = helper.make_node(
+2026-11-13T09:23:50.4872609Z                         "DequantizeLinear", [quantized.name, "scale", "zero"], ["Y"], axis=axis, block_size=2
+2026-11-13T09:23:50.4873040Z                     )
+2026-11-13T09:23:50.4873326Z                     graph = helper.make_graph(
+2026-11-13T09:23:50.4873662Z                         [node],
+2026-11-13T09:23:50.4873918Z                         "blocked_dequantization",
+2026-11-13T09:23:50.4874190Z                         [],
+2026-11-13T09:23:50.4874402Z                         [
+2026-11-13T09:23:50.4874641Z                             helper.make_tensor_value_info(
+2026-11-13T09:23:50.4875036Z                                 "Y", helper.np_dtype_to_tensor_dtype(weight.dtype), weight.shape
+2026-11-13T09:23:50.4875415Z                             )
+2026-11-13T09:23:50.4875635Z                         ],
+2026-11-13T09:23:50.4876044Z                         [quantized, numpy_helper.from_array(scale, "scale"), numpy_helper.from_array(zero, "zero")],
+2026-11-13T09:23:50.4876500Z                     )
+2026-11-13T09:23:50.4876888Z                     model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 21)], ir_version=10)
+2026-11-13T09:23:50.4877364Z                     onnx.checker.check_model(model)
+2026-11-13T09:23:50.4877674Z                     options = ort.SessionOptions()
+2026-11-13T09:23:50.4878120Z                     options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
+2026-11-13T09:23:50.4878737Z                     session = ort.InferenceSession(
+2026-11-13T09:23:50.4879160Z                         model.SerializeToString(), options, providers=["CPUExecutionProvider"]
+2026-11-13T09:23:50.4879558Z                     )
+2026-11-13T09:23:50.4879779Z                     actual = session.run(None, {})[0]
+2026-11-13T09:23:50.4880173Z                     _, expected_scale = _reference(weight, TensorProto.INT8, axis, 2, True)
+2026-11-13T09:23:50.4880757Z                     expanded = np.take(np.repeat(expected_scale, 2, axis=axis), range(weight.shape[axis]), axis=axis)
+2026-11-13T09:23:50.4881381Z                     expected_codes = np.clip(np.rint(weight.astype(np.float64) / expanded), -127, 127)
+2026-11-13T09:23:50.4881921Z                     expected = (expected_codes * expanded.astype(np.float64)).astype(dtype)
+2026-11-13T09:23:50.4883042Z                     self.assertEqual(actual.dtype, weight.dtype)
+2026-11-13T09:23:50.4883620Z >                   self.assertTrue(np.isfinite(actual).all())
+2026-11-13T09:23:50.4884147Z E                   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4884476Z 
+2026-11-13T09:23:50.4884966Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:150: AssertionError
+2026-11-13T09:23:50.4886157Z _ TestBlockedQuantizationRange.test_noncontiguous_readonly_weights (dtype=<class 'numpy.float16'>) _
+2026-11-13T09:23:50.4886814Z 
+2026-11-13T09:23:50.4887418Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_noncontiguous_readonly_weights>
+2026-11-13T09:23:50.4888245Z 
+2026-11-13T09:23:50.4888466Z     def test_noncontiguous_readonly_weights(self):
+2026-11-13T09:23:50.4889276Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4889630Z             with self.subTest(dtype=dtype):
+2026-11-13T09:23:50.4889973Z                 weight = _weights(dtype).T[:, ::-1]
+2026-11-13T09:23:50.4890280Z                 weight.flags.writeable = False
+2026-11-13T09:23:50.4890605Z                 self.assertFalse(weight.flags.c_contiguous)
+2026-11-13T09:23:50.4891001Z >               self._check_parameters(weight, TensorProto.UINT8, 1, False)
+2026-11-13T09:23:50.4891278Z 
+2026-11-13T09:23:50.4891510Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:100: 
+2026-11-13T09:23:50.4892016Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4892542Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4893041Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4893346Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4893847Z _ TestBlockedQuantizationRange.test_noncontiguous_readonly_weights (dtype=<class 'numpy.float32'>) _
+2026-11-13T09:23:50.4894267Z 
+2026-11-13T09:23:50.4894637Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_noncontiguous_readonly_weights>
+2026-11-13T09:23:50.4895105Z 
+2026-11-13T09:23:50.4895237Z     def test_noncontiguous_readonly_weights(self):
+2026-11-13T09:23:50.4895557Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4895851Z             with self.subTest(dtype=dtype):
+2026-11-13T09:23:50.4896147Z                 weight = _weights(dtype).T[:, ::-1]
+2026-11-13T09:23:50.4896450Z                 weight.flags.writeable = False
+2026-11-13T09:23:50.4896780Z                 self.assertFalse(weight.flags.c_contiguous)
+2026-11-13T09:23:50.4897238Z >               self._check_parameters(weight, TensorProto.UINT8, 1, False)
+2026-11-13T09:23:50.4897517Z 
+2026-11-13T09:23:50.4897741Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:100: 
+2026-11-13T09:23:50.4898210Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4899025Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4899539Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4899845Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4900391Z _ TestBlockedQuantizationRange.test_static_quantization_uses_finite_block_scales (dtype=<class 'numpy.float16'>) _
+2026-11-13T09:23:50.4900851Z 
+2026-11-13T09:23:50.4901261Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_static_quantization_uses_finite_block_scales>
+2026-11-13T09:23:50.4901779Z 
+2026-11-13T09:23:50.4901945Z     def test_static_quantization_uses_finite_block_scales(self):
+2026-11-13T09:23:50.4902309Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4902724Z             with self.subTest(dtype=dtype), tempfile.TemporaryDirectory() as directory:
+2026-11-13T09:23:50.4903203Z                 magnitude = dtype(60000 if dtype == np.float16 else 2e38)
+2026-11-13T09:23:50.4903981Z                 weight = np.array([[1, -1], [-1, 1], [0.5, -0.5], [-0.5, 0.5]], dtype=dtype) * magnitude
+2026-11-13T09:23:50.4904447Z                 data = np.array([[0.001, 0, 0, 0]], dtype=dtype)
+2026-11-13T09:23:50.4904852Z                 element_type = helper.np_dtype_to_tensor_dtype(weight.dtype)
+2026-11-13T09:23:50.4905224Z                 model = helper.make_model(
+2026-11-13T09:23:50.4905499Z                     helper.make_graph(
+2026-11-13T09:23:50.4905812Z                         [helper.make_node("MatMul", ["A", "W"], ["Y"])],
+2026-11-13T09:23:50.4906135Z                         "blocked_matmul",
+2026-11-13T09:23:50.4906478Z                         [helper.make_tensor_value_info("A", element_type, [1, 4])],
+2026-11-13T09:23:50.4906909Z                         [helper.make_tensor_value_info("Y", element_type, [1, 2])],
+2026-11-13T09:23:50.4907301Z                         [numpy_helper.from_array(weight, "W")],
+2026-11-13T09:23:50.4907626Z                     ),
+2026-11-13T09:23:50.4907888Z                     opset_imports=[helper.make_opsetid("", 21)],
+2026-11-13T09:23:50.4908206Z                     ir_version=10,
+2026-11-13T09:23:50.4908440Z                 )
+2026-11-13T09:23:50.4909071Z                 source, destination = Path(directory) / "float.onnx", Path(directory) / "qdq.onnx"
+2026-11-13T09:23:50.4909545Z                 onnx.save_model(model, source)
+2026-11-13T09:23:50.4909839Z                 quantize_static(
+2026-11-13T09:23:50.4910078Z                     source,
+2026-11-13T09:23:50.4910308Z                     destination,
+2026-11-13T09:23:50.4910556Z                     _DataReader(data),
+2026-11-13T09:23:50.4910838Z                     quant_format=QuantFormat.QDQ,
+2026-11-13T09:23:50.4911149Z                     activation_type=QuantType.QInt8,
+2026-11-13T09:23:50.4911460Z                     weight_type=QuantType.QInt8,
+2026-11-13T09:23:50.4911857Z                     op_types_to_quantize=["MatMul"],
+2026-11-13T09:23:50.4912683Z                     extra_options={"WeightSymmetric": True, "ActivationSymmetric": True, "BlockSize": 2},
+2026-11-13T09:23:50.4913470Z                 )
+2026-11-13T09:23:50.4913894Z                 quantized_model = onnx.load_model(destination)
+2026-11-13T09:23:50.4914501Z                 onnx.checker.check_model(quantized_model)
+2026-11-13T09:23:50.4915064Z                 stored_scale = numpy_helper.to_array(
+2026-11-13T09:23:50.4915745Z                     next(i for i in quantized_model.graph.initializer if i.name == "W_scale")
+2026-11-13T09:23:50.4916160Z                 )
+2026-11-13T09:23:50.4916470Z                 _, expected_scale = _reference(weight, TensorProto.INT8, 0, 2, True)
+2026-11-13T09:23:50.4916940Z >               np.testing.assert_array_equal(stored_scale, expected_scale)
+2026-11-13T09:23:50.4917302Z E               AssertionError: 
+2026-11-13T09:23:50.4917552Z E               Arrays are not equal
+2026-11-13T09:23:50.4917794Z E               
+2026-11-13T09:23:50.4918001Z E               +inf location mismatch:
+2026-11-13T09:23:50.4918283Z E                ACTUAL: array([[  inf,   inf],
+2026-11-13T09:23:50.4918825Z E                      [236.2, 236.2]], dtype=float16)
+2026-11-13T09:23:50.4919132Z E                DESIRED: array([[472.5, 472.5],
+2026-11-13T09:23:50.4919427Z E                      [236.2, 236.2]], dtype=float16)
+2026-11-13T09:23:50.4919622Z 
+2026-11-13T09:23:50.4919914Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:190: AssertionError
+2026-11-13T09:23:50.4920646Z _ TestBlockedQuantizationRange.test_static_quantization_uses_finite_block_scales (dtype=<class 'numpy.float32'>) _
+2026-11-13T09:23:50.4921102Z 
+2026-11-13T09:23:50.4921517Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_static_quantization_uses_finite_block_scales>
+2026-11-13T09:23:50.4922030Z 
+2026-11-13T09:23:50.4922191Z     def test_static_quantization_uses_finite_block_scales(self):
+2026-11-13T09:23:50.4922553Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4923240Z             with self.subTest(dtype=dtype), tempfile.TemporaryDirectory() as directory:
+2026-11-13T09:23:50.4923724Z                 magnitude = dtype(60000 if dtype == np.float16 else 2e38)
+2026-11-13T09:23:50.4924200Z                 weight = np.array([[1, -1], [-1, 1], [0.5, -0.5], [-0.5, 0.5]], dtype=dtype) * magnitude
+2026-11-13T09:23:50.4924638Z                 data = np.array([[0.001, 0, 0, 0]], dtype=dtype)
+2026-11-13T09:23:50.4925038Z                 element_type = helper.np_dtype_to_tensor_dtype(weight.dtype)
+2026-11-13T09:23:50.4925405Z                 model = helper.make_model(
+2026-11-13T09:23:50.4925683Z                     helper.make_graph(
+2026-11-13T09:23:50.4925987Z                         [helper.make_node("MatMul", ["A", "W"], ["Y"])],
+2026-11-13T09:23:50.4926308Z                         "blocked_matmul",
+2026-11-13T09:23:50.4926648Z                         [helper.make_tensor_value_info("A", element_type, [1, 4])],
+2026-11-13T09:23:50.4927091Z                         [helper.make_tensor_value_info("Y", element_type, [1, 2])],
+2026-11-13T09:23:50.4927489Z                         [numpy_helper.from_array(weight, "W")],
+2026-11-13T09:23:50.4927789Z                     ),
+2026-11-13T09:23:50.4928047Z                     opset_imports=[helper.make_opsetid("", 21)],
+2026-11-13T09:23:50.4928360Z                     ir_version=10,
+2026-11-13T09:23:50.4928874Z                 )
+2026-11-13T09:23:50.4929260Z                 source, destination = Path(directory) / "float.onnx", Path(directory) / "qdq.onnx"
+2026-11-13T09:23:50.4929736Z                 onnx.save_model(model, source)
+2026-11-13T09:23:50.4930020Z                 quantize_static(
+2026-11-13T09:23:50.4930260Z                     source,
+2026-11-13T09:23:50.4930484Z                     destination,
+2026-11-13T09:23:50.4930724Z                     _DataReader(data),
+2026-11-13T09:23:50.4930996Z                     quant_format=QuantFormat.QDQ,
+2026-11-13T09:23:50.4931304Z                     activation_type=QuantType.QInt8,
+2026-11-13T09:23:50.4931613Z                     weight_type=QuantType.QInt8,
+2026-11-13T09:23:50.4931913Z                     op_types_to_quantize=["MatMul"],
+2026-11-13T09:23:50.4932372Z                     extra_options={"WeightSymmetric": True, "ActivationSymmetric": True, "BlockSize": 2},
+2026-11-13T09:23:50.4932809Z                 )
+2026-11-13T09:23:50.4933064Z                 quantized_model = onnx.load_model(destination)
+2026-11-13T09:23:50.4933412Z                 onnx.checker.check_model(quantized_model)
+2026-11-13T09:23:50.4933734Z                 stored_scale = numpy_helper.to_array(
+2026-11-13T09:23:50.4934141Z                     next(i for i in quantized_model.graph.initializer if i.name == "W_scale")
+2026-11-13T09:23:50.4934528Z                 )
+2026-11-13T09:23:50.4934824Z                 _, expected_scale = _reference(weight, TensorProto.INT8, 0, 2, True)
+2026-11-13T09:23:50.4935286Z >               np.testing.assert_array_equal(stored_scale, expected_scale)
+2026-11-13T09:23:50.4935647Z E               AssertionError: 
+2026-11-13T09:23:50.4935896Z E               Arrays are not equal
+2026-11-13T09:23:50.4936145Z E               
+2026-11-13T09:23:50.4936349Z E               +inf location mismatch:
+2026-11-13T09:23:50.4936645Z E                ACTUAL: array([[         inf,          inf],
+2026-11-13T09:23:50.4936979Z E                      [7.874016e+35, 7.874016e+35]], dtype=float32)
+2026-11-13T09:23:50.4937319Z E                DESIRED: array([[1.574803e+36, 1.574803e+36],
+2026-11-13T09:23:50.4937650Z E                      [7.874016e+35, 7.874016e+35]], dtype=float32)
+2026-11-13T09:23:50.4937870Z 
+2026-11-13T09:23:50.4938139Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:190: AssertionError
+2026-11-13T09:23:50.4939037Z _ TestBlockedQuantizationRange.test_symmetric_single_sign_ranges (dtype=<class 'numpy.float16'>, sign=-1) _
+2026-11-13T09:23:50.4939489Z 
+2026-11-13T09:23:50.4939850Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_symmetric_single_sign_ranges>
+2026-11-13T09:23:50.4940456Z 
+2026-11-13T09:23:50.4940677Z     def test_symmetric_single_sign_ranges(self):
+2026-11-13T09:23:50.4940996Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4941282Z             for sign in (-1, 1):
+2026-11-13T09:23:50.4941567Z                 with self.subTest(dtype=dtype, sign=sign):
+2026-11-13T09:23:50.4942029Z >                   self._check_parameters(np.abs(_weights(dtype)) * sign, TensorProto.INT8, 0, True)
+2026-11-13T09:23:50.4942379Z 
+2026-11-13T09:23:50.4942599Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:92: 
+2026-11-13T09:23:50.4943058Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4943580Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4944079Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4944383Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4944903Z _ TestBlockedQuantizationRange.test_symmetric_single_sign_ranges (dtype=<class 'numpy.float16'>, sign=1) _
+2026-11-13T09:23:50.4945333Z 
+2026-11-13T09:23:50.4945685Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_symmetric_single_sign_ranges>
+2026-11-13T09:23:50.4946141Z 
+2026-11-13T09:23:50.4946256Z     def test_symmetric_single_sign_ranges(self):
+2026-11-13T09:23:50.4946575Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4946860Z             for sign in (-1, 1):
+2026-11-13T09:23:50.4947181Z                 with self.subTest(dtype=dtype, sign=sign):
+2026-11-13T09:23:50.4947916Z >                   self._check_parameters(np.abs(_weights(dtype)) * sign, TensorProto.INT8, 0, True)
+2026-11-13T09:23:50.4948733Z 
+2026-11-13T09:23:50.4949114Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:92: 
+2026-11-13T09:23:50.4949900Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4950501Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4950996Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4951299Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4951808Z _ TestBlockedQuantizationRange.test_symmetric_single_sign_ranges (dtype=<class 'numpy.float32'>, sign=-1) _
+2026-11-13T09:23:50.4952234Z 
+2026-11-13T09:23:50.4952590Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_symmetric_single_sign_ranges>
+2026-11-13T09:23:50.4953039Z 
+2026-11-13T09:23:50.4953154Z     def test_symmetric_single_sign_ranges(self):
+2026-11-13T09:23:50.4953461Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4953740Z             for sign in (-1, 1):
+2026-11-13T09:23:50.4954015Z                 with self.subTest(dtype=dtype, sign=sign):
+2026-11-13T09:23:50.4954473Z >                   self._check_parameters(np.abs(_weights(dtype)) * sign, TensorProto.INT8, 0, True)
+2026-11-13T09:23:50.4954813Z 
+2026-11-13T09:23:50.4955038Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:92: 
+2026-11-13T09:23:50.4955484Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4955996Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4956485Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4956785Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4957293Z _ TestBlockedQuantizationRange.test_symmetric_single_sign_ranges (dtype=<class 'numpy.float32'>, sign=1) _
+2026-11-13T09:23:50.4957720Z 
+2026-11-13T09:23:50.4958071Z self = <test_blocked_quantization_range.TestBlockedQuantizationRange testMethod=test_symmetric_single_sign_ranges>
+2026-11-13T09:23:50.4958719Z 
+2026-11-13T09:23:50.4958910Z     def test_symmetric_single_sign_ranges(self):
+2026-11-13T09:23:50.4959230Z         for dtype in (np.float16, np.float32):
+2026-11-13T09:23:50.4959718Z             for sign in (-1, 1):
+2026-11-13T09:23:50.4960100Z                 with self.subTest(dtype=dtype, sign=sign):
+2026-11-13T09:23:50.4960560Z >                   self._check_parameters(np.abs(_weights(dtype)) * sign, TensorProto.INT8, 0, True)
+2026-11-13T09:23:50.4960902Z 
+2026-11-13T09:23:50.4961116Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:92: 
+2026-11-13T09:23:50.4961558Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T09:23:50.4962075Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py:68: in _check_parameters
+2026-11-13T09:23:50.4962567Z     self.assertTrue(np.isfinite(scale).all())
+2026-11-13T09:23:50.4962868Z E   AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4963188Z =============================== warnings summary ===============================
+2026-11-13T09:23:50.4963658Z onnxruntime/test/python/quantization/test_blocked_quantization_range.py: 28 warnings
+2026-11-13T09:23:50.4964556Z   /home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/quant_utils.py:478: RuntimeWarning: overflow encountered in subtract
+2026-11-13T09:23:50.4965313Z     dr = (rmax - rmin).astype(numpy.float64)
+2026-11-13T09:23:50.4965511Z 
+2026-11-13T09:23:50.4965720Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-11-13T09:23:50.4966156Z =========================== short test summary info ============================
+2026-11-13T09:23:50.4967116Z SUBFAILED(axis=0, quant_type=3, symmetric=False) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float16_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4968876Z SUBFAILED(axis=0, quant_type=3, symmetric=True) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float16_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4970372Z SUBFAILED(axis=0, quant_type=2, symmetric=False) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float16_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4971850Z SUBFAILED(axis=0, quant_type=2, symmetric=True) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float16_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4973319Z SUBFAILED(axis=1, quant_type=3, symmetric=False) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float16_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4974788Z SUBFAILED(axis=1, quant_type=3, symmetric=True) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float16_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4976255Z SUBFAILED(axis=1, quant_type=2, symmetric=False) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float16_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4977729Z SUBFAILED(axis=1, quant_type=2, symmetric=True) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float16_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4979446Z SUBFAILED(axis=0, quant_type=3, symmetric=False) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float32_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4980921Z SUBFAILED(axis=0, quant_type=3, symmetric=True) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float32_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4982521Z SUBFAILED(axis=0, quant_type=2, symmetric=False) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float32_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4984096Z SUBFAILED(axis=0, quant_type=2, symmetric=True) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float32_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4985563Z SUBFAILED(axis=1, quant_type=3, symmetric=False) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float32_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4987031Z SUBFAILED(axis=1, quant_type=3, symmetric=True) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float32_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4988499Z SUBFAILED(axis=1, quant_type=2, symmetric=False) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float32_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4990141Z SUBFAILED(axis=1, quant_type=2, symmetric=True) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_large_float32_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4991669Z SUBFAILED(dtype=<class 'numpy.float16'>, axis=0) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_native_cpu_blocked_dequantization - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4993256Z SUBFAILED(dtype=<class 'numpy.float16'>, axis=1) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_native_cpu_blocked_dequantization - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4994832Z SUBFAILED(dtype=<class 'numpy.float32'>, axis=0) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_native_cpu_blocked_dequantization - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4996405Z SUBFAILED(dtype=<class 'numpy.float32'>, axis=1) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_native_cpu_blocked_dequantization - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4997997Z SUBFAILED(dtype=<class 'numpy.float16'>) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_noncontiguous_readonly_weights - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.4999768Z SUBFAILED(dtype=<class 'numpy.float32'>) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_noncontiguous_readonly_weights - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.5001267Z SUBFAILED(dtype=<class 'numpy.float16'>) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_static_quantization_uses_finite_block_scales - AssertionError: 
+2026-11-13T09:23:50.5002145Z Arrays are not equal
+2026-11-13T09:23:50.5002282Z 
+2026-11-13T09:23:50.5002370Z +inf location mismatch:
+2026-11-13T09:23:50.5002599Z  ACTUAL: array([[  inf,   inf],
+2026-11-13T09:23:50.5002845Z        [236.2, 236.2]], dtype=float16)
+2026-11-13T09:23:50.5003108Z  DESIRED: array([[472.5, 472.5],
+2026-11-13T09:23:50.5003349Z        [236.2, 236.2]], dtype=float16)
+2026-11-13T09:23:50.5004207Z SUBFAILED(dtype=<class 'numpy.float32'>) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_static_quantization_uses_finite_block_scales - AssertionError: 
+2026-11-13T09:23:50.5005069Z Arrays are not equal
+2026-11-13T09:23:50.5005199Z 
+2026-11-13T09:23:50.5005283Z +inf location mismatch:
+2026-11-13T09:23:50.5005521Z  ACTUAL: array([[         inf,          inf],
+2026-11-13T09:23:50.5005820Z        [7.874016e+35, 7.874016e+35]], dtype=float32)
+2026-11-13T09:23:50.5006266Z  DESIRED: array([[1.574803e+36, 1.574803e+36],
+2026-11-13T09:23:50.5006664Z        [7.874016e+35, 7.874016e+35]], dtype=float32)
+2026-11-13T09:23:50.5007605Z SUBFAILED(dtype=<class 'numpy.float16'>, sign=-1) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_symmetric_single_sign_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.5009336Z SUBFAILED(dtype=<class 'numpy.float16'>, sign=1) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_symmetric_single_sign_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.5010885Z SUBFAILED(dtype=<class 'numpy.float32'>, sign=-1) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_symmetric_single_sign_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.5012441Z SUBFAILED(dtype=<class 'numpy.float32'>, sign=1) onnxruntime/test/python/quantization/test_blocked_quantization_range.py::TestBlockedQuantizationRange::test_symmetric_single_sign_ranges - AssertionError: np.False_ is not true
+2026-11-13T09:23:50.5013419Z 28 failed, 8 passed, 28 warnings, 12 subtests passed in 0.51s
+2026-11-13T09:23:50.5014539Z Confirmed original blocked-range failures: ['test_large_float16_ranges', 'test_large_float32_ranges', 'test_native_cpu_blocked_dequantization', 'test_noncontiguous_readonly_weights', 'test_static_quantization_uses_finite_block_scales', 'test_symmetric_single_sign_ranges']
+2026-11-13T09:23:50.5046337Z ##[group]Run python -m ruff check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_blocked_quantization_range.py
+2026-11-13T09:23:50.5047500Z [36;1mpython -m ruff check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_blocked_quantization_range.py[0m
+2026-11-13T09:23:50.5048923Z [36;1mpython -m ruff format --diff onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_blocked_quantization_range.py || true[0m
+2026-11-13T09:23:50.5050089Z [36;1mpython -m ruff format --check onnxruntime/python/tools/quantization/quant_utils.py onnxruntime/test/python/quantization/test_blocked_quantization_range.py[0m
+2026-11-13T09:23:50.5050788Z [36;1mgit diff --check[0m
+2026-11-13T09:23:50.5071154Z shell: /usr/bin/bash -e {0}
+2026-11-13T09:23:50.5071605Z env:
+2026-11-13T09:23:50.5071905Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:50.5072488Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:50.5072937Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:50.5073483Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:50.5074012Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:23:50.5074584Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:50.5075117Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:50.5088335Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:50.5089204Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:23:50.5089566Z ##[endgroup]
+2026-11-13T09:23:50.5419882Z All checks passed!
+2026-11-13T09:23:50.5696776Z 2 files already formatted
+2026-11-13T09:23:50.5932804Z 2 files already formatted
+2026-11-13T09:23:51.4035080Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-13T09:23:51.4035507Z with:
+2026-11-13T09:23:51.4035723Z   name: native-blocked-ranges-evidence
+2026-11-13T09:23:51.4036260Z   path: ort-source-overlay-metadata.json
+ort-patched.log
+ort-patched.xml
+ort-baseline.log
+ort-baseline.xml
+
+2026-11-13T09:23:51.4036787Z   if-no-files-found: warn
+2026-11-13T09:23:51.4037018Z   compression-level: 6
+2026-11-13T09:23:51.4037231Z   overwrite: false
+2026-11-13T09:23:51.4037440Z   include-hidden-files: false
+2026-11-13T09:23:51.4037670Z   archive: true
+2026-11-13T09:23:51.4037861Z env:
+2026-11-13T09:23:51.4038051Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T09:23:51.4038701Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T09:23:51.4039013Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T09:23:51.4039395Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:51.4040130Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T09:23:51.4040717Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:51.4041091Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:51.4041466Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T09:23:51.4041848Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T09:23:51.4042173Z ##[endgroup]
+2026-11-13T09:23:51.5544827Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-13T09:23:51.5548227Z The least common ancestor is /home/runner/work/onnxruntime/onnxruntime. This will be the root directory of the artifact
+2026-11-13T09:23:51.5549682Z With the provided path, there will be 5 files uploaded
+2026-11-13T09:23:51.5569264Z Artifact name is valid!
+2026-11-13T09:23:51.5570041Z Root directory input is valid!
+2026-11-13T09:23:51.7777991Z Uploading artifact: native-blocked-ranges-evidence.zip
+2026-11-13T09:23:51.7821633Z Beginning upload of artifact content to blob storage
+2026-11-13T09:23:51.8883918Z Uploaded bytes 10577
+2026-11-13T09:23:51.8996143Z Finished uploading artifact content to blob storage!
+2026-11-13T09:23:51.8997247Z SHA256 digest of uploaded artifact is ca27d015a1e587d0fea85d1d52008f1ece99a0124e505ab2fb2d75935d702c33
+2026-11-13T09:23:51.8998164Z Finalizing artifact upload
+2026-11-13T09:23:52.2516837Z Artifact native-blocked-ranges-evidence successfully finalized. Artifact ID 14025071820
+2026-11-13T09:23:52.2518268Z Artifact native-blocked-ranges-evidence has been successfully uploaded! Final size is 10577 bytes. Artifact ID is 14025071820
+2026-11-13T09:23:52.2521699Z Artifact download URL: https://github.com/Afloat16/onnxruntime/actions/runs/43400845218/artifacts/14025071820
+2026-11-13T09:23:52.2700662Z Post job cleanup.
+2026-11-13T09:23:52.3951027Z (node:2691) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T09:23:52.3951834Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T09:23:52.4110401Z Post job cleanup.
+2026-11-13T09:23:52.5149514Z [command]/usr/bin/git version
+2026-11-13T09:23:52.5210392Z git version 2.56.0
+2026-11-13T09:23:52.5265956Z Temporarily overriding HOME='/home/runner/work/_temp/61c52356-1e3c-4834-81a0-926c8dd705ea' before making global git config changes
+2026-11-13T09:23:52.5267596Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T09:23:52.5276680Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T09:23:52.5369687Z Removing SSH command configuration
+2026-11-13T09:23:52.5370294Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T09:23:52.5434671Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T09:23:52.5732490Z Removing HTTP extra header
+2026-11-13T09:23:52.5741603Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T09:23:52.5795235Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T09:23:52.6090356Z Removing includeIf entries pointing to credentials config files
+2026-11-13T09:23:52.6099994Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T09:23:52.6148323Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T09:23:52.6556671Z Cleaning up orphan processes
+2026-11-13T09:23:52.7053139Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
