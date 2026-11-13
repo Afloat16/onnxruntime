@@ -29,6 +29,6 @@
   },
   "status": "awaiting_native_validation",
   "scope": "Accumulate direct FLOAT8 weight standard deviation in float64 and cast the final scale back to the original weight dtype; retain existing zero-variance policy.",
-  "commit": "e56c059fb64e05b24f2fc142c9848615ee5578f5",
+  "commit": "5c574563ff5a3707345cd40f507e4c0cdbfb438f",
   "compatibility": "FP16/32 only use wide accumulation; other direct-helper input dtypes keep default NumPy statistics dtype."
 }
