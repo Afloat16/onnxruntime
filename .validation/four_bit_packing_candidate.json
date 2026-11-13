@@ -29,7 +29,7 @@
     "NumPy shifted odd-element array temporarily consumes about half the input byte length; report measured memory tradeoff.",
     "No whole-model quantization time or model-accuracy claim."
   ],
-  "commit": "b03ae0e4b9b44942c23b6b27a7b8431ba081c946",
-  "validation_note": "Final revision preserves the original element loop for other sequences, including noncontiguous and wider memoryviews; the NumPy fast path is specialized for bytes/bytearray. Native exact-SHA validation and benchmark pending.",
+  "commit": "d8596d3fe7a5b0d548e52a97f2252111035b1879",
+  "validation_note": "Final revision preserves the original element loop for other sequences, including noncontiguous and wider memoryviews; the NumPy fast path is specialized for bytes/bytearray. Native exact-SHA validation and benchmark pending. Normalize the single trailing newline printed by the formatter log; semantics and production code unchanged.",
   "workflow_reenabled_at": "2026-11-13T09:22:52.035Z"
 }
