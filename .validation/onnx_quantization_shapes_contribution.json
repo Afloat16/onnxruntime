@@ -1,0 +1,61 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "default_branch": "main",
+  "fork": "Afloat16/onnxruntime",
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "commit": "be74e3b96032bfdc7060e1a91625de54d1bf773f",
+  "branch": "fix/quantization-scalar-empty-tensors-20261113",
+  "title": "Handle scalar and empty tensors in integer quantization helpers",
+  "body": "### Description\n\nInteger `compute_data_quant_params` uses `len(data)` to decide whether an array contains values. This raises on a zero-dimensional tensor and misclassifies empty shapes such as `(2, 0)` as nonempty, leading to invalid reductions or inconsistent override handling.\n\nUse `data.size` for the three element-count checks. Scalars now follow the same quantization calculation as a one-element vector. Empty integer tensors use the existing identity scale/zero-point defaults regardless of which dimension is empty, while preserving their shape.\n\n### Validation\n\n- Seven new unittest methods cover FP16/FP32, INT4/UINT4/INT8/UINT8/INT16/UINT16, symmetric/asymmetric settings, explicit hard-coded scale/code expectations, range overrides, minimum range, readonly inputs and invalid-argument controls.\n- A native CPU `DequantizeLinear + Add` model consumes the scalar quantized initializer after ONNX save/reload.\n- New and existing quantization utility tests: **16 methods passed, 279 subtests passed**.\n- Restoring the original helper produces **1 failing method and 123 failing subtests** (pytest reports 124 failures), with 6 completed methods and 25 passing subtests.\n- Ruff 0.12.12 lint/format and `git diff --check` passed.\n\nExact-source native validation: https://github.com/Afloat16/onnxruntime/actions/runs/43402852485\n\nThe runtime was built using the repository's official CPU Release build.py/CMake process at `8dea1194e974fa07b1d2f07a190949c3a92cab80`. Its C++ sources match base `a8246c0d094f1ab0d6bf236228e5e67683321cd7`. This Python-only validation installs that built wheel, overlays the complete quantization package from this exact commit, and verifies byte equality and hashes before normal native imports. It does not claim a separate C++ rebuild for this Python-only change.\n\n### Motivation and Context\n\nThe public array helpers should determine emptiness by total element count. This change is limited to integer quantization; FLOAT8's separate statistics path is unchanged. Some higher-level initializer callers already flatten their inputs, so this is not a claim that every static quantization entry point previously rejected scalars. No model-quality or throughput improvement is claimed.\n",
+  "prefilled_url": "https://github.com/microsoft/onnxruntime/compare/main...Afloat16:fix/quantization-scalar-empty-tensors-20261113?expand=1&title=Handle%20scalar%20and%20empty%20tensors%20in%20integer%20quantization%20helpers&body=%23%23%23%20Description%0A%0AInteger%20%60compute_data_quant_params%60%20uses%20%60len(data)%60%20to%20decide%20whether%20an%20array%20contains%20values.%20This%20raises%20on%20a%20zero-dimensional%20tensor%20and%20misclassifies%20empty%20shapes%20such%20as%20%60(2%2C%200)%60%20as%20nonempty%2C%20leading%20to%20invalid%20reductions%20or%20inconsistent%20override%20handling.%0A%0AUse%20%60data.size%60%20for%20the%20three%20element-count%20checks.%20Scalars%20now%20follow%20the%20same%20quantization%20calculation%20as%20a%20one-element%20vector.%20Empty%20integer%20tensors%20use%20the%20existing%20identity%20scale%2Fzero-point%20defaults%20regardless%20of%20which%20dimension%20is%20empty%2C%20while%20preserving%20their%20shape.%0A%0A%23%23%23%20Validation%0A%0A-%20Seven%20new%20unittest%20methods%20cover%20FP16%2FFP32%2C%20INT4%2FUINT4%2FINT8%2FUINT8%2FINT16%2FUINT16%2C%20symmetric%2Fasymmetric%20settings%2C%20explicit%20hard-coded%20scale%2Fcode%20expectations%2C%20range%20overrides%2C%20minimum%20range%2C%20readonly%20inputs%20and%20invalid-argument%20controls.%0A-%20A%20native%20CPU%20%60DequantizeLinear%20%2B%20Add%60%20model%20consumes%20the%20scalar%20quantized%20initializer%20after%20ONNX%20save%2Freload.%0A-%20New%20and%20existing%20quantization%20utility%20tests%3A%20**16%20methods%20passed%2C%20279%20subtests%20passed**.%0A-%20Restoring%20the%20original%20helper%20produces%20**1%20failing%20method%20and%20123%20failing%20subtests**%20(pytest%20reports%20124%20failures)%2C%20with%206%20completed%20methods%20and%2025%20passing%20subtests.%0A-%20Ruff%200.12.12%20lint%2Fformat%20and%20%60git%20diff%20--check%60%20passed.%0A%0AExact-source%20native%20validation%3A%20https%3A%2F%2Fgithub.com%2FAfloat16%2Fonnxruntime%2Factions%2Fruns%2F43402852485%0A%0AThe%20runtime%20was%20built%20using%20the%20repository's%20official%20CPU%20Release%20build.py%2FCMake%20process%20at%20%608dea1194e974fa07b1d2f07a190949c3a92cab80%60.%20Its%20C%2B%2B%20sources%20match%20base%20%60a8246c0d094f1ab0d6bf236228e5e67683321cd7%60.%20This%20Python-only%20validation%20installs%20that%20built%20wheel%2C%20overlays%20the%20complete%20quantization%20package%20from%20this%20exact%20commit%2C%20and%20verifies%20byte%20equality%20and%20hashes%20before%20normal%20native%20imports.%20It%20does%20not%20claim%20a%20separate%20C%2B%2B%20rebuild%20for%20this%20Python-only%20change.%0A%0A%23%23%23%20Motivation%20and%20Context%0A%0AThe%20public%20array%20helpers%20should%20determine%20emptiness%20by%20total%20element%20count.%20This%20change%20is%20limited%20to%20integer%20quantization%3B%20FLOAT8's%20separate%20statistics%20path%20is%20unchanged.%20Some%20higher-level%20initializer%20callers%20already%20flatten%20their%20inputs%2C%20so%20this%20is%20not%20a%20claim%20that%20every%20static%20quantization%20entry%20point%20previously%20rejected%20scalars.%20No%20model-quality%20or%20throughput%20improvement%20is%20claimed.%0A",
+  "pr_url": null,
+  "pr_status": "ready",
+  "merged_at": null,
+  "counts_as_upstream_merged": false,
+  "novelty": {
+    "classification": "genuinely_new",
+    "history_entries": 65,
+    "actual_patches_read": [
+      9640
+    ],
+    "all_state_queries": [
+      "compute_data_quant_params",
+      "quantize_data scalar",
+      "empty quantize_data",
+      "len(data) quantization"
+    ],
+    "excluded_matches": [
+      1057,
+      11415,
+      20949
+    ],
+    "personal_fork": "Fork created this task; all branches/PRs are current independent fixes; no scalar/empty shape helper work."
+  },
+  "validation": {
+    "runtime_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+    "runtime_build_run": 43296543822,
+    "runtime_wheel_artifact": 13982605959,
+    "native_sources_match_base": true,
+    "exact_python_overlay_commit": "be74e3b96032bfdc7060e1a91625de54d1bf773f",
+    "run_id": 43402852485,
+    "job_id": 131809772978,
+    "conclusion": "success",
+    "artifact_id": 14026001898,
+    "new_methods": 7,
+    "fixed": "16 passed methods, 279 subtests passed",
+    "baseline": "1 failed method, 123 failed subtests; 6 completed methods, 25 subtests passed",
+    "lint": "Ruff 0.12.12 check and format; git diff --check passed"
+  },
+  "limitations": [
+    "Integer quantization only; FLOAT8 statistics path unchanged",
+    "Native runtime reused from same-base official CPU build with exact Python overlay; no fresh C++ rebuild claimed",
+    "Native CPU inference disables graph optimization to directly test DQ + Add",
+    "No model-quality or throughput claim"
+  ],
+  "source_files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_quantize_data_shapes.py"
+  ]
+}
