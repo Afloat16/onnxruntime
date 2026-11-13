@@ -34,5 +34,6 @@
     "Native results pending; Graphs custom-attribute case checks ordering only, not an unsupported custom execution kernel."
   ],
   "commit": "e4bdecae937d11b84b418aec58f7dddf12aaeca4",
-  "validation_note": "Previous exact native tests passed; source change is test formatting only (Python AST identical). Final exact-SHA workflow rerun pending."
+  "validation_note": "Previous exact native tests passed; source change is test formatting only (Python AST identical). Final exact-SHA workflow rerun pending.",
+  "workflow_reenabled_at": "2026-11-13T09:22:59.028Z"
 }
