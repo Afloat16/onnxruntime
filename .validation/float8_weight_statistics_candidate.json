@@ -1,0 +1,33 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "fork": "Afloat16/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "base_tree": "ada396d3d22a607ae65ae1140ac5e66a057fc692",
+  "branch": "fix/float8-weight-statistics-range-20261113",
+  "files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_float8_weight_statistics.py"
+  ],
+  "novelty": {
+    "classification": "genuinely-new",
+    "history_entries": 65,
+    "actual_patches_read": [
+      16550,
+      29350,
+      33479
+    ],
+    "all_state_queries": [
+      "float8 std",
+      "float8 overflow",
+      "quantization \"standard deviation\"",
+      "\"numpy.std\" quantization",
+      "FP8 scale overflow"
+    ],
+    "personal_fork": "All fork branches created in this task; no prior weight-std repair. Distribution histogram moments #34179 is a separate histogram algorithm and input path."
+  },
+  "status": "awaiting_native_validation",
+  "scope": "Accumulate direct FLOAT8 weight standard deviation in float64 and cast the final scale back to the original weight dtype; retain existing zero-variance policy.",
+  "commit": "c78e6952f370809e9de39c72af9cd5fed3217b3b"
+}
