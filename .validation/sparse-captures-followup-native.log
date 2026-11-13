@@ -1,0 +1,2022 @@
+﻿2026-11-13T10:20:48.4523722Z Current runner version: '2.338.2'
+2026-11-13T10:20:48.4550778Z ##[group]Runner Image Provisioner
+2026-11-13T10:20:48.4551699Z Hosted Compute Agent
+2026-11-13T10:20:48.4552400Z Version: 20261028.624
+2026-11-13T10:20:48.4553061Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-13T10:20:48.4553831Z Build Date: 2026-10-28T21:51:42Z
+2026-11-13T10:20:48.4554606Z Worker ID: {fd735acd-c292-4852-8393-d134ddad2efa}
+2026-11-13T10:20:48.4555336Z Region: northcentralus
+2026-11-13T10:20:48.4555967Z Cloud: Azure
+2026-11-13T10:20:48.4556539Z ##[endgroup]
+2026-11-13T10:20:48.4558122Z ##[group]Operating System
+2026-11-13T10:20:48.4559225Z Ubuntu
+2026-11-13T10:20:48.4559862Z 24.04.5
+2026-11-13T10:20:48.4560447Z LTS
+2026-11-13T10:20:48.4561061Z ##[endgroup]
+2026-11-13T10:20:48.4561674Z ##[group]Runner Image
+2026-11-13T10:20:48.4562337Z Image: ubuntu-24.04
+2026-11-13T10:20:48.4562925Z Version: 20261101.360.1
+2026-11-13T10:20:48.4564283Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261101.360/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-13T10:20:48.4565915Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261101.360
+2026-11-13T10:20:48.4566963Z ##[endgroup]
+2026-11-13T10:20:48.4568190Z ##[group]GITHUB_TOKEN Permissions
+2026-11-13T10:20:48.4570415Z Actions: read
+2026-11-13T10:20:48.4571112Z Contents: read
+2026-11-13T10:20:48.4571817Z Metadata: read
+2026-11-13T10:20:48.4572424Z ##[endgroup]
+2026-11-13T10:20:48.4574944Z Secret source: Actions
+2026-11-13T10:20:48.4576011Z Cache mode: write
+2026-11-13T10:20:48.4576826Z Prepare workflow directory
+2026-11-13T10:20:48.5151801Z Prepare all required actions
+2026-11-13T10:20:48.5225626Z Getting action download info
+2026-11-13T10:20:48.7762511Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-13T10:20:48.8674042Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-11-13T10:20:49.0026255Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-13T10:20:49.3231442Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-13T10:20:49.5610936Z Complete job name: native-cpu
+2026-11-13T10:20:49.6672261Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-13T10:20:49.6673344Z with:
+2026-11-13T10:20:49.6673836Z   ref: ff57d2442bf826c42f0dd70c96b1e6b7001447e1
+2026-11-13T10:20:49.6674440Z   fetch-depth: 2
+2026-11-13T10:20:49.6674907Z   persist-credentials: false
+2026-11-13T10:20:49.6675439Z   repository: Afloat16/onnxruntime
+2026-11-13T10:20:49.6679483Z   token: ***
+2026-11-13T10:20:49.6679950Z   ssh-strict: true
+2026-11-13T10:20:49.6680399Z   ssh-user: git
+2026-11-13T10:20:49.6681067Z   clean: true
+2026-11-13T10:20:49.6681833Z   sparse-checkout-cone-mode: true
+2026-11-13T10:20:49.6682737Z   fetch-tags: false
+2026-11-13T10:20:49.6683550Z   show-progress: true
+2026-11-13T10:20:49.6684273Z   lfs: false
+2026-11-13T10:20:49.6684704Z   submodules: false
+2026-11-13T10:20:49.6685162Z   set-safe-directory: true
+2026-11-13T10:20:49.6685677Z   allow-unsafe-pr-checkout: false
+2026-11-13T10:20:49.6686581Z env:
+2026-11-13T10:20:49.6687012Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:20:49.6687563Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:20:49.6688181Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:20:49.6688786Z ##[endgroup]
+2026-11-13T10:20:49.9470683Z Syncing repository: Afloat16/onnxruntime
+2026-11-13T10:20:49.9472803Z ##[group]Getting Git version info
+2026-11-13T10:20:49.9473639Z Working directory is '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T10:20:49.9474899Z [command]/usr/bin/git version
+2026-11-13T10:20:49.9580798Z git version 2.56.0
+2026-11-13T10:20:49.9604174Z ##[endgroup]
+2026-11-13T10:20:49.9615525Z Temporarily overriding HOME='/home/runner/work/_temp/e0a90336-deb7-4dc4-b518-752fbb59ac88' before making global git config changes
+2026-11-13T10:20:49.9618752Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T10:20:49.9622759Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:20:49.9678494Z Deleting the contents of '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T10:20:49.9681969Z ##[group]Determining repository object format
+2026-11-13T10:20:49.9683630Z ##[endgroup]
+2026-11-13T10:20:49.9685140Z ##[group]Initializing the repository
+2026-11-13T10:20:49.9688280Z [command]/usr/bin/git init /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:20:49.9799139Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-13T10:20:49.9801225Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-13T10:20:49.9803642Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-13T10:20:49.9805459Z hint: call:
+2026-11-13T10:20:49.9806473Z hint:
+2026-11-13T10:20:49.9807895Z hint: 	git config --global init.defaultBranch <name>
+2026-11-13T10:20:49.9809768Z hint:
+2026-11-13T10:20:49.9811316Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-13T10:20:49.9812674Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-13T10:20:49.9813509Z hint:
+2026-11-13T10:20:49.9813990Z hint: 	git branch -m <name>
+2026-11-13T10:20:49.9814526Z hint:
+2026-11-13T10:20:49.9815248Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-13T10:20:49.9816449Z Initialized empty Git repository in /home/runner/work/onnxruntime/onnxruntime/.git/
+2026-11-13T10:20:49.9834134Z [command]/usr/bin/git remote add origin https://github.com/Afloat16/onnxruntime
+2026-11-13T10:20:49.9886773Z ##[endgroup]
+2026-11-13T10:20:49.9889168Z ##[group]Disabling automatic garbage collection
+2026-11-13T10:20:49.9891292Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-13T10:20:50.0033183Z ##[endgroup]
+2026-11-13T10:20:50.0039829Z ##[group]Setting up auth
+2026-11-13T10:20:50.0041521Z Removing SSH command configuration
+2026-11-13T10:20:50.0055409Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:20:50.0060162Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:20:50.0436656Z Removing HTTP extra header
+2026-11-13T10:20:50.0444568Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:20:50.0497189Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:20:50.0753995Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:20:50.0760248Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:20:50.0807091Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:20:50.1060795Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-13T10:20:50.1119737Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path /home/runner/work/_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config
+2026-11-13T10:20:50.1166856Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config
+2026-11-13T10:20:50.1215038Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config
+2026-11-13T10:20:50.1260366Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config
+2026-11-13T10:20:50.1302910Z ##[endgroup]
+2026-11-13T10:20:50.1303806Z ##[group]Fetching the repository
+2026-11-13T10:20:50.1310961Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin ff57d2442bf826c42f0dd70c96b1e6b7001447e1
+2026-11-13T10:21:02.2615129Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T10:21:02.2615994Z  * branch            ff57d2442bf826c42f0dd70c96b1e6b7001447e1 -> FETCH_HEAD
+2026-11-13T10:21:02.2626262Z [command]/usr/bin/git rev-parse --verify --quiet ff57d2442bf826c42f0dd70c96b1e6b7001447e1^{object}
+2026-11-13T10:21:02.2665703Z ff57d2442bf826c42f0dd70c96b1e6b7001447e1
+2026-11-13T10:21:02.2671714Z ##[endgroup]
+2026-11-13T10:21:02.2672642Z ##[group]Determining the checkout info
+2026-11-13T10:21:02.2673752Z ##[endgroup]
+2026-11-13T10:21:02.2678313Z [command]/usr/bin/git sparse-checkout disable
+2026-11-13T10:21:02.2744535Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-13T10:21:02.2789728Z ##[group]Checking out the ref
+2026-11-13T10:21:02.2794407Z [command]/usr/bin/git checkout --progress --force ff57d2442bf826c42f0dd70c96b1e6b7001447e1
+2026-11-13T10:21:03.3497533Z Updating files:  73% (8565/11668)
+2026-11-13T10:21:03.6101784Z Updating files:  74% (8635/11668)
+2026-11-13T10:21:03.6180926Z Updating files:  75% (8751/11668)
+2026-11-13T10:21:03.6296490Z Updating files:  76% (8868/11668)
+2026-11-13T10:21:03.7092199Z Updating files:  77% (8985/11668)
+2026-11-13T10:21:03.8207532Z Updating files:  78% (9102/11668)
+2026-11-13T10:21:03.8264066Z Updating files:  79% (9218/11668)
+2026-11-13T10:21:03.9282341Z Updating files:  80% (9335/11668)
+2026-11-13T10:21:04.1654181Z Updating files:  81% (9452/11668)
+2026-11-13T10:21:04.1912976Z Updating files:  82% (9568/11668)
+2026-11-13T10:21:04.1997743Z Updating files:  83% (9685/11668)
+2026-11-13T10:21:04.2075926Z Updating files:  84% (9802/11668)
+2026-11-13T10:21:04.2155352Z Updating files:  85% (9918/11668)
+2026-11-13T10:21:04.2233649Z Updating files:  86% (10035/11668)
+2026-11-13T10:21:04.2364367Z Updating files:  87% (10152/11668)
+2026-11-13T10:21:04.2429484Z Updating files:  88% (10268/11668)
+2026-11-13T10:21:04.2487790Z Updating files:  89% (10385/11668)
+2026-11-13T10:21:04.2543511Z Updating files:  90% (10502/11668)
+2026-11-13T10:21:04.2610645Z Updating files:  91% (10618/11668)
+2026-11-13T10:21:04.2679320Z Updating files:  92% (10735/11668)
+2026-11-13T10:21:04.2733393Z Updating files:  93% (10852/11668)
+2026-11-13T10:21:04.2796925Z Updating files:  94% (10968/11668)
+2026-11-13T10:21:04.2877509Z Updating files:  95% (11085/11668)
+2026-11-13T10:21:04.2933861Z Updating files:  96% (11202/11668)
+2026-11-13T10:21:04.2942365Z Updating files:  97% (11318/11668)
+2026-11-13T10:21:04.2995908Z Updating files:  97% (11332/11668)
+2026-11-13T10:21:04.3074589Z Updating files:  98% (11435/11668)
+2026-11-13T10:21:04.6480213Z Updating files:  99% (11552/11668)
+2026-11-13T10:21:04.6480758Z Updating files: 100% (11668/11668)
+2026-11-13T10:21:04.6481227Z Updating files: 100% (11668/11668), done.
+2026-11-13T10:21:04.6600836Z Note: switching to 'ff57d2442bf826c42f0dd70c96b1e6b7001447e1'.
+2026-11-13T10:21:04.6601173Z 
+2026-11-13T10:21:04.6601396Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-13T10:21:04.6601910Z changes and commit them, and you can discard any commits you make in this
+2026-11-13T10:21:04.6602396Z state without impacting any branches by switching back to a branch.
+2026-11-13T10:21:04.6602681Z 
+2026-11-13T10:21:04.6602876Z If you want to create a new branch to retain commits you create, you may
+2026-11-13T10:21:04.6603327Z do so (now or later) by using -c with the switch command. Example:
+2026-11-13T10:21:04.6603862Z 
+2026-11-13T10:21:04.6603971Z   git switch -c <new-branch-name>
+2026-11-13T10:21:04.6604173Z 
+2026-11-13T10:21:04.6604276Z Or undo this operation with:
+2026-11-13T10:21:04.6604448Z 
+2026-11-13T10:21:04.6604532Z   git switch -
+2026-11-13T10:21:04.6604660Z 
+2026-11-13T10:21:04.6604882Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-13T10:21:04.6605205Z 
+2026-11-13T10:21:04.6605449Z HEAD is now at ff57d24 fix: seed sparse initializer sources in quantization sorting
+2026-11-13T10:21:04.6745809Z ##[endgroup]
+2026-11-13T10:21:04.6803540Z [command]/usr/bin/git log -1 --format=%H
+2026-11-13T10:21:04.6843364Z ff57d2442bf826c42f0dd70c96b1e6b7001447e1
+2026-11-13T10:21:04.6853669Z ##[group]Removing auth
+2026-11-13T10:21:04.6854104Z Removing SSH command configuration
+2026-11-13T10:21:04.6861203Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:21:04.6907407Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:21:04.7174641Z Removing HTTP extra header
+2026-11-13T10:21:04.7178317Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:21:04.7227589Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:21:04.7496344Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:21:04.7501390Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:21:04.7542888Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T10:21:04.7543703Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T10:21:04.7544590Z includeif.gitdir:/github/workspace/.git.path
+2026-11-13T10:21:04.7545361Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T10:21:04.7554636Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T10:21:04.7591107Z /home/runner/work/_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config
+2026-11-13T10:21:04.7602319Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-04edfef7\-3788\-4f9b\-b673\-50eb19d26d0a\.config
+2026-11-13T10:21:04.7661105Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T10:21:04.7700063Z /home/runner/work/_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config
+2026-11-13T10:21:04.7711337Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-04edfef7\-3788\-4f9b\-b673\-50eb19d26d0a\.config
+2026-11-13T10:21:04.7769547Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-13T10:21:04.7807023Z /github/runner_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config
+2026-11-13T10:21:04.7823293Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-04edfef7\-3788\-4f9b\-b673\-50eb19d26d0a\.config
+2026-11-13T10:21:04.7875869Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T10:21:04.7913950Z /github/runner_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config
+2026-11-13T10:21:04.7923705Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-04edfef7\-3788\-4f9b\-b673\-50eb19d26d0a\.config
+2026-11-13T10:21:04.7975715Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:21:04.8240868Z Removing credentials config '/home/runner/work/_temp/git-credentials-04edfef7-3788-4f9b-b673-50eb19d26d0a.config'
+2026-11-13T10:21:04.8251384Z ##[endgroup]
+2026-11-13T10:21:04.8517171Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-11-13T10:21:04.8517597Z with:
+2026-11-13T10:21:04.8517803Z   python-version: 3.12
+2026-11-13T10:21:04.8518035Z   check-latest: false
+2026-11-13T10:21:04.8520579Z   token: ***
+2026-11-13T10:21:04.8520804Z   update-environment: true
+2026-11-13T10:21:04.8521053Z   allow-prereleases: false
+2026-11-13T10:21:04.8521279Z   freethreaded: false
+2026-11-13T10:21:04.8521484Z env:
+2026-11-13T10:21:04.8521668Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:04.8521905Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:04.8522213Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:04.8522529Z ##[endgroup]
+2026-11-13T10:21:04.9922344Z ##[group]Installed versions
+2026-11-13T10:21:05.0015005Z (node:2441) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:21:05.0015926Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:21:05.0016714Z Successfully set up CPython (3.12.16)
+2026-11-13T10:21:05.0017517Z ##[endgroup]
+2026-11-13T10:21:05.0239970Z ##[group]Run python -m venv "$RUNNER_TEMP/ort-validation-venv"
+2026-11-13T10:21:05.0240532Z [36;1mpython -m venv "$RUNNER_TEMP/ort-validation-venv"[0m
+2026-11-13T10:21:05.0240989Z [36;1mecho "$RUNNER_TEMP/ort-validation-venv/bin" >> "$GITHUB_PATH"[0m
+2026-11-13T10:21:05.0346074Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:21:05.0346552Z env:
+2026-11-13T10:21:05.0346882Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:05.0347302Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:05.0347818Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:05.0348484Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:05.0349546Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:21:05.0350291Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:05.0350941Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:05.0351691Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:05.0352365Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:21:05.0352909Z ##[endgroup]
+2026-11-13T10:21:09.6207109Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T10:21:09.6207562Z with:
+2026-11-13T10:21:09.6207789Z   name: cpu-native-wheel-a8246c0d
+2026-11-13T10:21:09.6208045Z   run-id: 43296543822
+2026-11-13T10:21:09.6210668Z   github-token: ***
+2026-11-13T10:21:09.6210962Z   path: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T10:21:09.6211275Z   merge-multiple: false
+2026-11-13T10:21:09.6211533Z   repository: Afloat16/onnxruntime
+2026-11-13T10:21:09.6211794Z env:
+2026-11-13T10:21:09.6211985Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:09.6212234Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:09.6212533Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:09.6212902Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:09.6213327Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:21:09.6213744Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:09.6214189Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:09.6214576Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:09.6214964Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:21:09.6215283Z ##[endgroup]
+2026-11-13T10:21:09.7825482Z Downloading single artifact
+2026-11-13T10:21:09.7928158Z (node:2475) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:21:09.7929570Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:21:09.8141339Z (node:2475) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T10:21:10.0948138Z Preparing to download the following artifacts:
+2026-11-13T10:21:10.0949571Z - cpu-native-wheel-a8246c0d (ID: 13982605959, Size: 30978382, Expected Digest: sha256:0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301)
+2026-11-13T10:21:10.0985132Z Downloading artifact '13982605959' from 'Afloat16/onnxruntime'
+2026-11-13T10:21:10.3378540Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/6682e059f91784baee0f176a816c789347a553a5901897c10ebf1feb950019db.zip
+2026-11-13T10:21:10.3382664Z Starting download of artifact to: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T10:21:10.4998800Z (node:2475) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T10:21:11.1094992Z SHA256 digest of downloaded artifact is 0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301
+2026-11-13T10:21:11.1096063Z Artifact download completed successfully.
+2026-11-13T10:21:11.1096653Z Total of 1 artifact(s) downloaded
+2026-11-13T10:21:11.1101479Z Download artifact has finished successfully
+2026-11-13T10:21:11.1282936Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T10:21:11.1283375Z with:
+2026-11-13T10:21:11.1283619Z   name: cpu-distribution-calibration-evidence
+2026-11-13T10:21:11.1283916Z   run-id: 43296543822
+2026-11-13T10:21:11.1286294Z   github-token: ***
+2026-11-13T10:21:11.1286585Z   path: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T10:21:11.1286903Z   merge-multiple: false
+2026-11-13T10:21:11.1287152Z   repository: Afloat16/onnxruntime
+2026-11-13T10:21:11.1287523Z env:
+2026-11-13T10:21:11.1309027Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:11.1309319Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:11.1309666Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:11.1310068Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:11.1310508Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:21:11.1310981Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:11.1311371Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:11.1311760Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:11.1312154Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:21:11.1312479Z ##[endgroup]
+2026-11-13T10:21:11.2992697Z Downloading single artifact
+2026-11-13T10:21:11.3097046Z (node:2487) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:21:11.3098353Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:21:11.3300699Z (node:2487) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T10:21:11.5859747Z Preparing to download the following artifacts:
+2026-11-13T10:21:11.5861214Z - cpu-distribution-calibration-evidence (ID: 13981818755, Size: 64428, Expected Digest: sha256:53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec)
+2026-11-13T10:21:11.5905046Z Downloading artifact '13981818755' from 'Afloat16/onnxruntime'
+2026-11-13T10:21:11.9695137Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/b5c359d12481e2fcd67c56939a89868631bef8eee9f9477d17c7aaf2174630ca.zip
+2026-11-13T10:21:11.9698214Z Starting download of artifact to: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T10:21:12.0934790Z (node:2487) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T10:21:12.1321513Z SHA256 digest of downloaded artifact is 53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec
+2026-11-13T10:21:12.1322648Z Artifact download completed successfully.
+2026-11-13T10:21:12.1323228Z Total of 1 artifact(s) downloaded
+2026-11-13T10:21:12.1328028Z Download artifact has finished successfully
+2026-11-13T10:21:12.1469571Z ##[group]Run python -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12
+2026-11-13T10:21:12.1470751Z [36;1mpython -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12[0m
+2026-11-13T10:21:12.1471535Z [36;1mgit fetch --no-tags origin 8dea1194e974fa07b1d2f07a190949c3a92cab80[0m
+2026-11-13T10:21:12.1471942Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:21:12.1472192Z [36;1mimport hashlib[0m
+2026-11-13T10:21:12.1472415Z [36;1mimport json[0m
+2026-11-13T10:21:12.1472625Z [36;1mimport os[0m
+2026-11-13T10:21:12.1472833Z [36;1mimport shutil[0m
+2026-11-13T10:21:12.1473061Z [36;1mimport subprocess[0m
+2026-11-13T10:21:12.1473314Z [36;1mfrom pathlib import Path[0m
+2026-11-13T10:21:12.1473584Z [36;1mimport onnxruntime[0m
+2026-11-13T10:21:12.1473854Z [36;1mfrom onnxruntime import quantization[0m
+2026-11-13T10:21:12.1474268Z [36;1mbuilt_commit = "8dea1194e974fa07b1d2f07a190949c3a92cab80"[0m
+2026-11-13T10:21:12.1474702Z [36;1mbase_commit = "a8246c0d094f1ab0d6bf236228e5e67683321cd7"[0m
+2026-11-13T10:21:12.1475236Z [36;1msource_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()[0m
+2026-11-13T10:21:12.1476035Z [36;1mprovenance = json.loads((Path(os.environ["RUNNER_TEMP"]) / "ort-build-evidence/ort-source-build-metadata.json").read_text())[0m
+2026-11-13T10:21:12.1476696Z [36;1massert provenance["source_commit"] == built_commit[0m
+2026-11-13T10:21:12.1477079Z [36;1mfor revision in (built_commit, source_commit):[0m
+2026-11-13T10:21:12.1477633Z [36;1m    paths = subprocess.check_output(["git", "diff", "--name-only", base_commit, revision], text=True).splitlines()[0m
+2026-11-13T10:21:12.1478515Z [36;1m    assert all(path.startswith(("onnxruntime/python/tools/quantization/", "onnxruntime/test/python/quantization/")) for path in paths), paths[0m
+2026-11-13T10:21:12.1479596Z [36;1msource = Path("onnxruntime/python/tools/quantization")[0m
+2026-11-13T10:21:12.1479998Z [36;1mdestination = Path(quantization.__file__).parent[0m
+2026-11-13T10:21:12.1480400Z [36;1mshutil.copytree(source, destination, dirs_exist_ok=True)[0m
+2026-11-13T10:21:12.1480791Z [36;1mfor cache in destination.rglob("__pycache__"):[0m
+2026-11-13T10:21:12.1481109Z [36;1m    shutil.rmtree(cache)[0m
+2026-11-13T10:21:12.1481351Z [36;1mhashes = {}[0m
+2026-11-13T10:21:12.1481595Z [36;1mfor path in source.rglob("*.py"):[0m
+2026-11-13T10:21:12.1481943Z [36;1m    installed = destination / path.relative_to(source)[0m
+2026-11-13T10:21:12.1482368Z [36;1m    assert installed.read_bytes() == path.read_bytes(), installed[0m
+2026-11-13T10:21:12.1482929Z [36;1m    hashes[str(path.relative_to(source))] = hashlib.sha256(installed.read_bytes()).hexdigest()[0m
+2026-11-13T10:21:12.1483551Z [36;1massert "CPUExecutionProvider" in onnxruntime.get_available_providers()[0m
+2026-11-13T10:21:12.1483960Z [36;1mmetadata = {[0m
+2026-11-13T10:21:12.1484208Z [36;1m    "source_commit": source_commit,[0m
+2026-11-13T10:21:12.1484538Z [36;1m    "native_build_source_commit": built_commit,[0m
+2026-11-13T10:21:12.1485071Z [36;1m    "common_native_source_base": base_commit,[0m
+2026-11-13T10:21:12.1485385Z [36;1m    "native_build_run": 43296543822,[0m
+2026-11-13T10:21:12.1485685Z [36;1m    "native_wheel_artifact": 13982605959,[0m
+2026-11-13T10:21:12.1486010Z [36;1m    "runtime_version": onnxruntime.__version__,[0m
+2026-11-13T10:21:12.1486348Z [36;1m    "runtime_path": onnxruntime.__file__,[0m
+2026-11-13T10:21:12.1486670Z [36;1m    "quantization_path": str(destination),[0m
+2026-11-13T10:21:12.1486978Z [36;1m    "quantization_sha256": hashes,[0m
+2026-11-13T10:21:12.1487511Z [36;1m    "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged.",[0m
+2026-11-13T10:21:12.1489233Z [36;1m}[0m
+2026-11-13T10:21:12.1489884Z [36;1mPath("ort-source-overlay-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")[0m
+2026-11-13T10:21:12.1490404Z [36;1mprint(json.dumps(metadata, indent=2))[0m
+2026-11-13T10:21:12.1490683Z [36;1mPY[0m
+2026-11-13T10:21:12.1512385Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:21:12.1512636Z env:
+2026-11-13T10:21:12.1512833Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:12.1513081Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:12.1513390Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:12.1513766Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:12.1514194Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:21:12.1514612Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:12.1514988Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:12.1515372Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:12.1515754Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:21:12.1516080Z ##[endgroup]
+2026-11-13T10:21:13.0426746Z Processing /home/runner/work/_temp/ort-built-wheel/onnxruntime-1.33.0-cp312-cp312-linux_x86_64.whl
+2026-11-13T10:21:13.3183337Z Collecting numpy==2.3.5
+2026-11-13T10:21:13.3485609Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-11-13T10:21:13.4217159Z Collecting onnx==1.20.1
+2026-11-13T10:21:13.4260460Z   Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.4 kB)
+2026-11-13T10:21:13.4516058Z Collecting ml_dtypes
+2026-11-13T10:21:13.4550898Z   Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+2026-11-13T10:21:13.4904238Z Collecting pytest==9.1.1
+2026-11-13T10:21:13.4938599Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-11-13T10:21:13.8159178Z Collecting ruff==0.12.12
+2026-11-13T10:21:13.8194418Z   Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2026-11-13T10:21:13.9790295Z Collecting protobuf>=4.25.1 (from onnx==1.20.1)
+2026-11-13T10:21:13.9826214Z   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+2026-11-13T10:21:13.9997774Z Collecting typing_extensions>=4.7.1 (from onnx==1.20.1)
+2026-11-13T10:21:14.0031510Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-13T10:21:14.0157936Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1)
+2026-11-13T10:21:14.0189782Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-13T10:21:14.0356192Z Collecting packaging>=22 (from pytest==9.1.1)
+2026-11-13T10:21:14.0389874Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-13T10:21:14.0531738Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1)
+2026-11-13T10:21:14.0564661Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-13T10:21:14.0765247Z Collecting pygments>=2.7.2 (from pytest==9.1.1)
+2026-11-13T10:21:14.0798157Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-13T10:21:14.0946088Z Collecting flatbuffers (from onnxruntime==1.33.0)
+2026-11-13T10:21:14.0978229Z   Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+2026-11-13T10:21:14.1370411Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-11-13T10:21:14.1934702Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 315.6 MB/s eta 0:00:00
+2026-11-13T10:21:14.2003980Z Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (17.5 MB)
+2026-11-13T10:21:14.2669732Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.5/17.5 MB 269.7 MB/s eta 0:00:00
+2026-11-13T10:21:14.2707334Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-11-13T10:21:14.2773322Z Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+2026-11-13T10:21:14.3212920Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 318.1 MB/s eta 0:00:00
+2026-11-13T10:21:14.3260590Z Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (409 kB)
+2026-11-13T10:21:14.3324658Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-13T10:21:14.3375329Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-13T10:21:14.3430016Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-13T10:21:14.3482703Z Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+2026-11-13T10:21:14.3543527Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-13T10:21:14.3614642Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 217.6 MB/s eta 0:00:00
+2026-11-13T10:21:14.3647697Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-13T10:21:14.3729234Z Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+2026-11-13T10:21:14.5709546Z Installing collected packages: flatbuffers, typing_extensions, ruff, pygments, protobuf, pluggy, packaging, numpy, iniconfig, pytest, onnxruntime, ml_dtypes, onnx
+2026-11-13T10:21:21.4192041Z Successfully installed flatbuffers-25.12.19 iniconfig-2.3.1 ml_dtypes-0.6.0 numpy-2.3.5 onnx-1.20.1 onnxruntime-1.33.0 packaging-26.3 pluggy-1.7.0 protobuf-7.36.2 pygments-2.21.0 pytest-9.1.1 ruff-0.12.12 typing_extensions-4.16.0
+2026-11-13T10:21:21.5061280Z 
+2026-11-13T10:21:21.5061924Z [notice] A new release of pip is available: 25.0.1 -> 26.3
+2026-11-13T10:21:21.5062519Z [notice] To update, run: pip install --upgrade pip
+2026-11-13T10:21:45.7390664Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T10:21:45.7391723Z  * branch                  8dea1194e974fa07b1d2f07a190949c3a92cab80 -> FETCH_HEAD
+2026-11-13T10:21:47.0912073Z [0;93m2026-11-13 10:21:47.090799395 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T10:21:47.2604023Z {
+2026-11-13T10:21:47.2604607Z   "source_commit": "ff57d2442bf826c42f0dd70c96b1e6b7001447e1",
+2026-11-13T10:21:47.2605315Z   "native_build_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+2026-11-13T10:21:47.2606085Z   "common_native_source_base": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+2026-11-13T10:21:47.2606704Z   "native_build_run": 43296543822,
+2026-11-13T10:21:47.2607113Z   "native_wheel_artifact": 13982605959,
+2026-11-13T10:21:47.2607530Z   "runtime_version": "1.33.0",
+2026-11-13T10:21:47.2608345Z   "runtime_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/__init__.py",
+2026-11-13T10:21:47.2609932Z   "quantization_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization",
+2026-11-13T10:21:47.2610819Z   "quantization_sha256": {
+2026-11-13T10:21:47.2611454Z     "base_quantizer.py": "750f1ae870b793a140938a83c9f72fa361ecf3e5c36257bc9482a6e1e0463335",
+2026-11-13T10:21:47.2612396Z     "preprocess.py": "105d56a717cc3a81922596c1d3804bf4ae3e9801d8ef15a3e6d86fcf5b7ae1d7",
+2026-11-13T10:21:47.2613385Z     "static_quantize_runner.py": "656546050e54f699780c560b85b19209f9cbfdf6544a6bd046de4ea93d6c3a12",
+2026-11-13T10:21:47.2614674Z     "quantize.py": "b96538a6a4f2311cf9af9ece760170b3d90c527cd7dfc4760ad8cafbbf694324",
+2026-11-13T10:21:47.2615642Z     "matmul_bnb4_quantizer.py": "2afb1460ff720f0fee991f2f12434d4a154059f00847e96853151041735fcff6",
+2026-11-13T10:21:47.2616606Z     "calibrate.py": "dd84a7663166b2eb013ac51c1184cd36c689786813d49916cd5a7b779b39bea0",
+2026-11-13T10:21:47.2617443Z     "__init__.py": "e6a397c6f48639307150aa6d495826b3a3f3229220748a095837a592c9beac8c",
+2026-11-13T10:21:47.2618296Z     "onnx_quantizer.py": "f9c3705d631ff38231b4787f89e487274a8768122d79c11a3a6f0ce7caf62dc9",
+2026-11-13T10:21:47.2619432Z     "onnx_model.py": "e6cf44ca91f80b3ab13bdd944bcba1862fef01aea84ea3f999e6a5691edcad0d",
+2026-11-13T10:21:47.2620652Z     "matmul_nbits_quantizer.py": "04feb252358ee7f20758a732537adff49fb10c7e80e84e358a4eb4c763bc3903",
+2026-11-13T10:21:47.2621613Z     "registry.py": "342e55d91f62a64fcd4e4d721a0ac568af69c822a7557312d8bd69a4adc3a5f5",
+2026-11-13T10:21:47.2622529Z     "cuda_quantizer.py": "1e4dbc4f780c06a281054aac00fbbb7e136dfee1c29eee350c3e3dd420310e55",
+2026-11-13T10:21:47.2623455Z     "qdq_loss_debug.py": "f8fcf18ea1e0081ba77ecb6664e67650c068bdf206f0d3ff63351833da480629",
+2026-11-13T10:21:47.2624425Z     "tensor_quant_overrides.py": "6df028cd14bf2919ead19d103aad77331fe4fde186a90f8a74f440384932a0c9",
+2026-11-13T10:21:47.2625374Z     "quant_utils.py": "503a1611c1ca49d7a08b3c7c27926ede3ea1ba00597a6bd97b63bb8c36f81de9",
+2026-11-13T10:21:47.2626284Z     "shape_inference.py": "f1fc6a69fd829d29963ba6d90a6b81d16b7ef3536a7a0dffacf8e3858ef5c227",
+2026-11-13T10:21:47.2627217Z     "qdq_quantizer.py": "6c6c061ae90ea4a0d6a8b5d2314e764bf1b0c4245ed4dafcd72d1603cd69683b",
+2026-11-13T10:21:47.2628291Z     "fusions/replace_upsample_with_resize.py": "21663d11455fde7190b9aa04c334a798f8383059af561527ac309398b7cba3bc",
+2026-11-13T10:21:47.2629542Z     "fusions/__init__.py": "f05e55a909e2a9aedaec74ef9451aff14e65b6f059f9215ad936310ab822ab24",
+2026-11-13T10:21:47.2630481Z     "fusions/fusion.py": "f2f4cb00704942a8143f02b6539c9de94c14b64d4c1cfc8ace52e3fb89574112",
+2026-11-13T10:21:47.2631407Z     "fusions/fusion_gelu.py": "a2216ab4e51cba690f6601f96dd4aa9ad7a898ce9611a7b0c0cd7cc29bf79b2c",
+2026-11-13T10:21:47.2632399Z     "fusions/fusion_layernorm.py": "5347c96082498172da1d61742ec120746b3fd7d8a9b27ff397cd1ba9b0806784",
+2026-11-13T10:21:47.2633464Z     "CalTableFlatBuffers/KeyValue.py": "fecc58656ee31b11d336456ad3e6e5fce4e8ab60dd31718e9e968756180dd8cb",
+2026-11-13T10:21:47.2634632Z     "CalTableFlatBuffers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T10:21:47.2635698Z     "CalTableFlatBuffers/TrtTable.py": "eeb0e37992385ac644f978f88e601dbcceb10c6c42c256cb88889a87b05f1133",
+2026-11-13T10:21:47.2636689Z     "operators/conv.py": "be3bc477995318cfd45619453444abb19638e746b6907318cacfe54ec1b34d7e",
+2026-11-13T10:21:47.2637607Z     "operators/maxpool.py": "b7357d17439efe5c35c9d22131ef0cc33f661fb395613cfee54031bc38dc265c",
+2026-11-13T10:21:47.2638550Z     "operators/argmax.py": "86b3b40c8808df3c33956e8c7207d25b3f7b6d4bc7b96193b321f6ba11b540d1",
+2026-11-13T10:21:47.2639711Z     "operators/softmax.py": "377d90c9cf445eb62c4c84fd24e009804662f838740f81551c54ac98e226bd1d",
+2026-11-13T10:21:47.2640672Z     "operators/activation.py": "63d8004592e07fedc847da426b135e541a06bb465889063c646e0a72dc3829ff",
+2026-11-13T10:21:47.2641693Z     "operators/embed_layernorm.py": "686ab6cb0e19b63be00b9fed78023f7c09f5f14120af54a126b5d3eedd7c2464",
+2026-11-13T10:21:47.2642693Z     "operators/where.py": "b43afc5d219013a56e43653f9a244db0e8b0efee9766478ef7a74cd67697e1e8",
+2026-11-13T10:21:47.2643604Z     "operators/norm.py": "0da2c43dc5677e4c1a0fa7a94e0ac2ee1784f838e25814ecda8b0048c613f741",
+2026-11-13T10:21:47.2644562Z     "operators/binary_op.py": "407cb36bfb9b087e8a2caa7b26d586a0d2d804e2d5c61b8287572b98860bf4ca",
+2026-11-13T10:21:47.2645503Z     "operators/gemm.py": "9077b95a0f33f0eb962ce2bd5f66b411ef268b80fba62a61269b327cfda6d1c4",
+2026-11-13T10:21:47.2646867Z     "operators/qdq_base_operator.py": "833a553185bda598964606d9107a4a806b96a9c3a232cb18b61f93a7269ddac8",
+2026-11-13T10:21:47.2647829Z     "operators/pad.py": "92ee11d6df95801111f345685eb132ff8c41754a3dec363d7ac0df999d736b01",
+2026-11-13T10:21:47.2648792Z     "operators/pooling.py": "65323c1632f093e79aa3bfaa638e5c0ac52da1b95956f27b3c86745bd629404c",
+2026-11-13T10:21:47.2650094Z     "operators/base_operator.py": "74a29cf70d2a2e7afd1ceb4a4c6f222452993f037077956576efb544998fcaf9",
+2026-11-13T10:21:47.2651069Z     "operators/__init__.py": "7b531614058e27f1678fbea573c2e71b6dafd8ac22ff236f2a1d1aaa489d10a5",
+2026-11-13T10:21:47.2651985Z     "operators/lstm.py": "1cdd3fb3c00ded7503747824a1dbd773ba08e3172f4b63da9c6fe9238c613cec",
+2026-11-13T10:21:47.2652930Z     "operators/gather.py": "2cac2de86bcc9bcd327047580cf73bc8e0ecee1a52b832e279289bd7695b9b7a",
+2026-11-13T10:21:47.2654122Z     "operators/direct_q8.py": "ed3514d7e2409b916efffe11a91c463e05f0aaa0f7ff472e4b44944788aa28d5",
+2026-11-13T10:21:47.2655153Z     "operators/concat.py": "731ec69fc8e1e1fa016e8a516f824f02836c4b23f500a737fe01969d5c891344",
+2026-11-13T10:21:47.2656106Z     "operators/matmul.py": "7d850ddaa686a670848662c50f2338a3e634a859b4b5c6efd6191bc60940d08e",
+2026-11-13T10:21:47.2657074Z     "operators/attention.py": "45b7d496416d2cfd4ee702e5c2fe47f18a2535e8dfd17cae07845fa8629595e3",
+2026-11-13T10:21:47.2658051Z     "operators/split.py": "1d76742cae13f2fb116e1c8723c0e30710a62769c0df321258cf486bdca50212",
+2026-11-13T10:21:47.2659374Z     "operators/gavgpool.py": "cdb2d953162af78b71f8e553656bfae005becbc32f9a4fb671740d6ca3352896",
+2026-11-13T10:21:47.2660442Z     "operators/resize.py": "5caa4667dafb624f433982c041173f98acbe8ef884f375a74f8155eb908b4cb4",
+2026-11-13T10:21:47.2661465Z     "neural_compressor/util.py": "20f54aa4817b69e5480e3bb456f460bcc3d53b9b12a8d1fecb038a182b968eaf",
+2026-11-13T10:21:47.2662585Z     "neural_compressor/__init__.py": "97eb008ba62d7bfb6234540b738dce6914085e0517358f1c091232e9db87f172",
+2026-11-13T10:21:47.2663682Z     "neural_compressor/onnx_model.py": "0f901eb2ee11bc2ec80a941e4072243ef472143b0e1becd020ad0de72f2d3563",
+2026-11-13T10:21:47.2664802Z     "neural_compressor/weight_only.py": "2f7a7760a7dd7bbbd65a6ea0b46c876e2ce1fda0e34bccf0a54c946f6a676598",
+2026-11-13T10:21:47.2665917Z     "execution_providers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T10:21:47.2667121Z     "execution_providers/qnn/preprocess.py": "56997c1fa18cd53a176ca84706f9667c127c8a145b2265490c8177798b249665",
+2026-11-13T10:21:47.2668573Z     "execution_providers/qnn/mixed_precision_overrides_utils.py": "beff0aa9254a724556906333c169615ab64de047b45c09c1f325fee0b334da07",
+2026-11-13T10:21:47.2670088Z     "execution_providers/qnn/fusion_lpnorm.py": "6767db32ff39da3cc2c9691f4d36acab90883d2bed0fe1161a6507d677c7cf5f",
+2026-11-13T10:21:47.2671298Z     "execution_providers/qnn/quant_config.py": "07a58ddb57eaf0a4a17550bf86bebeee1c8c739a65a92b30368ad4629b9c68d4",
+2026-11-13T10:21:47.2672563Z     "execution_providers/qnn/fusion_spacetodepth.py": "1fe6bea7151d14dc4e0c9bca81e6b251c65bc9297bb8b6c2c5ba43e5b0650575",
+2026-11-13T10:21:47.2673786Z     "execution_providers/qnn/__init__.py": "99a13e72b8e602904cfac188b98fcfce386542eb10afc0fe140840f5eaa6f758"
+2026-11-13T10:21:47.2674537Z   },
+2026-11-13T10:21:47.2675177Z   "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged."
+2026-11-13T10:21:47.2675941Z }
+2026-11-13T10:21:47.3098582Z ##[group]Run set -o pipefail
+2026-11-13T10:21:47.3099429Z [36;1mset -o pipefail[0m
+2026-11-13T10:21:47.3101371Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py onnxruntime/test/python/quantization/test_onnx_model.py 2>&1 | tee ort-patched.log[0m
+2026-11-13T10:21:47.3133717Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T10:21:47.3134077Z env:
+2026-11-13T10:21:47.3134280Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:47.3134742Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:47.3135058Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:47.3135438Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:47.3135872Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:21:47.3136343Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:47.3136724Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:47.3137114Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:47.3137502Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:21:47.3137828Z ##[endgroup]
+2026-11-13T10:21:47.4059252Z [0;93m2026-11-13 10:21:47.405387067 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T10:21:48.3559582Z .............                                               [100%]
+2026-11-13T10:21:48.3560196Z 13 passed, 13 subtests passed in 0.42s
+2026-11-13T10:21:48.4259635Z ##[group]Run python -P - <<'PY'
+2026-11-13T10:21:48.4260029Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:21:48.4260328Z [36;1mimport subprocess[0m
+2026-11-13T10:21:48.4260618Z [36;1mfrom pathlib import Path[0m
+2026-11-13T10:21:48.4261007Z [36;1mfrom onnxruntime.quantization import onnx_model[0m
+2026-11-13T10:21:48.4261423Z [36;1mtarget = Path(onnx_model.__file__)[0m
+2026-11-13T10:21:48.4262249Z [36;1mtarget.write_bytes(subprocess.check_output(["git", "show", "16f7f332eac743749ade445f8cecc7f2d4d688b2:onnxruntime/python/tools/quantization/onnx_model.py"]))[0m
+2026-11-13T10:21:48.4263197Z [36;1mfor cache in target.parent.glob("__pycache__/onnx_model.*.pyc"):[0m
+2026-11-13T10:21:48.4263629Z [36;1m    cache.unlink()[0m
+2026-11-13T10:21:48.4263898Z [36;1mPY[0m
+2026-11-13T10:21:48.4285380Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:21:48.4285662Z env:
+2026-11-13T10:21:48.4285877Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:48.4286167Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:48.4286562Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:48.4286998Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:48.4287492Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:21:48.4287996Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:48.4288439Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:48.4289138Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:48.4289605Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:21:48.4289978Z ##[endgroup]
+2026-11-13T10:21:48.5308841Z [0;93m2026-11-13 10:21:48.530310107 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T10:21:48.6978191Z ##[group]Run set +e
+2026-11-13T10:21:48.6978523Z [36;1mset +e[0m
+2026-11-13T10:21:48.6979906Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py -k sparse_initializer > ort-baseline.log 2>&1[0m
+2026-11-13T10:21:48.6981050Z [36;1mresult=$?[0m
+2026-11-13T10:21:48.6981282Z [36;1mset -e[0m
+2026-11-13T10:21:48.6981518Z [36;1mcat ort-baseline.log[0m
+2026-11-13T10:21:48.6981799Z [36;1mtest "$result" -eq 1[0m
+2026-11-13T10:21:48.6982067Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:21:48.6982375Z [36;1mimport xml.etree.ElementTree as ET[0m
+2026-11-13T10:21:48.6982991Z [36;1mroot = ET.parse("ort-baseline.xml").getroot()[0m
+2026-11-13T10:21:48.6983734Z [36;1mfailed = {case.attrib["name"] for case in root.findall(".//testcase") if case.find("failure") is not None or case.find("error") is not None}[0m
+2026-11-13T10:21:48.6984439Z [36;1mrequired = {[0m
+2026-11-13T10:21:48.6984783Z [36;1m    "test_if_sparse_initializer_capture_can_sort_and_save",[0m
+2026-11-13T10:21:48.6985274Z [36;1m    "test_loop_sparse_initializer_capture_can_sort_and_save",[0m
+2026-11-13T10:21:48.6985657Z [36;1m}[0m
+2026-11-13T10:21:48.6985939Z [36;1massert required <= failed, (failed, required)[0m
+2026-11-13T10:21:48.6986413Z [36;1mfailures = root.findall(".//failure") + root.findall(".//error")[0m
+2026-11-13T10:21:48.6987058Z [36;1massert failures and all("Graph is not a DAG" in "".join(item.itertext()) for item in failures)[0m
+2026-11-13T10:21:48.6987734Z [36;1mprint("Confirmed pre-fix sparse capture failures:", sorted(failed))[0m
+2026-11-13T10:21:48.6988170Z [36;1mPY[0m
+2026-11-13T10:21:48.7009183Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T10:21:48.7009562Z env:
+2026-11-13T10:21:48.7009785Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:48.7010072Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:48.7010449Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:48.7010893Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:48.7011515Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:21:48.7011997Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:48.7012436Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:48.7012882Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:48.7013323Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:21:48.7013687Z ##[endgroup]
+2026-11-13T10:21:49.3310273Z [0;93m2026-11-13 10:21:48.797524461 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-11-13T10:21:49.3313689Z ..                                                                   [100%]
+2026-11-13T10:21:49.3314222Z =================================== FAILURES ===================================
+2026-11-13T10:21:49.3315169Z _ TestCapturedSubgraphDependencies.test_if_sparse_initializer_capture_can_sort_and_save (condition=False) _
+2026-11-13T10:21:49.3315768Z 
+2026-11-13T10:21:49.3316321Z self = <test_captured_subgraph_inputs.TestCapturedSubgraphDependencies testMethod=test_if_sparse_initializer_capture_can_sort_and_save>
+2026-11-13T10:21:49.3317011Z 
+2026-11-13T10:21:49.3317296Z     def test_if_sparse_initializer_capture_can_sort_and_save(self):
+2026-11-13T10:21:49.3317856Z         for condition in (False, True):
+2026-11-13T10:21:49.3318481Z             with self.subTest(condition=condition), tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:21:49.3319502Z                 choice = helper.make_node(
+2026-11-13T10:21:49.3319911Z                     "If",
+2026-11-13T10:21:49.3320610Z                     ["condition"],
+2026-11-13T10:21:49.3333206Z                     ["output"],
+2026-11-13T10:21:49.3333752Z                     then_branch=captured_branch("then", "sparse_capture"),
+2026-11-13T10:21:49.3334540Z                     else_branch=captured_branch("else", "sparse_capture", True),
+2026-11-13T10:21:49.3335064Z                 )
+2026-11-13T10:21:49.3335492Z                 model = make_model([choice], [scalar_info("condition", TensorProto.BOOL)], [float_info("output")])
+2026-11-13T10:21:49.3336040Z                 model.graph.sparse_initializer.append(
+2026-11-13T10:21:49.3336374Z                     helper.make_sparse_tensor(
+2026-11-13T10:21:49.3336839Z                         numpy_helper.from_array(np.array([-3.0], dtype=np.float32), "sparse_capture"),
+2026-11-13T10:21:49.3337656Z                         numpy_helper.from_array(np.array([1], dtype=np.int64), "sparse_indices"),
+2026-11-13T10:21:49.3338068Z                         [2],
+2026-11-13T10:21:49.3338302Z                     )
+2026-11-13T10:21:49.3338505Z                 )
+2026-11-13T10:21:49.3338749Z                 feeds = {"condition": np.array(condition)}
+2026-11-13T10:21:49.3339545Z                 expected = np.array([0.0, -3.0], dtype=np.float32) * (1 if condition else -1)
+2026-11-13T10:21:49.3340049Z                 np.testing.assert_array_equal(run_cpu(model, feeds), expected)
+2026-11-13T10:21:49.3340473Z                 output_path = Path(directory) / "sparse_if.onnx"
+2026-11-13T10:21:49.3340842Z >               ONNXModel(model).save_model_to_file(output_path)
+2026-11-13T10:21:49.3341076Z 
+2026-11-13T10:21:49.3341312Z onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py:167: 
+2026-11-13T10:21:49.3341778Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:21:49.3342417Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/onnx_model.py:492: in save_model_to_file
+2026-11-13T10:21:49.3343005Z     self.topological_sort()
+2026-11-13T10:21:49.3343317Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:21:49.3343565Z 
+2026-11-13T10:21:49.3343806Z self = <onnxruntime.quantization.onnx_model.ONNXModel object at 0x7f9957b809e0>
+2026-11-13T10:21:49.3344135Z 
+2026-11-13T10:21:49.3344240Z     def topological_sort(self):
+2026-11-13T10:21:49.3344601Z         deps_count = [0] * len(self.nodes())  # dependency count of each node
+2026-11-13T10:21:49.3344995Z         deps_to_nodes = {}  # input to node indice
+2026-11-13T10:21:49.3345320Z         sorted_nodes = []  # initialize sorted_nodes
+2026-11-13T10:21:49.3345658Z         for node_idx, node in enumerate(self.nodes()):
+2026-11-13T10:21:49.3346058Z             # CANNOT use len(node.input) directly because input can be optional
+2026-11-13T10:21:49.3346472Z             input_names = _get_node_input_names(node)
+2026-11-13T10:21:49.3346792Z             deps_count[node_idx] = len(input_names)
+2026-11-13T10:21:49.3347183Z             if deps_count[node_idx] == 0:  # Constant doesn't depend on any inputs
+2026-11-13T10:21:49.3347593Z                 sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3347898Z                 continue
+2026-11-13T10:21:49.3348113Z     
+2026-11-13T10:21:49.3348318Z             for input_name in input_names:
+2026-11-13T10:21:49.3348612Z                 if input_name not in deps_to_nodes:
+2026-11-13T10:21:49.3349206Z                     deps_to_nodes[input_name] = [node_idx]
+2026-11-13T10:21:49.3349521Z                 else:
+2026-11-13T10:21:49.3349786Z                     deps_to_nodes[input_name].append(node_idx)
+2026-11-13T10:21:49.3350084Z     
+2026-11-13T10:21:49.3350363Z         initializer_names = [init.name for init in self.initializer()]
+2026-11-13T10:21:49.3350839Z         graph_input_names = [input.name for input in self.model.graph.input]
+2026-11-13T10:21:49.3351272Z         input_names = initializer_names + graph_input_names
+2026-11-13T10:21:49.3351602Z         input_names.sort()
+2026-11-13T10:21:49.3352012Z         prev_input_name = None
+2026-11-13T10:21:49.3352275Z         for input_name in input_names:
+2026-11-13T10:21:49.3352576Z             if prev_input_name == input_name:
+2026-11-13T10:21:49.3352862Z                 continue
+2026-11-13T10:21:49.3353077Z     
+2026-11-13T10:21:49.3353277Z             prev_input_name = input_name
+2026-11-13T10:21:49.3353556Z             if input_name in deps_to_nodes:
+2026-11-13T10:21:49.3353866Z                 for node_idx in deps_to_nodes[input_name]:
+2026-11-13T10:21:49.3354224Z                     deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.3354608Z                     if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.3355065Z                         sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3355371Z     
+2026-11-13T10:21:49.3355553Z         start = 0
+2026-11-13T10:21:49.3355757Z         end = len(sorted_nodes)
+2026-11-13T10:21:49.3355983Z     
+2026-11-13T10:21:49.3356164Z         while start < end:
+2026-11-13T10:21:49.3356424Z             for output in sorted_nodes[start].output:
+2026-11-13T10:21:49.3356731Z                 if output in deps_to_nodes:
+2026-11-13T10:21:49.3357028Z                     for node_idx in deps_to_nodes[output]:
+2026-11-13T10:21:49.3357375Z                         deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.3357716Z                         if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.3358046Z                             sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3358374Z                             end = end + 1
+2026-11-13T10:21:49.3358636Z             start = start + 1
+2026-11-13T10:21:49.3359094Z     
+2026-11-13T10:21:49.3359374Z >       assert end == len(self.graph().node), "Graph is not a DAG"
+2026-11-13T10:21:49.3359708Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:21:49.3359992Z E       AssertionError: Graph is not a DAG
+2026-11-13T10:21:49.3360186Z 
+2026-11-13T10:21:49.3360574Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/onnx_model.py:618: AssertionError
+2026-11-13T10:21:49.3361394Z _ TestCapturedSubgraphDependencies.test_if_sparse_initializer_capture_can_sort_and_save (condition=True) _
+2026-11-13T10:21:49.3361835Z 
+2026-11-13T10:21:49.3362274Z self = <test_captured_subgraph_inputs.TestCapturedSubgraphDependencies testMethod=test_if_sparse_initializer_capture_can_sort_and_save>
+2026-11-13T10:21:49.3362801Z 
+2026-11-13T10:21:49.3362972Z     def test_if_sparse_initializer_capture_can_sort_and_save(self):
+2026-11-13T10:21:49.3363330Z         for condition in (False, True):
+2026-11-13T10:21:49.3363763Z             with self.subTest(condition=condition), tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:21:49.3364220Z                 choice = helper.make_node(
+2026-11-13T10:21:49.3364483Z                     "If",
+2026-11-13T10:21:49.3364712Z                     ["condition"],
+2026-11-13T10:21:49.3364958Z                     ["output"],
+2026-11-13T10:21:49.3365269Z                     then_branch=captured_branch("then", "sparse_capture"),
+2026-11-13T10:21:49.3365705Z                     else_branch=captured_branch("else", "sparse_capture", True),
+2026-11-13T10:21:49.3366054Z                 )
+2026-11-13T10:21:49.3366456Z                 model = make_model([choice], [scalar_info("condition", TensorProto.BOOL)], [float_info("output")])
+2026-11-13T10:21:49.3366975Z                 model.graph.sparse_initializer.append(
+2026-11-13T10:21:49.3367293Z                     helper.make_sparse_tensor(
+2026-11-13T10:21:49.3367724Z                         numpy_helper.from_array(np.array([-3.0], dtype=np.float32), "sparse_capture"),
+2026-11-13T10:21:49.3368282Z                         numpy_helper.from_array(np.array([1], dtype=np.int64), "sparse_indices"),
+2026-11-13T10:21:49.3368695Z                         [2],
+2026-11-13T10:21:49.3369154Z                     )
+2026-11-13T10:21:49.3369367Z                 )
+2026-11-13T10:21:49.3369610Z                 feeds = {"condition": np.array(condition)}
+2026-11-13T10:21:49.3370190Z                 expected = np.array([0.0, -3.0], dtype=np.float32) * (1 if condition else -1)
+2026-11-13T10:21:49.3370707Z                 np.testing.assert_array_equal(run_cpu(model, feeds), expected)
+2026-11-13T10:21:49.3371139Z                 output_path = Path(directory) / "sparse_if.onnx"
+2026-11-13T10:21:49.3371504Z >               ONNXModel(model).save_model_to_file(output_path)
+2026-11-13T10:21:49.3371741Z 
+2026-11-13T10:21:49.3371967Z onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py:167: 
+2026-11-13T10:21:49.3372421Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:21:49.3373045Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/onnx_model.py:492: in save_model_to_file
+2026-11-13T10:21:49.3373776Z     self.topological_sort()
+2026-11-13T10:21:49.3374061Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:21:49.3374300Z 
+2026-11-13T10:21:49.3374527Z self = <onnxruntime.quantization.onnx_model.ONNXModel object at 0x7f99586d0f20>
+2026-11-13T10:21:49.3374850Z 
+2026-11-13T10:21:49.3374943Z     def topological_sort(self):
+2026-11-13T10:21:49.3375281Z         deps_count = [0] * len(self.nodes())  # dependency count of each node
+2026-11-13T10:21:49.3375673Z         deps_to_nodes = {}  # input to node indice
+2026-11-13T10:21:49.3375997Z         sorted_nodes = []  # initialize sorted_nodes
+2026-11-13T10:21:49.3376324Z         for node_idx, node in enumerate(self.nodes()):
+2026-11-13T10:21:49.3376707Z             # CANNOT use len(node.input) directly because input can be optional
+2026-11-13T10:21:49.3377095Z             input_names = _get_node_input_names(node)
+2026-11-13T10:21:49.3377411Z             deps_count[node_idx] = len(input_names)
+2026-11-13T10:21:49.3377795Z             if deps_count[node_idx] == 0:  # Constant doesn't depend on any inputs
+2026-11-13T10:21:49.3378204Z                 sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3378515Z                 continue
+2026-11-13T10:21:49.3378723Z     
+2026-11-13T10:21:49.3379199Z             for input_name in input_names:
+2026-11-13T10:21:49.3379622Z                 if input_name not in deps_to_nodes:
+2026-11-13T10:21:49.3379944Z                     deps_to_nodes[input_name] = [node_idx]
+2026-11-13T10:21:49.3380242Z                 else:
+2026-11-13T10:21:49.3380496Z                     deps_to_nodes[input_name].append(node_idx)
+2026-11-13T10:21:49.3380792Z     
+2026-11-13T10:21:49.3381068Z         initializer_names = [init.name for init in self.initializer()]
+2026-11-13T10:21:49.3381558Z         graph_input_names = [input.name for input in self.model.graph.input]
+2026-11-13T10:21:49.3381993Z         input_names = initializer_names + graph_input_names
+2026-11-13T10:21:49.3382309Z         input_names.sort()
+2026-11-13T10:21:49.3382546Z         prev_input_name = None
+2026-11-13T10:21:49.3382806Z         for input_name in input_names:
+2026-11-13T10:21:49.3383103Z             if prev_input_name == input_name:
+2026-11-13T10:21:49.3383378Z                 continue
+2026-11-13T10:21:49.3383590Z     
+2026-11-13T10:21:49.3383788Z             prev_input_name = input_name
+2026-11-13T10:21:49.3384070Z             if input_name in deps_to_nodes:
+2026-11-13T10:21:49.3384377Z                 for node_idx in deps_to_nodes[input_name]:
+2026-11-13T10:21:49.3384727Z                     deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.3385061Z                     if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.3385385Z                         sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3385680Z     
+2026-11-13T10:21:49.3385855Z         start = 0
+2026-11-13T10:21:49.3386061Z         end = len(sorted_nodes)
+2026-11-13T10:21:49.3386287Z     
+2026-11-13T10:21:49.3386467Z         while start < end:
+2026-11-13T10:21:49.3386720Z             for output in sorted_nodes[start].output:
+2026-11-13T10:21:49.3387025Z                 if output in deps_to_nodes:
+2026-11-13T10:21:49.3387459Z                     for node_idx in deps_to_nodes[output]:
+2026-11-13T10:21:49.3387817Z                         deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.3388151Z                         if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.3388478Z                             sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3388810Z                             end = end + 1
+2026-11-13T10:21:49.3389413Z             start = start + 1
+2026-11-13T10:21:49.3389638Z     
+2026-11-13T10:21:49.3389887Z >       assert end == len(self.graph().node), "Graph is not a DAG"
+2026-11-13T10:21:49.3390220Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:21:49.3390656Z E       AssertionError: Graph is not a DAG
+2026-11-13T10:21:49.3390850Z 
+2026-11-13T10:21:49.3391225Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/onnx_model.py:618: AssertionError
+2026-11-13T10:21:49.3392030Z _ TestCapturedSubgraphDependencies.test_loop_sparse_initializer_capture_can_sort_and_save (trip_count=0) _
+2026-11-13T10:21:49.3392471Z 
+2026-11-13T10:21:49.3392905Z self = <test_captured_subgraph_inputs.TestCapturedSubgraphDependencies testMethod=test_loop_sparse_initializer_capture_can_sort_and_save>
+2026-11-13T10:21:49.3393447Z 
+2026-11-13T10:21:49.3393626Z     def test_loop_sparse_initializer_capture_can_sort_and_save(self):
+2026-11-13T10:21:49.3393988Z         for trip_count in (0, 2):
+2026-11-13T10:21:49.3394408Z             with self.subTest(trip_count=trip_count), tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:21:49.3394859Z                 body = helper.make_graph(
+2026-11-13T10:21:49.3395116Z                     [
+2026-11-13T10:21:49.3395466Z                         helper.make_node("Identity", ["body_condition"], ["next_condition"]),
+2026-11-13T10:21:49.3395966Z                         helper.make_node("Add", ["state", "sparse_capture"], ["next_state"]),
+2026-11-13T10:21:49.3396342Z                     ],
+2026-11-13T10:21:49.3396549Z                     "body",
+2026-11-13T10:21:49.3396763Z                     [
+2026-11-13T10:21:49.3397024Z                         scalar_info("iteration", TensorProto.INT64),
+2026-11-13T10:21:49.3397401Z                         scalar_info("body_condition", TensorProto.BOOL),
+2026-11-13T10:21:49.3397744Z                         float_info("state"),
+2026-11-13T10:21:49.3398001Z                     ],
+2026-11-13T10:21:49.3398345Z                     [scalar_info("next_condition", TensorProto.BOOL), float_info("next_state")],
+2026-11-13T10:21:49.3398742Z                 )
+2026-11-13T10:21:49.3399393Z                 loop = helper.make_node("Loop", ["trip_count", "loop_condition", "x"], ["output"], body=body)
+2026-11-13T10:21:49.3399871Z                 model = make_model(
+2026-11-13T10:21:49.3400121Z                     [loop],
+2026-11-13T10:21:49.3400336Z                     [
+2026-11-13T10:21:49.3400595Z                         scalar_info("trip_count", TensorProto.INT64),
+2026-11-13T10:21:49.3400976Z                         scalar_info("loop_condition", TensorProto.BOOL),
+2026-11-13T10:21:49.3401305Z                         float_info("x"),
+2026-11-13T10:21:49.3401547Z                     ],
+2026-11-13T10:21:49.3401764Z                     [float_info("output")],
+2026-11-13T10:21:49.3402017Z                 )
+2026-11-13T10:21:49.3402260Z                 model.graph.sparse_initializer.append(
+2026-11-13T10:21:49.3402587Z                     helper.make_sparse_tensor(
+2026-11-13T10:21:49.3403016Z                         numpy_helper.from_array(np.array([-3.0], dtype=np.float32), "sparse_capture"),
+2026-11-13T10:21:49.3403572Z                         numpy_helper.from_array(np.array([1], dtype=np.int64), "sparse_indices"),
+2026-11-13T10:21:49.3403988Z                         [2],
+2026-11-13T10:21:49.3404207Z                     )
+2026-11-13T10:21:49.3404403Z                 )
+2026-11-13T10:21:49.3404604Z                 feeds = {
+2026-11-13T10:21:49.3404867Z                     "x": np.array([5.0, 7.0], dtype=np.float32),
+2026-11-13T10:21:49.3405366Z                     "trip_count": np.array(trip_count, dtype=np.int64),
+2026-11-13T10:21:49.3405714Z                     "loop_condition": np.array(True),
+2026-11-13T10:21:49.3405986Z                 }
+2026-11-13T10:21:49.3406286Z                 expected = np.array([5.0, 7.0 - 3.0 * trip_count], dtype=np.float32)
+2026-11-13T10:21:49.3406754Z                 np.testing.assert_array_equal(run_cpu(model, feeds), expected)
+2026-11-13T10:21:49.3407124Z                 wrapped = ONNXModel(model)
+2026-11-13T10:21:49.3407403Z >               wrapped.topological_sort()
+2026-11-13T10:21:49.3407590Z 
+2026-11-13T10:21:49.3407810Z onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py:214: 
+2026-11-13T10:21:49.3408382Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:21:49.3408624Z 
+2026-11-13T10:21:49.3409026Z self = <onnxruntime.quantization.onnx_model.ONNXModel object at 0x7f995750f140>
+2026-11-13T10:21:49.3409356Z 
+2026-11-13T10:21:49.3409458Z     def topological_sort(self):
+2026-11-13T10:21:49.3409800Z         deps_count = [0] * len(self.nodes())  # dependency count of each node
+2026-11-13T10:21:49.3410185Z         deps_to_nodes = {}  # input to node indice
+2026-11-13T10:21:49.3410511Z         sorted_nodes = []  # initialize sorted_nodes
+2026-11-13T10:21:49.3410837Z         for node_idx, node in enumerate(self.nodes()):
+2026-11-13T10:21:49.3411231Z             # CANNOT use len(node.input) directly because input can be optional
+2026-11-13T10:21:49.3411633Z             input_names = _get_node_input_names(node)
+2026-11-13T10:21:49.3411949Z             deps_count[node_idx] = len(input_names)
+2026-11-13T10:21:49.3412343Z             if deps_count[node_idx] == 0:  # Constant doesn't depend on any inputs
+2026-11-13T10:21:49.3412762Z                 sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3413064Z                 continue
+2026-11-13T10:21:49.3413272Z     
+2026-11-13T10:21:49.3413476Z             for input_name in input_names:
+2026-11-13T10:21:49.3413764Z                 if input_name not in deps_to_nodes:
+2026-11-13T10:21:49.3414076Z                     deps_to_nodes[input_name] = [node_idx]
+2026-11-13T10:21:49.3414366Z                 else:
+2026-11-13T10:21:49.3414628Z                     deps_to_nodes[input_name].append(node_idx)
+2026-11-13T10:21:49.3414917Z     
+2026-11-13T10:21:49.3415183Z         initializer_names = [init.name for init in self.initializer()]
+2026-11-13T10:21:49.3415645Z         graph_input_names = [input.name for input in self.model.graph.input]
+2026-11-13T10:21:49.3416067Z         input_names = initializer_names + graph_input_names
+2026-11-13T10:21:49.3416375Z         input_names.sort()
+2026-11-13T10:21:49.3416611Z         prev_input_name = None
+2026-11-13T10:21:49.3416865Z         for input_name in input_names:
+2026-11-13T10:21:49.3417144Z             if prev_input_name == input_name:
+2026-11-13T10:21:49.3417420Z                 continue
+2026-11-13T10:21:49.3417624Z     
+2026-11-13T10:21:49.3417817Z             prev_input_name = input_name
+2026-11-13T10:21:49.3418094Z             if input_name in deps_to_nodes:
+2026-11-13T10:21:49.3418398Z                 for node_idx in deps_to_nodes[input_name]:
+2026-11-13T10:21:49.3418751Z                     deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.3419385Z                     if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.3419716Z                         sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3420024Z     
+2026-11-13T10:21:49.3420198Z         start = 0
+2026-11-13T10:21:49.3420415Z         end = len(sorted_nodes)
+2026-11-13T10:21:49.3420639Z     
+2026-11-13T10:21:49.3420819Z         while start < end:
+2026-11-13T10:21:49.3421080Z             for output in sorted_nodes[start].output:
+2026-11-13T10:21:49.3421386Z                 if output in deps_to_nodes:
+2026-11-13T10:21:49.3421696Z                     for node_idx in deps_to_nodes[output]:
+2026-11-13T10:21:49.3422183Z                         deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.3422533Z                         if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.3422857Z                             sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3423175Z                             end = end + 1
+2026-11-13T10:21:49.3423446Z             start = start + 1
+2026-11-13T10:21:49.3423668Z     
+2026-11-13T10:21:49.3423921Z >       assert end == len(self.graph().node), "Graph is not a DAG"
+2026-11-13T10:21:49.3424261Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:21:49.3424543Z E       AssertionError: Graph is not a DAG
+2026-11-13T10:21:49.3424743Z 
+2026-11-13T10:21:49.3425122Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/onnx_model.py:618: AssertionError
+2026-11-13T10:21:49.3426040Z _ TestCapturedSubgraphDependencies.test_loop_sparse_initializer_capture_can_sort_and_save (trip_count=2) _
+2026-11-13T10:21:49.3426482Z 
+2026-11-13T10:21:49.3426927Z self = <test_captured_subgraph_inputs.TestCapturedSubgraphDependencies testMethod=test_loop_sparse_initializer_capture_can_sort_and_save>
+2026-11-13T10:21:49.3427462Z 
+2026-11-13T10:21:49.3427645Z     def test_loop_sparse_initializer_capture_can_sort_and_save(self):
+2026-11-13T10:21:49.3428011Z         for trip_count in (0, 2):
+2026-11-13T10:21:49.3428427Z             with self.subTest(trip_count=trip_count), tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:21:49.3429102Z                 body = helper.make_graph(
+2026-11-13T10:21:49.3429371Z                     [
+2026-11-13T10:21:49.3429703Z                         helper.make_node("Identity", ["body_condition"], ["next_condition"]),
+2026-11-13T10:21:49.3430206Z                         helper.make_node("Add", ["state", "sparse_capture"], ["next_state"]),
+2026-11-13T10:21:49.3430589Z                     ],
+2026-11-13T10:21:49.3430803Z                     "body",
+2026-11-13T10:21:49.3431019Z                     [
+2026-11-13T10:21:49.3431284Z                         scalar_info("iteration", TensorProto.INT64),
+2026-11-13T10:21:49.3431665Z                         scalar_info("body_condition", TensorProto.BOOL),
+2026-11-13T10:21:49.3432001Z                         float_info("state"),
+2026-11-13T10:21:49.3432262Z                     ],
+2026-11-13T10:21:49.3432609Z                     [scalar_info("next_condition", TensorProto.BOOL), float_info("next_state")],
+2026-11-13T10:21:49.3433004Z                 )
+2026-11-13T10:21:49.3433385Z                 loop = helper.make_node("Loop", ["trip_count", "loop_condition", "x"], ["output"], body=body)
+2026-11-13T10:21:49.3433834Z                 model = make_model(
+2026-11-13T10:21:49.3434079Z                     [loop],
+2026-11-13T10:21:49.3434301Z                     [
+2026-11-13T10:21:49.3434560Z                         scalar_info("trip_count", TensorProto.INT64),
+2026-11-13T10:21:49.3434937Z                         scalar_info("loop_condition", TensorProto.BOOL),
+2026-11-13T10:21:49.3435267Z                         float_info("x"),
+2026-11-13T10:21:49.3435520Z                     ],
+2026-11-13T10:21:49.3435739Z                     [float_info("output")],
+2026-11-13T10:21:49.3435997Z                 )
+2026-11-13T10:21:49.3436243Z                 model.graph.sparse_initializer.append(
+2026-11-13T10:21:49.3436563Z                     helper.make_sparse_tensor(
+2026-11-13T10:21:49.3436992Z                         numpy_helper.from_array(np.array([-3.0], dtype=np.float32), "sparse_capture"),
+2026-11-13T10:21:49.3437545Z                         numpy_helper.from_array(np.array([1], dtype=np.int64), "sparse_indices"),
+2026-11-13T10:21:49.3437945Z                         [2],
+2026-11-13T10:21:49.3438165Z                     )
+2026-11-13T10:21:49.3438362Z                 )
+2026-11-13T10:21:49.3438559Z                 feeds = {
+2026-11-13T10:21:49.3438959Z                     "x": np.array([5.0, 7.0], dtype=np.float32),
+2026-11-13T10:21:49.3439340Z                     "trip_count": np.array(trip_count, dtype=np.int64),
+2026-11-13T10:21:49.3439832Z                     "loop_condition": np.array(True),
+2026-11-13T10:21:49.3440113Z                 }
+2026-11-13T10:21:49.3440414Z                 expected = np.array([5.0, 7.0 - 3.0 * trip_count], dtype=np.float32)
+2026-11-13T10:21:49.3440887Z                 np.testing.assert_array_equal(run_cpu(model, feeds), expected)
+2026-11-13T10:21:49.3441262Z                 wrapped = ONNXModel(model)
+2026-11-13T10:21:49.3441547Z >               wrapped.topological_sort()
+2026-11-13T10:21:49.3441737Z 
+2026-11-13T10:21:49.3441952Z onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py:214: 
+2026-11-13T10:21:49.3442418Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:21:49.3442780Z 
+2026-11-13T10:21:49.3443018Z self = <onnxruntime.quantization.onnx_model.ONNXModel object at 0x7f995750db50>
+2026-11-13T10:21:49.3443338Z 
+2026-11-13T10:21:49.3443443Z     def topological_sort(self):
+2026-11-13T10:21:49.3443793Z         deps_count = [0] * len(self.nodes())  # dependency count of each node
+2026-11-13T10:21:49.3444183Z         deps_to_nodes = {}  # input to node indice
+2026-11-13T10:21:49.3444504Z         sorted_nodes = []  # initialize sorted_nodes
+2026-11-13T10:21:49.3444829Z         for node_idx, node in enumerate(self.nodes()):
+2026-11-13T10:21:49.3445219Z             # CANNOT use len(node.input) directly because input can be optional
+2026-11-13T10:21:49.3445607Z             input_names = _get_node_input_names(node)
+2026-11-13T10:21:49.3445925Z             deps_count[node_idx] = len(input_names)
+2026-11-13T10:21:49.3446320Z             if deps_count[node_idx] == 0:  # Constant doesn't depend on any inputs
+2026-11-13T10:21:49.3446728Z                 sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3447031Z                 continue
+2026-11-13T10:21:49.3447240Z     
+2026-11-13T10:21:49.3447439Z             for input_name in input_names:
+2026-11-13T10:21:49.3447735Z                 if input_name not in deps_to_nodes:
+2026-11-13T10:21:49.3448047Z                     deps_to_nodes[input_name] = [node_idx]
+2026-11-13T10:21:49.3448333Z                 else:
+2026-11-13T10:21:49.3448584Z                     deps_to_nodes[input_name].append(node_idx)
+2026-11-13T10:21:49.3449026Z     
+2026-11-13T10:21:49.3449296Z         initializer_names = [init.name for init in self.initializer()]
+2026-11-13T10:21:49.3449751Z         graph_input_names = [input.name for input in self.model.graph.input]
+2026-11-13T10:21:49.3450168Z         input_names = initializer_names + graph_input_names
+2026-11-13T10:21:49.3450477Z         input_names.sort()
+2026-11-13T10:21:49.3450717Z         prev_input_name = None
+2026-11-13T10:21:49.3450963Z         for input_name in input_names:
+2026-11-13T10:21:49.3451241Z             if prev_input_name == input_name:
+2026-11-13T10:21:49.3451510Z                 continue
+2026-11-13T10:21:49.3451714Z     
+2026-11-13T10:21:49.3451911Z             prev_input_name = input_name
+2026-11-13T10:21:49.3452183Z             if input_name in deps_to_nodes:
+2026-11-13T10:21:49.3452491Z                 for node_idx in deps_to_nodes[input_name]:
+2026-11-13T10:21:49.3452837Z                     deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.3453173Z                     if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.3453500Z                         sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3453798Z     
+2026-11-13T10:21:49.3453967Z         start = 0
+2026-11-13T10:21:49.3454168Z         end = len(sorted_nodes)
+2026-11-13T10:21:49.3454391Z     
+2026-11-13T10:21:49.3454623Z         while start < end:
+2026-11-13T10:21:49.3454885Z             for output in sorted_nodes[start].output:
+2026-11-13T10:21:49.3455185Z                 if output in deps_to_nodes:
+2026-11-13T10:21:49.3455521Z                     for node_idx in deps_to_nodes[output]:
+2026-11-13T10:21:49.3455868Z                         deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.3456212Z                         if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.3456683Z                             sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.3457012Z                             end = end + 1
+2026-11-13T10:21:49.3457268Z             start = start + 1
+2026-11-13T10:21:49.3457487Z     
+2026-11-13T10:21:49.3457732Z >       assert end == len(self.graph().node), "Graph is not a DAG"
+2026-11-13T10:21:49.3458062Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-11-13T10:21:49.3458338Z E       AssertionError: Graph is not a DAG
+2026-11-13T10:21:49.3458534Z 
+2026-11-13T10:21:49.3459235Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization/onnx_model.py:618: AssertionError
+2026-11-13T10:21:49.3459881Z =========================== short test summary info ============================
+2026-11-13T10:21:49.3461083Z SUBFAILED(condition=False) onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py::TestCapturedSubgraphDependencies::test_if_sparse_initializer_capture_can_sort_and_save - AssertionError: Graph is not a DAG
+2026-11-13T10:21:49.3462685Z SUBFAILED(condition=True) onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py::TestCapturedSubgraphDependencies::test_if_sparse_initializer_capture_can_sort_and_save - AssertionError: Graph is not a DAG
+2026-11-13T10:21:49.3464241Z SUBFAILED(trip_count=0) onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py::TestCapturedSubgraphDependencies::test_loop_sparse_initializer_capture_can_sort_and_save - AssertionError: Graph is not a DAG
+2026-11-13T10:21:49.3465807Z SUBFAILED(trip_count=2) onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py::TestCapturedSubgraphDependencies::test_loop_sparse_initializer_capture_can_sort_and_save - AssertionError: Graph is not a DAG
+2026-11-13T10:21:49.3466744Z 4 failed, 2 passed, 8 deselected in 0.30s
+2026-11-13T10:21:49.3557470Z Confirmed pre-fix sparse capture failures: ['test_if_sparse_initializer_capture_can_sort_and_save', 'test_loop_sparse_initializer_capture_can_sort_and_save']
+2026-11-13T10:21:49.3637003Z ##[group]Run python -m ruff check onnxruntime/python/tools/quantization/onnx_model.py onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py
+2026-11-13T10:21:49.3638210Z [36;1mpython -m ruff check onnxruntime/python/tools/quantization/onnx_model.py onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py[0m
+2026-11-13T10:21:49.3639691Z [36;1mpython -m ruff format onnxruntime/python/tools/quantization/onnx_model.py onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py[0m
+2026-11-13T10:21:49.3640398Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:21:49.3640661Z [36;1mfrom pathlib import Path[0m
+2026-11-13T10:21:49.3640945Z [36;1mprint("BEGIN_FORMATTED_SOURCE")[0m
+2026-11-13T10:21:49.3641408Z [36;1mprint(Path("onnxruntime/python/tools/quantization/onnx_model.py").read_text())[0m
+2026-11-13T10:21:49.3641868Z [36;1mprint("END_FORMATTED_SOURCE")[0m
+2026-11-13T10:21:49.3642144Z [36;1mprint("BEGIN_FORMATTED_TEST")[0m
+2026-11-13T10:21:49.3642675Z [36;1mprint(Path("onnxruntime/test/python/quantization/test_captured_subgraph_inputs.py").read_text())[0m
+2026-11-13T10:21:49.3643199Z [36;1mprint("END_FORMATTED_TEST")[0m
+2026-11-13T10:21:49.3643451Z [36;1mPY[0m
+2026-11-13T10:21:49.3643652Z [36;1mgit diff --exit-code[0m
+2026-11-13T10:21:49.3643899Z [36;1mgit diff --check[0m
+2026-11-13T10:21:49.3664398Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:21:49.3664699Z env:
+2026-11-13T10:21:49.3664906Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:49.3665176Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:49.3665490Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:49.3665873Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:49.3666337Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:21:49.3666781Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:49.3667171Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:49.3667568Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:49.3667960Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:21:49.3668290Z ##[endgroup]
+2026-11-13T10:21:49.3990641Z All checks passed!
+2026-11-13T10:21:49.4283297Z 2 files left unchanged
+2026-11-13T10:21:49.4510075Z BEGIN_FORMATTED_SOURCE
+2026-11-13T10:21:49.4511792Z # --------------------------------------------------------------------------
+2026-11-13T10:21:49.4512665Z # Copyright (c) Microsoft Corporation.  All rights reserved.
+2026-11-13T10:21:49.4513401Z # Licensed under the MIT License.
+2026-11-13T10:21:49.4514078Z # --------------------------------------------------------------------------
+2026-11-13T10:21:49.4515450Z from pathlib import Path
+2026-11-13T10:21:49.4515791Z 
+2026-11-13T10:21:49.4515968Z import onnx
+2026-11-13T10:21:49.4516284Z import onnx.helper as onnx_helper
+2026-11-13T10:21:49.4516969Z import onnx.numpy_helper as onnx_numpy_helper
+2026-11-13T10:21:49.4517764Z from onnx.onnx_pb import ModelProto
+2026-11-13T10:21:49.4518180Z 
+2026-11-13T10:21:49.4518511Z from .quant_utils import attribute_to_kwarg, find_by_name
+2026-11-13T10:21:49.4519335Z 
+2026-11-13T10:21:49.4519343Z 
+2026-11-13T10:21:49.4519857Z def _clean_initializers_helper(graph, model):
+2026-11-13T10:21:49.4520562Z     """Clean unused initializers from graph.
+2026-11-13T10:21:49.4521027Z 
+2026-11-13T10:21:49.4521265Z     Returns:
+2026-11-13T10:21:49.4521776Z         A cleaned graph without unused initializers
+2026-11-13T10:21:49.4522764Z         A list of tensor names, which are not produced by this graph and its subgraphes
+2026-11-13T10:21:49.4523687Z     """
+2026-11-13T10:21:49.4524130Z     requesting_tensor_names = set()
+2026-11-13T10:21:49.4525299Z     requesting_tensor_names.update(input_name for node in graph.node for input_name in node.input if input_name)
+2026-11-13T10:21:49.4526852Z     requesting_tensor_names.update(g_out.name for g_out in graph.output if g_out.name)
+2026-11-13T10:21:49.4527297Z 
+2026-11-13T10:21:49.4527683Z     new_nodes = []
+2026-11-13T10:21:49.4527939Z     for node in graph.node:
+2026-11-13T10:21:49.4528195Z         new_node = node
+2026-11-13T10:21:49.4528418Z         graph_attrs = [
+2026-11-13T10:21:49.4528626Z             attr
+2026-11-13T10:21:49.4529104Z             for attr in node.attribute
+2026-11-13T10:21:49.4529955Z             if attr.type == onnx.AttributeProto.GRAPH or attr.type == onnx.AttributeProto.GRAPHS
+2026-11-13T10:21:49.4530817Z         ]
+2026-11-13T10:21:49.4531133Z         if graph_attrs:
+2026-11-13T10:21:49.4531502Z             kwargs = {}
+2026-11-13T10:21:49.4531744Z             for attr in node.attribute:
+2026-11-13T10:21:49.4532035Z                 new_attribute = {}
+2026-11-13T10:21:49.4532345Z                 if attr.type == onnx.AttributeProto.GRAPH:
+2026-11-13T10:21:49.4532649Z                     (
+2026-11-13T10:21:49.4532869Z                         cleaned_sub_graph,
+2026-11-13T10:21:49.4533161Z                         sub_requesting_tensor_names,
+2026-11-13T10:21:49.4533495Z                     ) = _clean_initializers_helper(attr.g, model)
+2026-11-13T10:21:49.4533866Z                     new_attribute = {attr.name: cleaned_sub_graph}
+2026-11-13T10:21:49.4534283Z                     requesting_tensor_names.update(sub_requesting_tensor_names)
+2026-11-13T10:21:49.4534703Z                 elif attr.type == onnx.AttributeProto.GRAPHS:
+2026-11-13T10:21:49.4535034Z                     cleaned_graphes = []
+2026-11-13T10:21:49.4535316Z                     for subgraph in attr.graphs:
+2026-11-13T10:21:49.4535591Z                         (
+2026-11-13T10:21:49.4535825Z                             cleaned_sub_graph,
+2026-11-13T10:21:49.4536122Z                             sub_requesting_tensor_names,
+2026-11-13T10:21:49.4536466Z                         ) = _clean_initializers_helper(subgraph, model)
+2026-11-13T10:21:49.4536835Z                         cleaned_graphes.append(cleaned_sub_graph)
+2026-11-13T10:21:49.4537247Z                         requesting_tensor_names.update(sub_requesting_tensor_names)
+2026-11-13T10:21:49.4537664Z                     new_attribute = {attr.name: cleaned_graphes}
+2026-11-13T10:21:49.4537975Z                 else:
+2026-11-13T10:21:49.4538230Z                     new_attribute = attribute_to_kwarg(attr)
+2026-11-13T10:21:49.4538552Z                 kwargs.update(new_attribute)
+2026-11-13T10:21:49.4539375Z             new_node = onnx_helper.make_node(node.op_type, node.input, node.output, name=node.name, **kwargs)
+2026-11-13T10:21:49.4539874Z         new_nodes.append(new_node)
+2026-11-13T10:21:49.4540056Z 
+2026-11-13T10:21:49.4540155Z     graph.ClearField("node")
+2026-11-13T10:21:49.4540413Z     graph.node.extend(new_nodes)
+2026-11-13T10:21:49.4540799Z 
+2026-11-13T10:21:49.4541110Z     requesting_tensor_names.difference_update(output for node in graph.node for output in node.output)
+2026-11-13T10:21:49.4541517Z 
+2026-11-13T10:21:49.4541620Z     unused_initializer = []
+2026-11-13T10:21:49.4541886Z     for initializer in graph.initializer:
+2026-11-13T10:21:49.4542218Z         if initializer.name in requesting_tensor_names:
+2026-11-13T10:21:49.4542572Z             requesting_tensor_names.remove(initializer.name)
+2026-11-13T10:21:49.4542879Z         else:
+2026-11-13T10:21:49.4543168Z             # mark it to remove, remove here directly will cause mis-behavier
+2026-11-13T10:21:49.4543561Z             unused_initializer.append(initializer)
+2026-11-13T10:21:49.4543772Z 
+2026-11-13T10:21:49.4543933Z     name_to_input = {input.name: input for input in graph.input}
+2026-11-13T10:21:49.4544295Z     for initializer in unused_initializer:
+2026-11-13T10:21:49.4544593Z         graph.initializer.remove(initializer)
+2026-11-13T10:21:49.4544891Z         if initializer.name in name_to_input:
+2026-11-13T10:21:49.4545160Z             try:
+2026-11-13T10:21:49.4545431Z                 graph.input.remove(name_to_input[initializer.name])
+2026-11-13T10:21:49.4545774Z             except StopIteration:
+2026-11-13T10:21:49.4546029Z                 if model.ir_version < 4:
+2026-11-13T10:21:49.4546658Z                     print(f"Warning: invalid weight name {initializer.name} found in the graph (not a graph input)")
+2026-11-13T10:21:49.4547074Z 
+2026-11-13T10:21:49.4547303Z     requesting_tensor_names.difference_update(input.name for input in graph.input)
+2026-11-13T10:21:49.4547637Z 
+2026-11-13T10:21:49.4547745Z     return graph, requesting_tensor_names
+2026-11-13T10:21:49.4547928Z 
+2026-11-13T10:21:49.4547932Z 
+2026-11-13T10:21:49.4548033Z def _get_node_input_names(node):
+2026-11-13T10:21:49.4548404Z     """Include values captured from enclosing scopes by subgraph attributes."""
+2026-11-13T10:21:49.4549101Z     input_names = {name for name in node.input if name}
+2026-11-13T10:21:49.4549500Z     for attribute in node.attribute:
+2026-11-13T10:21:49.4549818Z         if attribute.type == onnx.AttributeProto.GRAPH:
+2026-11-13T10:21:49.4550144Z             graphs = [attribute.g]
+2026-11-13T10:21:49.4550455Z         elif attribute.type == onnx.AttributeProto.GRAPHS:
+2026-11-13T10:21:49.4550801Z             graphs = attribute.graphs
+2026-11-13T10:21:49.4551051Z         else:
+2026-11-13T10:21:49.4551241Z             continue
+2026-11-13T10:21:49.4551452Z         for graph in graphs:
+2026-11-13T10:21:49.4551740Z             local_names = {value.name for value in graph.input}
+2026-11-13T10:21:49.4552198Z             local_names.update(initializer.name for initializer in graph.initializer)
+2026-11-13T10:21:49.4552790Z             local_names.update(initializer.values.name for initializer in graph.sparse_initializer)
+2026-11-13T10:21:49.4553433Z             local_names.update(output for subnode in graph.node for output in subnode.output if output)
+2026-11-13T10:21:49.4553956Z             required_names = {value.name for value in graph.output}
+2026-11-13T10:21:49.4554307Z             for subnode in graph.node:
+2026-11-13T10:21:49.4554636Z                 required_names.update(_get_node_input_names(subnode))
+2026-11-13T10:21:49.4555020Z             input_names.update(required_names - local_names)
+2026-11-13T10:21:49.4555338Z     return input_names
+2026-11-13T10:21:49.4555479Z 
+2026-11-13T10:21:49.4555483Z 
+2026-11-13T10:21:49.4555565Z class ONNXModel:
+2026-11-13T10:21:49.4555793Z     def __init__(self, model: ModelProto):
+2026-11-13T10:21:49.4556070Z         self.model = model
+2026-11-13T10:21:49.4556219Z 
+2026-11-13T10:21:49.4556303Z     def nodes(self):
+2026-11-13T10:21:49.4556540Z         return self.model.graph.node
+2026-11-13T10:21:49.4556719Z 
+2026-11-13T10:21:49.4556814Z     def initializer(self):
+2026-11-13T10:21:49.4557073Z         return self.model.graph.initializer
+2026-11-13T10:21:49.4557270Z 
+2026-11-13T10:21:49.4557380Z     def initializer_extend(self, inits):
+2026-11-13T10:21:49.4557651Z         if len(inits) == 0:
+2026-11-13T10:21:49.4558114Z             raise ValueError("Can add an empty list.")
+2026-11-13T10:21:49.4558423Z         for init in self.initializer():
+2026-11-13T10:21:49.4558695Z             self._check_init(init, "gain")
+2026-11-13T10:21:49.4559291Z         for init in inits:
+2026-11-13T10:21:49.4559555Z             self._check_init(init)
+2026-11-13T10:21:49.4559859Z             self.model.graph.initializer.append(init)
+2026-11-13T10:21:49.4560159Z 
+2026-11-13T10:21:49.4560251Z     def graph(self):
+2026-11-13T10:21:49.4560523Z         return self.model.graph
+2026-11-13T10:21:49.4560717Z 
+2026-11-13T10:21:49.4560840Z     def ir_version(self):
+2026-11-13T10:21:49.4561134Z         return self.model.ir_version
+2026-11-13T10:21:49.4561351Z 
+2026-11-13T10:21:49.4561445Z     def opset_import(self):
+2026-11-13T10:21:49.4561692Z         return self.model.opset_import
+2026-11-13T10:21:49.4561873Z 
+2026-11-13T10:21:49.4561990Z     def set_opset_import(self, domain, version):
+2026-11-13T10:21:49.4562315Z         for opset in self.model.opset_import:
+2026-11-13T10:21:49.4562604Z             if opset.domain == domain:
+2026-11-13T10:21:49.4562875Z                 opset.version = version
+2026-11-13T10:21:49.4563124Z                 return
+2026-11-13T10:21:49.4563249Z 
+2026-11-13T10:21:49.4563660Z         self.model.opset_import.extend([onnx_helper.make_opsetid(domain, version)])
+2026-11-13T10:21:49.4564007Z 
+2026-11-13T10:21:49.4564109Z     def remove_node(self, node):
+2026-11-13T10:21:49.4564382Z         if node in self.model.graph.node:
+2026-11-13T10:21:49.4564687Z             self.model.graph.node.remove(node)
+2026-11-13T10:21:49.4564893Z 
+2026-11-13T10:21:49.4565002Z     def remove_nodes(self, nodes_to_remove):
+2026-11-13T10:21:49.4565284Z         for node in nodes_to_remove:
+2026-11-13T10:21:49.4565546Z             self.remove_node(node)
+2026-11-13T10:21:49.4565704Z 
+2026-11-13T10:21:49.4565801Z     def add_node(self, node):
+2026-11-13T10:21:49.4566105Z         self.model.graph.node.extend([self._check_node(node)])
+2026-11-13T10:21:49.4566363Z 
+2026-11-13T10:21:49.4566460Z     def add_nodes(self, nodes_to_add):
+2026-11-13T10:21:49.4566723Z         for node in nodes_to_add:
+2026-11-13T10:21:49.4566972Z             self.add_node(node)
+2026-11-13T10:21:49.4567138Z 
+2026-11-13T10:21:49.4567246Z     def add_initializer(self, tensor):
+2026-11-13T10:21:49.4567610Z         if find_by_name(tensor.name, self.model.graph.initializer) is None:
+2026-11-13T10:21:49.4567989Z             self._check_init(tensor)
+2026-11-13T10:21:49.4568299Z             self.model.graph.initializer.extend([tensor])
+2026-11-13T10:21:49.4568530Z 
+2026-11-13T10:21:49.4568630Z     def get_initializer(self, name):
+2026-11-13T10:21:49.4569213Z         for tensor in self.model.graph.initializer:
+2026-11-13T10:21:49.4569532Z             if tensor.name == name:
+2026-11-13T10:21:49.4569784Z                 return tensor
+2026-11-13T10:21:49.4570010Z         return None
+2026-11-13T10:21:49.4570136Z 
+2026-11-13T10:21:49.4570300Z     def find_graph_input(self, input_name):
+2026-11-13T10:21:49.4570608Z         for input in self.model.graph.input:
+2026-11-13T10:21:49.4570897Z             if input.name == input_name:
+2026-11-13T10:21:49.4571160Z                 return input
+2026-11-13T10:21:49.4571380Z         return None
+2026-11-13T10:21:49.4571507Z 
+2026-11-13T10:21:49.4571623Z     def find_graph_output(self, output_name):
+2026-11-13T10:21:49.4571934Z         for output in self.model.graph.output:
+2026-11-13T10:21:49.4572224Z             if output.name == output_name:
+2026-11-13T10:21:49.4572489Z                 return output
+2026-11-13T10:21:49.4572710Z         return None
+2026-11-13T10:21:49.4572832Z 
+2026-11-13T10:21:49.4572953Z     def get_tensor_type(self, tensor_name: str):
+2026-11-13T10:21:49.4573368Z         tensor_type_map = {obj.name: obj.type for obj in self.model.graph.value_info}
+2026-11-13T10:21:49.4573685Z 
+2026-11-13T10:21:49.4573788Z         if tensor_name in tensor_type_map:
+2026-11-13T10:21:49.4574101Z             return tensor_type_map[tensor_name].tensor_type
+2026-11-13T10:21:49.4574485Z 
+2026-11-13T10:21:49.4574608Z         g_input = self.find_graph_input(tensor_name)
+2026-11-13T10:21:49.4574891Z         if g_input:
+2026-11-13T10:21:49.4575108Z             return g_input.type.tensor_type
+2026-11-13T10:21:49.4575300Z 
+2026-11-13T10:21:49.4575431Z         g_output = self.find_graph_output(tensor_name)
+2026-11-13T10:21:49.4575718Z         if g_output:
+2026-11-13T10:21:49.4575946Z             return g_output.type.tensor_type
+2026-11-13T10:21:49.4576134Z 
+2026-11-13T10:21:49.4576217Z         return None
+2026-11-13T10:21:49.4576331Z 
+2026-11-13T10:21:49.4576445Z     def get_constant_value(self, output_name):
+2026-11-13T10:21:49.4576749Z         for node in self.model.graph.node:
+2026-11-13T10:21:49.4577035Z             if node.op_type == "Constant":
+2026-11-13T10:21:49.4577319Z                 if node.output[0] == output_name:
+2026-11-13T10:21:49.4577621Z                     for attr in node.attribute:
+2026-11-13T10:21:49.4577926Z                         if attr.name == "value":
+2026-11-13T10:21:49.4578255Z                             return onnx_numpy_helper.to_array(attr.t)
+2026-11-13T10:21:49.4578484Z 
+2026-11-13T10:21:49.4578681Z         # Fallback to initializer since constant folding may have been applied.
+2026-11-13T10:21:49.4579570Z         initializer = self.get_initializer(output_name)
+2026-11-13T10:21:49.4579895Z         if initializer is not None:
+2026-11-13T10:21:49.4580192Z             return onnx_numpy_helper.to_array(initializer)
+2026-11-13T10:21:49.4580419Z 
+2026-11-13T10:21:49.4580495Z         return None
+2026-11-13T10:21:49.4580618Z 
+2026-11-13T10:21:49.4580715Z     def get_initializer_name_set(self):
+2026-11-13T10:21:49.4581147Z         return {initializer.name for initializer in self.model.graph.initializer}
+2026-11-13T10:21:49.4581460Z 
+2026-11-13T10:21:49.4581567Z     def remove_initializer(self, tensor):
+2026-11-13T10:21:49.4581870Z         if tensor in self.model.graph.initializer:
+2026-11-13T10:21:49.4582217Z             self.model.graph.initializer.remove(tensor)
+2026-11-13T10:21:49.4582556Z             for input in self.model.graph.input:
+2026-11-13T10:21:49.4582858Z                 if input.name == tensor.name:
+2026-11-13T10:21:49.4583171Z                     self.model.graph.input.remove(input)
+2026-11-13T10:21:49.4583473Z                     break
+2026-11-13T10:21:49.4583616Z 
+2026-11-13T10:21:49.4583744Z     def remove_initializers(self, init_to_remove):
+2026-11-13T10:21:49.4584051Z         for initializer in init_to_remove:
+2026-11-13T10:21:49.4584468Z             self.remove_initializer(initializer)
+2026-11-13T10:21:49.4584701Z 
+2026-11-13T10:21:49.4584876Z     def get_non_initializer_inputs(self):
+2026-11-13T10:21:49.4585301Z         initializer_names = self.get_initializer_name_set()
+2026-11-13T10:21:49.4585888Z         non_initializer_inputs = set()
+2026-11-13T10:21:49.4586283Z         for input in self.model.graph.input:
+2026-11-13T10:21:49.4586738Z             if input.name not in initializer_names:
+2026-11-13T10:21:49.4587236Z                 non_initializer_inputs.add(input.name)
+2026-11-13T10:21:49.4587650Z         return non_initializer_inputs
+2026-11-13T10:21:49.4587932Z 
+2026-11-13T10:21:49.4605482Z     def input_name_to_nodes(self):
+2026-11-13T10:21:49.4606004Z         input_name_to_nodes = {}
+2026-11-13T10:21:49.4606468Z         for node in self.model.graph.node:
+2026-11-13T10:21:49.4606965Z             for input_name in node.input:
+2026-11-13T10:21:49.4607517Z                 if input_name:  # Could be empty when it is optional
+2026-11-13T10:21:49.4608131Z                     if input_name not in input_name_to_nodes:
+2026-11-13T10:21:49.4608701Z                         input_name_to_nodes[input_name] = [node]
+2026-11-13T10:21:49.4659551Z                     else:
+2026-11-13T10:21:49.4660049Z                         input_name_to_nodes[input_name].append(node)
+2026-11-13T10:21:49.4660615Z         return input_name_to_nodes
+2026-11-13T10:21:49.4660891Z 
+2026-11-13T10:21:49.4661057Z     def output_name_to_node(self):
+2026-11-13T10:21:49.4661905Z         output_name_to_node = {}
+2026-11-13T10:21:49.4662343Z         for node in self.model.graph.node:
+2026-11-13T10:21:49.4662830Z             for output_name in node.output:
+2026-11-13T10:21:49.4663399Z                 if output_name:  # Could be empty when it is optional
+2026-11-13T10:21:49.4664011Z                     output_name_to_node[output_name] = node
+2026-11-13T10:21:49.4664537Z         return output_name_to_node
+2026-11-13T10:21:49.4664819Z 
+2026-11-13T10:21:49.4665067Z     def get_children(self, node, input_name_to_nodes=None):
+2026-11-13T10:21:49.4665618Z         if input_name_to_nodes is None:
+2026-11-13T10:21:49.4666144Z             input_name_to_nodes = self.input_name_to_nodes()
+2026-11-13T10:21:49.4666518Z 
+2026-11-13T10:21:49.4666657Z         children = []
+2026-11-13T10:21:49.4667040Z         for output in node.output:
+2026-11-13T10:21:49.4667478Z             if output in input_name_to_nodes:
+2026-11-13T10:21:49.4667983Z                 for node in input_name_to_nodes[output]:
+2026-11-13T10:21:49.4668544Z                     children.append(node)  # noqa: PERF402
+2026-11-13T10:21:49.4669310Z         return children
+2026-11-13T10:21:49.4669557Z 
+2026-11-13T10:21:49.4669799Z     def get_parents(self, node, output_name_to_node=None):
+2026-11-13T10:21:49.4670638Z         if output_name_to_node is None:
+2026-11-13T10:21:49.4671164Z             output_name_to_node = self.output_name_to_node()
+2026-11-13T10:21:49.4671532Z 
+2026-11-13T10:21:49.4671673Z         parents = []
+2026-11-13T10:21:49.4672027Z         for input in node.input:
+2026-11-13T10:21:49.4672454Z             if input in output_name_to_node:
+2026-11-13T10:21:49.4672965Z                 parents.append(output_name_to_node[input])
+2026-11-13T10:21:49.4673527Z         return parents
+2026-11-13T10:21:49.4673857Z 
+2026-11-13T10:21:49.4674123Z     def get_parent(self, node, idx, output_name_to_node=None):
+2026-11-13T10:21:49.4674528Z         if output_name_to_node is None:
+2026-11-13T10:21:49.4675070Z             output_name_to_node = self.output_name_to_node()
+2026-11-13T10:21:49.4675600Z 
+2026-11-13T10:21:49.4675806Z         if len(node.input) <= idx:
+2026-11-13T10:21:49.4676196Z             return None
+2026-11-13T10:21:49.4676349Z 
+2026-11-13T10:21:49.4676445Z         input = node.input[idx]
+2026-11-13T10:21:49.4676718Z         if input not in output_name_to_node:
+2026-11-13T10:21:49.4677002Z             return None
+2026-11-13T10:21:49.4677139Z 
+2026-11-13T10:21:49.4677243Z         return output_name_to_node[input]
+2026-11-13T10:21:49.4677595Z 
+2026-11-13T10:21:49.4677779Z     def find_node_by_name(self, node_name, new_nodes_list, graph):
+2026-11-13T10:21:49.4678207Z         """Find out if a node exists in a graph or a node is in the
+2026-11-13T10:21:49.4678583Z         new set of nodes created during quantization.
+2026-11-13T10:21:49.4678805Z 
+2026-11-13T10:21:49.4679319Z         Returns:
+2026-11-13T10:21:49.4679569Z             The node found or None.
+2026-11-13T10:21:49.4679829Z         """
+2026-11-13T10:21:49.4680081Z         graph_nodes_list = list(graph.node)  # deep copy
+2026-11-13T10:21:49.4680425Z         graph_nodes_list.extend(new_nodes_list)
+2026-11-13T10:21:49.4680757Z         node = find_by_name(node_name, graph_nodes_list)
+2026-11-13T10:21:49.4681061Z         return node
+2026-11-13T10:21:49.4681188Z 
+2026-11-13T10:21:49.4681346Z     def get_largest_node_name_suffix(self, node_name_prefix):
+2026-11-13T10:21:49.4681677Z         """
+2026-11-13T10:21:49.4682054Z         Gets the largest node name (int) suffix for all node names that begin with `node_name_prefix`.
+2026-11-13T10:21:49.4682614Z         Example: for nodes my_prefix_0 and my_prefix_3, this method returns 3.
+2026-11-13T10:21:49.4682981Z         """
+2026-11-13T10:21:49.4683192Z         suffix = -1
+2026-11-13T10:21:49.4683320Z 
+2026-11-13T10:21:49.4683427Z         for node in self.model.graph.node:
+2026-11-13T10:21:49.4683789Z             if node.name and node.name.startswith(node_name_prefix):
+2026-11-13T10:21:49.4684124Z                 try:
+2026-11-13T10:21:49.4684597Z                     index = int(node.name[len(node_name_prefix) :])
+2026-11-13T10:21:49.4684948Z                     suffix = max(index, suffix)
+2026-11-13T10:21:49.4685236Z                 except ValueError:
+2026-11-13T10:21:49.4685486Z                     continue
+2026-11-13T10:21:49.4685646Z 
+2026-11-13T10:21:49.4685728Z         return suffix
+2026-11-13T10:21:49.4685861Z 
+2026-11-13T10:21:49.4686061Z     def get_largest_initializer_name_suffix(self, initializer_name_prefix):
+2026-11-13T10:21:49.4686433Z         """
+2026-11-13T10:21:49.4686790Z         Gets the largest initializer name integer suffix for all initializer names that begin
+2026-11-13T10:21:49.4687386Z         with `initializer_name_prefix`. This can be used to create unique initializer names.
+2026-11-13T10:21:49.4687721Z 
+2026-11-13T10:21:49.4687980Z         Example: for initializer names 'my_weight_0' and 'my_weight_3', this method returns 3 if
+2026-11-13T10:21:49.4688564Z                  `initializer_name_prefix` is 'my_weight_'.
+2026-11-13T10:21:49.4689354Z         """
+2026-11-13T10:21:49.4689555Z         suffix = -1
+2026-11-13T10:21:49.4689695Z 
+2026-11-13T10:21:49.4689843Z         for initializer in self.model.graph.initializer:
+2026-11-13T10:21:49.4690496Z             if initializer.name.startswith(initializer_name_prefix):
+2026-11-13T10:21:49.4690860Z                 try:
+2026-11-13T10:21:49.4691171Z                     index = int(initializer.name[len(initializer_name_prefix) :])
+2026-11-13T10:21:49.4691553Z                     suffix = max(index, suffix)
+2026-11-13T10:21:49.4691835Z                 except ValueError:
+2026-11-13T10:21:49.4692083Z                     continue
+2026-11-13T10:21:49.4692233Z 
+2026-11-13T10:21:49.4692314Z         return suffix
+2026-11-13T10:21:49.4692444Z 
+2026-11-13T10:21:49.4692588Z     def find_nodes_by_initializer(self, graph, initializer):
+2026-11-13T10:21:49.4692905Z         """
+2026-11-13T10:21:49.4693198Z         Find all nodes with given initializer as an input.
+2026-11-13T10:21:49.4693812Z         """
+2026-11-13T10:21:49.4694218Z         nodes = []
+2026-11-13T10:21:49.4694600Z         for node in graph.node:
+2026-11-13T10:21:49.4695013Z             for node_input in node.input:
+2026-11-13T10:21:49.4695516Z                 if node_input == initializer.name:
+2026-11-13T10:21:49.4696028Z                     nodes.append(node)
+2026-11-13T10:21:49.4696473Z         return nodes
+2026-11-13T10:21:49.4696698Z 
+2026-11-13T10:21:49.4696829Z     @staticmethod
+2026-11-13T10:21:49.4697220Z     def __get_initializer(name, graph_path):
+2026-11-13T10:21:49.4697808Z         for gid in range(len(graph_path) - 1, -1, -1):
+2026-11-13T10:21:49.4698341Z             graph = graph_path[gid]
+2026-11-13T10:21:49.4698807Z             for tensor in graph.initializer:
+2026-11-13T10:21:49.4699536Z                 if tensor.name == name:
+2026-11-13T10:21:49.4699987Z                     return tensor, graph
+2026-11-13T10:21:49.4700422Z         return None, None
+2026-11-13T10:21:49.4700666Z 
+2026-11-13T10:21:49.4700803Z     @staticmethod
+2026-11-13T10:21:49.4701356Z     def __replace_gemm_with_matmul(graph_path, tensor_names, transposed_sources):
+2026-11-13T10:21:49.4702030Z         new_nodes = []
+2026-11-13T10:21:49.4702401Z         graph = graph_path[-1]
+2026-11-13T10:21:49.4702822Z         transposed_weights = {}
+2026-11-13T10:21:49.4703233Z         for node in graph.node:
+2026-11-13T10:21:49.4703892Z             graph_attrs = [attr for attr in node.attribute if attr.type == 5 or attr.type == 10]
+2026-11-13T10:21:49.4704616Z             if graph_attrs:
+2026-11-13T10:21:49.4704990Z                 kwargs = {}
+2026-11-13T10:21:49.4705391Z                 for attr in node.attribute:
+2026-11-13T10:21:49.4705856Z                     if attr.type == 5:
+2026-11-13T10:21:49.4706317Z                         graph_path.append(attr.g)
+2026-11-13T10:21:49.4706781Z                         kv = {
+2026-11-13T10:21:49.4707273Z                             attr.name: ONNXModel.__replace_gemm_with_matmul(
+2026-11-13T10:21:49.4708166Z                                 graph_path, tensor_names, transposed_sources
+2026-11-13T10:21:49.4708712Z                             )
+2026-11-13T10:21:49.4709272Z                         }
+2026-11-13T10:21:49.4709654Z                     elif attr.type == 10:
+2026-11-13T10:21:49.4710101Z                         value = []
+2026-11-13T10:21:49.4710542Z                         for subgraph in attr.graphs:
+2026-11-13T10:21:49.4711068Z                             graph_path.append(subgraph)
+2026-11-13T10:21:49.4711560Z                             value.extend(
+2026-11-13T10:21:49.4712334Z                                 [ONNXModel.__replace_gemm_with_matmul(graph_path, tensor_names, transposed_sources)]
+2026-11-13T10:21:49.4713134Z                             )
+2026-11-13T10:21:49.4713537Z                         kv = {attr.name: value}
+2026-11-13T10:21:49.4713984Z                     else:
+2026-11-13T10:21:49.4714383Z                         kv = attribute_to_kwarg(attr)
+2026-11-13T10:21:49.4714877Z                     kwargs.update(kv)
+2026-11-13T10:21:49.4715394Z                 node = onnx_helper.make_node(  # noqa: PLW2901
+2026-11-13T10:21:49.4716085Z                     node.op_type, node.input, node.output, name=node.name, **kwargs
+2026-11-13T10:21:49.4716694Z                 )
+2026-11-13T10:21:49.4717071Z 
+2026-11-13T10:21:49.4717231Z             if node.op_type == "Gemm":
+2026-11-13T10:21:49.4717668Z                 alpha = 1.0
+2026-11-13T10:21:49.4718039Z                 beta = 1.0
+2026-11-13T10:21:49.4718418Z                 transA = 0  # noqa: N806
+2026-11-13T10:21:49.4719030Z                 transB = 0  # noqa: N806
+2026-11-13T10:21:49.4719504Z                 for attr in node.attribute:
+2026-11-13T10:21:49.4719979Z                     if attr.name == "alpha":
+2026-11-13T10:21:49.4720516Z                         alpha = onnx_helper.get_attribute_value(attr)
+2026-11-13T10:21:49.4721071Z                     elif attr.name == "beta":
+2026-11-13T10:21:49.4721604Z                         beta = onnx_helper.get_attribute_value(attr)
+2026-11-13T10:21:49.4722166Z                     elif attr.name == "transA":
+2026-11-13T10:21:49.4722777Z                         transA = onnx_helper.get_attribute_value(attr)  # noqa: N806
+2026-11-13T10:21:49.4723418Z                     elif attr.name == "transB":
+2026-11-13T10:21:49.4724032Z                         transB = onnx_helper.get_attribute_value(attr)  # noqa: N806
+2026-11-13T10:21:49.4724725Z                 if alpha == 1.0 and beta == 1.0 and transA == 0:
+2026-11-13T10:21:49.4725291Z                     inputB = node.input[1]  # noqa: N806
+2026-11-13T10:21:49.4725776Z                     if transB == 1:
+2026-11-13T10:21:49.4726423Z                         B, _ = ONNXModel.__get_initializer(node.input[1], graph_path)  # noqa: N806
+2026-11-13T10:21:49.4727116Z                         if B:
+2026-11-13T10:21:49.4727559Z                             if inputB not in transposed_weights:
+2026-11-13T10:21:49.4728153Z                                 transposed_name = inputB + "_Transposed"
+2026-11-13T10:21:49.4729078Z                                 initializer_suffixes = ("", "_quantized", "_scale", "_zero_point")
+2026-11-13T10:21:49.4729778Z                                 suffix = 0
+2026-11-13T10:21:49.4730517Z                                 while any(transposed_name + s in tensor_names for s in initializer_suffixes):
+2026-11-13T10:21:49.4731278Z                                     suffix += 1
+2026-11-13T10:21:49.4731856Z                                     transposed_name = f"{inputB}_Transposed_{suffix}"
+2026-11-13T10:21:49.4732643Z                                 # Reserve names that quantization derives from this initializer.
+2026-11-13T10:21:49.4733550Z                                 tensor_names.update(transposed_name + s for s in initializer_suffixes)
+2026-11-13T10:21:49.4734533Z                                 # Keep the original tensor and its shape metadata valid for other consumers.
+2026-11-13T10:21:49.4735321Z                                 graph.initializer.append(
+2026-11-13T10:21:49.4736306Z                                     onnx_numpy_helper.from_array(onnx_numpy_helper.to_array(B).T, transposed_name)
+2026-11-13T10:21:49.4737072Z                                 )
+2026-11-13T10:21:49.4737577Z                                 transposed_weights[inputB] = transposed_name
+2026-11-13T10:21:49.4738235Z                                 transposed_sources[transposed_name] = inputB
+2026-11-13T10:21:49.4739080Z                             inputB = transposed_weights[inputB]  # noqa: N806
+2026-11-13T10:21:49.4739649Z                         else:
+2026-11-13T10:21:49.4740095Z                             inputB += "_Transposed"  # noqa: N806
+2026-11-13T10:21:49.4740673Z                             transpose_node = onnx_helper.make_node(
+2026-11-13T10:21:49.4741214Z                                 "Transpose",
+2026-11-13T10:21:49.4741690Z                                 inputs=[node.input[1]],
+2026-11-13T10:21:49.4742192Z                                 outputs=[inputB],
+2026-11-13T10:21:49.4742785Z                                 name=node.name + "_Transpose" if node.name else "",
+2026-11-13T10:21:49.4743359Z                             )
+2026-11-13T10:21:49.4743797Z                             new_nodes.append(transpose_node)
+2026-11-13T10:21:49.4744166Z 
+2026-11-13T10:21:49.4744529Z                     matmul_node = onnx_helper.make_node(
+2026-11-13T10:21:49.4745021Z                         "MatMul",
+2026-11-13T10:21:49.4745627Z                         inputs=[node.input[0], inputB],
+2026-11-13T10:21:49.4746319Z                         outputs=[node.output[0] + ("_MatMul" if len(node.input) > 2 else "")],
+2026-11-13T10:21:49.4747083Z                         name=node.name + "_MatMul" if node.name else "",
+2026-11-13T10:21:49.4747613Z                     )
+2026-11-13T10:21:49.4747987Z                     new_nodes.append(matmul_node)
+2026-11-13T10:21:49.4748325Z 
+2026-11-13T10:21:49.4748482Z                     if len(node.input) > 2:
+2026-11-13T10:21:49.4749274Z                         add_node = onnx_helper.make_node(
+2026-11-13T10:21:49.4749774Z                             "Add",
+2026-11-13T10:21:49.4750289Z                             inputs=[node.output[0] + "_MatMul", node.input[2]],
+2026-11-13T10:21:49.4750897Z                             outputs=node.output,
+2026-11-13T10:21:49.4751456Z                             name=node.name + "_Add" if node.name else "",
+2026-11-13T10:21:49.4751988Z                         )
+2026-11-13T10:21:49.4752382Z                         new_nodes.append(add_node)
+2026-11-13T10:21:49.4752716Z 
+2026-11-13T10:21:49.4752862Z                 # unsupported
+2026-11-13T10:21:49.4753234Z                 else:
+2026-11-13T10:21:49.4753594Z                     new_nodes.append(node)
+2026-11-13T10:21:49.4753908Z 
+2026-11-13T10:21:49.4754037Z             # not GEMM
+2026-11-13T10:21:49.4754367Z             else:
+2026-11-13T10:21:49.4754723Z                 new_nodes.append(node)
+2026-11-13T10:21:49.4755016Z 
+2026-11-13T10:21:49.4755178Z         graph.ClearField("node")
+2026-11-13T10:21:49.4755608Z         graph.node.extend(new_nodes)
+2026-11-13T10:21:49.4756040Z         graph_path.pop()
+2026-11-13T10:21:49.4756405Z         return graph
+2026-11-13T10:21:49.4756617Z 
+2026-11-13T10:21:49.4756780Z     def replace_gemm_with_matmul(self):
+2026-11-13T10:21:49.4757234Z         tensor_names = set()
+2026-11-13T10:21:49.4757626Z         graphs = [self.graph()]
+2026-11-13T10:21:49.4758015Z         while graphs:
+2026-11-13T10:21:49.4758370Z             graph = graphs.pop()
+2026-11-13T10:21:49.4759309Z             tensor_names.update(tensor.name for tensor in graph.initializer)
+2026-11-13T10:21:49.4760297Z             tensor_names.update(value.name for value in (*graph.input, *graph.output, *graph.value_info))
+2026-11-13T10:21:49.4761106Z             for node in graph.node:
+2026-11-13T10:21:49.4761561Z                 tensor_names.update(node.input)
+2026-11-13T10:21:49.4762070Z                 tensor_names.update(node.output)
+2026-11-13T10:21:49.4762561Z                 for attr in node.attribute:
+2026-11-13T10:21:49.4763280Z                     if attr.type == onnx.AttributeProto.GRAPH:
+2026-11-13T10:21:49.4763830Z                         graphs.append(attr.g)
+2026-11-13T10:21:49.4764382Z                     elif attr.type == onnx.AttributeProto.GRAPHS:
+2026-11-13T10:21:49.4764969Z                         graphs.extend(attr.graphs)
+2026-11-13T10:21:49.4765454Z         graph_path = [self.graph()]
+2026-11-13T10:21:49.4765879Z         transposed_sources = {}
+2026-11-13T10:21:49.4766547Z         ONNXModel.__replace_gemm_with_matmul(graph_path, tensor_names, transposed_sources)
+2026-11-13T10:21:49.4767286Z         return transposed_sources
+2026-11-13T10:21:49.4767567Z 
+2026-11-13T10:21:49.4767906Z     def save_model_to_file(self, output_path, use_external_data_format=False):
+2026-11-13T10:21:49.4768537Z         """
+2026-11-13T10:21:49.4769190Z         Save model to external data, which is needed for model size > 2GB
+2026-11-13T10:21:49.4769785Z         """
+2026-11-13T10:21:49.4770113Z         self.topological_sort()
+2026-11-13T10:21:49.4770600Z         if use_external_data_format:
+2026-11-13T10:21:49.4771157Z             onnx.external_data_helper.convert_model_to_external_data(
+2026-11-13T10:21:49.4771733Z                 self.model,
+2026-11-13T10:21:49.4772305Z                 all_tensors_to_one_file=True,
+2026-11-13T10:21:49.4772832Z                 location=Path(output_path).name + ".data",
+2026-11-13T10:21:49.4773350Z                 convert_attribute=True,
+2026-11-13T10:21:49.4773765Z             )
+2026-11-13T10:21:49.4774135Z         for init in self.model.graph.initializer:
+2026-11-13T10:21:49.4774655Z             self._check_init(init, "end")
+2026-11-13T10:21:49.4775140Z         onnx.save_model(self.model, output_path)
+2026-11-13T10:21:49.4775481Z 
+2026-11-13T10:21:49.4775616Z     @staticmethod
+2026-11-13T10:21:49.4776081Z     def replace_node_input(node, old_input_name, new_input_name):
+2026-11-13T10:21:49.4776877Z         assert isinstance(old_input_name, str) and isinstance(new_input_name, str)
+2026-11-13T10:21:49.4777577Z         for j in range(len(node.input)):
+2026-11-13T10:21:49.4778057Z             if node.input[j] == old_input_name:
+2026-11-13T10:21:49.4778550Z                 node.input[j] = new_input_name
+2026-11-13T10:21:49.4779060Z 
+2026-11-13T10:21:49.4779380Z     def replace_input_of_all_nodes(self, old_input_name, new_input_name):
+2026-11-13T10:21:49.4780049Z         for node in self.model.graph.node:
+2026-11-13T10:21:49.4780693Z             ONNXModel.replace_node_input(node, old_input_name, new_input_name)
+2026-11-13T10:21:49.4781195Z 
+2026-11-13T10:21:49.4781577Z     def replace_input_of_nodes(self, old_input_name, new_input_name, node_names_set):
+2026-11-13T10:21:49.4782301Z         for node in self.model.graph.node:
+2026-11-13T10:21:49.4782778Z             if node.name in node_names_set:
+2026-11-13T10:21:49.4783426Z                 ONNXModel.replace_node_input(node, old_input_name, new_input_name)
+2026-11-13T10:21:49.4783941Z 
+2026-11-13T10:21:49.4784070Z     @staticmethod
+2026-11-13T10:21:49.4784567Z     def replace_node_output(node, old_output_name, new_output_name):
+2026-11-13T10:21:49.4785392Z         assert isinstance(old_output_name, str) and isinstance(new_output_name, str)
+2026-11-13T10:21:49.4786095Z         for j in range(len(node.output)):
+2026-11-13T10:21:49.4786584Z             if node.output[j] == old_output_name:
+2026-11-13T10:21:49.4787086Z                 node.output[j] = new_output_name
+2026-11-13T10:21:49.4787422Z 
+2026-11-13T10:21:49.4787756Z     def replace_output_of_all_nodes(self, old_output_name, new_output_name):
+2026-11-13T10:21:49.4788434Z         for node in self.model.graph.node:
+2026-11-13T10:21:49.4789354Z             ONNXModel.replace_node_output(node, old_output_name, new_output_name)
+2026-11-13T10:21:49.4789930Z 
+2026-11-13T10:21:49.4790330Z     def replace_output_of_nodes(self, old_output_name, new_output_name, node_names_set):
+2026-11-13T10:21:49.4791073Z         for node in self.model.graph.node:
+2026-11-13T10:21:49.4791547Z             if node.name in node_names_set:
+2026-11-13T10:21:49.4792368Z                 ONNXModel.replace_node_output(node, old_output_name, new_output_name)
+2026-11-13T10:21:49.4792898Z 
+2026-11-13T10:21:49.4793066Z     def remove_unused_constant(self):
+2026-11-13T10:21:49.4793755Z         input_names = {name for node in self.nodes() for name in _get_node_input_names(node)}
+2026-11-13T10:21:49.4794333Z 
+2026-11-13T10:21:49.4794483Z         # remove unused constant
+2026-11-13T10:21:49.4794910Z         unused_nodes = []
+2026-11-13T10:21:49.4795288Z         nodes = self.nodes()
+2026-11-13T10:21:49.4795673Z         for node in nodes:
+2026-11-13T10:21:49.4796027Z             if (
+2026-11-13T10:21:49.4796368Z                 node.op_type == "Constant"
+2026-11-13T10:21:49.4796887Z                 and not self.is_graph_output(node.output[0])
+2026-11-13T10:21:49.4797456Z                 and node.output[0] not in input_names
+2026-11-13T10:21:49.4797915Z             ):
+2026-11-13T10:21:49.4798251Z                 unused_nodes.append(node)
+2026-11-13T10:21:49.4798574Z 
+2026-11-13T10:21:49.4798732Z         self.remove_nodes(unused_nodes)
+2026-11-13T10:21:49.4799252Z 
+2026-11-13T10:21:49.4799405Z         ununsed_weights = []
+2026-11-13T10:21:49.4799813Z         for w in self.initializer():
+2026-11-13T10:21:49.4800580Z             if w.name not in input_names and not self.is_graph_output(w.name):
+2026-11-13T10:21:49.4801220Z                 ununsed_weights.append(w)
+2026-11-13T10:21:49.4801687Z                 # Remove from graph.input
+2026-11-13T10:21:49.4802175Z                 for graph_input in self.graph().input:
+2026-11-13T10:21:49.4802694Z                     if graph_input.name == w.name:
+2026-11-13T10:21:49.4803227Z                         self.graph().input.remove(graph_input)
+2026-11-13T10:21:49.4803604Z 
+2026-11-13T10:21:49.4803793Z         self.remove_initializers(ununsed_weights)
+2026-11-13T10:21:49.4804151Z 
+2026-11-13T10:21:49.4804320Z     def is_graph_output(self, output_name):
+2026-11-13T10:21:49.4805004Z         return any(output.name == output_name for output in self.model.graph.output)
+2026-11-13T10:21:49.4805556Z 
+2026-11-13T10:21:49.4805780Z     def is_graph_input(self, tensor_name: str) -> bool:
+2026-11-13T10:21:49.4806490Z         return any(input.name == tensor_name for input in self.model.graph.input)
+2026-11-13T10:21:49.4807015Z 
+2026-11-13T10:21:49.4807475Z     # TODO:use OnnxModel.graph_topological_sort(self.model.graph) from transformers.onnx_model
+2026-11-13T10:21:49.4808522Z     # Currently it breaks Openvino/Linux training gpu pipeline so hold off for 1.8 release
+2026-11-13T10:21:49.4809482Z     def topological_sort(self):
+2026-11-13T10:21:49.4810056Z         deps_count = [0] * len(self.nodes())  # dependency count of each node
+2026-11-13T10:21:49.4810719Z         deps_to_nodes = {}  # input to node indice
+2026-11-13T10:21:49.4811253Z         sorted_nodes = []  # initialize sorted_nodes
+2026-11-13T10:21:49.4811804Z         for node_idx, node in enumerate(self.nodes()):
+2026-11-13T10:21:49.4812481Z             # CANNOT use len(node.input) directly because input can be optional
+2026-11-13T10:21:49.4813153Z             input_names = _get_node_input_names(node)
+2026-11-13T10:21:49.4813680Z             deps_count[node_idx] = len(input_names)
+2026-11-13T10:21:49.4814349Z             if deps_count[node_idx] == 0:  # Constant doesn't depend on any inputs
+2026-11-13T10:21:49.4815051Z                 sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.4815552Z                 continue
+2026-11-13T10:21:49.4815782Z 
+2026-11-13T10:21:49.4815949Z             for input_name in input_names:
+2026-11-13T10:21:49.4816434Z                 if input_name not in deps_to_nodes:
+2026-11-13T10:21:49.4816976Z                     deps_to_nodes[input_name] = [node_idx]
+2026-11-13T10:21:49.4817455Z                 else:
+2026-11-13T10:21:49.4817872Z                     deps_to_nodes[input_name].append(node_idx)
+2026-11-13T10:21:49.4818360Z 
+2026-11-13T10:21:49.4818658Z         initializer_names = [init.name for init in self.initializer()]
+2026-11-13T10:21:49.4819928Z         initializer_names.extend(init.values.name for init in self.graph().sparse_initializer)
+2026-11-13T10:21:49.4820885Z         graph_input_names = [input.name for input in self.model.graph.input]
+2026-11-13T10:21:49.4821616Z         input_names = initializer_names + graph_input_names
+2026-11-13T10:21:49.4822144Z         input_names.sort()
+2026-11-13T10:21:49.4822533Z         prev_input_name = None
+2026-11-13T10:21:49.4822947Z         for input_name in input_names:
+2026-11-13T10:21:49.4823418Z             if prev_input_name == input_name:
+2026-11-13T10:21:49.4823875Z                 continue
+2026-11-13T10:21:49.4824096Z 
+2026-11-13T10:21:49.4824275Z             prev_input_name = input_name
+2026-11-13T10:21:49.4824738Z             if input_name in deps_to_nodes:
+2026-11-13T10:21:49.4825248Z                 for node_idx in deps_to_nodes[input_name]:
+2026-11-13T10:21:49.4825839Z                     deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.4826411Z                     if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.4826955Z                         sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.4827350Z 
+2026-11-13T10:21:49.4827474Z         start = 0
+2026-11-13T10:21:49.4827816Z         end = len(sorted_nodes)
+2026-11-13T10:21:49.4828237Z 
+2026-11-13T10:21:49.4828386Z         while start < end:
+2026-11-13T10:21:49.4828809Z             for output in sorted_nodes[start].output:
+2026-11-13T10:21:49.4829525Z                 if output in deps_to_nodes:
+2026-11-13T10:21:49.4830026Z                     for node_idx in deps_to_nodes[output]:
+2026-11-13T10:21:49.4830619Z                         deps_count[node_idx] = deps_count[node_idx] - 1
+2026-11-13T10:21:49.4831200Z                         if deps_count[node_idx] == 0:
+2026-11-13T10:21:49.4831764Z                             sorted_nodes.append(self.nodes()[node_idx])
+2026-11-13T10:21:49.4832304Z                             end = end + 1
+2026-11-13T10:21:49.4832748Z             start = start + 1
+2026-11-13T10:21:49.4833008Z 
+2026-11-13T10:21:49.4833265Z         assert end == len(self.graph().node), "Graph is not a DAG"
+2026-11-13T10:21:49.4833843Z         self.graph().ClearField("node")
+2026-11-13T10:21:49.4834314Z         self.graph().node.extend(sorted_nodes)
+2026-11-13T10:21:49.4834662Z 
+2026-11-13T10:21:49.4834819Z     def clean_initializers(self):
+2026-11-13T10:21:49.4835365Z         return _clean_initializers_helper(self.graph(), self.model)
+2026-11-13T10:21:49.4835814Z 
+2026-11-13T10:21:49.4835984Z     def _check_init(self, init, test=None):
+2026-11-13T10:21:49.4836541Z         if init.data_type == onnx.TensorProto.FLOAT8E4M3FN:
+2026-11-13T10:21:49.4837108Z             if init.HasField("raw_data"):
+2026-11-13T10:21:49.4837561Z                 b = list(init.raw_data)
+2026-11-13T10:21:49.4838017Z                 if any((i & 127) == 127 for i in b):
+2026-11-13T10:21:49.4838611Z                     raise ValueError(f"Initializer {init.name!r} has nan.")
+2026-11-13T10:21:49.4839403Z         return init
+2026-11-13T10:21:49.4839612Z 
+2026-11-13T10:21:49.4839761Z     def _check_node(self, node):
+2026-11-13T10:21:49.4840150Z         """
+2026-11-13T10:21:49.4840655Z         A quantization to float 8 does not use quantized bias but float 16 bias.
+2026-11-13T10:21:49.4841440Z         This function checks that DequantizeLinear is not used to
+2026-11-13T10:21:49.4842029Z         dequantize from float 16.
+2026-11-13T10:21:49.4842427Z         """
+2026-11-13T10:21:49.4842774Z         if node.op_type == "DequantizeLinear":
+2026-11-13T10:21:49.4843266Z             zero_point = node.input[2]
+2026-11-13T10:21:49.4843748Z             init = self.get_initializer(zero_point)
+2026-11-13T10:21:49.4844256Z             dtype = init.data_type
+2026-11-13T10:21:49.4844666Z             if dtype in {
+2026-11-13T10:21:49.4845056Z                 onnx.TensorProto.FLOAT16,
+2026-11-13T10:21:49.4845525Z                 onnx.TensorProto.FLOAT,
+2026-11-13T10:21:49.4845984Z                 onnx.TensorProto.DOUBLE,
+2026-11-13T10:21:49.4846626Z                 onnx.TensorProto.BFLOAT16,
+2026-11-13T10:21:49.4847059Z             }:
+2026-11-13T10:21:49.4847744Z                 raise RuntimeError(f"Unsupported DequantizeLinear operator, dequantization from {dtype}.")
+2026-11-13T10:21:49.4848546Z         return node
+2026-11-13T10:21:49.4848750Z 
+2026-11-13T10:21:49.4849103Z END_FORMATTED_SOURCE
+2026-11-13T10:21:49.4849461Z BEGIN_FORMATTED_TEST
+2026-11-13T10:21:49.4849928Z # Copyright (c) Microsoft Corporation. All rights reserved.
+2026-11-13T10:21:49.4850501Z # Licensed under the MIT License.
+2026-11-13T10:21:49.4850784Z 
+2026-11-13T10:21:49.4850914Z import tempfile
+2026-11-13T10:21:49.4851245Z import unittest
+2026-11-13T10:21:49.4851579Z from pathlib import Path
+2026-11-13T10:21:49.4851819Z 
+2026-11-13T10:21:49.4851960Z import numpy as np
+2026-11-13T10:21:49.4852285Z import onnx
+2026-11-13T10:21:49.4852668Z from onnx import TensorProto, helper, numpy_helper
+2026-11-13T10:21:49.4853048Z 
+2026-11-13T10:21:49.4853196Z import onnxruntime as ort
+2026-11-13T10:21:49.4853707Z from onnxruntime.quantization.onnx_model import ONNXModel
+2026-11-13T10:21:49.4854140Z 
+2026-11-13T10:21:49.4854147Z 
+2026-11-13T10:21:49.4854284Z def float_info(name):
+2026-11-13T10:21:49.4854989Z     return helper.make_tensor_value_info(name, TensorProto.FLOAT, [2])
+2026-11-13T10:21:49.4855484Z 
+2026-11-13T10:21:49.4855490Z 
+2026-11-13T10:21:49.4855648Z def scalar_info(name, dtype):
+2026-11-13T10:21:49.4856143Z     return helper.make_tensor_value_info(name, dtype, [])
+2026-11-13T10:21:49.4856541Z 
+2026-11-13T10:21:49.4856547Z 
+2026-11-13T10:21:49.4856794Z def make_model(nodes, inputs, outputs, initializers=()):
+2026-11-13T10:21:49.4857612Z     graph = helper.make_graph(nodes, "captured_inputs", inputs, outputs, list(initializers))
+2026-11-13T10:21:49.4858654Z     return helper.make_model(graph, opset_imports=[helper.make_opsetid("", 18)], ir_version=10)
+2026-11-13T10:21:49.4859481Z 
+2026-11-13T10:21:49.4859488Z 
+2026-11-13T10:21:49.4859700Z def captured_branch(name, capture, negate=False):
+2026-11-13T10:21:49.4860225Z     return helper.make_graph(
+2026-11-13T10:21:49.4860850Z         [helper.make_node("Neg" if negate else "Identity", [capture], [name + "_out"])],
+2026-11-13T10:21:49.4861517Z         name,
+2026-11-13T10:21:49.4861814Z         [],
+2026-11-13T10:21:49.4862136Z         [float_info(name + "_out")],
+2026-11-13T10:21:49.4862542Z     )
+2026-11-13T10:21:49.4862708Z 
+2026-11-13T10:21:49.4862714Z 
+2026-11-13T10:21:49.4862859Z def run_cpu(model, feeds):
+2026-11-13T10:21:49.4863262Z     onnx.checker.check_model(model)
+2026-11-13T10:21:49.4863713Z     options = ort.SessionOptions()
+2026-11-13T10:21:49.4864400Z     options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
+2026-11-13T10:21:49.4865601Z     session = ort.InferenceSession(model.SerializeToString(), sess_options=options, providers=["CPUExecutionProvider"])
+2026-11-13T10:21:49.4866586Z     return session.run(None, feeds)[0]
+2026-11-13T10:21:49.4866913Z 
+2026-11-13T10:21:49.4866919Z 
+2026-11-13T10:21:49.4867097Z def captured_if_model(nested=False):
+2026-11-13T10:21:49.4867754Z     bias = numpy_helper.from_array(np.array([2.0, -3.0], dtype=np.float32), "bias")
+2026-11-13T10:21:49.4868651Z     producer = helper.make_node("Add", ["x", "bias"], ["captured"], name="producer")
+2026-11-13T10:21:49.4869485Z     if nested:
+2026-11-13T10:21:49.4869831Z         inner = helper.make_node(
+2026-11-13T10:21:49.4870224Z             "If",
+2026-11-13T10:21:49.4870615Z             ["inner_condition"],
+2026-11-13T10:21:49.4871010Z             ["inner_out"],
+2026-11-13T10:21:49.4871485Z             then_branch=captured_branch("deep_then", "captured"),
+2026-11-13T10:21:49.4872170Z             else_branch=captured_branch("deep_else", "captured", True),
+2026-11-13T10:21:49.4872733Z         )
+2026-11-13T10:21:49.4873302Z         then_branch = helper.make_graph([inner], "nested_then", [], [float_info("inner_out")])
+2026-11-13T10:21:49.4874012Z     else:
+2026-11-13T10:21:49.4874390Z         then_branch = captured_branch("then", "captured")
+2026-11-13T10:21:49.4875101Z     choice = helper.make_node(
+2026-11-13T10:21:49.4875482Z         "If",
+2026-11-13T10:21:49.4875794Z         ["condition"],
+2026-11-13T10:21:49.4876131Z         ["output"],
+2026-11-13T10:21:49.4876456Z         name="choice",
+2026-11-13T10:21:49.4876817Z         then_branch=then_branch,
+2026-11-13T10:21:49.4877319Z         else_branch=captured_branch("else", "captured", True),
+2026-11-13T10:21:49.4877841Z     )
+2026-11-13T10:21:49.4878310Z     inputs = [float_info("x"), scalar_info("condition", TensorProto.BOOL)]
+2026-11-13T10:21:49.4879090Z     if nested:
+2026-11-13T10:21:49.4879583Z         inputs.append(scalar_info("inner_condition", TensorProto.BOOL))
+2026-11-13T10:21:49.4880423Z     return make_model([producer, choice], inputs, [float_info("output")], [bias])
+2026-11-13T10:21:49.4880959Z 
+2026-11-13T10:21:49.4880966Z 
+2026-11-13T10:21:49.4881259Z class TestCapturedSubgraphDependencies(unittest.TestCase):
+2026-11-13T10:21:49.4881914Z     def test_sort_preserves_a_valid_if_capture(self):
+2026-11-13T10:21:49.4882448Z         for condition in (False, True):
+2026-11-13T10:21:49.4882937Z             with self.subTest(condition=condition):
+2026-11-13T10:21:49.4883446Z                 model = captured_if_model()
+2026-11-13T10:21:49.4884316Z                 feeds = {"x": np.array([5.0, 7.0], dtype=np.float32), "condition": np.array(condition)}
+2026-11-13T10:21:49.4885250Z                 expected = np.array([7.0, 4.0], dtype=np.float32) * (1 if condition else -1)
+2026-11-13T10:21:49.4886078Z                 np.testing.assert_array_equal(run_cpu(model, feeds), expected)
+2026-11-13T10:21:49.4886721Z                 wrapped = ONNXModel(model)
+2026-11-13T10:21:49.4887197Z                 wrapped.topological_sort()
+2026-11-13T10:21:49.4887934Z                 self.assertEqual([node.name for node in model.graph.node], ["producer", "choice"])
+2026-11-13T10:21:49.4889035Z                 np.testing.assert_array_equal(run_cpu(model, feeds), expected)
+2026-11-13T10:21:49.4890003Z 
+2026-11-13T10:21:49.4890214Z     def test_sort_and_save_nested_captures(self):
+2026-11-13T10:21:49.4890797Z         for outer, inner in ((True, True), (True, False), (False, True)):
+2026-11-13T10:21:49.4891199Z             with self.subTest(outer=outer, inner=inner), tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:21:49.4891369Z                 model = captured_if_model(nested=True)
+2026-11-13T10:21:49.4891621Z                 original_subgraph = model.graph.node[1].SerializeToString()
+2026-11-13T10:21:49.4891798Z                 nodes = list(reversed(model.graph.node))
+2026-11-13T10:21:49.4891945Z                 model.graph.ClearField("node")
+2026-11-13T10:21:49.4892092Z                 model.graph.node.extend(nodes)
+2026-11-13T10:21:49.4892282Z                 destination = Path(directory) / "sorted.onnx"
+2026-11-13T10:21:49.4892471Z                 ONNXModel(model).save_model_to_file(destination)
+2026-11-13T10:21:49.4892609Z                 saved = onnx.load(destination)
+2026-11-13T10:21:49.4892956Z                 self.assertEqual(saved.graph.node[-1].SerializeToString(), original_subgraph)
+2026-11-13T10:21:49.4893280Z                 expected = np.array([7.0, 4.0], dtype=np.float32) * (1 if outer and inner else -1)
+2026-11-13T10:21:49.4893422Z                 np.testing.assert_array_equal(
+2026-11-13T10:21:49.4893546Z                     run_cpu(
+2026-11-13T10:21:49.4893664Z                         saved,
+2026-11-13T10:21:49.4893775Z                         {
+2026-11-13T10:21:49.4893966Z                             "x": np.array([5.0, 7.0], dtype=np.float32),
+2026-11-13T10:21:49.4894120Z                             "condition": np.array(outer),
+2026-11-13T10:21:49.4894288Z                             "inner_condition": np.array(inner),
+2026-11-13T10:21:49.4894396Z                         },
+2026-11-13T10:21:49.4894507Z                     ),
+2026-11-13T10:21:49.4894626Z                     expected,
+2026-11-13T10:21:49.4894726Z                 )
+2026-11-13T10:21:49.4894734Z 
+2026-11-13T10:21:49.4895240Z     def test_loop_body_capture_waits_for_its_producer(self):
+2026-11-13T10:21:49.4895371Z         body = helper.make_graph(
+2026-11-13T10:21:49.4895479Z             [
+2026-11-13T10:21:49.4895754Z                 helper.make_node("Identity", ["body_condition"], ["next_condition"]),
+2026-11-13T10:21:49.4896008Z                 helper.make_node("Add", ["state", "captured"], ["next_state"]),
+2026-11-13T10:21:49.4896114Z             ],
+2026-11-13T10:21:49.4896217Z             "body",
+2026-11-13T10:21:49.4896322Z             [
+2026-11-13T10:21:49.4896498Z                 scalar_info("iteration", TensorProto.INT64),
+2026-11-13T10:21:49.4896691Z                 scalar_info("body_condition", TensorProto.BOOL),
+2026-11-13T10:21:49.4896812Z                 float_info("state"),
+2026-11-13T10:21:49.4896916Z             ],
+2026-11-13T10:21:49.4897275Z             [scalar_info("next_condition", TensorProto.BOOL), float_info("next_state")],
+2026-11-13T10:21:49.4897410Z         )
+2026-11-13T10:21:49.4897729Z         producer = helper.make_node("Add", ["x", "bias"], ["captured"], name="producer")
+2026-11-13T10:21:49.4898159Z         loop = helper.make_node("Loop", ["trip_count", "loop_condition", "x"], ["output"], name="loop", body=body)
+2026-11-13T10:21:49.4898286Z         model = make_model(
+2026-11-13T10:21:49.4898547Z             [loop, producer],
+2026-11-13T10:21:49.4898675Z             [float_info("x")],
+2026-11-13T10:21:49.4898967Z             [float_info("output")],
+2026-11-13T10:21:49.4899160Z             [
+2026-11-13T10:21:49.4899496Z                 numpy_helper.from_array(np.array([2.0, -3.0], dtype=np.float32), "bias"),
+2026-11-13T10:21:49.4899773Z                 numpy_helper.from_array(np.array(2, dtype=np.int64), "trip_count"),
+2026-11-13T10:21:49.4900017Z                 numpy_helper.from_array(np.array(True), "loop_condition"),
+2026-11-13T10:21:49.4900121Z             ],
+2026-11-13T10:21:49.4900230Z         )
+2026-11-13T10:21:49.4900383Z         ONNXModel(model).topological_sort()
+2026-11-13T10:21:49.4900712Z         self.assertEqual([node.name for node in model.graph.node], ["producer", "loop"])
+2026-11-13T10:21:49.4900858Z         np.testing.assert_array_equal(
+2026-11-13T10:21:49.4901083Z             run_cpu(model, {"x": np.array([5.0, 7.0], dtype=np.float32)}),
+2026-11-13T10:21:49.4901254Z             np.array([19.0, 15.0], dtype=np.float32),
+2026-11-13T10:21:49.4901357Z         )
+2026-11-13T10:21:49.4901369Z 
+2026-11-13T10:21:49.4901608Z     def test_if_sparse_initializer_capture_can_sort_and_save(self):
+2026-11-13T10:21:49.4901747Z         for condition in (False, True):
+2026-11-13T10:21:49.4902113Z             with self.subTest(condition=condition), tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:21:49.4902254Z                 choice = helper.make_node(
+2026-11-13T10:21:49.4902367Z                     "If",
+2026-11-13T10:21:49.4902494Z                     ["condition"],
+2026-11-13T10:21:49.4902617Z                     ["output"],
+2026-11-13T10:21:49.4902833Z                     then_branch=captured_branch("then", "sparse_capture"),
+2026-11-13T10:21:49.4903094Z                     else_branch=captured_branch("else", "sparse_capture", True),
+2026-11-13T10:21:49.4903197Z                 )
+2026-11-13T10:21:49.4903646Z                 model = make_model([choice], [scalar_info("condition", TensorProto.BOOL)], [float_info("output")])
+2026-11-13T10:21:49.4903819Z                 model.graph.sparse_initializer.append(
+2026-11-13T10:21:49.4903968Z                     helper.make_sparse_tensor(
+2026-11-13T10:21:49.4904318Z                         numpy_helper.from_array(np.array([-3.0], dtype=np.float32), "sparse_capture"),
+2026-11-13T10:21:49.4904637Z                         numpy_helper.from_array(np.array([1], dtype=np.int64), "sparse_indices"),
+2026-11-13T10:21:49.4904756Z                         [2],
+2026-11-13T10:21:49.4904863Z                     )
+2026-11-13T10:21:49.4904974Z                 )
+2026-11-13T10:21:49.4905145Z                 feeds = {"condition": np.array(condition)}
+2026-11-13T10:21:49.4905595Z                 expected = np.array([0.0, -3.0], dtype=np.float32) * (1 if condition else -1)
+2026-11-13T10:21:49.4905863Z                 np.testing.assert_array_equal(run_cpu(model, feeds), expected)
+2026-11-13T10:21:49.4906065Z                 output_path = Path(directory) / "sparse_if.onnx"
+2026-11-13T10:21:49.4906265Z                 ONNXModel(model).save_model_to_file(output_path)
+2026-11-13T10:21:49.4906406Z                 saved = onnx.load(output_path)
+2026-11-13T10:21:49.4906617Z                 self.assertEqual(len(saved.graph.initializer), 0)
+2026-11-13T10:21:49.4907088Z                 self.assertEqual([value.values.name for value in saved.graph.sparse_initializer], ["sparse_capture"])
+2026-11-13T10:21:49.4907338Z                 np.testing.assert_array_equal(run_cpu(saved, feeds), expected)
+2026-11-13T10:21:49.4907345Z 
+2026-11-13T10:21:49.4907601Z     def test_loop_sparse_initializer_capture_can_sort_and_save(self):
+2026-11-13T10:21:49.4907728Z         for trip_count in (0, 2):
+2026-11-13T10:21:49.4908101Z             with self.subTest(trip_count=trip_count), tempfile.TemporaryDirectory() as directory:
+2026-11-13T10:21:49.4908234Z                 body = helper.make_graph(
+2026-11-13T10:21:49.4908346Z                     [
+2026-11-13T10:21:49.4908749Z                         helper.make_node("Identity", ["body_condition"], ["next_condition"]),
+2026-11-13T10:21:49.4909202Z                         helper.make_node("Add", ["state", "sparse_capture"], ["next_state"]),
+2026-11-13T10:21:49.4909302Z                     ],
+2026-11-13T10:21:49.4909386Z                     "body",
+2026-11-13T10:21:49.4909468Z                     [
+2026-11-13T10:21:49.4909613Z                         scalar_info("iteration", TensorProto.INT64),
+2026-11-13T10:21:49.4909766Z                         scalar_info("body_condition", TensorProto.BOOL),
+2026-11-13T10:21:49.4909867Z                         float_info("state"),
+2026-11-13T10:21:49.4909946Z                     ],
+2026-11-13T10:21:49.4910180Z                     [scalar_info("next_condition", TensorProto.BOOL), float_info("next_state")],
+2026-11-13T10:21:49.4910262Z                 )
+2026-11-13T10:21:49.4910545Z                 loop = helper.make_node("Loop", ["trip_count", "loop_condition", "x"], ["output"], body=body)
+2026-11-13T10:21:49.4910650Z                 model = make_model(
+2026-11-13T10:21:49.4910733Z                     [loop],
+2026-11-13T10:21:49.4910814Z                     [
+2026-11-13T10:21:49.4910961Z                         scalar_info("trip_count", TensorProto.INT64),
+2026-11-13T10:21:49.4911110Z                         scalar_info("loop_condition", TensorProto.BOOL),
+2026-11-13T10:21:49.4911201Z                         float_info("x"),
+2026-11-13T10:21:49.4911283Z                     ],
+2026-11-13T10:21:49.4911383Z                     [float_info("output")],
+2026-11-13T10:21:49.4911455Z                 )
+2026-11-13T10:21:49.4911588Z                 model.graph.sparse_initializer.append(
+2026-11-13T10:21:49.4911690Z                     helper.make_sparse_tensor(
+2026-11-13T10:21:49.4911944Z                         numpy_helper.from_array(np.array([-3.0], dtype=np.float32), "sparse_capture"),
+2026-11-13T10:21:49.4912164Z                         numpy_helper.from_array(np.array([1], dtype=np.int64), "sparse_indices"),
+2026-11-13T10:21:49.4912256Z                         [2],
+2026-11-13T10:21:49.4912338Z                     )
+2026-11-13T10:21:49.4912410Z                 )
+2026-11-13T10:21:49.4912500Z                 feeds = {
+2026-11-13T10:21:49.4912627Z                     "x": np.array([5.0, 7.0], dtype=np.float32),
+2026-11-13T10:21:49.4912776Z                     "trip_count": np.array(trip_count, dtype=np.int64),
+2026-11-13T10:21:49.4912891Z                     "loop_condition": np.array(True),
+2026-11-13T10:21:49.4912970Z                 }
+2026-11-13T10:21:49.4913168Z                 expected = np.array([5.0, 7.0 - 3.0 * trip_count], dtype=np.float32)
+2026-11-13T10:21:49.4913350Z                 np.testing.assert_array_equal(run_cpu(model, feeds), expected)
+2026-11-13T10:21:49.4913582Z                 wrapped = ONNXModel(model)
+2026-11-13T10:21:49.4913682Z                 wrapped.topological_sort()
+2026-11-13T10:21:49.4913862Z                 np.testing.assert_array_equal(run_cpu(model, feeds), expected)
+2026-11-13T10:21:49.4914012Z                 output_path = Path(directory) / "sparse_loop.onnx"
+2026-11-13T10:21:49.4914137Z                 wrapped.save_model_to_file(output_path)
+2026-11-13T10:21:49.4914244Z                 saved = onnx.load(output_path)
+2026-11-13T10:21:49.4914390Z                 self.assertEqual(len(saved.graph.initializer), 0)
+2026-11-13T10:21:49.4914716Z                 self.assertEqual([value.values.name for value in saved.graph.sparse_initializer], ["sparse_capture"])
+2026-11-13T10:21:49.4914886Z                 np.testing.assert_array_equal(run_cpu(saved, feeds), expected)
+2026-11-13T10:21:49.4914892Z 
+2026-11-13T10:21:49.4915070Z     def test_cleanup_keeps_captured_constant_and_initializer(self):
+2026-11-13T10:21:49.4915179Z         for condition in (False, True):
+2026-11-13T10:21:49.4915293Z             with self.subTest(condition=condition):
+2026-11-13T10:21:49.4915396Z                 branch = helper.make_graph(
+2026-11-13T10:21:49.4915770Z                     [helper.make_node("Add", ["captured_constant", "captured_weight"], ["branch_output"])],
+2026-11-13T10:21:49.4915865Z                     "branch",
+2026-11-13T10:21:49.4915944Z                     [],
+2026-11-13T10:21:49.4916057Z                     [float_info("branch_output")],
+2026-11-13T10:21:49.4916136Z                 )
+2026-11-13T10:21:49.4916236Z                 constant = helper.make_node(
+2026-11-13T10:21:49.4916326Z                     "Constant",
+2026-11-13T10:21:49.4916402Z                     [],
+2026-11-13T10:21:49.4916501Z                     ["captured_constant"],
+2026-11-13T10:21:49.4916588Z                     name="constant",
+2026-11-13T10:21:49.4916816Z                     value=numpy_helper.from_array(np.array([3.0, -4.0], dtype=np.float32)),
+2026-11-13T10:21:49.4916900Z                 )
+2026-11-13T10:21:49.4917176Z                 unused = helper.make_node("Constant", [], ["unused_constant"], name="unused", value_float=99.0)
+2026-11-13T10:21:49.4917276Z                 choice = helper.make_node(
+2026-11-13T10:21:49.4917520Z                     "If", ["condition"], ["output"], name="choice", then_branch=branch, else_branch=branch
+2026-11-13T10:21:49.4917600Z                 )
+2026-11-13T10:21:49.4917690Z                 model = make_model(
+2026-11-13T10:21:49.4917801Z                     [constant, unused, choice],
+2026-11-13T10:21:49.4917944Z                     [scalar_info("condition", TensorProto.BOOL)],
+2026-11-13T10:21:49.4918039Z                     [float_info("output")],
+2026-11-13T10:21:49.4918126Z                     [
+2026-11-13T10:21:49.4918379Z                         numpy_helper.from_array(np.array([7.0, 2.0], dtype=np.float32), "captured_weight"),
+2026-11-13T10:21:49.4918625Z                         numpy_helper.from_array(np.array([99.0, 99.0], dtype=np.float32), "unused_weight"),
+2026-11-13T10:21:49.4918706Z                     ],
+2026-11-13T10:21:49.4918785Z                 )
+2026-11-13T10:21:49.4919038Z                 wrapped = ONNXModel(model)
+2026-11-13T10:21:49.4919152Z                 wrapped.remove_unused_constant()
+2026-11-13T10:21:49.4919410Z                 self.assertEqual([node.name for node in model.graph.node], ["constant", "choice"])
+2026-11-13T10:21:49.4919680Z                 self.assertEqual([value.name for value in model.graph.initializer], ["captured_weight"])
+2026-11-13T10:21:49.4919786Z                 wrapped.topological_sort()
+2026-11-13T10:21:49.4919896Z                 np.testing.assert_array_equal(
+2026-11-13T10:21:49.4920164Z                     run_cpu(model, {"condition": np.array(condition)}), np.array([10.0, -2.0], dtype=np.float32)
+2026-11-13T10:21:49.4920241Z                 )
+2026-11-13T10:21:49.4920246Z 
+2026-11-13T10:21:49.4920575Z     def test_subgraph_local_names_do_not_keep_unused_outer_initializers(self):
+2026-11-13T10:21:49.4920951Z         local = numpy_helper.from_array(np.array([3.0, 4.0], dtype=np.float32), "local")
+2026-11-13T10:21:49.4921049Z         branch = helper.make_graph(
+2026-11-13T10:21:49.4921223Z             [helper.make_node("Identity", ["local"], ["branch_output"])],
+2026-11-13T10:21:49.4921315Z             "branch",
+2026-11-13T10:21:49.4921388Z             [],
+2026-11-13T10:21:49.4921488Z             [float_info("branch_output")],
+2026-11-13T10:21:49.4921563Z             [local],
+2026-11-13T10:21:49.4921640Z         )
+2026-11-13T10:21:49.4921907Z         choice = helper.make_node("If", ["condition"], ["output"], then_branch=branch, else_branch=branch)
+2026-11-13T10:21:49.4921998Z         model = make_model(
+2026-11-13T10:21:49.4922080Z             [choice],
+2026-11-13T10:21:49.4922214Z             [scalar_info("condition", TensorProto.BOOL)],
+2026-11-13T10:21:49.4922311Z             [float_info("output")],
+2026-11-13T10:21:49.4922524Z             [numpy_helper.from_array(np.array([99.0, 99.0], dtype=np.float32), "local")],
+2026-11-13T10:21:49.4922606Z         )
+2026-11-13T10:21:49.4922699Z         wrapped = ONNXModel(model)
+2026-11-13T10:21:49.4922805Z         wrapped.remove_unused_constant()
+2026-11-13T10:21:49.4922953Z         self.assertEqual(len(model.graph.initializer), 0)
+2026-11-13T10:21:49.4923160Z         wrapped.topological_sort()
+2026-11-13T10:21:49.4923273Z         np.testing.assert_array_equal(
+2026-11-13T10:21:49.4923514Z             run_cpu(model, {"condition": np.array(True)}), np.array([3.0, 4.0], dtype=np.float32)
+2026-11-13T10:21:49.4923593Z         )
+2026-11-13T10:21:49.4923598Z 
+2026-11-13T10:21:49.4923779Z     def test_graphs_attribute_captures_all_branch_dependencies(self):
+2026-11-13T10:21:49.4923968Z         first = helper.make_node("Identity", ["x"], ["first"], name="first")
+2026-11-13T10:21:49.4924143Z         second = helper.make_node("Neg", ["x"], ["second"], name="second")
+2026-11-13T10:21:49.4924238Z         container = helper.make_node(
+2026-11-13T10:21:49.4924339Z             "GraphContainer",
+2026-11-13T10:21:49.4924414Z             [],
+2026-11-13T10:21:49.4924503Z             ["output"],
+2026-11-13T10:21:49.4924587Z             domain="test",
+2026-11-13T10:21:49.4924678Z             name="container",
+2026-11-13T10:21:49.4924976Z             branches=[captured_branch("first_branch", "first"), captured_branch("second_branch", "second")],
+2026-11-13T10:21:49.4925062Z         )
+2026-11-13T10:21:49.4925518Z         model = make_model([container, second, first], [float_info("x")], [float_info("output")])
+2026-11-13T10:21:49.4925696Z         ONNXModel(model).topological_sort()
+2026-11-13T10:21:49.4925992Z         self.assertEqual(model.graph.node[-1].name, "container")
+2026-11-13T10:21:49.4926259Z         self.assertEqual({node.name for node in model.graph.node[:-1]}, {"first", "second"})
+2026-11-13T10:21:49.4926266Z 
+2026-11-13T10:21:49.4926480Z     def test_duplicate_explicit_inputs_and_output_constants_remain_valid(self):
+2026-11-13T10:21:49.4926582Z         constant = helper.make_node(
+2026-11-13T10:21:49.4926898Z             "Constant", [], ["output_constant"], value=numpy_helper.from_array(np.array([9.0, 10.0], dtype=np.float32))
+2026-11-13T10:21:49.4926983Z         )
+2026-11-13T10:21:49.4927127Z         add = helper.make_node("Add", ["x", "x"], ["output"])
+2026-11-13T10:21:49.4927223Z         model = make_model(
+2026-11-13T10:21:49.4927314Z             [add, constant],
+2026-11-13T10:21:49.4927402Z             [float_info("x")],
+2026-11-13T10:21:49.4927553Z             [float_info("output"), float_info("output_constant")],
+2026-11-13T10:21:49.4927628Z         )
+2026-11-13T10:21:49.4927732Z         wrapped = ONNXModel(model)
+2026-11-13T10:21:49.4927833Z         wrapped.remove_unused_constant()
+2026-11-13T10:21:49.4927938Z         wrapped.topological_sort()
+2026-11-13T10:21:49.4928042Z         np.testing.assert_array_equal(
+2026-11-13T10:21:49.4928304Z             run_cpu(model, {"x": np.array([2.0, 3.0], dtype=np.float32)}), np.array([4.0, 6.0], dtype=np.float32)
+2026-11-13T10:21:49.4928506Z         )
+2026-11-13T10:21:49.4928737Z         self.assertEqual(sum(node.op_type == "Constant" for node in model.graph.node), 1)
+2026-11-13T10:21:49.4928743Z 
+2026-11-13T10:21:49.4929215Z     def test_missing_capture_and_capture_cycle_are_rejected(self):
+2026-11-13T10:21:49.4929329Z         for cyclic in (False, True):
+2026-11-13T10:21:49.4929438Z             with self.subTest(cyclic=cyclic):
+2026-11-13T10:21:49.4929544Z                 model = captured_if_model()
+2026-11-13T10:21:49.4929653Z                 producer = model.graph.node[0]
+2026-11-13T10:21:49.4929741Z                 if cyclic:
+2026-11-13T10:21:49.4929849Z                     producer.input[0] = "output"
+2026-11-13T10:21:49.4929936Z                 else:
+2026-11-13T10:21:49.4930048Z                     producer.output[0] = "different"
+2026-11-13T10:21:49.4930227Z                 with self.assertRaisesRegex(AssertionError, "not a DAG"):
+2026-11-13T10:21:49.4930349Z                     ONNXModel(model).topological_sort()
+2026-11-13T10:21:49.4930359Z 
+2026-11-13T10:21:49.4930364Z 
+2026-11-13T10:21:49.4930453Z if __name__ == "__main__":
+2026-11-13T10:21:49.4930542Z     unittest.main()
+2026-11-13T10:21:49.4930547Z 
+2026-11-13T10:21:49.4930628Z END_FORMATTED_TEST
+2026-11-13T10:21:51.0895345Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-13T10:21:51.0895774Z with:
+2026-11-13T10:21:51.0895994Z   name: native-sparse-capture-evidence
+2026-11-13T10:21:51.0896539Z   path: ort-source-overlay-metadata.json
+ort-patched.log
+ort-patched.xml
+ort-baseline.log
+ort-baseline.xml
+
+2026-11-13T10:21:51.0897083Z   if-no-files-found: warn
+2026-11-13T10:21:51.0897318Z   compression-level: 6
+2026-11-13T10:21:51.0897541Z   overwrite: false
+2026-11-13T10:21:51.0897758Z   include-hidden-files: false
+2026-11-13T10:21:51.0897997Z   archive: true
+2026-11-13T10:21:51.0898204Z env:
+2026-11-13T10:21:51.0898392Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:21:51.0898630Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:21:51.0899306Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:21:51.0899702Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:51.0900247Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:21:51.0900938Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:51.0901550Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:51.0902212Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:21:51.0902892Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:21:51.0903458Z ##[endgroup]
+2026-11-13T10:21:51.2481218Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-13T10:21:51.2484303Z The least common ancestor is /home/runner/work/onnxruntime/onnxruntime. This will be the root directory of the artifact
+2026-11-13T10:21:51.2485457Z With the provided path, there will be 5 files uploaded
+2026-11-13T10:21:51.2486320Z Artifact name is valid!
+2026-11-13T10:21:51.2486938Z Root directory input is valid!
+2026-11-13T10:21:51.5119391Z Uploading artifact: native-sparse-capture-evidence.zip
+2026-11-13T10:21:51.5164764Z Beginning upload of artifact content to blob storage
+2026-11-13T10:21:51.6952579Z Uploaded bytes 8671
+2026-11-13T10:21:51.7310651Z Finished uploading artifact content to blob storage!
+2026-11-13T10:21:51.7311786Z SHA256 digest of uploaded artifact is 836d57e1010ba1d9028bb3ebe7296b7cf28087601a9e537fd54b4f76bd24a8ae
+2026-11-13T10:21:51.7312759Z Finalizing artifact upload
+2026-11-13T10:21:52.1434140Z Artifact native-sparse-capture-evidence successfully finalized. Artifact ID 14027809369
+2026-11-13T10:21:52.1435355Z Artifact native-sparse-capture-evidence has been successfully uploaded! Final size is 8671 bytes. Artifact ID is 14027809369
+2026-11-13T10:21:52.1439775Z Artifact download URL: https://github.com/Afloat16/onnxruntime/actions/runs/43408398837/artifacts/14027809369
+2026-11-13T10:21:52.1636245Z Post job cleanup.
+2026-11-13T10:21:52.2926045Z (node:2719) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:21:52.2927373Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:21:52.3149310Z Post job cleanup.
+2026-11-13T10:21:52.4260728Z [command]/usr/bin/git version
+2026-11-13T10:21:52.4340190Z git version 2.56.0
+2026-11-13T10:21:52.4404810Z Temporarily overriding HOME='/home/runner/work/_temp/a2097987-f67c-4e38-88d0-90d345d0fbf7' before making global git config changes
+2026-11-13T10:21:52.4405707Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T10:21:52.4406443Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:21:52.4440106Z Removing SSH command configuration
+2026-11-13T10:21:52.4451227Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:21:52.4520867Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:21:52.4874931Z Removing HTTP extra header
+2026-11-13T10:21:52.4886550Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:21:52.4949859Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:21:52.5359191Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:21:52.5360360Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:21:52.5388536Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:21:52.5830929Z Cleaning up orphan processes
+2026-11-13T10:21:52.6276285Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
