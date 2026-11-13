@@ -1,0 +1,33 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "fork": "Afloat16/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "base_tree": "ada396d3d22a607ae65ae1140ac5e66a057fc692",
+  "branch": "fix/quantization-subgraph-node-properties-20261113",
+  "files": [
+    "onnxruntime/python/tools/quantization/onnx_model.py",
+    "onnxruntime/test/python/quantization/test_subgraph_node_properties.py"
+  ],
+  "novelty": {
+    "classification": "genuinely-new",
+    "history_entries": 37,
+    "actual_patches_read": [
+      8012,
+      33415
+    ],
+    "all_state_queries": [
+      "_clean_initializers_helper",
+      "clean_initializers domain",
+      "replace_gemm_with_matmul domain",
+      "onnx_model metadata",
+      "clean_initializers custom",
+      "subgraph node domain quantization"
+    ],
+    "personal_fork": "28 existing branches inspected. The separate capture-dependency PR #34184 and its sparse-initializer follow-up are not repeated."
+  },
+  "scope": "Recurse into graph attributes in place so their parent NodeProto retains all non-graph fields, including custom-function domain and overload. Existing node transformations within those graphs still run.",
+  "status": "awaiting_native_validation",
+  "commit": "0bceda4c8362cd68a0593cac842957d60363c7e2"
+}
