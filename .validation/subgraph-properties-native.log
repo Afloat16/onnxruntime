@@ -1,0 +1,1114 @@
+﻿2026-11-13T10:27:16.5167152Z Current runner version: '2.338.2'
+2026-11-13T10:27:16.5184742Z ##[group]Runner Image Provisioner
+2026-11-13T10:27:16.5185411Z Hosted Compute Agent
+2026-11-13T10:27:16.5185827Z Version: 20261103.629
+2026-11-13T10:27:16.5186359Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-13T10:27:16.5186949Z Build Date: 2026-11-03T17:26:59Z
+2026-11-13T10:27:16.5187461Z Worker ID: {ed73bae6-3c4d-4076-8965-9f71e5839522}
+2026-11-13T10:27:16.5187986Z Region: us-west-2
+2026-11-13T10:27:16.5188422Z Cloud: AWS
+2026-11-13T10:27:16.5188840Z ##[endgroup]
+2026-11-13T10:27:16.5189699Z ##[group]Operating System
+2026-11-13T10:27:16.5190159Z Ubuntu
+2026-11-13T10:27:16.5190538Z 24.04.5
+2026-11-13T10:27:16.5190943Z LTS
+2026-11-13T10:27:16.5191339Z ##[endgroup]
+2026-11-13T10:27:16.5191753Z ##[group]Runner Image
+2026-11-13T10:27:16.5192456Z Image: ubuntu-24.04
+2026-11-13T10:27:16.5192877Z Version: 20261111.127.1
+2026-11-13T10:27:16.5193885Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.127/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-13T10:27:16.5195115Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.127
+2026-11-13T10:27:16.5195859Z ##[endgroup]
+2026-11-13T10:27:16.5196747Z ##[group]GITHUB_TOKEN Permissions
+2026-11-13T10:27:16.5198473Z Actions: read
+2026-11-13T10:27:16.5198894Z Contents: read
+2026-11-13T10:27:16.5199294Z Metadata: read
+2026-11-13T10:27:16.5199701Z ##[endgroup]
+2026-11-13T10:27:16.5201222Z Secret source: Actions
+2026-11-13T10:27:16.5202160Z Cache mode: write
+2026-11-13T10:27:16.5202811Z Prepare workflow directory
+2026-11-13T10:27:16.5471595Z Prepare all required actions
+2026-11-13T10:27:16.5507477Z Getting action download info
+2026-11-13T10:27:16.9494904Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-13T10:27:18.7680874Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-11-13T10:27:18.9188124Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-11-13T10:27:19.1644591Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-13T10:27:19.4793718Z Complete job name: native-cpu
+2026-11-13T10:27:19.5548820Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-13T10:27:19.5550264Z with:
+2026-11-13T10:27:19.5551052Z   ref: 0bceda4c8362cd68a0593cac842957d60363c7e2
+2026-11-13T10:27:19.5552300Z   fetch-depth: 2
+2026-11-13T10:27:19.5553114Z   persist-credentials: false
+2026-11-13T10:27:19.5554033Z   repository: Afloat16/onnxruntime
+2026-11-13T10:27:19.5560649Z   token: ***
+2026-11-13T10:27:19.5561372Z   ssh-strict: true
+2026-11-13T10:27:19.5562285Z   ssh-user: git
+2026-11-13T10:27:19.5563043Z   clean: true
+2026-11-13T10:27:19.5563832Z   sparse-checkout-cone-mode: true
+2026-11-13T10:27:19.5564760Z   fetch-tags: false
+2026-11-13T10:27:19.5565534Z   show-progress: true
+2026-11-13T10:27:19.5566328Z   lfs: false
+2026-11-13T10:27:19.5567048Z   submodules: false
+2026-11-13T10:27:19.5567845Z   set-safe-directory: true
+2026-11-13T10:27:19.5568707Z   allow-unsafe-pr-checkout: false
+2026-11-13T10:27:19.5569760Z env:
+2026-11-13T10:27:19.5570461Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:27:19.5571448Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:27:19.5572581Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:27:19.5573751Z ##[endgroup]
+2026-11-13T10:27:23.1289502Z Syncing repository: Afloat16/onnxruntime
+2026-11-13T10:27:23.1290739Z ##[group]Getting Git version info
+2026-11-13T10:27:23.1291132Z Working directory is '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T10:27:23.1291790Z [command]/usr/bin/git version
+2026-11-13T10:27:23.2810634Z git version 2.56.1
+2026-11-13T10:27:23.2825011Z ##[endgroup]
+2026-11-13T10:27:23.2832398Z Temporarily overriding HOME='/home/runner/work/_temp/f253cd77-3b3a-48dd-86d2-401375700802' before making global git config changes
+2026-11-13T10:27:23.2833253Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T10:27:23.2836348Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:27:23.3316556Z Deleting the contents of '/home/runner/work/onnxruntime/onnxruntime'
+2026-11-13T10:27:23.3318640Z ##[group]Determining repository object format
+2026-11-13T10:27:23.3319617Z ##[endgroup]
+2026-11-13T10:27:23.3320065Z ##[group]Initializing the repository
+2026-11-13T10:27:23.3323277Z [command]/usr/bin/git init /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:27:23.3766228Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-13T10:27:23.3766953Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-13T10:27:23.3767429Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-13T10:27:23.3767820Z hint: call:
+2026-11-13T10:27:23.3768091Z hint:
+2026-11-13T10:27:23.3768444Z hint: 	git config --global init.defaultBranch <name>
+2026-11-13T10:27:23.3769132Z hint:
+2026-11-13T10:27:23.3769472Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-13T10:27:23.3769934Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-13T10:27:23.3770320Z hint:
+2026-11-13T10:27:23.3770590Z hint: 	git branch -m <name>
+2026-11-13T10:27:23.3770849Z hint:
+2026-11-13T10:27:23.3771210Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-13T10:27:23.3775149Z Initialized empty Git repository in /home/runner/work/onnxruntime/onnxruntime/.git/
+2026-11-13T10:27:23.3782720Z [command]/usr/bin/git remote add origin https://github.com/Afloat16/onnxruntime
+2026-11-13T10:27:23.3840158Z ##[endgroup]
+2026-11-13T10:27:23.3840861Z ##[group]Disabling automatic garbage collection
+2026-11-13T10:27:23.3842701Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-13T10:27:23.3865624Z ##[endgroup]
+2026-11-13T10:27:23.3866201Z ##[group]Setting up auth
+2026-11-13T10:27:23.3866683Z Removing SSH command configuration
+2026-11-13T10:27:23.3869606Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:27:23.3896852Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:27:23.6797206Z Removing HTTP extra header
+2026-11-13T10:27:23.6802259Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:27:23.6826856Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:27:23.6971562Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:27:23.6981611Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:27:23.7004971Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:27:23.7152941Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-13T10:27:23.7179744Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path /home/runner/work/_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config
+2026-11-13T10:27:23.7200741Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config
+2026-11-13T10:27:23.7223307Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config
+2026-11-13T10:27:23.7245318Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config
+2026-11-13T10:27:23.7265541Z ##[endgroup]
+2026-11-13T10:27:23.7265973Z ##[group]Fetching the repository
+2026-11-13T10:27:23.7269916Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin 0bceda4c8362cd68a0593cac842957d60363c7e2
+2026-11-13T10:27:35.8119770Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T10:27:35.8120256Z  * branch            0bceda4c8362cd68a0593cac842957d60363c7e2 -> FETCH_HEAD
+2026-11-13T10:27:35.8128361Z [command]/usr/bin/git rev-parse --verify --quiet 0bceda4c8362cd68a0593cac842957d60363c7e2^{object}
+2026-11-13T10:27:35.8150895Z 0bceda4c8362cd68a0593cac842957d60363c7e2
+2026-11-13T10:27:35.8154837Z ##[endgroup]
+2026-11-13T10:27:35.8155364Z ##[group]Determining the checkout info
+2026-11-13T10:27:35.8155967Z ##[endgroup]
+2026-11-13T10:27:35.8157747Z [command]/usr/bin/git sparse-checkout disable
+2026-11-13T10:27:35.8219786Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-13T10:27:35.8241299Z ##[group]Checking out the ref
+2026-11-13T10:27:35.8244531Z [command]/usr/bin/git checkout --progress --force 0bceda4c8362cd68a0593cac842957d60363c7e2
+2026-11-13T10:27:36.9848365Z Updating files:  74% (8728/11668)
+2026-11-13T10:27:36.9902913Z Updating files:  75% (8751/11668)
+2026-11-13T10:27:36.9995717Z Updating files:  76% (8868/11668)
+2026-11-13T10:27:37.0857273Z Updating files:  77% (8985/11668)
+2026-11-13T10:27:37.2064737Z Updating files:  78% (9102/11668)
+2026-11-13T10:27:37.2093198Z Updating files:  79% (9218/11668)
+2026-11-13T10:27:37.2505013Z Updating files:  80% (9335/11668)
+2026-11-13T10:27:37.5114417Z Updating files:  81% (9452/11668)
+2026-11-13T10:27:37.5364972Z Updating files:  82% (9568/11668)
+2026-11-13T10:27:37.5419522Z Updating files:  83% (9685/11668)
+2026-11-13T10:27:37.5462141Z Updating files:  84% (9802/11668)
+2026-11-13T10:27:37.5507553Z Updating files:  85% (9918/11668)
+2026-11-13T10:27:37.5554478Z Updating files:  86% (10035/11668)
+2026-11-13T10:27:37.5648989Z Updating files:  87% (10152/11668)
+2026-11-13T10:27:37.5680026Z Updating files:  88% (10268/11668)
+2026-11-13T10:27:37.5709732Z Updating files:  89% (10385/11668)
+2026-11-13T10:27:37.5737121Z Updating files:  90% (10502/11668)
+2026-11-13T10:27:37.5773471Z Updating files:  91% (10618/11668)
+2026-11-13T10:27:37.5811100Z Updating files:  92% (10735/11668)
+2026-11-13T10:27:37.5837264Z Updating files:  93% (10852/11668)
+2026-11-13T10:27:37.5866663Z Updating files:  94% (10968/11668)
+2026-11-13T10:27:37.5916063Z Updating files:  95% (11085/11668)
+2026-11-13T10:27:37.5932770Z Updating files:  96% (11202/11668)
+2026-11-13T10:27:37.5964662Z Updating files:  97% (11318/11668)
+2026-11-13T10:27:37.6014304Z Updating files:  98% (11435/11668)
+2026-11-13T10:27:37.9094512Z Updating files:  99% (11552/11668)
+2026-11-13T10:27:37.9664290Z Updating files:  99% (11667/11668)
+2026-11-13T10:27:37.9664689Z Updating files: 100% (11668/11668)
+2026-11-13T10:27:37.9665094Z Updating files: 100% (11668/11668), done.
+2026-11-13T10:27:37.9759395Z Note: switching to '0bceda4c8362cd68a0593cac842957d60363c7e2'.
+2026-11-13T10:27:37.9759788Z 
+2026-11-13T10:27:37.9760173Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-13T10:27:37.9760657Z changes and commit them, and you can discard any commits you make in this
+2026-11-13T10:27:37.9761051Z state without impacting any branches by switching back to a branch.
+2026-11-13T10:27:37.9761276Z 
+2026-11-13T10:27:37.9761460Z If you want to create a new branch to retain commits you create, you may
+2026-11-13T10:27:37.9762021Z do so (now or later) by using -c with the switch command. Example:
+2026-11-13T10:27:37.9762253Z 
+2026-11-13T10:27:37.9762375Z   git switch -c <new-branch-name>
+2026-11-13T10:27:37.9762766Z 
+2026-11-13T10:27:37.9762945Z Or undo this operation with:
+2026-11-13T10:27:37.9763180Z 
+2026-11-13T10:27:37.9763306Z   git switch -
+2026-11-13T10:27:37.9763457Z 
+2026-11-13T10:27:37.9763690Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-13T10:27:37.9763981Z 
+2026-11-13T10:27:37.9764302Z HEAD is now at 0bceda4 Preserve parent node properties during quantization subgraph traversal
+2026-11-13T10:27:37.9824905Z ##[endgroup]
+2026-11-13T10:27:37.9868697Z [command]/usr/bin/git log -1 --format=%H
+2026-11-13T10:27:37.9889281Z 0bceda4c8362cd68a0593cac842957d60363c7e2
+2026-11-13T10:27:37.9896690Z ##[group]Removing auth
+2026-11-13T10:27:37.9897176Z Removing SSH command configuration
+2026-11-13T10:27:37.9900304Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:27:37.9923221Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:27:38.0086045Z Removing HTTP extra header
+2026-11-13T10:27:38.0088558Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:27:38.0112993Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:27:38.0268576Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:27:38.0270279Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:27:38.0291092Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T10:27:38.0291636Z includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T10:27:38.0292307Z includeif.gitdir:/github/workspace/.git.path
+2026-11-13T10:27:38.0292724Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T10:27:38.0301701Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path
+2026-11-13T10:27:38.0313108Z /home/runner/work/_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config
+2026-11-13T10:27:38.0319411Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-ea20b655\-0784\-4fad\-a6d8\-2696cefb4feb\.config
+2026-11-13T10:27:38.0343572Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path
+2026-11-13T10:27:38.0359944Z /home/runner/work/_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config
+2026-11-13T10:27:38.0365178Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/onnxruntime/onnxruntime/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-ea20b655\-0784\-4fad\-a6d8\-2696cefb4feb\.config
+2026-11-13T10:27:38.0393981Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-13T10:27:38.0412591Z /github/runner_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config
+2026-11-13T10:27:38.0417981Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-ea20b655\-0784\-4fad\-a6d8\-2696cefb4feb\.config
+2026-11-13T10:27:38.0441209Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-13T10:27:38.0458392Z /github/runner_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config
+2026-11-13T10:27:38.0463129Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-ea20b655\-0784\-4fad\-a6d8\-2696cefb4feb\.config
+2026-11-13T10:27:38.0486722Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:27:38.0644247Z Removing credentials config '/home/runner/work/_temp/git-credentials-ea20b655-0784-4fad-a6d8-2696cefb4feb.config'
+2026-11-13T10:27:38.0650011Z ##[endgroup]
+2026-11-13T10:27:38.0835087Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-11-13T10:27:38.0835468Z with:
+2026-11-13T10:27:38.0835692Z   python-version: 3.12
+2026-11-13T10:27:38.0835984Z   check-latest: false
+2026-11-13T10:27:38.0837675Z   token: ***
+2026-11-13T10:27:38.0837907Z   update-environment: true
+2026-11-13T10:27:38.0838166Z   allow-prereleases: false
+2026-11-13T10:27:38.0838388Z   freethreaded: false
+2026-11-13T10:27:38.0838625Z env:
+2026-11-13T10:27:38.0838859Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:27:38.0839108Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:27:38.0839407Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:27:38.0839676Z ##[endgroup]
+2026-11-13T10:27:38.1849288Z ##[group]Installed versions
+2026-11-13T10:27:38.3339677Z (node:2255) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:27:38.3340436Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:27:38.3340882Z Successfully set up CPython (3.12.16)
+2026-11-13T10:27:38.3341385Z ##[endgroup]
+2026-11-13T10:27:38.3455143Z ##[group]Run python -m venv "$RUNNER_TEMP/ort-validation-venv"
+2026-11-13T10:27:38.3455604Z [36;1mpython -m venv "$RUNNER_TEMP/ort-validation-venv"[0m
+2026-11-13T10:27:38.3456080Z [36;1mecho "$RUNNER_TEMP/ort-validation-venv/bin" >> "$GITHUB_PATH"[0m
+2026-11-13T10:27:38.7281420Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:27:38.7281775Z env:
+2026-11-13T10:27:38.7282259Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:27:38.7282558Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:27:38.7282895Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:27:38.7283234Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:38.7283626Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:27:38.7284043Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:38.7284395Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:38.7284826Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:38.7285168Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:27:38.7285484Z ##[endgroup]
+2026-11-13T10:27:43.9635536Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T10:27:43.9635921Z with:
+2026-11-13T10:27:43.9636150Z   name: cpu-native-wheel-a8246c0d
+2026-11-13T10:27:43.9636669Z   run-id: 43296543822
+2026-11-13T10:27:43.9638460Z   github-token: ***
+2026-11-13T10:27:43.9638714Z   path: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T10:27:43.9639009Z   merge-multiple: false
+2026-11-13T10:27:43.9639253Z   repository: Afloat16/onnxruntime
+2026-11-13T10:27:43.9639506Z env:
+2026-11-13T10:27:43.9639723Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:27:43.9639965Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:27:43.9640257Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:27:43.9640572Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:43.9640969Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:27:43.9641330Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:43.9641781Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:43.9642338Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:43.9642689Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:27:43.9642988Z ##[endgroup]
+2026-11-13T10:27:44.0735707Z Downloading single artifact
+2026-11-13T10:27:44.0815189Z (node:2285) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:27:44.0816257Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:27:44.1005781Z (node:2285) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T10:27:44.3926627Z Preparing to download the following artifacts:
+2026-11-13T10:27:44.3927364Z - cpu-native-wheel-a8246c0d (ID: 13982605959, Size: 30978382, Expected Digest: sha256:0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301)
+2026-11-13T10:27:44.3949351Z Downloading artifact '13982605959' from 'Afloat16/onnxruntime'
+2026-11-13T10:27:44.7202382Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/6682e059f91784baee0f176a816c789347a553a5901897c10ebf1feb950019db.zip
+2026-11-13T10:27:44.7203955Z Starting download of artifact to: /home/runner/work/_temp/ort-built-wheel
+2026-11-13T10:27:45.0902379Z (node:2285) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T10:27:47.5663184Z SHA256 digest of downloaded artifact is 0c3dca63860a9a48e4f68b72de7d29eb04236de4c42cba4260b0b44e0e8c0301
+2026-11-13T10:27:47.5663794Z Artifact download completed successfully.
+2026-11-13T10:27:47.5664102Z Total of 1 artifact(s) downloaded
+2026-11-13T10:27:47.5666664Z Download artifact has finished successfully
+2026-11-13T10:27:47.5807837Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-11-13T10:27:47.5808199Z with:
+2026-11-13T10:27:47.5808477Z   name: cpu-distribution-calibration-evidence
+2026-11-13T10:27:47.5808788Z   run-id: 43296543822
+2026-11-13T10:27:47.5810702Z   github-token: ***
+2026-11-13T10:27:47.5810968Z   path: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T10:27:47.5811263Z   merge-multiple: false
+2026-11-13T10:27:47.5811491Z   repository: Afloat16/onnxruntime
+2026-11-13T10:27:47.5811793Z env:
+2026-11-13T10:27:47.5812473Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:27:47.5812742Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:27:47.5813028Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:27:47.5813343Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:47.5813755Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:27:47.5814183Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:47.5814545Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:47.5814876Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:47.5815266Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:27:47.5815555Z ##[endgroup]
+2026-11-13T10:27:47.6946765Z Downloading single artifact
+2026-11-13T10:27:47.7017081Z (node:2298) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:27:47.7018043Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:27:47.7147174Z (node:2298) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-13T10:27:47.9352195Z Preparing to download the following artifacts:
+2026-11-13T10:27:47.9352988Z - cpu-distribution-calibration-evidence (ID: 13981818755, Size: 64428, Expected Digest: sha256:53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec)
+2026-11-13T10:27:47.9376756Z Downloading artifact '13981818755' from 'Afloat16/onnxruntime'
+2026-11-13T10:27:48.2046453Z Redirecting to blob download url: https://productionresultssa32.blob.core.windows.net/actions-results/568ef490-fc23-8204-b80d-e4aefd653703/workflow-job-run-2aefdc39-6b52-5cd4-a899-dad9b7384475/artifacts/b5c359d12481e2fcd67c56939a89868631bef8eee9f9477d17c7aaf2174630ca.zip
+2026-11-13T10:27:48.2047917Z Starting download of artifact to: /home/runner/work/_temp/ort-build-evidence
+2026-11-13T10:27:48.5891195Z (node:2298) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-11-13T10:27:48.7440156Z SHA256 digest of downloaded artifact is 53de5e58e2c55a71527de43db9df5fa48ec78a5e4b92eb3dd95792c2ebdb72ec
+2026-11-13T10:27:48.7440881Z Artifact download completed successfully.
+2026-11-13T10:27:48.7441421Z Total of 1 artifact(s) downloaded
+2026-11-13T10:27:48.7445570Z Download artifact has finished successfully
+2026-11-13T10:27:48.7535185Z ##[group]Run python -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12
+2026-11-13T10:27:48.7536033Z [36;1mpython -m pip install --force-reinstall "$RUNNER_TEMP/ort-built-wheel"/*.whl numpy==2.3.5 onnx==1.20.1 ml_dtypes pytest==9.1.1 ruff==0.12.12[0m
+2026-11-13T10:27:48.7536647Z [36;1mgit fetch --no-tags origin 8dea1194e974fa07b1d2f07a190949c3a92cab80[0m
+2026-11-13T10:27:48.7536989Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:27:48.7537267Z [36;1mimport hashlib[0m
+2026-11-13T10:27:48.7537490Z [36;1mimport json[0m
+2026-11-13T10:27:48.7537710Z [36;1mimport os[0m
+2026-11-13T10:27:48.7537956Z [36;1mimport shutil[0m
+2026-11-13T10:27:48.7538204Z [36;1mimport subprocess[0m
+2026-11-13T10:27:48.7538462Z [36;1mfrom pathlib import Path[0m
+2026-11-13T10:27:48.7538714Z [36;1mimport onnxruntime[0m
+2026-11-13T10:27:48.7538960Z [36;1mfrom onnxruntime import quantization[0m
+2026-11-13T10:27:48.7539394Z [36;1mbuilt_commit = "8dea1194e974fa07b1d2f07a190949c3a92cab80"[0m
+2026-11-13T10:27:48.7539740Z [36;1mbase_commit = "a8246c0d094f1ab0d6bf236228e5e67683321cd7"[0m
+2026-11-13T10:27:48.7540199Z [36;1msource_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()[0m
+2026-11-13T10:27:48.7540790Z [36;1mprovenance = json.loads((Path(os.environ["RUNNER_TEMP"]) / "ort-build-evidence/ort-source-build-metadata.json").read_text())[0m
+2026-11-13T10:27:48.7541364Z [36;1massert provenance["source_commit"] == built_commit[0m
+2026-11-13T10:27:48.7541687Z [36;1mfor revision in (built_commit, source_commit):[0m
+2026-11-13T10:27:48.7542323Z [36;1m    paths = subprocess.check_output(["git", "diff", "--name-only", base_commit, revision], text=True).splitlines()[0m
+2026-11-13T10:27:48.7542999Z [36;1m    assert all(path.startswith(("onnxruntime/python/tools/quantization/", "onnxruntime/test/python/quantization/")) for path in paths), paths[0m
+2026-11-13T10:27:48.7543562Z [36;1msource = Path("onnxruntime/python/tools/quantization")[0m
+2026-11-13T10:27:48.7543935Z [36;1mdestination = Path(quantization.__file__).parent[0m
+2026-11-13T10:27:48.7544280Z [36;1mshutil.copytree(source, destination, dirs_exist_ok=True)[0m
+2026-11-13T10:27:48.7544609Z [36;1mfor cache in destination.rglob("__pycache__"):[0m
+2026-11-13T10:27:48.7544920Z [36;1m    shutil.rmtree(cache)[0m
+2026-11-13T10:27:48.7545161Z [36;1mhashes = {}[0m
+2026-11-13T10:27:48.7545396Z [36;1mfor path in source.rglob("*.py"):[0m
+2026-11-13T10:27:48.7545748Z [36;1m    installed = destination / path.relative_to(source)[0m
+2026-11-13T10:27:48.7546088Z [36;1m    assert installed.read_bytes() == path.read_bytes(), installed[0m
+2026-11-13T10:27:48.7546544Z [36;1m    hashes[str(path.relative_to(source))] = hashlib.sha256(installed.read_bytes()).hexdigest()[0m
+2026-11-13T10:27:48.7547015Z [36;1massert "CPUExecutionProvider" in onnxruntime.get_available_providers()[0m
+2026-11-13T10:27:48.7547379Z [36;1mmetadata = {[0m
+2026-11-13T10:27:48.7547633Z [36;1m    "source_commit": source_commit,[0m
+2026-11-13T10:27:48.7547928Z [36;1m    "native_build_source_commit": built_commit,[0m
+2026-11-13T10:27:48.7548267Z [36;1m    "common_native_source_base": base_commit,[0m
+2026-11-13T10:27:48.7548663Z [36;1m    "native_build_run": 43296543822,[0m
+2026-11-13T10:27:48.7548956Z [36;1m    "native_wheel_artifact": 13982605959,[0m
+2026-11-13T10:27:48.7549261Z [36;1m    "runtime_version": onnxruntime.__version__,[0m
+2026-11-13T10:27:48.7549558Z [36;1m    "runtime_path": onnxruntime.__file__,[0m
+2026-11-13T10:27:48.7549855Z [36;1m    "quantization_path": str(destination),[0m
+2026-11-13T10:27:48.7550141Z [36;1m    "quantization_sha256": hashes,[0m
+2026-11-13T10:27:48.7550611Z [36;1m    "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged.",[0m
+2026-11-13T10:27:48.7551019Z [36;1m}[0m
+2026-11-13T10:27:48.7551437Z [36;1mPath("ort-source-overlay-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")[0m
+2026-11-13T10:27:48.7552142Z [36;1mprint(json.dumps(metadata, indent=2))[0m
+2026-11-13T10:27:48.7552464Z [36;1mPY[0m
+2026-11-13T10:27:48.7579354Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:27:48.7579641Z env:
+2026-11-13T10:27:48.7579949Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:27:48.7580230Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:27:48.7580530Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:27:48.7580870Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:48.7581239Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:27:48.7581614Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:48.7582140Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:48.7582469Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:27:48.7582882Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:27:48.7583200Z ##[endgroup]
+2026-11-13T10:27:49.5683070Z Processing /home/runner/work/_temp/ort-built-wheel/onnxruntime-1.33.0-cp312-cp312-linux_x86_64.whl
+2026-11-13T10:27:49.8455580Z Collecting numpy==2.3.5
+2026-11-13T10:27:49.8853047Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-11-13T10:27:49.9427735Z Collecting onnx==1.20.1
+2026-11-13T10:27:49.9520809Z   Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.4 kB)
+2026-11-13T10:27:49.9730251Z Collecting ml_dtypes
+2026-11-13T10:27:49.9813609Z   Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+2026-11-13T10:27:50.0078007Z Collecting pytest==9.1.1
+2026-11-13T10:27:50.0169030Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-11-13T10:27:50.2259696Z Collecting ruff==0.12.12
+2026-11-13T10:27:50.2346290Z   Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2026-11-13T10:27:50.3449235Z Collecting protobuf>=4.25.1 (from onnx==1.20.1)
+2026-11-13T10:27:50.3534286Z   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+2026-11-13T10:27:50.3699577Z Collecting typing_extensions>=4.7.1 (from onnx==1.20.1)
+2026-11-13T10:27:50.3779150Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-11-13T10:27:50.3921638Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1)
+2026-11-13T10:27:50.4006349Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-11-13T10:27:50.4166303Z Collecting packaging>=22 (from pytest==9.1.1)
+2026-11-13T10:27:50.4251316Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-11-13T10:27:50.4393430Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1)
+2026-11-13T10:27:50.4474922Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+2026-11-13T10:27:50.4655312Z Collecting pygments>=2.7.2 (from pytest==9.1.1)
+2026-11-13T10:27:50.4735587Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-11-13T10:27:50.4879301Z Collecting flatbuffers (from onnxruntime==1.33.0)
+2026-11-13T10:27:50.4960275Z   Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+2026-11-13T10:27:50.5273555Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-11-13T10:27:50.6375149Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 184.9 MB/s eta 0:00:00
+2026-11-13T10:27:50.6498688Z Downloading onnx-1.20.1-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (17.5 MB)
+2026-11-13T10:27:50.7491342Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.5/17.5 MB 177.2 MB/s eta 0:00:00
+2026-11-13T10:27:50.7574242Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-11-13T10:27:50.7679063Z Downloading ruff-0.12.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+2026-11-13T10:27:50.8465627Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 171.9 MB/s eta 0:00:00
+2026-11-13T10:27:50.8550883Z Downloading ml_dtypes-0.6.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (409 kB)
+2026-11-13T10:27:50.8664530Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-11-13T10:27:50.8761249Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-11-13T10:27:50.8859159Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+2026-11-13T10:27:50.8950386Z Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+2026-11-13T10:27:50.9049763Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-11-13T10:27:50.9100881Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 293.4 MB/s eta 0:00:00
+2026-11-13T10:27:50.9180152Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-11-13T10:27:50.9274075Z Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+2026-11-13T10:27:51.0627392Z Installing collected packages: flatbuffers, typing_extensions, ruff, pygments, protobuf, pluggy, packaging, numpy, iniconfig, pytest, onnxruntime, ml_dtypes, onnx
+2026-11-13T10:27:55.2483202Z Successfully installed flatbuffers-25.12.19 iniconfig-2.3.1 ml_dtypes-0.6.0 numpy-2.3.5 onnx-1.20.1 onnxruntime-1.33.0 packaging-26.3 pluggy-1.7.0 protobuf-7.36.2 pygments-2.21.0 pytest-9.1.1 ruff-0.12.12 typing_extensions-4.16.0
+2026-11-13T10:27:55.3333951Z 
+2026-11-13T10:27:55.3335122Z [notice] A new release of pip is available: 25.0.1 -> 26.3
+2026-11-13T10:27:55.3335685Z [notice] To update, run: pip install --upgrade pip
+2026-11-13T10:28:09.7637560Z From https://github.com/Afloat16/onnxruntime
+2026-11-13T10:28:09.7637994Z  * branch              8dea1194e974fa07b1d2f07a190949c3a92cab80 -> FETCH_HEAD
+2026-11-13T10:28:10.1233577Z {
+2026-11-13T10:28:10.1234179Z   "source_commit": "0bceda4c8362cd68a0593cac842957d60363c7e2",
+2026-11-13T10:28:10.1235725Z   "native_build_source_commit": "8dea1194e974fa07b1d2f07a190949c3a92cab80",
+2026-11-13T10:28:10.1236319Z   "common_native_source_base": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+2026-11-13T10:28:10.1236706Z   "native_build_run": 43296543822,
+2026-11-13T10:28:10.1237040Z   "native_wheel_artifact": 13982605959,
+2026-11-13T10:28:10.1237373Z   "runtime_version": "1.33.0",
+2026-11-13T10:28:10.1237931Z   "runtime_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/__init__.py",
+2026-11-13T10:28:10.1238678Z   "quantization_path": "/home/runner/work/_temp/ort-validation-venv/lib/python3.12/site-packages/onnxruntime/quantization",
+2026-11-13T10:28:10.1239208Z   "quantization_sha256": {
+2026-11-13T10:28:10.1239636Z     "static_quantize_runner.py": "656546050e54f699780c560b85b19209f9cbfdf6544a6bd046de4ea93d6c3a12",
+2026-11-13T10:28:10.1240202Z     "preprocess.py": "105d56a717cc3a81922596c1d3804bf4ae3e9801d8ef15a3e6d86fcf5b7ae1d7",
+2026-11-13T10:28:10.1240870Z     "matmul_nbits_quantizer.py": "04feb252358ee7f20758a732537adff49fb10c7e80e84e358a4eb4c763bc3903",
+2026-11-13T10:28:10.1241576Z     "tensor_quant_overrides.py": "6df028cd14bf2919ead19d103aad77331fe4fde186a90f8a74f440384932a0c9",
+2026-11-13T10:28:10.1242494Z     "base_quantizer.py": "750f1ae870b793a140938a83c9f72fa361ecf3e5c36257bc9482a6e1e0463335",
+2026-11-13T10:28:10.1242999Z     "onnx_quantizer.py": "f9c3705d631ff38231b4787f89e487274a8768122d79c11a3a6f0ce7caf62dc9",
+2026-11-13T10:28:10.1243700Z     "onnx_model.py": "9bc2a11d8c79e4a2ba3af25bbbbaf71bf516f1b31c6cb26e771c6c5d333659be",
+2026-11-13T10:28:10.1244161Z     "__init__.py": "e6a397c6f48639307150aa6d495826b3a3f3229220748a095837a592c9beac8c",
+2026-11-13T10:28:10.1244614Z     "matmul_bnb4_quantizer.py": "2afb1460ff720f0fee991f2f12434d4a154059f00847e96853151041735fcff6",
+2026-11-13T10:28:10.1245123Z     "qdq_quantizer.py": "6c6c061ae90ea4a0d6a8b5d2314e764bf1b0c4245ed4dafcd72d1603cd69683b",
+2026-11-13T10:28:10.1245609Z     "registry.py": "342e55d91f62a64fcd4e4d721a0ac568af69c822a7557312d8bd69a4adc3a5f5",
+2026-11-13T10:28:10.1246068Z     "quantize.py": "b96538a6a4f2311cf9af9ece760170b3d90c527cd7dfc4760ad8cafbbf694324",
+2026-11-13T10:28:10.1246736Z     "cuda_quantizer.py": "1e4dbc4f780c06a281054aac00fbbb7e136dfee1c29eee350c3e3dd420310e55",
+2026-11-13T10:28:10.1247330Z     "calibrate.py": "dd84a7663166b2eb013ac51c1184cd36c689786813d49916cd5a7b779b39bea0",
+2026-11-13T10:28:10.1247969Z     "qdq_loss_debug.py": "f8fcf18ea1e0081ba77ecb6664e67650c068bdf206f0d3ff63351833da480629",
+2026-11-13T10:28:10.1248589Z     "shape_inference.py": "f1fc6a69fd829d29963ba6d90a6b81d16b7ef3536a7a0dffacf8e3858ef5c227",
+2026-11-13T10:28:10.1249145Z     "quant_utils.py": "503a1611c1ca49d7a08b3c7c27926ede3ea1ba00597a6bd97b63bb8c36f81de9",
+2026-11-13T10:28:10.1249636Z     "fusions/fusion_layernorm.py": "5347c96082498172da1d61742ec120746b3fd7d8a9b27ff397cd1ba9b0806784",
+2026-11-13T10:28:10.1250137Z     "fusions/fusion_gelu.py": "a2216ab4e51cba690f6601f96dd4aa9ad7a898ce9611a7b0c0cd7cc29bf79b2c",
+2026-11-13T10:28:10.1250642Z     "fusions/fusion.py": "f2f4cb00704942a8143f02b6539c9de94c14b64d4c1cfc8ace52e3fb89574112",
+2026-11-13T10:28:10.1251163Z     "fusions/__init__.py": "f05e55a909e2a9aedaec74ef9451aff14e65b6f059f9215ad936310ab822ab24",
+2026-11-13T10:28:10.1251713Z     "fusions/replace_upsample_with_resize.py": "21663d11455fde7190b9aa04c334a798f8383059af561527ac309398b7cba3bc",
+2026-11-13T10:28:10.1252516Z     "execution_providers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T10:28:10.1253043Z     "neural_compressor/weight_only.py": "2f7a7760a7dd7bbbd65a6ea0b46c876e2ce1fda0e34bccf0a54c946f6a676598",
+2026-11-13T10:28:10.1253696Z     "neural_compressor/util.py": "20f54aa4817b69e5480e3bb456f460bcc3d53b9b12a8d1fecb038a182b968eaf",
+2026-11-13T10:28:10.1254261Z     "neural_compressor/onnx_model.py": "0f901eb2ee11bc2ec80a941e4072243ef472143b0e1becd020ad0de72f2d3563",
+2026-11-13T10:28:10.1254833Z     "neural_compressor/__init__.py": "97eb008ba62d7bfb6234540b738dce6914085e0517358f1c091232e9db87f172",
+2026-11-13T10:28:10.1255354Z     "CalTableFlatBuffers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+2026-11-13T10:28:10.1255914Z     "CalTableFlatBuffers/KeyValue.py": "fecc58656ee31b11d336456ad3e6e5fce4e8ab60dd31718e9e968756180dd8cb",
+2026-11-13T10:28:10.1256483Z     "CalTableFlatBuffers/TrtTable.py": "eeb0e37992385ac644f978f88e601dbcceb10c6c42c256cb88889a87b05f1133",
+2026-11-13T10:28:10.1257010Z     "operators/qdq_base_operator.py": "833a553185bda598964606d9107a4a806b96a9c3a232cb18b61f93a7269ddac8",
+2026-11-13T10:28:10.1257527Z     "operators/resize.py": "5caa4667dafb624f433982c041173f98acbe8ef884f375a74f8155eb908b4cb4",
+2026-11-13T10:28:10.1258011Z     "operators/norm.py": "0da2c43dc5677e4c1a0fa7a94e0ac2ee1784f838e25814ecda8b0048c613f741",
+2026-11-13T10:28:10.1258492Z     "operators/direct_q8.py": "ed3514d7e2409b916efffe11a91c463e05f0aaa0f7ff472e4b44944788aa28d5",
+2026-11-13T10:28:10.1259012Z     "operators/lstm.py": "1cdd3fb3c00ded7503747824a1dbd773ba08e3172f4b63da9c6fe9238c613cec",
+2026-11-13T10:28:10.1259469Z     "operators/gemm.py": "9077b95a0f33f0eb962ce2bd5f66b411ef268b80fba62a61269b327cfda6d1c4",
+2026-11-13T10:28:10.1259955Z     "operators/where.py": "b43afc5d219013a56e43653f9a244db0e8b0efee9766478ef7a74cd67697e1e8",
+2026-11-13T10:28:10.1260460Z     "operators/base_operator.py": "74a29cf70d2a2e7afd1ceb4a4c6f222452993f037077956576efb544998fcaf9",
+2026-11-13T10:28:10.1260974Z     "operators/embed_layernorm.py": "686ab6cb0e19b63be00b9fed78023f7c09f5f14120af54a126b5d3eedd7c2464",
+2026-11-13T10:28:10.1261762Z     "operators/softmax.py": "377d90c9cf445eb62c4c84fd24e009804662f838740f81551c54ac98e226bd1d",
+2026-11-13T10:28:10.1262401Z     "operators/split.py": "1d76742cae13f2fb116e1c8723c0e30710a62769c0df321258cf486bdca50212",
+2026-11-13T10:28:10.1262938Z     "operators/activation.py": "63d8004592e07fedc847da426b135e541a06bb465889063c646e0a72dc3829ff",
+2026-11-13T10:28:10.1263428Z     "operators/conv.py": "be3bc477995318cfd45619453444abb19638e746b6907318cacfe54ec1b34d7e",
+2026-11-13T10:28:10.1263906Z     "operators/attention.py": "45b7d496416d2cfd4ee702e5c2fe47f18a2535e8dfd17cae07845fa8629595e3",
+2026-11-13T10:28:10.1264463Z     "operators/gather.py": "2cac2de86bcc9bcd327047580cf73bc8e0ecee1a52b832e279289bd7695b9b7a",
+2026-11-13T10:28:10.1264958Z     "operators/concat.py": "731ec69fc8e1e1fa016e8a516f824f02836c4b23f500a737fe01969d5c891344",
+2026-11-13T10:28:10.1265411Z     "operators/matmul.py": "7d850ddaa686a670848662c50f2338a3e634a859b4b5c6efd6191bc60940d08e",
+2026-11-13T10:28:10.1265936Z     "operators/__init__.py": "7b531614058e27f1678fbea573c2e71b6dafd8ac22ff236f2a1d1aaa489d10a5",
+2026-11-13T10:28:10.1266419Z     "operators/gavgpool.py": "cdb2d953162af78b71f8e553656bfae005becbc32f9a4fb671740d6ca3352896",
+2026-11-13T10:28:10.1266901Z     "operators/pad.py": "92ee11d6df95801111f345685eb132ff8c41754a3dec363d7ac0df999d736b01",
+2026-11-13T10:28:10.1267395Z     "operators/pooling.py": "65323c1632f093e79aa3bfaa638e5c0ac52da1b95956f27b3c86745bd629404c",
+2026-11-13T10:28:10.1267871Z     "operators/maxpool.py": "b7357d17439efe5c35c9d22131ef0cc33f661fb395613cfee54031bc38dc265c",
+2026-11-13T10:28:10.1268381Z     "operators/binary_op.py": "407cb36bfb9b087e8a2caa7b26d586a0d2d804e2d5c61b8287572b98860bf4ca",
+2026-11-13T10:28:10.1268861Z     "operators/argmax.py": "86b3b40c8808df3c33956e8c7207d25b3f7b6d4bc7b96193b321f6ba11b540d1",
+2026-11-13T10:28:10.1269427Z     "execution_providers/qnn/fusion_lpnorm.py": "6767db32ff39da3cc2c9691f4d36acab90883d2bed0fe1161a6507d677c7cf5f",
+2026-11-13T10:28:10.1270107Z     "execution_providers/qnn/preprocess.py": "56997c1fa18cd53a176ca84706f9667c127c8a145b2265490c8177798b249665",
+2026-11-13T10:28:10.1270695Z     "execution_providers/qnn/mixed_precision_overrides_utils.py": "beff0aa9254a724556906333c169615ab64de047b45c09c1f325fee0b334da07",
+2026-11-13T10:28:10.1271336Z     "execution_providers/qnn/fusion_spacetodepth.py": "1fe6bea7151d14dc4e0c9bca81e6b251c65bc9297bb8b6c2c5ba43e5b0650575",
+2026-11-13T10:28:10.1272076Z     "execution_providers/qnn/__init__.py": "99a13e72b8e602904cfac188b98fcfce386542eb10afc0fe140840f5eaa6f758",
+2026-11-13T10:28:10.1272974Z     "execution_providers/qnn/quant_config.py": "07a58ddb57eaf0a4a17550bf86bebeee1c8c739a65a92b30368ad4629b9c68d4"
+2026-11-13T10:28:10.1273383Z   },
+2026-11-13T10:28:10.1273722Z   "scope": "Exact Python source overlay on the official source-built CPU runtime; native source is unchanged."
+2026-11-13T10:28:10.1274134Z }
+2026-11-13T10:28:10.1607372Z ##[group]Run set -o pipefail
+2026-11-13T10:28:10.1607662Z [36;1mset -o pipefail[0m
+2026-11-13T10:28:10.1608434Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-patched.xml onnxruntime/test/python/quantization/test_subgraph_node_properties.py onnxruntime/test/python/quantization/test_onnx_model.py 2>&1 | tee ort-patched.log[0m
+2026-11-13T10:28:10.1637668Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T10:28:10.1638090Z env:
+2026-11-13T10:28:10.1638332Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:28:10.1638590Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:28:10.1638879Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:28:10.1639195Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:10.1639566Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:28:10.1640007Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:10.1640452Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:10.1640778Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:10.1641151Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:28:10.1641455Z ##[endgroup]
+2026-11-13T10:28:11.3585976Z ..........                                               [100%]
+2026-11-13T10:28:11.3586377Z 10 passed, 16 subtests passed in 0.31s
+2026-11-13T10:28:11.4425284Z ##[group]Run python -P - <<'PY'
+2026-11-13T10:28:11.4425595Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:28:11.4425868Z [36;1mimport subprocess[0m
+2026-11-13T10:28:11.4426135Z [36;1mfrom pathlib import Path[0m
+2026-11-13T10:28:11.4426438Z [36;1mfrom onnxruntime.quantization import onnx_model[0m
+2026-11-13T10:28:11.4426796Z [36;1mtarget = Path(onnx_model.__file__)[0m
+2026-11-13T10:28:11.4427369Z [36;1mtarget.write_bytes(subprocess.check_output(["git", "show", "a8246c0d094f1ab0d6bf236228e5e67683321cd7:onnxruntime/python/tools/quantization/onnx_model.py"]))[0m
+2026-11-13T10:28:11.4428027Z [36;1mfor cache in target.parent.glob("__pycache__/onnx_model.*.pyc"):[0m
+2026-11-13T10:28:11.4428357Z [36;1m    cache.unlink()[0m
+2026-11-13T10:28:11.4428590Z [36;1mPY[0m
+2026-11-13T10:28:11.4454850Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:28:11.4455246Z env:
+2026-11-13T10:28:11.4455525Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:28:11.4455819Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:28:11.4456182Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:28:11.4456579Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:11.4456941Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:28:11.4457293Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:11.4457648Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:11.4457983Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:11.4458317Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:28:11.4458641Z ##[endgroup]
+2026-11-13T10:28:11.6486591Z ##[group]Run set +e
+2026-11-13T10:28:11.6486933Z [36;1mset +e[0m
+2026-11-13T10:28:11.6487788Z [36;1mpython -P -c 'import onnxruntime, pytest, sys; raise SystemExit(pytest.main(sys.argv[1:]))' -q --junitxml=ort-baseline.xml onnxruntime/test/python/quantization/test_subgraph_node_properties.py > ort-baseline.log 2>&1[0m
+2026-11-13T10:28:11.6488770Z [36;1mresult=$?[0m
+2026-11-13T10:28:11.6489054Z [36;1mset -e[0m
+2026-11-13T10:28:11.6489339Z [36;1mcat ort-baseline.log[0m
+2026-11-13T10:28:11.6489676Z [36;1mtest "$result" -eq 1[0m
+2026-11-13T10:28:11.6490005Z [36;1mpython -P - <<'PY'[0m
+2026-11-13T10:28:11.6490400Z [36;1mimport xml.etree.ElementTree as ET[0m
+2026-11-13T10:28:11.6490819Z [36;1mroot = ET.parse("ort-baseline.xml").getroot()[0m
+2026-11-13T10:28:11.6491806Z [36;1mfailed = {case.attrib["name"] for case in root.findall(".//testcase") if case.find("failure") is not None or case.find("error") is not None}[0m
+2026-11-13T10:28:11.6492960Z [36;1mrequired = {[0m
+2026-11-13T10:28:11.6493360Z [36;1m    "test_custom_function_dispatch_and_inference_survive",[0m
+2026-11-13T10:28:11.6493952Z [36;1m    "test_overload_survives_save_and_reload",[0m
+2026-11-13T10:28:11.6494394Z [36;1m    "test_all_non_graph_node_properties_are_preserved",[0m
+2026-11-13T10:28:11.6494904Z [36;1m    "test_nested_standard_if_nodes_keep_metadata",[0m
+2026-11-13T10:28:11.6495404Z [36;1m    "test_repeated_graph_attributes_keep_the_original_node",[0m
+2026-11-13T10:28:11.6495830Z [36;1m}[0m
+2026-11-13T10:28:11.6496264Z [36;1massert required <= failed, (required - failed, failed)[0m
+2026-11-13T10:28:11.6496779Z [36;1mprint("Confirmed original subgraph node-property failures:", sorted(failed))[0m
+2026-11-13T10:28:11.6497230Z [36;1mPY[0m
+2026-11-13T10:28:11.6526415Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-13T10:28:11.6526752Z env:
+2026-11-13T10:28:11.6526970Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:28:11.6527357Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:28:11.6527695Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:28:11.6528018Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:11.6528378Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:28:11.6528741Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:11.6529078Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:11.6529416Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:11.6529726Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:28:11.6530049Z ##[endgroup]
+2026-11-13T10:28:12.0855512Z .......                                                  [100%]
+2026-11-13T10:28:12.0856235Z =================================== FAILURES ===================================
+2026-11-13T10:28:12.0856774Z _ TestSubgraphNodeProperties.test_all_non_graph_node_properties_are_preserved (operation='clean_initializers') _
+2026-11-13T10:28:12.0857171Z 
+2026-11-13T10:28:12.0857499Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_all_non_graph_node_properties_are_preserved>
+2026-11-13T10:28:12.0857893Z 
+2026-11-13T10:28:12.0858021Z     def test_all_non_graph_node_properties_are_preserved(self):
+2026-11-13T10:28:12.0858439Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0858791Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.0859148Z                 model = _function_model(overload="float32")
+2026-11-13T10:28:12.0859451Z                 node = model.graph.node[0]
+2026-11-13T10:28:12.0859794Z                 node.attribute[0].doc_string = "branch attribute documentation"
+2026-11-13T10:28:12.0860164Z                 expected = _properties(node)
+2026-11-13T10:28:12.0860441Z                 _apply(model, operation)
+2026-11-13T10:28:12.0860763Z >               self.assertEqual(_properties(model.graph.node[0]), expected)
+2026-11-13T10:28:12.0861682Z E               AssertionError: b'\n\[57 chars]onal*\x10\n\x0belse_branch\xa0\x01\x05*\x10\n\[22 chars]\x05' != b'\n\[57 chars]onal*0\n\x0belse_branchj\x1ebranch attribute d[229 chars]lock'
+2026-11-13T10:28:12.0862302Z 
+2026-11-13T10:28:12.0862540Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:141: AssertionError
+2026-11-13T10:28:12.0863185Z _ TestSubgraphNodeProperties.test_all_non_graph_node_properties_are_preserved (operation='replace_gemm_with_matmul') _
+2026-11-13T10:28:12.0863508Z 
+2026-11-13T10:28:12.0863824Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_all_non_graph_node_properties_are_preserved>
+2026-11-13T10:28:12.0864189Z 
+2026-11-13T10:28:12.0864335Z     def test_all_non_graph_node_properties_are_preserved(self):
+2026-11-13T10:28:12.0864710Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0865084Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.0865438Z                 model = _function_model(overload="float32")
+2026-11-13T10:28:12.0865731Z                 node = model.graph.node[0]
+2026-11-13T10:28:12.0866056Z                 node.attribute[0].doc_string = "branch attribute documentation"
+2026-11-13T10:28:12.0866397Z                 expected = _properties(node)
+2026-11-13T10:28:12.0866689Z                 _apply(model, operation)
+2026-11-13T10:28:12.0867011Z >               self.assertEqual(_properties(model.graph.node[0]), expected)
+2026-11-13T10:28:12.0867581Z E               AssertionError: b'\n\[57 chars]onal*\x10\n\x0belse_branch\xa0\x01\x05*\x10\n\[22 chars]\x05' != b'\n\[57 chars]onal*0\n\x0belse_branchj\x1ebranch attribute d[229 chars]lock'
+2026-11-13T10:28:12.0868004Z 
+2026-11-13T10:28:12.0868237Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:141: AssertionError
+2026-11-13T10:28:12.0868834Z _ TestSubgraphNodeProperties.test_custom_function_dispatch_and_inference_survive (operation='clean_initializers', condition=False) _
+2026-11-13T10:28:12.0869305Z 
+2026-11-13T10:28:12.0869632Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_custom_function_dispatch_and_inference_survive>
+2026-11-13T10:28:12.0870008Z 
+2026-11-13T10:28:12.0870159Z     def test_custom_function_dispatch_and_inference_survive(self):
+2026-11-13T10:28:12.0870525Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0870842Z             for condition in (False, True):
+2026-11-13T10:28:12.0871228Z                 with self.subTest(operation=operation, condition=condition):
+2026-11-13T10:28:12.0871554Z                     model = _function_model()
+2026-11-13T10:28:12.0872109Z                     expected = np.asarray([[4, 15] if condition else [-2, -10]], dtype=np.float32)
+2026-11-13T10:28:12.0872530Z                     np.testing.assert_array_equal(_infer(model, condition), expected)
+2026-11-13T10:28:12.0872938Z                     _apply(model, operation)
+2026-11-13T10:28:12.0873406Z >                   self.assertEqual(model.graph.node[0].domain, DOMAIN)
+2026-11-13T10:28:12.0873924Z E                   AssertionError: '' != 'test.quantization.functions'
+2026-11-13T10:28:12.0874875Z E                   + test.quantization.functions
+2026-11-13T10:28:12.0875107Z 
+2026-11-13T10:28:12.0875402Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:116: AssertionError
+2026-11-13T10:28:12.0881442Z _ TestSubgraphNodeProperties.test_custom_function_dispatch_and_inference_survive (operation='clean_initializers', condition=True) _
+2026-11-13T10:28:12.0882167Z 
+2026-11-13T10:28:12.0882600Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_custom_function_dispatch_and_inference_survive>
+2026-11-13T10:28:12.0883094Z 
+2026-11-13T10:28:12.0883241Z     def test_custom_function_dispatch_and_inference_survive(self):
+2026-11-13T10:28:12.0883714Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0884278Z             for condition in (False, True):
+2026-11-13T10:28:12.0884622Z                 with self.subTest(operation=operation, condition=condition):
+2026-11-13T10:28:12.0884961Z                     model = _function_model()
+2026-11-13T10:28:12.0885318Z                     expected = np.asarray([[4, 15] if condition else [-2, -10]], dtype=np.float32)
+2026-11-13T10:28:12.0885720Z                     np.testing.assert_array_equal(_infer(model, condition), expected)
+2026-11-13T10:28:12.0886077Z                     _apply(model, operation)
+2026-11-13T10:28:12.0886381Z >                   self.assertEqual(model.graph.node[0].domain, DOMAIN)
+2026-11-13T10:28:12.0886789Z E                   AssertionError: '' != 'test.quantization.functions'
+2026-11-13T10:28:12.0887118Z E                   + test.quantization.functions
+2026-11-13T10:28:12.0887282Z 
+2026-11-13T10:28:12.0887506Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:116: AssertionError
+2026-11-13T10:28:12.0888131Z _ TestSubgraphNodeProperties.test_custom_function_dispatch_and_inference_survive (operation='replace_gemm_with_matmul', condition=False) _
+2026-11-13T10:28:12.0888538Z 
+2026-11-13T10:28:12.0888842Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_custom_function_dispatch_and_inference_survive>
+2026-11-13T10:28:12.0889203Z 
+2026-11-13T10:28:12.0889359Z     def test_custom_function_dispatch_and_inference_survive(self):
+2026-11-13T10:28:12.0889770Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0890084Z             for condition in (False, True):
+2026-11-13T10:28:12.0890420Z                 with self.subTest(operation=operation, condition=condition):
+2026-11-13T10:28:12.0890755Z                     model = _function_model()
+2026-11-13T10:28:12.0891101Z                     expected = np.asarray([[4, 15] if condition else [-2, -10]], dtype=np.float32)
+2026-11-13T10:28:12.0891512Z                     np.testing.assert_array_equal(_infer(model, condition), expected)
+2026-11-13T10:28:12.0892111Z                     _apply(model, operation)
+2026-11-13T10:28:12.0892467Z >                   self.assertEqual(model.graph.node[0].domain, DOMAIN)
+2026-11-13T10:28:12.0892837Z E                   AssertionError: '' != 'test.quantization.functions'
+2026-11-13T10:28:12.0893169Z E                   + test.quantization.functions
+2026-11-13T10:28:12.0893340Z 
+2026-11-13T10:28:12.0893644Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:116: AssertionError
+2026-11-13T10:28:12.0894257Z _ TestSubgraphNodeProperties.test_custom_function_dispatch_and_inference_survive (operation='replace_gemm_with_matmul', condition=True) _
+2026-11-13T10:28:12.0894717Z 
+2026-11-13T10:28:12.0895029Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_custom_function_dispatch_and_inference_survive>
+2026-11-13T10:28:12.0895434Z 
+2026-11-13T10:28:12.0895606Z     def test_custom_function_dispatch_and_inference_survive(self):
+2026-11-13T10:28:12.0895991Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0896341Z             for condition in (False, True):
+2026-11-13T10:28:12.0896673Z                 with self.subTest(operation=operation, condition=condition):
+2026-11-13T10:28:12.0897023Z                     model = _function_model()
+2026-11-13T10:28:12.0897389Z                     expected = np.asarray([[4, 15] if condition else [-2, -10]], dtype=np.float32)
+2026-11-13T10:28:12.0897783Z                     np.testing.assert_array_equal(_infer(model, condition), expected)
+2026-11-13T10:28:12.0898165Z                     _apply(model, operation)
+2026-11-13T10:28:12.0898464Z >                   self.assertEqual(model.graph.node[0].domain, DOMAIN)
+2026-11-13T10:28:12.0898821Z E                   AssertionError: '' != 'test.quantization.functions'
+2026-11-13T10:28:12.0899167Z E                   + test.quantization.functions
+2026-11-13T10:28:12.0899358Z 
+2026-11-13T10:28:12.0899619Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:116: AssertionError
+2026-11-13T10:28:12.0900207Z _ TestSubgraphNodeProperties.test_graph_contents_still_receive_the_requested_transformation (operation='clean_initializers') _
+2026-11-13T10:28:12.0900577Z 
+2026-11-13T10:28:12.0900892Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_graph_contents_still_receive_the_requested_transformation>
+2026-11-13T10:28:12.0901283Z 
+2026-11-13T10:28:12.0901515Z     def test_graph_contents_still_receive_the_requested_transformation(self):
+2026-11-13T10:28:12.0902074Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0902428Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.0902738Z                 model = _function_model()
+2026-11-13T10:28:12.0903003Z                 _apply(model, operation)
+2026-11-13T10:28:12.0903308Z                 for attribute in model.graph.node[0].attribute:
+2026-11-13T10:28:12.0903627Z                     graph = attribute.g
+2026-11-13T10:28:12.0903933Z                     if operation == "clean_initializers":
+2026-11-13T10:28:12.0904333Z                         self.assertEqual([tensor.name for tensor in graph.initializer], ["weight"])
+2026-11-13T10:28:12.0904727Z                         self.assertEqual(graph.node[0].op_type, "Gemm")
+2026-11-13T10:28:12.0905031Z                     else:
+2026-11-13T10:28:12.0905358Z                         self.assertEqual([child.op_type for child in graph.node], ["MatMul"])
+2026-11-13T10:28:12.0905807Z >               np.testing.assert_array_equal(_infer(model), np.asarray([[4, 15]], dtype=np.float32))
+2026-11-13T10:28:12.0906191Z                                               ^^^^^^^^^^^^^
+2026-11-13T10:28:12.0906378Z 
+2026-11-13T10:28:12.0906580Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:235: 
+2026-11-13T10:28:12.0906981Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:28:12.0907453Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:97: in _infer
+2026-11-13T10:28:12.0907820Z     onnx.checker.check_model(model)
+2026-11-13T10:28:12.0908120Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:28:12.0908321Z 
+2026-11-13T10:28:12.0908754Z model = ModelProto(ir_version=10, opset_import={'': 17, 'test.quantization.functions': 1}, graph=GraphProto('function_graph', input=<2 inputs>, output=<1 outputs>, node=<1 nodes>), functions=<1 functions>)
+2026-11-13T10:28:12.0909430Z full_check = False, skip_opset_compatibility_check = False
+2026-11-13T10:28:12.0909740Z check_custom_domain = False
+2026-11-13T10:28:12.0909873Z 
+2026-11-13T10:28:12.0909985Z     def check_model(
+2026-11-13T10:28:12.0910256Z         model: onnx.ModelProto | str | bytes | os.PathLike,
+2026-11-13T10:28:12.0910549Z         full_check: bool = False,
+2026-11-13T10:28:12.0910833Z         skip_opset_compatibility_check: bool = False,
+2026-11-13T10:28:12.0911150Z         check_custom_domain: bool = False,
+2026-11-13T10:28:12.0911424Z     ) -> None:
+2026-11-13T10:28:12.0911697Z         """Check the consistency of a model.
+2026-11-13T10:28:12.0912160Z     
+2026-11-13T10:28:12.0912476Z         An exception will be raised if the model's ir_version is not set
+2026-11-13T10:28:12.0912988Z         properly or is higher than checker's ir_version, or if the model
+2026-11-13T10:28:12.0913418Z         has duplicate keys in metadata_props.
+2026-11-13T10:28:12.0913765Z     
+2026-11-13T10:28:12.0914025Z         If IR version >= 3, the model must specify opset_import.
+2026-11-13T10:28:12.0914398Z         If IR version < 3, the model cannot have any opset_import specified.
+2026-11-13T10:28:12.0914712Z     
+2026-11-13T10:28:12.0914942Z         Args:
+2026-11-13T10:28:12.0915234Z             model: Model to check. If model is a path, the function checks model
+2026-11-13T10:28:12.0915686Z                 path first. If the model bytes size is larger than 2GB, function
+2026-11-13T10:28:12.0916022Z                 should be called using model path.
+2026-11-13T10:28:12.0916523Z             full_check: If True, the function also runs shape inference check.
+2026-11-13T10:28:12.0916931Z             skip_opset_compatibility_check: If True, the function skips the check for
+2026-11-13T10:28:12.0917331Z                 opset compatibility.
+2026-11-13T10:28:12.0917703Z             check_custom_domain: If True, the function will check all domains. Otherwise
+2026-11-13T10:28:12.0918056Z                 only check built-in domains.
+2026-11-13T10:28:12.0918319Z         """
+2026-11-13T10:28:12.0918550Z         # If model is a path instead of ModelProto
+2026-11-13T10:28:12.0918871Z         if isinstance(model, (str, os.PathLike)):
+2026-11-13T10:28:12.0919176Z             C.check_model_path(
+2026-11-13T10:28:12.0919429Z                 os.fspath(model),
+2026-11-13T10:28:12.0919682Z                 full_check,
+2026-11-13T10:28:12.0919938Z                 skip_opset_compatibility_check,
+2026-11-13T10:28:12.0920202Z                 check_custom_domain,
+2026-11-13T10:28:12.0920492Z             )
+2026-11-13T10:28:12.0920703Z         else:
+2026-11-13T10:28:12.0920915Z             protobuf_string = (
+2026-11-13T10:28:12.0921236Z                 model if isinstance(model, bytes) else model.SerializeToString()
+2026-11-13T10:28:12.0921563Z             )
+2026-11-13T10:28:12.0922820Z             # If the protobuf is larger than 2GiB,
+2026-11-13T10:28:12.0923159Z             # remind users should use the model path to check
+2026-11-13T10:28:12.0923505Z             if sys.getsizeof(protobuf_string) > MAXIMUM_PROTOBUF:
+2026-11-13T10:28:12.0923823Z                 raise ValueError(
+2026-11-13T10:28:12.0924191Z                     "This protobuf of onnx model is too large (>2GiB). Call check_model with model path instead."
+2026-11-13T10:28:12.0924579Z                 )
+2026-11-13T10:28:12.0924799Z >           C.check_model(
+2026-11-13T10:28:12.0925070Z                 protobuf_string,
+2026-11-13T10:28:12.0925430Z                 full_check,
+2026-11-13T10:28:12.0925707Z                 skip_opset_compatibility_check,
+2026-11-13T10:28:12.0925991Z                 check_custom_domain,
+2026-11-13T10:28:12.0926227Z             )
+2026-11-13T10:28:12.0926599Z E           onnx.onnx_cpp2py_export.checker.ValidationError: No Op registered for Conditional with domain_version of 17
+2026-11-13T10:28:12.0927033Z E           
+2026-11-13T10:28:12.0927330Z E           ==> Context: Bad node spec for node. Name: function_call OpType: Conditional
+2026-11-13T10:28:12.0927593Z 
+2026-11-13T10:28:12.0927865Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnx/checker.py:164: ValidationError
+2026-11-13T10:28:12.0928461Z _ TestSubgraphNodeProperties.test_graph_contents_still_receive_the_requested_transformation (operation='replace_gemm_with_matmul') _
+2026-11-13T10:28:12.0928815Z 
+2026-11-13T10:28:12.0929147Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_graph_contents_still_receive_the_requested_transformation>
+2026-11-13T10:28:12.0929580Z 
+2026-11-13T10:28:12.0929748Z     def test_graph_contents_still_receive_the_requested_transformation(self):
+2026-11-13T10:28:12.0930165Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0930513Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.0930835Z                 model = _function_model()
+2026-11-13T10:28:12.0931089Z                 _apply(model, operation)
+2026-11-13T10:28:12.0931404Z                 for attribute in model.graph.node[0].attribute:
+2026-11-13T10:28:12.0931727Z                     graph = attribute.g
+2026-11-13T10:28:12.0932221Z                     if operation == "clean_initializers":
+2026-11-13T10:28:12.0932628Z                         self.assertEqual([tensor.name for tensor in graph.initializer], ["weight"])
+2026-11-13T10:28:12.0933023Z                         self.assertEqual(graph.node[0].op_type, "Gemm")
+2026-11-13T10:28:12.0933336Z                     else:
+2026-11-13T10:28:12.0933887Z                         self.assertEqual([child.op_type for child in graph.node], ["MatMul"])
+2026-11-13T10:28:12.0934373Z >               np.testing.assert_array_equal(_infer(model), np.asarray([[4, 15]], dtype=np.float32))
+2026-11-13T10:28:12.0934775Z                                               ^^^^^^^^^^^^^
+2026-11-13T10:28:12.0934967Z 
+2026-11-13T10:28:12.0935145Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:235: 
+2026-11-13T10:28:12.0935553Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:28:12.0935973Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:97: in _infer
+2026-11-13T10:28:12.0936443Z     onnx.checker.check_model(model)
+2026-11-13T10:28:12.0936740Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-13T10:28:12.0936915Z 
+2026-11-13T10:28:12.0937362Z model = ModelProto(ir_version=10, opset_import={'': 17, 'test.quantization.functions': 1}, graph=GraphProto('function_graph', input=<2 inputs>, output=<1 outputs>, node=<1 nodes>), functions=<1 functions>)
+2026-11-13T10:28:12.0938011Z full_check = False, skip_opset_compatibility_check = False
+2026-11-13T10:28:12.0938327Z check_custom_domain = False
+2026-11-13T10:28:12.0938488Z 
+2026-11-13T10:28:12.0938560Z     def check_model(
+2026-11-13T10:28:12.0938847Z         model: onnx.ModelProto | str | bytes | os.PathLike,
+2026-11-13T10:28:12.0939171Z         full_check: bool = False,
+2026-11-13T10:28:12.0939455Z         skip_opset_compatibility_check: bool = False,
+2026-11-13T10:28:12.0939763Z         check_custom_domain: bool = False,
+2026-11-13T10:28:12.0940012Z     ) -> None:
+2026-11-13T10:28:12.0940269Z         """Check the consistency of a model.
+2026-11-13T10:28:12.0940521Z     
+2026-11-13T10:28:12.0940783Z         An exception will be raised if the model's ir_version is not set
+2026-11-13T10:28:12.0941182Z         properly or is higher than checker's ir_version, or if the model
+2026-11-13T10:28:12.0941565Z         has duplicate keys in metadata_props.
+2026-11-13T10:28:12.0942014Z     
+2026-11-13T10:28:12.0942288Z         If IR version >= 3, the model must specify opset_import.
+2026-11-13T10:28:12.0942660Z         If IR version < 3, the model cannot have any opset_import specified.
+2026-11-13T10:28:12.0942977Z     
+2026-11-13T10:28:12.0943176Z         Args:
+2026-11-13T10:28:12.0943538Z             model: Model to check. If model is a path, the function checks model
+2026-11-13T10:28:12.0943916Z                 path first. If the model bytes size is larger than 2GB, function
+2026-11-13T10:28:12.0944232Z                 should be called using model path.
+2026-11-13T10:28:12.0944626Z             full_check: If True, the function also runs shape inference check.
+2026-11-13T10:28:12.0945017Z             skip_opset_compatibility_check: If True, the function skips the check for
+2026-11-13T10:28:12.0945367Z                 opset compatibility.
+2026-11-13T10:28:12.0945703Z             check_custom_domain: If True, the function will check all domains. Otherwise
+2026-11-13T10:28:12.0946065Z                 only check built-in domains.
+2026-11-13T10:28:12.0946334Z         """
+2026-11-13T10:28:12.0946560Z         # If model is a path instead of ModelProto
+2026-11-13T10:28:12.0946897Z         if isinstance(model, (str, os.PathLike)):
+2026-11-13T10:28:12.0947216Z             C.check_model_path(
+2026-11-13T10:28:12.0947469Z                 os.fspath(model),
+2026-11-13T10:28:12.0947739Z                 full_check,
+2026-11-13T10:28:12.0947988Z                 skip_opset_compatibility_check,
+2026-11-13T10:28:12.0948263Z                 check_custom_domain,
+2026-11-13T10:28:12.0948512Z             )
+2026-11-13T10:28:12.0948735Z         else:
+2026-11-13T10:28:12.0948966Z             protobuf_string = (
+2026-11-13T10:28:12.0949275Z                 model if isinstance(model, bytes) else model.SerializeToString()
+2026-11-13T10:28:12.0949621Z             )
+2026-11-13T10:28:12.0949857Z             # If the protobuf is larger than 2GiB,
+2026-11-13T10:28:12.0950409Z             # remind users should use the model path to check
+2026-11-13T10:28:12.0950836Z             if sys.getsizeof(protobuf_string) > MAXIMUM_PROTOBUF:
+2026-11-13T10:28:12.0951197Z                 raise ValueError(
+2026-11-13T10:28:12.0951654Z                     "This protobuf of onnx model is too large (>2GiB). Call check_model with model path instead."
+2026-11-13T10:28:12.0952304Z                 )
+2026-11-13T10:28:12.0952609Z >           C.check_model(
+2026-11-13T10:28:12.0952967Z                 protobuf_string,
+2026-11-13T10:28:12.0953283Z                 full_check,
+2026-11-13T10:28:12.0953600Z                 skip_opset_compatibility_check,
+2026-11-13T10:28:12.0953996Z                 check_custom_domain,
+2026-11-13T10:28:12.0954339Z             )
+2026-11-13T10:28:12.0954833Z E           onnx.onnx_cpp2py_export.checker.ValidationError: No Op registered for Conditional with domain_version of 17
+2026-11-13T10:28:12.0955349Z E           
+2026-11-13T10:28:12.0955668Z E           ==> Context: Bad node spec for node. Name: function_call OpType: Conditional
+2026-11-13T10:28:12.0955933Z 
+2026-11-13T10:28:12.0956190Z ../../_temp/ort-validation-venv/lib/python3.12/site-packages/onnx/checker.py:164: ValidationError
+2026-11-13T10:28:12.0956756Z _ TestSubgraphNodeProperties.test_nested_standard_if_nodes_keep_metadata (operation='clean_initializers') _
+2026-11-13T10:28:12.0957059Z 
+2026-11-13T10:28:12.0957364Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_nested_standard_if_nodes_keep_metadata>
+2026-11-13T10:28:12.0957737Z 
+2026-11-13T10:28:12.0957868Z     def test_nested_standard_if_nodes_keep_metadata(self):
+2026-11-13T10:28:12.0958231Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0958593Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.0958898Z                 model = _function_model()
+2026-11-13T10:28:12.0959198Z                 custom = model.graph.node[0]
+2026-11-13T10:28:12.0959618Z                 inner = helper.make_node(
+2026-11-13T10:28:12.0959877Z                     "If",
+2026-11-13T10:28:12.0960157Z                     ["condition"],
+2026-11-13T10:28:12.0960408Z                     ["nested_y"],
+2026-11-13T10:28:12.0960641Z                     name="inner_if",
+2026-11-13T10:28:12.0960927Z                     doc_string="inner condition",
+2026-11-13T10:28:12.0961240Z                     then_branch=_branch("inner_positive", [[2, 0], [0, 3]]),
+2026-11-13T10:28:12.0961661Z                     else_branch=_branch("inner_negative", [[-1, 0], [0, -2]]),
+2026-11-13T10:28:12.0962176Z                 )
+2026-11-13T10:28:12.0962432Z                 inner.metadata_props.add(key="layer", value="inner")
+2026-11-13T10:28:12.0962782Z                 nested = helper.make_graph(
+2026-11-13T10:28:12.0963167Z                     [inner], "nested", [], [helper.make_tensor_value_info("nested_y", TensorProto.FLOAT, [1, 2])]
+2026-11-13T10:28:12.0963548Z                 )
+2026-11-13T10:28:12.0963784Z                 outer = helper.make_node(
+2026-11-13T10:28:12.0964041Z                     "If",
+2026-11-13T10:28:12.0964312Z                     ["condition"],
+2026-11-13T10:28:12.0964557Z                     ["y"],
+2026-11-13T10:28:12.0964804Z                     name="outer_if",
+2026-11-13T10:28:12.0965077Z                     doc_string="outer condition",
+2026-11-13T10:28:12.0965348Z                     then_branch=nested,
+2026-11-13T10:28:12.0965655Z                     else_branch=copy.deepcopy(custom.attribute[0].g),
+2026-11-13T10:28:12.0965946Z                 )
+2026-11-13T10:28:12.0966209Z                 outer.metadata_props.add(key="layer", value="outer")
+2026-11-13T10:28:12.0966553Z                 model.graph.ClearField("node")
+2026-11-13T10:28:12.0966870Z                 model.graph.node.append(outer)
+2026-11-13T10:28:12.0967153Z                 expected = _infer(model)
+2026-11-13T10:28:12.0967412Z                 expected_fields = {
+2026-11-13T10:28:12.0967685Z                     "outer_if": _properties(outer),
+2026-11-13T10:28:12.0968072Z                     "inner_if": _properties(inner),
+2026-11-13T10:28:12.0968325Z                 }
+2026-11-13T10:28:12.0968557Z                 _apply(model, operation)
+2026-11-13T10:28:12.0968831Z                 graphs = [model.graph]
+2026-11-13T10:28:12.0969108Z                 seen = set()
+2026-11-13T10:28:12.0969389Z                 while graphs:
+2026-11-13T10:28:12.0969637Z                     graph = graphs.pop()
+2026-11-13T10:28:12.0969902Z                     for node in graph.node:
+2026-11-13T10:28:12.0970197Z                         if node.name in expected_fields:
+2026-11-13T10:28:12.0970566Z >                           self.assertEqual(_properties(node), expected_fields[node.name])
+2026-11-13T10:28:12.0971107Z E                           AssertionError: b'\n\[97 chars]h\xa0\x01\x05' != b'\n\[97 chars]h\xa0\x01\x052\x0fouter conditionJ\x0e\n\x05layer\x12\x05outer'
+2026-11-13T10:28:12.0971452Z 
+2026-11-13T10:28:12.0971662Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:185: AssertionError
+2026-11-13T10:28:12.0972456Z _ TestSubgraphNodeProperties.test_nested_standard_if_nodes_keep_metadata (operation='replace_gemm_with_matmul') _
+2026-11-13T10:28:12.0972790Z 
+2026-11-13T10:28:12.0973093Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_nested_standard_if_nodes_keep_metadata>
+2026-11-13T10:28:12.0973446Z 
+2026-11-13T10:28:12.0973698Z     def test_nested_standard_if_nodes_keep_metadata(self):
+2026-11-13T10:28:12.0974091Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0974447Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.0974725Z                 model = _function_model()
+2026-11-13T10:28:12.0975071Z                 custom = model.graph.node[0]
+2026-11-13T10:28:12.0975349Z                 inner = helper.make_node(
+2026-11-13T10:28:12.0975625Z                     "If",
+2026-11-13T10:28:12.0975866Z                     ["condition"],
+2026-11-13T10:28:12.0976184Z                     ["nested_y"],
+2026-11-13T10:28:12.0976488Z                     name="inner_if",
+2026-11-13T10:28:12.0976755Z                     doc_string="inner condition",
+2026-11-13T10:28:12.0977064Z                     then_branch=_branch("inner_positive", [[2, 0], [0, 3]]),
+2026-11-13T10:28:12.0977428Z                     else_branch=_branch("inner_negative", [[-1, 0], [0, -2]]),
+2026-11-13T10:28:12.0977743Z                 )
+2026-11-13T10:28:12.0978048Z                 inner.metadata_props.add(key="layer", value="inner")
+2026-11-13T10:28:12.0978404Z                 nested = helper.make_graph(
+2026-11-13T10:28:12.0978781Z                     [inner], "nested", [], [helper.make_tensor_value_info("nested_y", TensorProto.FLOAT, [1, 2])]
+2026-11-13T10:28:12.0979148Z                 )
+2026-11-13T10:28:12.0979369Z                 outer = helper.make_node(
+2026-11-13T10:28:12.0979644Z                     "If",
+2026-11-13T10:28:12.0979878Z                     ["condition"],
+2026-11-13T10:28:12.0980151Z                     ["y"],
+2026-11-13T10:28:12.0980395Z                     name="outer_if",
+2026-11-13T10:28:12.0980651Z                     doc_string="outer condition",
+2026-11-13T10:28:12.0980941Z                     then_branch=nested,
+2026-11-13T10:28:12.0981235Z                     else_branch=copy.deepcopy(custom.attribute[0].g),
+2026-11-13T10:28:12.0981508Z                 )
+2026-11-13T10:28:12.0981788Z                 outer.metadata_props.add(key="layer", value="outer")
+2026-11-13T10:28:12.0982271Z                 model.graph.ClearField("node")
+2026-11-13T10:28:12.0982586Z                 model.graph.node.append(outer)
+2026-11-13T10:28:12.0982897Z                 expected = _infer(model)
+2026-11-13T10:28:12.0983141Z                 expected_fields = {
+2026-11-13T10:28:12.0983430Z                     "outer_if": _properties(outer),
+2026-11-13T10:28:12.0983711Z                     "inner_if": _properties(inner),
+2026-11-13T10:28:12.0983982Z                 }
+2026-11-13T10:28:12.0984220Z                 _apply(model, operation)
+2026-11-13T10:28:12.0984546Z                 graphs = [model.graph]
+2026-11-13T10:28:12.0984818Z                 seen = set()
+2026-11-13T10:28:12.0985063Z                 while graphs:
+2026-11-13T10:28:12.0985356Z                     graph = graphs.pop()
+2026-11-13T10:28:12.0985631Z                     for node in graph.node:
+2026-11-13T10:28:12.0985914Z                         if node.name in expected_fields:
+2026-11-13T10:28:12.0986273Z >                           self.assertEqual(_properties(node), expected_fields[node.name])
+2026-11-13T10:28:12.0986789Z E                           AssertionError: b'\n\[97 chars]h\xa0\x01\x05' != b'\n\[97 chars]h\xa0\x01\x052\x0fouter conditionJ\x0e\n\x05layer\x12\x05outer'
+2026-11-13T10:28:12.0987151Z 
+2026-11-13T10:28:12.0987346Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:185: AssertionError
+2026-11-13T10:28:12.0987910Z _ TestSubgraphNodeProperties.test_overload_survives_save_and_reload (operation='clean_initializers') _
+2026-11-13T10:28:12.0988205Z 
+2026-11-13T10:28:12.0988498Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_overload_survives_save_and_reload>
+2026-11-13T10:28:12.0988853Z 
+2026-11-13T10:28:12.0989017Z     def test_overload_survives_save_and_reload(self):
+2026-11-13T10:28:12.0989367Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0989714Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.0990035Z                 model = _function_model(overload="float32")
+2026-11-13T10:28:12.0990329Z                 expected = _infer(model)
+2026-11-13T10:28:12.0990623Z                 _apply(model, operation)
+2026-11-13T10:28:12.0990942Z >               self.assertEqual(model.graph.node[0].overload, "float32")
+2026-11-13T10:28:12.0991256Z E               AssertionError: '' != 'float32'
+2026-11-13T10:28:12.0991542Z E               + float32
+2026-11-13T10:28:12.0991689Z 
+2026-11-13T10:28:12.0992094Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:125: AssertionError
+2026-11-13T10:28:12.0992636Z _ TestSubgraphNodeProperties.test_overload_survives_save_and_reload (operation='replace_gemm_with_matmul') _
+2026-11-13T10:28:12.0992978Z 
+2026-11-13T10:28:12.0993264Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_overload_survives_save_and_reload>
+2026-11-13T10:28:12.0993604Z 
+2026-11-13T10:28:12.0993734Z     def test_overload_survives_save_and_reload(self):
+2026-11-13T10:28:12.0994097Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0994438Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.0994731Z                 model = _function_model(overload="float32")
+2026-11-13T10:28:12.0995039Z                 expected = _infer(model)
+2026-11-13T10:28:12.0995295Z                 _apply(model, operation)
+2026-11-13T10:28:12.0995610Z >               self.assertEqual(model.graph.node[0].overload, "float32")
+2026-11-13T10:28:12.0995969Z E               AssertionError: '' != 'float32'
+2026-11-13T10:28:12.0996232Z E               + float32
+2026-11-13T10:28:12.0996363Z 
+2026-11-13T10:28:12.0996603Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:125: AssertionError
+2026-11-13T10:28:12.0997152Z _ TestSubgraphNodeProperties.test_repeated_graph_attributes_keep_the_original_node (operation='clean_initializers') _
+2026-11-13T10:28:12.0997505Z 
+2026-11-13T10:28:12.0997815Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_repeated_graph_attributes_keep_the_original_node>
+2026-11-13T10:28:12.0998188Z 
+2026-11-13T10:28:12.0998332Z     def test_repeated_graph_attributes_keep_the_original_node(self):
+2026-11-13T10:28:12.0998732Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.0999092Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.0999412Z                 node = helper.make_node(
+2026-11-13T10:28:12.0999688Z                     "GraphContainer",
+2026-11-13T10:28:12.0999988Z                     ["x"],
+2026-11-13T10:28:12.1000282Z                     ["y"],
+2026-11-13T10:28:12.1000561Z                     name="container",
+2026-11-13T10:28:12.1000811Z                     domain=DOMAIN,
+2026-11-13T10:28:12.1001085Z                     doc_string="multiple graph alternatives",
+2026-11-13T10:28:12.1001404Z                     overload="variant",
+2026-11-13T10:28:12.1001664Z                     branches=[
+2026-11-13T10:28:12.1002110Z                         _branch("first", [[2, 0], [0, 3]]),
+2026-11-13T10:28:12.1002414Z                         _branch("second", [[-1, 0], [0, -2]]),
+2026-11-13T10:28:12.1002696Z                     ],
+2026-11-13T10:28:12.1002939Z                     selection=2,
+2026-11-13T10:28:12.1003200Z                     label="source",
+2026-11-13T10:28:12.1003471Z                 )
+2026-11-13T10:28:12.1003823Z                 node.metadata_props.add(key="exporter", value="test")
+2026-11-13T10:28:12.1004326Z                 model = helper.make_model(helper.make_graph([node], "structural", [], []))
+2026-11-13T10:28:12.1004697Z                 expected = _properties(node)
+2026-11-13T10:28:12.1004979Z                 _apply(model, operation)
+2026-11-13T10:28:12.1005335Z                 result = model.graph.node[0]
+2026-11-13T10:28:12.1005634Z >               self.assertEqual(_properties(result), expected)
+2026-11-13T10:28:12.1006074Z E               AssertionError: b'\n\[146 chars]1\x02' != b'\n\[146 chars]1\x022\x1bmultiple graph alternatives:\x1btest[62 chars]test'
+2026-11-13T10:28:12.1006417Z 
+2026-11-13T10:28:12.1006643Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:214: AssertionError
+2026-11-13T10:28:12.1007216Z _ TestSubgraphNodeProperties.test_repeated_graph_attributes_keep_the_original_node (operation='replace_gemm_with_matmul') _
+2026-11-13T10:28:12.1007628Z 
+2026-11-13T10:28:12.1007921Z self = <test_subgraph_node_properties.TestSubgraphNodeProperties testMethod=test_repeated_graph_attributes_keep_the_original_node>
+2026-11-13T10:28:12.1008371Z 
+2026-11-13T10:28:12.1008516Z     def test_repeated_graph_attributes_keep_the_original_node(self):
+2026-11-13T10:28:12.1008892Z         for operation in ("clean_initializers", "replace_gemm_with_matmul"):
+2026-11-13T10:28:12.1009280Z             with self.subTest(operation=operation):
+2026-11-13T10:28:12.1009544Z                 node = helper.make_node(
+2026-11-13T10:28:12.1009869Z                     "GraphContainer",
+2026-11-13T10:28:12.1010114Z                     ["x"],
+2026-11-13T10:28:12.1010338Z                     ["y"],
+2026-11-13T10:28:12.1010595Z                     name="container",
+2026-11-13T10:28:12.1010836Z                     domain=DOMAIN,
+2026-11-13T10:28:12.1011120Z                     doc_string="multiple graph alternatives",
+2026-11-13T10:28:12.1011399Z                     overload="variant",
+2026-11-13T10:28:12.1011674Z                     branches=[
+2026-11-13T10:28:12.1012134Z                         _branch("first", [[2, 0], [0, 3]]),
+2026-11-13T10:28:12.1012433Z                         _branch("second", [[-1, 0], [0, -2]]),
+2026-11-13T10:28:12.1012714Z                     ],
+2026-11-13T10:28:12.1012941Z                     selection=2,
+2026-11-13T10:28:12.1013173Z                     label="source",
+2026-11-13T10:28:12.1013448Z                 )
+2026-11-13T10:28:12.1013795Z                 node.metadata_props.add(key="exporter", value="test")
+2026-11-13T10:28:12.1014232Z                 model = helper.make_model(helper.make_graph([node], "structural", [], []))
+2026-11-13T10:28:12.1014586Z                 expected = _properties(node)
+2026-11-13T10:28:12.1014847Z                 _apply(model, operation)
+2026-11-13T10:28:12.1015156Z                 result = model.graph.node[0]
+2026-11-13T10:28:12.1015469Z >               self.assertEqual(_properties(result), expected)
+2026-11-13T10:28:12.1015933Z E               AssertionError: b'\n\[146 chars]1\x02' != b'\n\[146 chars]1\x022\x1bmultiple graph alternatives:\x1btest[62 chars]test'
+2026-11-13T10:28:12.1016290Z 
+2026-11-13T10:28:12.1016557Z onnxruntime/test/python/quantization/test_subgraph_node_properties.py:214: AssertionError
+2026-11-13T10:28:12.1017002Z =========================== short test summary info ============================
+2026-11-13T10:28:12.1018065Z SUBFAILED(operation='clean_initializers') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_all_non_graph_node_properties_are_preserved - AssertionError: b'\n\[57 chars]onal*\x10\n\x0belse_branch\xa0\x01\x05*\x10\n\[22 chars]\x05' != b'\n\[57 chars]onal*0\n\x0belse_branchj\x1ebranch attribute d[229 chars]lock'
+2026-11-13T10:28:12.1019681Z SUBFAILED(operation='replace_gemm_with_matmul') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_all_non_graph_node_properties_are_preserved - AssertionError: b'\n\[57 chars]onal*\x10\n\x0belse_branch\xa0\x01\x05*\x10\n\[22 chars]\x05' != b'\n\[57 chars]onal*0\n\x0belse_branchj\x1ebranch attribute d[229 chars]lock'
+2026-11-13T10:28:12.1021157Z SUBFAILED(operation='clean_initializers', condition=False) onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_custom_function_dispatch_and_inference_survive - AssertionError: '' != 'test.quantization.functions'
+2026-11-13T10:28:12.1022106Z + test.quantization.functions
+2026-11-13T10:28:12.1022847Z SUBFAILED(operation='clean_initializers', condition=True) onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_custom_function_dispatch_and_inference_survive - AssertionError: '' != 'test.quantization.functions'
+2026-11-13T10:28:12.1023640Z + test.quantization.functions
+2026-11-13T10:28:12.1024399Z SUBFAILED(operation='replace_gemm_with_matmul', condition=False) onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_custom_function_dispatch_and_inference_survive - AssertionError: '' != 'test.quantization.functions'
+2026-11-13T10:28:12.1025209Z + test.quantization.functions
+2026-11-13T10:28:12.1025985Z SUBFAILED(operation='replace_gemm_with_matmul', condition=True) onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_custom_function_dispatch_and_inference_survive - AssertionError: '' != 'test.quantization.functions'
+2026-11-13T10:28:12.1026763Z + test.quantization.functions
+2026-11-13T10:28:12.1027636Z SUBFAILED(operation='clean_initializers') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_graph_contents_still_receive_the_requested_transformation - onnx.onnx_cpp2py_export.checker.ValidationError: No Op registered for Conditional with domain_version of 17
+2026-11-13T10:28:12.1028406Z 
+2026-11-13T10:28:12.1028567Z ==> Context: Bad node spec for node. Name: function_call OpType: Conditional
+2026-11-13T10:28:12.1029530Z SUBFAILED(operation='replace_gemm_with_matmul') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_graph_contents_still_receive_the_requested_transformation - onnx.onnx_cpp2py_export.checker.ValidationError: No Op registered for Conditional with domain_version of 17
+2026-11-13T10:28:12.1030273Z 
+2026-11-13T10:28:12.1030454Z ==> Context: Bad node spec for node. Name: function_call OpType: Conditional
+2026-11-13T10:28:12.1031457Z SUBFAILED(operation='clean_initializers') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_nested_standard_if_nodes_keep_metadata - AssertionError: b'\n\[97 chars]h\xa0\x01\x05' != b'\n\[97 chars]h\xa0\x01\x052\x0fouter conditionJ\x0e\n\x05layer\x12\x05outer'
+2026-11-13T10:28:12.1033534Z SUBFAILED(operation='replace_gemm_with_matmul') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_nested_standard_if_nodes_keep_metadata - AssertionError: b'\n\[97 chars]h\xa0\x01\x05' != b'\n\[97 chars]h\xa0\x01\x052\x0fouter conditionJ\x0e\n\x05layer\x12\x05outer'
+2026-11-13T10:28:12.1034871Z SUBFAILED(operation='clean_initializers') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_overload_survives_save_and_reload - AssertionError: '' != 'float32'
+2026-11-13T10:28:12.1035522Z + float32
+2026-11-13T10:28:12.1036131Z SUBFAILED(operation='replace_gemm_with_matmul') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_overload_survives_save_and_reload - AssertionError: '' != 'float32'
+2026-11-13T10:28:12.1036823Z + float32
+2026-11-13T10:28:12.1037629Z SUBFAILED(operation='clean_initializers') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_repeated_graph_attributes_keep_the_original_node - AssertionError: b'\n\[146 chars]1\x02' != b'\n\[146 chars]1\x022\x1bmultiple graph alternatives:\x1btest[62 chars]test'
+2026-11-13T10:28:12.1039111Z SUBFAILED(operation='replace_gemm_with_matmul') onnxruntime/test/python/quantization/test_subgraph_node_properties.py::TestSubgraphNodeProperties::test_repeated_graph_attributes_keep_the_original_node - AssertionError: b'\n\[146 chars]1\x02' != b'\n\[146 chars]1\x022\x1bmultiple graph alternatives:\x1btest[62 chars]test'
+2026-11-13T10:28:12.1039992Z 14 failed, 7 passed, 2 subtests passed in 0.20s
+2026-11-13T10:28:12.1041025Z Confirmed original subgraph node-property failures: ['test_all_non_graph_node_properties_are_preserved', 'test_custom_function_dispatch_and_inference_survive', 'test_graph_contents_still_receive_the_requested_transformation', 'test_nested_standard_if_nodes_keep_metadata', 'test_overload_survives_save_and_reload', 'test_repeated_graph_attributes_keep_the_original_node']
+2026-11-13T10:28:12.1068197Z ##[group]Run python -m ruff check onnxruntime/python/tools/quantization/onnx_model.py onnxruntime/test/python/quantization/test_subgraph_node_properties.py
+2026-11-13T10:28:12.1069092Z [36;1mpython -m ruff check onnxruntime/python/tools/quantization/onnx_model.py onnxruntime/test/python/quantization/test_subgraph_node_properties.py[0m
+2026-11-13T10:28:12.1069892Z [36;1mpython -m ruff format --diff onnxruntime/python/tools/quantization/onnx_model.py onnxruntime/test/python/quantization/test_subgraph_node_properties.py || true[0m
+2026-11-13T10:28:12.1070691Z [36;1mpython -m ruff format --check onnxruntime/python/tools/quantization/onnx_model.py onnxruntime/test/python/quantization/test_subgraph_node_properties.py[0m
+2026-11-13T10:28:12.1071223Z [36;1mgit diff --check[0m
+2026-11-13T10:28:12.1098231Z shell: /usr/bin/bash -e {0}
+2026-11-13T10:28:12.1098537Z env:
+2026-11-13T10:28:12.1098744Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:28:12.1099110Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:28:12.1099394Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:28:12.1099772Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:12.1100164Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:28:12.1100546Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:12.1100877Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:12.1101194Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:12.1101565Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:28:12.1101988Z ##[endgroup]
+2026-11-13T10:28:12.1345913Z All checks passed!
+2026-11-13T10:28:12.1535363Z 2 files already formatted
+2026-11-13T10:28:12.1706530Z 2 files already formatted
+2026-11-13T10:28:13.1179217Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-13T10:28:13.1179578Z with:
+2026-11-13T10:28:13.1179830Z   name: native-subgraph-node-properties-evidence
+2026-11-13T10:28:13.1180315Z   path: ort-source-overlay-metadata.json
+ort-patched.log
+ort-patched.xml
+ort-baseline.log
+ort-baseline.xml
+
+2026-11-13T10:28:13.1180773Z   if-no-files-found: warn
+2026-11-13T10:28:13.1181024Z   compression-level: 6
+2026-11-13T10:28:13.1181256Z   overwrite: false
+2026-11-13T10:28:13.1181481Z   include-hidden-files: false
+2026-11-13T10:28:13.1181740Z   archive: true
+2026-11-13T10:28:13.1182168Z env:
+2026-11-13T10:28:13.1182368Z   OPENBLAS_NUM_THREADS: 1
+2026-11-13T10:28:13.1182638Z   PYTEST_DISABLE_PLUGIN_AUTOLOAD: 1
+2026-11-13T10:28:13.1182919Z   PYTHONPATH: onnxruntime/test/python/quantization
+2026-11-13T10:28:13.1183302Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:13.1183706Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+2026-11-13T10:28:13.1184113Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:13.1184443Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:13.1184757Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+2026-11-13T10:28:13.1185134Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+2026-11-13T10:28:13.1185421Z ##[endgroup]
+2026-11-13T10:28:13.2334149Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-13T10:28:13.2483378Z The least common ancestor is /home/runner/work/onnxruntime/onnxruntime. This will be the root directory of the artifact
+2026-11-13T10:28:13.2484033Z With the provided path, there will be 5 files uploaded
+2026-11-13T10:28:13.2484570Z Artifact name is valid!
+2026-11-13T10:28:13.2484822Z Root directory input is valid!
+2026-11-13T10:28:13.6310603Z Uploading artifact: native-subgraph-node-properties-evidence.zip
+2026-11-13T10:28:13.6339294Z Beginning upload of artifact content to blob storage
+2026-11-13T10:28:14.2241196Z Uploaded bytes 10515
+2026-11-13T10:28:14.3173808Z Finished uploading artifact content to blob storage!
+2026-11-13T10:28:14.3174608Z SHA256 digest of uploaded artifact is a9c445cd9687f7393fcffec9dd7a0f4b0ce4d448f0aac1059eab4fa1aaf477b9
+2026-11-13T10:28:14.3175216Z Finalizing artifact upload
+2026-11-13T10:28:14.8982575Z Artifact native-subgraph-node-properties-evidence successfully finalized. Artifact ID 14029485206
+2026-11-13T10:28:14.8983997Z Artifact native-subgraph-node-properties-evidence has been successfully uploaded! Final size is 10515 bytes. Artifact ID is 14029485206
+2026-11-13T10:28:14.8985936Z Artifact download URL: https://github.com/Afloat16/onnxruntime/actions/runs/43409044245/artifacts/14029485206
+2026-11-13T10:28:14.9106432Z Post job cleanup.
+2026-11-13T10:28:15.0011378Z (node:2463) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-13T10:28:15.0012123Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-13T10:28:15.0163664Z Post job cleanup.
+2026-11-13T10:28:15.0820584Z [command]/usr/bin/git version
+2026-11-13T10:28:15.0881457Z git version 2.56.1
+2026-11-13T10:28:15.0905442Z Temporarily overriding HOME='/home/runner/work/_temp/64138c30-b0bb-4a40-8b8b-4bd77c50ba02' before making global git config changes
+2026-11-13T10:28:15.0906326Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-13T10:28:15.0909200Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/onnxruntime/onnxruntime
+2026-11-13T10:28:15.0939539Z Removing SSH command configuration
+2026-11-13T10:28:15.0944783Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-13T10:28:15.0969901Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-13T10:28:15.1193399Z Removing HTTP extra header
+2026-11-13T10:28:15.1197813Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-13T10:28:15.1231084Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-13T10:28:15.1460036Z Removing includeIf entries pointing to credentials config files
+2026-11-13T10:28:15.1460652Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-13T10:28:15.1478247Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-13T10:28:15.1753672Z Cleaning up orphan processes
+2026-11-13T10:28:15.1994967Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
