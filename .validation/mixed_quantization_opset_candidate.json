@@ -1,0 +1,39 @@
+{
+  "repository": "microsoft/onnxruntime",
+  "fork": "Afloat16/onnxruntime",
+  "stars": 22297,
+  "archived": false,
+  "base_commit": "a8246c0d094f1ab0d6bf236228e5e67683321cd7",
+  "base_tree": "ada396d3d22a607ae65ae1140ac5e66a057fc692",
+  "branch": "fix/float8-int16-opset-priority-20261113",
+  "files": [
+    "onnxruntime/python/tools/quantization/quant_utils.py",
+    "onnxruntime/test/python/quantization/test_mixed_quantization_opset.py"
+  ],
+  "commit": "d9c51010d378330a4aeb9c3d7a9f4fdbba4866c4",
+  "status": "awaiting_native_validation",
+  "novelty": {
+    "classification": "genuinely-new",
+    "history_entries": 65,
+    "actual_patches_read": [
+      24949,
+      28202,
+      28522,
+      32372
+    ],
+    "all_state_queries": [
+      "update_opset_version",
+      "opset float8 16",
+      "float8 overrides opset",
+      "opset precedence"
+    ],
+    "personal_fork": "31 fork branches inspected, with all existing source heads belonging to separate current-task repairs; no prior opset-priority patch.",
+    "related_exclusions": {
+      "24949": "Introduced the helper and FLOAT8 upgrade; predates integer override support",
+      "28202": "Introduced 16-bit automatic upgrade after the FLOAT8 elif; does not handle simultaneous FLOAT8 and INT16/UINT16 requirements",
+      "28522": "Added block-size priority, leaves FLOAT8-before-16bit ordering unchanged",
+      "32372": "Adds CPU FP6 schemas/kernels, does not modify Python quantization opset selection"
+    }
+  },
+  "scope": "Let the existing opset-21 rule take precedence when FLOAT8 models also have 16-bit tensor overrides; preserve other upgrade rules and existing validation of top-level quantization types."
+}
