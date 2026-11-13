@@ -33,5 +33,6 @@
     "Quantization ONNXModel graph utilities, not the separate transformers.OnnxModel implementation.",
     "Native results pending; Graphs custom-attribute case checks ordering only, not an unsupported custom execution kernel."
   ],
-  "commit": "e8a3d2e6696b1d0392f12b320e948d79e634c297"
+  "commit": "e4bdecae937d11b84b418aec58f7dddf12aaeca4",
+  "validation_note": "Previous exact native tests passed; source change is test formatting only (Python AST identical). Final exact-SHA workflow rerun pending."
 }
