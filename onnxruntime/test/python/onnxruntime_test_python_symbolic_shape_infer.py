@@ -39,6 +39,178 @@ skipped_models = ["SSD-MobilenetV1", "SSD-int8", "Inception-1-int8"]
 
 
 class TestSymbolicShapeInference(unittest.TestCase):
+    @staticmethod
+    def _make_symbolic_equal_if(left, right, opset=13):
+        def branch(name, values):
+            return helper.make_graph(
+                [
+                    helper.make_node(
+                        "Constant",
+                        [],
+                        ["value"],
+                        value=helper.make_tensor("constant", TensorProto.FLOAT, [len(values)], values),
+                    )
+                ],
+                name,
+                [],
+                [helper.make_tensor_value_info("value", TensorProto.FLOAT, [len(values)])],
+            )
+
+        nodes = [
+            helper.make_node("Shape", ["input"], ["shape"]),
+            helper.make_node("Gather", ["shape", "zero"], ["n"]),
+            helper.make_node("Gather", ["shape", "one"], ["m"]),
+            helper.make_node("Add", ["n", "one"], ["n_plus_one"]),
+            helper.make_node("Equal", [left, right], ["condition"]),
+            helper.make_node(
+                "If",
+                ["condition"],
+                ["output"],
+                then_branch=branch("yes", [11, 12]),
+                else_branch=branch("no", [21, 22, 23]),
+            ),
+        ]
+        initializers = [
+            helper.make_tensor(name, TensorProto.INT64, [], [value])
+            for name, value in (("zero", 0), ("one", 1), ("two", 2), ("three", 3), ("negative", -1))
+        ]
+        return helper.make_model(
+            helper.make_graph(
+                nodes,
+                "symbolic_equal",
+                [helper.make_tensor_value_info("input", TensorProto.FLOAT, ["N", "M"])],
+                [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None])],
+                initializers,
+            ),
+            opset_imports=[helper.make_opsetid("", opset)],
+            ir_version=8,
+        )
+
+    def test_equal_symbolic_conditions_preserve_if_branches(self):
+        for left, right in (("n", "three"), ("n", "zero"), ("n", "m"), ("n_plus_one", "two"), ("n", "negative")):
+            with self.subTest(left=left, right=right):
+                inferred = SymbolicShapeInference.infer_shapes(self._make_symbolic_equal_if(left, right))
+                onnx.checker.check_model(inferred, full_check=True)
+                if_node = inferred.graph.node[-1]
+                branches = {attribute.name: attribute.g for attribute in if_node.attribute}
+                for name, expected in (("then_branch", [11, 12]), ("else_branch", [21, 22, 23])):
+                    tensor = branches[name].node[0].attribute[0].t
+                    numpy.testing.assert_array_equal(numpy_helper.to_array(tensor), expected)
+                self.assertFalse(inferred.graph.output[0].type.tensor_type.shape.dim[0].HasField("dim_value"))
+
+    def test_equal_provable_symbolic_conditions(self):
+        for left, right, expected in (
+            ("n", "n", [11, 12]),
+            ("n_plus_one", "n", [21, 22, 23]),
+            ("n_plus_one", "n_plus_one", [11, 12]),
+        ):
+            with self.subTest(left=left, right=right):
+                inferred = SymbolicShapeInference.infer_shapes(self._make_symbolic_equal_if(left, right))
+                onnx.checker.check_model(inferred, full_check=True)
+                self.assertEqual(inferred.graph.output[0].type.tensor_type.shape.dim[0].dim_value, len(expected))
+                for attribute in inferred.graph.node[-1].attribute:
+                    numpy.testing.assert_array_equal(
+                        numpy_helper.to_array(attribute.g.node[0].attribute[0].t), expected
+                    )
+
+    def test_equal_unknown_condition_keeps_where_shape_dynamic(self):
+        for input_shape in (["N", "M"], ["N", 2]):
+            for compared_shape in ([3, 2], [0, 2]):
+                with self.subTest(input_shape=input_shape, compared_shape=compared_shape):
+                    model = helper.make_model(
+                        helper.make_graph(
+                            [
+                                helper.make_node("Shape", ["input"], ["input_shape"]),
+                                helper.make_node("Equal", ["input_shape", "compared_shape"], ["condition"]),
+                                helper.make_node("Where", ["condition", "yes", "no"], ["shape"]),
+                                helper.make_node("ConstantOfShape", ["shape"], ["output"]),
+                            ],
+                            "dynamic_where",
+                            [helper.make_tensor_value_info("input", TensorProto.FLOAT, input_shape)],
+                            [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None, None])],
+                            [
+                                helper.make_tensor("compared_shape", TensorProto.INT64, [2], compared_shape),
+                                helper.make_tensor("yes", TensorProto.INT64, [2], [2, 3]),
+                                helper.make_tensor("no", TensorProto.INT64, [2], [4, 5]),
+                            ],
+                        ),
+                        opset_imports=[helper.make_opsetid("", 13)],
+                        ir_version=8,
+                    )
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    onnx.checker.check_model(inferred, full_check=True)
+                    dims = inferred.graph.output[0].type.tensor_type.shape.dim
+                    self.assertEqual(len(dims), 2)
+                    self.assertFalse(any(dim.HasField("dim_value") for dim in dims))
+
+    @staticmethod
+    def _make_literal_equal_shape(data_type, left, right, source, opset=13):
+        tensors = [
+            numpy_helper.from_array(numpy.asarray(values, dtype=helper.tensor_dtype_to_np_dtype(data_type)), name)
+            for name, values in (("left", left), ("right", right))
+        ]
+        nodes = []
+        if source == "constant":
+            nodes.extend(helper.make_node("Constant", [], [tensor.name], value=tensor) for tensor in tensors)
+            tensors = []
+        length = numpy.broadcast_arrays(numpy.asarray(left), numpy.asarray(right))[0].size
+        tensors.extend(
+            (
+                helper.make_tensor("yes", TensorProto.INT64, [length], [2] * length),
+                helper.make_tensor("no", TensorProto.INT64, [length], [4] * length),
+            )
+        )
+        nodes.extend(
+            (
+                helper.make_node("Equal", ["left", "right"], ["condition"]),
+                helper.make_node("Where", ["condition", "yes", "no"], ["shape"]),
+                helper.make_node("ConstantOfShape", ["shape"], ["output"]),
+            )
+        )
+        return helper.make_model(
+            helper.make_graph(
+                nodes,
+                "literal_equal",
+                [],
+                [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None] * length)],
+                tensors,
+            ),
+            opset_imports=[helper.make_opsetid("", opset)],
+            ir_version=8,
+        )
+
+    def test_equal_literal_values_are_not_truncated(self):
+        cases = (
+            (TensorProto.FLOAT, [0.25, 0.5], [0.5, 0.5], [4, 2]),
+            (TensorProto.DOUBLE, [-0.25, 0.5], [0.25, 0.5], [4, 2]),
+            (TensorProto.FLOAT16, [0.25, 0.5], [0.5, 0.5], [4, 2]),
+            (TensorProto.FLOAT, 0.5, [0.25, 0.5], [4, 2]),
+            (TensorProto.DOUBLE, [0.25, 0.5], 0.5, [4, 2]),
+            (TensorProto.FLOAT, 0.25, 0.5, [4]),
+            (TensorProto.INT64, [2, 3], [2, 4], [2, 4]),
+            (TensorProto.INT32, [2, 3], [2, 4], [2, 4]),
+            (TensorProto.BOOL, [True, False], [True, True], [2, 4]),
+        )
+        for data_type, left, right, expected in cases:
+            for source in ("initializer", "constant"):
+                with self.subTest(type=data_type, left=left, right=right, source=source):
+                    model = self._make_literal_equal_shape(data_type, left, right, source)
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    onnx.checker.check_model(inferred, full_check=True)
+                    self.assertEqual(
+                        [dim.dim_value for dim in inferred.graph.output[0].type.tensor_type.shape.dim], expected
+                    )
+
+    def test_equal_empty_vector_and_scalar(self):
+        for data_type in (TensorProto.INT64, TensorProto.FLOAT):
+            for source in ("initializer", "constant"):
+                with self.subTest(type=data_type, source=source):
+                    inferred = SymbolicShapeInference.infer_shapes(
+                        self._make_literal_equal_shape(data_type, [], 1, source)
+                    )
+                    onnx.checker.check_model(inferred, full_check=True)
+                    self.assertEqual(len(inferred.graph.output[0].type.tensor_type.shape.dim), 0)
+
     def test_shape_preserving_hyper_connection_ops(self):
         cases = {
             "BranchwiseRMSNorm": (

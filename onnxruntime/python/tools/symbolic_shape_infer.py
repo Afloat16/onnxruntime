@@ -147,7 +147,7 @@ class SymbolicShapeInference:
             "Div": self._infer_symbolic_compute_ops,
             "Einsum": self._infer_Einsum,
             "Expand": self._infer_Expand,
-            "Equal": self._infer_symbolic_compute_ops,
+            "Equal": self._infer_Equal,
             "Floor": self._infer_symbolic_compute_ops,
             "Gather": self._infer_Gather,
             "GatherElements": self._infer_GatherElements,
@@ -870,13 +870,34 @@ class SymbolicShapeInference:
             )
         )
 
+    def _infer_Equal(self, node):  # noqa: N802
+        values = self._get_int_or_float_values(node, broadcast=True, allow_float_values=True)
+        if any(value is None for value in values):
+            return
+        as_list = any(isinstance(value, list) for value in values)
+        if any(isinstance(value, list) and not value for value in values):
+            self.sympy_data_[node.output[0]] = []
+            return
+        pairs = zip(*values, strict=False) if as_list else [values]
+        result = []
+        for left, right in pairs:
+            if any(isinstance(value, sympy.Expr) and not value.is_number for value in (left, right)):
+                difference = left - right
+                # Distinct symbolic expressions need not have different runtime values.
+                # Only a literal difference proves equality or inequality for every input.
+                if not is_literal(difference):
+                    return
+                result.append(bool(difference == 0))
+            else:
+                result.append(bool(left == right))
+        self.sympy_data_[node.output[0]] = result if as_list else result[0]
+
     def _infer_symbolic_compute_ops(self, node):
         funcs = {
             "Add": lambda l: l[0] + l[1],  # noqa: E741
             "Div": lambda l: (  # noqa: E741
                 int(l[0] // l[1]) if isinstance(l[0] // l[1], float) else l[0] // l[1]
             ),  # integer div in sympy
-            "Equal": lambda l: l[0] == l[1],  # noqa: E741
             "Floor": lambda l: sympy.floor(l[0]),  # noqa: E741
             "Max": lambda l: (  # noqa: E741
                 l[1]
