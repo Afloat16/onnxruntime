@@ -17,7 +17,7 @@ class QMaxPool(Direct8BitOp):
             return
 
         # FP8 types are not supported for MaxPool; emit node unquantized.
-        if self.quantizer.activation_qType in FLOAT8_TYPES:
+        if self.quantizer.activation_qType in FLOAT8_TYPES or self._get_input_quantized_type() in FLOAT8_TYPES:
             return QuantOperatorBase.quantize(self)
 
         # Direct 8bits op

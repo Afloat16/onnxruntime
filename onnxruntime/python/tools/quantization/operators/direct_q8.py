@@ -1,3 +1,5 @@
+from onnx import TensorProto
+
 from ..quant_utils import TENSOR_NAME_QUANT_SUFFIX, QuantizedValue, QuantizedValueType
 from .base_operator import QuantOperatorBase
 from .qdq_base_operator import QDQOperatorBase
@@ -8,6 +10,19 @@ from .qdq_base_operator import QDQOperatorBase
 class Direct8BitOp(QuantOperatorBase):
     def __init__(self, onnx_quantizer, onnx_node):
         super().__init__(onnx_quantizer, onnx_node)
+
+    def _get_input_quantized_type(self):
+        input_name = self.node.input[0]
+        overrides = self.quantizer.tensor_quant_overrides.get(input_name, [{}])[0]
+        qtype = overrides["quant_type"].tensor_type if "quant_type" in overrides else self.quantizer.activation_qType
+        quantized_value = self.quantizer.find_quantized_value(input_name)
+        owner = self.quantizer
+        while quantized_value is not None and owner is not None:
+            zero_point = owner.model.get_initializer(quantized_value.zp_name)
+            if zero_point is not None:
+                return zero_point.data_type
+            owner = owner.parent
+        return qtype
 
     def quantize(self):
         node = self.node
@@ -38,6 +53,15 @@ class Direct8BitOp(QuantOperatorBase):
             if not self.quantizer.is_float_tensor(node.input[0]):
                 super().quantize()
                 return
+            # DynamicQuantizeLinear only accepts FLOAT. Static FLOAT16 input
+            # quantization requires QuantizeLinear/DequantizeLinear opset 19.
+            if (
+                self.quantizer.find_quantized_value(node.input[0]) is None
+                and not self.quantizer.find_initializer_in_path(node.input[0])
+                and self.quantizer.get_tensor_type(node.input[0]) != TensorProto.FLOAT
+                and (not self.quantizer.static or self.quantizer.opset_version < 19)
+            ):
+                return super().quantize()
 
             (
                 quantized_input_names,

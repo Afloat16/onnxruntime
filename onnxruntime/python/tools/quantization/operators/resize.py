@@ -11,7 +11,11 @@ class QResize(Direct8BitOp):
         assert node.op_type == "Resize"
 
         # Resize requires opset 11 and does not support FP8 tensors.
-        if self.quantizer.opset_version < 11 or self.quantizer.activation_qType in FLOAT8_TYPES:
+        if (
+            self.quantizer.opset_version < 11
+            or self.quantizer.activation_qType in FLOAT8_TYPES
+            or self._get_input_quantized_type() in FLOAT8_TYPES
+        ):
             super(Direct8BitOp, self).quantize()
             return
 

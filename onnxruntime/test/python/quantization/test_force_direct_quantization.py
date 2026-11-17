@@ -34,11 +34,13 @@ class TestForceDirectQuantization(unittest.TestCase):
             return np.lib.stride_tricks.sliding_window_view(value, (2, 2), axis=(2, 3)).max(axis=(-2, -1))
         return value.repeat(2, axis=2).repeat(2, axis=3)
 
-    def _model(self, op_type, source, dynamic=False, integer=False):
+    def _model(self, op_type, source, dynamic=False, integer=False, float16=False, opset=13):
         values = (np.arange(24, dtype=np.float32).reshape(1, 2, 3, 4) - 12) / 8
         if integer:
             values = values.astype(np.int64)
-        proto_type = TensorProto.INT64 if integer else TensorProto.FLOAT
+        elif float16:
+            values = values.astype(np.float16)
+        proto_type = TensorProto.INT64 if integer else (TensorProto.FLOAT16 if float16 else TensorProto.FLOAT)
         inputs = [helper.make_tensor_value_info("control", TensorProto.INT64, [])]
         nodes = [helper.make_node("Identity", ["control"], ["control_output"])]
         initializers = []
@@ -75,7 +77,7 @@ class TestForceDirectQuantization(unittest.TestCase):
             helper.make_tensor_value_info("control_output", TensorProto.INT64, []),
         ]
         graph = helper.make_graph(nodes, "forced_direct", inputs, outputs, initializers)
-        model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)], ir_version=7)
+        model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", opset)], ir_version=7)
         feeds = []
         for index, data in enumerate((values, np.flip(values, axis=-1).copy())):
             feed = {"control": np.array(index, dtype=np.int64)}
@@ -84,8 +86,8 @@ class TestForceDirectQuantization(unittest.TestCase):
             feeds.append(feed)
         return model, feeds, values
 
-    def _check(self, op_type, source, force, exclude, qtype, dynamic=False, integer=False):
-        model, feeds, constant = self._model(op_type, source, dynamic, integer)
+    def _check(self, op_type, source, force, exclude, qtype, dynamic=False, integer=False, float16=False, opset=13):
+        model, feeds, constant = self._model(op_type, source, dynamic, integer, float16, opset)
         with tempfile.TemporaryDirectory() as directory:
             output_path = Path(directory) / "quantized.onnx"
             options = {
@@ -107,7 +109,12 @@ class TestForceDirectQuantization(unittest.TestCase):
             quantized = onnx.load(output_path)
             onnx.checker.check_model(quantized, full_check=True)
             target = next(node for node in quantized.graph.node if node.name == "target")
-            expected_quantized = not integer and not exclude and (force or (source == "producer" and not dynamic))
+            expected_quantized = (
+                not integer
+                and not (float16 and (dynamic or opset < 19))
+                and not exclude
+                and (force or (source == "producer" and not dynamic))
+            )
             self.assertEqual(target.output[0] != "y", expected_quantized)
             inferred = onnx.shape_inference.infer_shapes(quantized)
             types = {
@@ -118,7 +125,7 @@ class TestForceDirectQuantization(unittest.TestCase):
             expected_type = (
                 (TensorProto.UINT8 if dynamic or qtype == QuantType.QUInt8 else TensorProto.INT8)
                 if expected_quantized
-                else (TensorProto.INT64 if integer else TensorProto.FLOAT)
+                else (TensorProto.INT64 if integer else (TensorProto.FLOAT16 if float16 else TensorProto.FLOAT))
             )
             self.assertEqual(types[target.input[0]], expected_type)
             self.assertEqual(types[target.output[0]], expected_type)
@@ -171,6 +178,70 @@ class TestForceDirectQuantization(unittest.TestCase):
         for dynamic, source in itertools.product((False, True), ("input", "initializer")):
             with self.subTest(dynamic=dynamic, source=source):
                 self._check("Transpose", source, True, False, QuantType.QUInt8, dynamic=dynamic, integer=True)
+
+    def test_float16_input_quantization_eligibility(self):
+        for dynamic, force, qtype, opset in itertools.product(
+            (False, True), (False, True), (QuantType.QInt8, QuantType.QUInt8), (13, 19, 21)
+        ):
+            with self.subTest(dynamic=dynamic, force=force, qtype=qtype, opset=opset):
+                self._check("Transpose", "input", force, False, qtype, dynamic=dynamic, float16=True, opset=opset)
+
+    def test_operators_use_effective_input_quantization_type(self):
+        for op_type, source, force, global_qtype, input_qtype in itertools.product(
+            ("Resize", "MaxPool"),
+            ("input", "initializer", "reused"),
+            (False, True),
+            (QuantType.QUInt8, QuantType.QFLOAT8E4M3FN),
+            (QuantType.QUInt8, QuantType.QFLOAT8E4M3FN),
+        ):
+            if global_qtype == input_qtype:
+                continue
+            with self.subTest(
+                op_type=op_type, source=source, force=force, global_qtype=global_qtype, input_qtype=input_qtype
+            ):
+                model, feeds, _ = self._model(op_type, "input" if source == "reused" else source, opset=21)
+                if source == "reused":
+                    model.graph.node.insert(1, helper.make_node("Transpose", ["x"], ["before"], perm=[0, 1, 2, 3]))
+                    model.graph.node[-1].input[0] = "before"
+                with tempfile.TemporaryDirectory() as directory:
+                    output_path = Path(directory) / "quantized.onnx"
+                    quantize_static(
+                        model,
+                        output_path,
+                        TestDataFeeds(feeds),
+                        quant_format=QuantFormat.QOperator,
+                        activation_type=global_qtype,
+                        weight_type=global_qtype,
+                        calibrate_method=CalibrationMethod.Distribution,
+                        extra_options={
+                            "ForceQuantizeNoInputCheck": force,
+                            "TensorQuantOverrides": {"x": [{"quant_type": input_qtype}]},
+                        },
+                    )
+                    quantized = onnx.load(output_path)
+                onnx.checker.check_model(quantized, full_check=True)
+                target = next(node for node in quantized.graph.node if node.op_type == op_type)
+                self.assertEqual(
+                    target.output[0] != "y",
+                    force and global_qtype == QuantType.QUInt8 and input_qtype == QuantType.QUInt8,
+                )
+                for optimization in (
+                    ort.GraphOptimizationLevel.ORT_DISABLE_ALL,
+                    ort.GraphOptimizationLevel.ORT_ENABLE_ALL,
+                ):
+                    options = ort.SessionOptions()
+                    options.graph_optimization_level = optimization
+                    options.intra_op_num_threads = 1
+                    original = ort.InferenceSession(
+                        model.SerializeToString(), options, providers=["CPUExecutionProvider"]
+                    )
+                    actual = ort.InferenceSession(
+                        quantized.SerializeToString(), options, providers=["CPUExecutionProvider"]
+                    )
+                    for feed in feeds:
+                        expected_outputs, actual_outputs = original.run(None, feed), actual.run(None, feed)
+                        np.testing.assert_allclose(actual_outputs[0], expected_outputs[0], rtol=0, atol=0.12)
+                        np.testing.assert_array_equal(actual_outputs[1], expected_outputs[1])
 
     def test_unsupported_float8_operators_remain_float(self):
         for op_type, source, force in itertools.product(("Resize", "MaxPool"), ("input", "initializer"), (False, True)):
