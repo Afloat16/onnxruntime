@@ -741,6 +741,13 @@ class SymbolicShapeInference:
         # only need to symbolic shape inference if input has symbolic dims in spatial axes
         spatial_shape = sympy_shape[-rank - 1 : -1] if channels_last else sympy_shape[-rank:]
         is_symbolic_dims = [not is_literal(i) for i in spatial_shape]
+        ceil_mode = get_attribute(node, "ceil_mode", 0)
+        limit_pool_windows = (
+            ceil_mode
+            and get_opset(self.out_mp_) >= 22
+            and node.op_type in ("AveragePool", "MaxPool")
+            and get_attribute(node, "auto_pad", b"NOTSET") in (b"NOTSET", b"VALID")
+        )
 
         if not any(is_symbolic_dims):
             shape = get_shape_from_value_info(self.known_vi_[node.output[0]])
@@ -778,18 +785,22 @@ class SymbolicShapeInference:
             assert len(pads) == 2 * rank
             total_pads = [p1 + p2 for p1, p2 in zip(pads[:rank], pads[rank:], strict=False)]
 
-        ceil_mode = get_attribute(node, "ceil_mode", 0)
         for i in range(rank):
             effective_input_size = sympy_shape[-rank + i + (-1 if channels_last else 0)]
             if len(total_pads) > 0:
                 effective_input_size = effective_input_size + total_pads[i]
             if ceil_mode:
                 strided_kernel_positions = sympy.ceiling(
-                    (effective_input_size - effective_kernel_shape[i]) / strides[i]
+                    (effective_input_size - effective_kernel_shape[i]) / sympy.Integer(strides[i])
                 )
             else:
                 strided_kernel_positions = (effective_input_size - effective_kernel_shape[i]) // strides[i]
-            sympy_shape[-rank + i + (-1 if channels_last else 0)] = strided_kernel_positions + 1
+            output_size = strided_kernel_positions + 1
+            if limit_pool_windows:
+                # The last pooling window must start inside the input, not in the trailing padding.
+                max_windows = sympy.ceiling((spatial_shape[i] + pads[i]) / sympy.Integer(strides[i]))
+                output_size = sympy.Min(output_size, max_windows)
+            sympy_shape[-rank + i + (-1 if channels_last else 0)] = output_size
         return sympy_shape
 
     def _check_merged_dims(self, dims, allow_broadcast=True):

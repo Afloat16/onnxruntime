@@ -7,6 +7,7 @@ import numpy
 
 # -*- coding: UTF-8 -*-
 import onnx
+import sympy
 from onnx import AttributeProto, GraphProto, TensorProto, helper, numpy_helper  # noqa: F401
 
 if os.path.exists(
@@ -39,6 +40,100 @@ skipped_models = ["SSD-MobilenetV1", "SSD-int8", "Inception-1-int8"]
 
 
 class TestSymbolicShapeInference(unittest.TestCase):
+    def _make_pool_ceil_model(self, op_type, rank, layout, case_index, ceil_mode, opset=22):
+        kernel, stride, dilation, padding, auto_pad = (
+            (2, 2, 1, (0, 1), None),
+            (1, 3, 1, None, None),
+            (2, 4, 2, (1, 1), None),
+            (1, 3, 1, None, "VALID"),
+        )[case_index]
+        spatial_shape = [f"D{i}" if layout == "all" or (layout == "mixed" and i == 0) else 4 for i in range(rank)]
+        attributes = {"kernel_shape": [kernel] * rank, "strides": [stride] * rank, "ceil_mode": ceil_mode}
+        if dilation != 1:
+            attributes["dilations"] = [dilation] * rank
+        if padding is not None:
+            attributes["pads"] = [padding[0]] * rank + [padding[1]] * rank
+        if auto_pad is not None:
+            attributes["auto_pad"] = auto_pad
+        outputs = [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None] * (rank + 2))]
+        if op_type == "MaxPool":
+            outputs.append(helper.make_tensor_value_info("indices", TensorProto.INT64, [None] * (rank + 2)))
+        model = helper.make_model(
+            helper.make_graph(
+                [helper.make_node(op_type, ["input"], [output.name for output in outputs], **attributes)],
+                "pool_ceil_boundary",
+                [helper.make_tensor_value_info("input", TensorProto.FLOAT, [1, 2, *spatial_shape])],
+                outputs,
+            ),
+            opset_imports=[helper.make_opsetid("", opset)],
+            ir_version=7,
+        )
+        return model, spatial_shape, kernel, stride, dilation, padding or (0, 0)
+
+    def test_pool_ceil_mode_trailing_window(self):
+        layouts = [(1, "all"), (2, "all"), (2, "mixed"), (3, "all"), (3, "mixed")]
+        cases = [(rank, layout, case_index) for rank, layout in layouts for case_index in range(4)]
+        cases.extend((rank, "none", 0) for rank in (1, 2, 3))
+        for op_type in ("AveragePool", "MaxPool"):
+            for ceil_mode in (0, 1):
+                for rank, layout, case_index in cases:
+                    with self.subTest(
+                        op_type=op_type, ceil_mode=ceil_mode, rank=rank, layout=layout, case_index=case_index
+                    ):
+                        model, spatial_shape, kernel, stride, dilation, padding = self._make_pool_ceil_model(
+                            op_type, rank, layout, case_index, ceil_mode
+                        )
+                        onnx.checker.check_model(model, full_check=True)
+                        inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                        onnx.checker.check_model(inferred, full_check=True)
+                        for output in inferred.graph.output:
+                            self.assertEqual(
+                                output.type.tensor_type.elem_type,
+                                TensorProto.FLOAT if output.name == "output" else TensorProto.INT64,
+                            )
+                            actual_shapes = []
+                            expected_shapes = []
+                            for size in [4] if layout == "none" else [3, 4, 5, 6]:
+                                substitutions = {f"D{i}": size + i % 2 for i in range(rank)}
+                                actual_shapes.append(
+                                    [
+                                        int(sympy.sympify(d.dim_param, locals=substitutions))
+                                        if d.dim_param
+                                        else d.dim_value
+                                        for d in output.type.tensor_type.shape.dim
+                                    ]
+                                )
+                                expected = [1, 2]
+                                for dim in spatial_shape:
+                                    extent = substitutions[dim] if isinstance(dim, str) else dim
+                                    stop = (
+                                        extent
+                                        + padding[1]
+                                        - (dilation * (kernel - 1) + 1)
+                                        + (stride if ceil_mode else 1)
+                                    )
+                                    starts = range(-padding[0], stop, stride)
+                                    expected.append(sum(not ceil_mode or start < extent for start in starts))
+                                expected_shapes.append(expected)
+                            self.assertEqual(actual_shapes, expected_shapes)
+
+    def test_pool_ceil_mode_opset_controls(self):
+        for opset in (11, 19, 21, 25):
+            for op_type in ("AveragePool", "MaxPool"):
+                for layout in ("all", "mixed", "none"):
+                    with self.subTest(opset=opset, op_type=op_type, layout=layout):
+                        model, _, _, _, _, _ = self._make_pool_ceil_model(op_type, 2, layout, 0, 1, opset)
+                        inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                        onnx.checker.check_model(inferred, full_check=True)
+                        for output in inferred.graph.output:
+                            actual = [
+                                int(sympy.sympify(d.dim_param, locals={"D0": 4, "D1": 4}))
+                                if d.dim_param
+                                else d.dim_value
+                                for d in output.type.tensor_type.shape.dim
+                            ]
+                            self.assertEqual(actual, [1, 2, *([2 if opset >= 22 else 3] * 2)])
+
     def test_shape_preserving_hyper_connection_ops(self):
         cases = {
             "BranchwiseRMSNorm": (
