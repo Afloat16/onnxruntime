@@ -515,6 +515,8 @@ class SymbolicShapeInference:
             "QLinearAdd",
             "QLinearMul",
         ]
+        if node.op_type == "Attention" and not node.domain:
+            skip_infer = False
 
         if not skip_infer:
             # Only pass initializers that satisfy the following condition:
@@ -2231,6 +2233,37 @@ class SymbolicShapeInference:
         vi.CopyFrom(new_vi)
 
     def _infer_Attention(self, node):  # noqa: N802
+        if not node.domain:
+            # ONNX infers the main output. Complete the optional cache shapes and
+            # QK sequence length, including when the past cache length is symbolic.
+            has_qk_output = len(node.output) > 3 and node.output[3]
+            for i in (1, 2):
+                has_cache_output = len(node.output) > i and node.output[i]
+                if not has_cache_output and not (i == 1 and has_qk_output):
+                    continue
+                shape = self._get_sympy_shape(node, i)
+                if len(shape) == 3:
+                    num_heads = get_attribute(node, "kv_num_heads")
+                    shape = [shape[0], num_heads, shape[1], shape[2] // num_heads]
+                if len(node.input) > i + 3 and node.input[i + 3]:
+                    shape[2] += self._get_sympy_shape(node, i + 3)[2]
+                self._update_computed_dims(shape)
+                if has_cache_output:
+                    vi = self.known_vi_[node.output[i]]
+                    vi.CopyFrom(
+                        helper.make_tensor_value_info(
+                            node.output[i],
+                            self.known_vi_[node.input[i]].type.tensor_type.elem_type,
+                            get_shape_from_sympy_shape(shape),
+                        )
+                    )
+                if i == 1 and has_qk_output:
+                    vi = self.known_vi_[node.output[3]]
+                    qk_shape = get_shape_from_type_proto(vi.type)
+                    qk_shape[3] = get_shape_from_sympy_shape(shape)[2]
+                    vi.CopyFrom(helper.make_tensor_value_info(vi.name, vi.type.tensor_type.elem_type, qk_shape))
+            return
+
         shape = self._get_shape(node, 0)
         shape_weights = self._get_shape(node, 1)
         shape_bias = self._try_get_shape(node, 2)

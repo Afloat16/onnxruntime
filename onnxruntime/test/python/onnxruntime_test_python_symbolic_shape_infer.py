@@ -39,6 +39,142 @@ skipped_models = ["SSD-MobilenetV1", "SSD-int8", "Inception-1-int8"]
 
 
 class TestSymbolicShapeInference(unittest.TestCase):
+    @staticmethod
+    def _make_standard_attention_model(
+        opset, rank, q_heads, past_length, outputs=None, value_type=TensorProto.FLOAT, mask=False, nonpad=False
+    ):
+        outputs = ["Y", "present_key", "present_value", "qk"] if outputs is None else outputs
+        kv_heads = 2
+        query_shape = ["B", "S", q_heads * 4] if rank == 3 else ["B", q_heads, "S", 4]
+        key_shape = ["B", 2, kv_heads * 4] if rank == 3 else ["B", kv_heads, 2, 4]
+        value_shape = ["B", 2, kv_heads * 3] if rank == 3 else ["B", kv_heads, 2, 3]
+        inputs = [
+            helper.make_tensor_value_info("Q", TensorProto.FLOAT, query_shape),
+            helper.make_tensor_value_info("K", TensorProto.FLOAT, key_shape),
+            helper.make_tensor_value_info("V", value_type, value_shape),
+        ]
+        node_inputs = ["Q", "K", "V"]
+        total_length = "P + 2" if past_length == "P" else (past_length or 0) + 2
+        if mask or past_length is not None or nonpad:
+            node_inputs.append("mask" if mask else "")
+        if mask:
+            inputs.append(helper.make_tensor_value_info("mask", TensorProto.BOOL, ["S", total_length]))
+        if past_length is not None:
+            node_inputs.extend(["past_key", "past_value"])
+            inputs.extend(
+                [
+                    helper.make_tensor_value_info("past_key", TensorProto.FLOAT, ["B", kv_heads, past_length, 4]),
+                    helper.make_tensor_value_info("past_value", value_type, ["B", kv_heads, past_length, 3]),
+                ]
+            )
+        if nonpad:
+            node_inputs.extend(["", "", "nonpad"])
+            inputs.append(helper.make_tensor_value_info("nonpad", TensorProto.INT64, ["B"]))
+        attributes = {"q_num_heads": q_heads, "kv_num_heads": kv_heads} if rank == 3 else {}
+        expected_shapes = [
+            ["B", "S", q_heads * 3] if rank == 3 else ["B", q_heads, "S", 3],
+            ["B", kv_heads, total_length, 4],
+            ["B", kv_heads, total_length, 3],
+            ["B", q_heads, "S", total_length],
+        ]
+        graph_outputs = [
+            helper.make_tensor_value_info(name, value_type if i == 2 else TensorProto.FLOAT, expected_shapes[i])
+            for i, name in enumerate(outputs)
+            if name
+        ]
+        model = helper.make_model(
+            helper.make_graph(
+                [helper.make_node("Attention", node_inputs, outputs, **attributes)],
+                "standard_attention",
+                inputs,
+                graph_outputs,
+            ),
+            opset_imports=[helper.make_opsetid("", opset)],
+            ir_version=9,
+        )
+        return model, [shape for name, shape in zip(outputs, expected_shapes, strict=False) if name]
+
+    def _check_attention_model(self, model, expected_shapes):
+        onnx.checker.check_model(model, full_check=True)
+        inferred = SymbolicShapeInference.infer_shapes(model)
+        onnx.checker.check_model(inferred, full_check=True)
+        for original, output, expected in zip(model.graph.output, inferred.graph.output, expected_shapes, strict=True):
+            self.assertEqual(output.type.tensor_type.elem_type, original.type.tensor_type.elem_type)
+            shape = output.type.tensor_type.shape.dim
+            self.assertEqual(len(shape), len(expected))
+            for dim, expected_dim in zip(shape, expected, strict=True):
+                self.assertEqual(dim.dim_param or dim.dim_value, expected_dim)
+        return model, inferred
+
+    def test_standard_attention_shapes(self):
+        for opset in [23, 24, 25]:
+            for rank in [3, 4]:
+                for q_heads in [2, 4]:
+                    for past_length in [None, 0, 3, "P"]:
+                        with self.subTest(opset=opset, rank=rank, q_heads=q_heads, past_length=past_length):
+                            self._check_attention_model(
+                                *self._make_standard_attention_model(opset, rank, q_heads, past_length)
+                            )
+
+    def test_standard_attention_optional_outputs(self):
+        for rank in [3, 4]:
+            for past_length, outputs in [
+                (None, ["Y"]),
+                (None, ["Y", "", "", "qk"]),
+                (None, ["Y", "present_key", "present_value"]),
+                (3, ["Y", "present_key", "present_value"]),
+            ]:
+                with self.subTest(rank=rank, past_length=past_length, outputs=outputs):
+                    self._check_attention_model(
+                        *self._make_standard_attention_model(23, rank, 4, past_length, outputs, mask=True)
+                    )
+        for opset in [24, 25]:
+            with self.subTest(opset=opset, nonpad=True):
+                self._check_attention_model(
+                    *self._make_standard_attention_model(  # external cache uses no past/present slots
+                        opset, 4, 4, None, ["Y", "", "", "qk"], nonpad=True
+                    )
+                )
+        for rank in [3, 4]:
+            with self.subTest(rank=rank, value_type=TensorProto.FLOAT16):
+                self._check_attention_model(
+                    *self._make_standard_attention_model(23, rank, 4, 3, value_type=TensorProto.FLOAT16)
+                )
+
+    def test_contrib_attention_shapes(self):
+        for bias in [False, True]:
+            for has_past in [False, True]:
+                with self.subTest(bias=bias, has_past=has_past):
+                    inputs = [
+                        helper.make_tensor_value_info("input", TensorProto.FLOAT, ["B", "S", 8]),
+                        helper.make_tensor_value_info("weight", TensorProto.FLOAT, [8, 24]),
+                    ]
+                    node_inputs = ["input", "weight", "bias" if bias else ""]
+                    if bias:
+                        inputs.append(helper.make_tensor_value_info("bias", TensorProto.FLOAT, [24]))
+                    if has_past:
+                        node_inputs.extend(["", "past"])
+                        inputs.append(helper.make_tensor_value_info("past", TensorProto.FLOAT, [2, "B", 2, 3, 4]))
+                    expected_shapes = [["B", "S", 8], [2, "B", 2, "3+S" if has_past else "S", 4]]
+                    model = helper.make_model(
+                        helper.make_graph(
+                            [
+                                helper.make_node(
+                                    "Attention", node_inputs, ["Y", "present"], domain="com.microsoft", num_heads=2
+                                )
+                            ],
+                            "contrib_attention",
+                            inputs,
+                            [
+                                helper.make_tensor_value_info(name, TensorProto.FLOAT, shape)
+                                for name, shape in zip(["Y", "present"], expected_shapes, strict=True)
+                            ],
+                        ),
+                        opset_imports=[helper.make_opsetid("", 23), helper.make_opsetid("com.microsoft", 1)],
+                        ir_version=9,
+                    )
+                    self._check_attention_model(model, expected_shapes)
+
     def test_shape_preserving_hyper_connection_ops(self):
         cases = {
             "BranchwiseRMSNorm": (
