@@ -315,6 +315,175 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
 
 class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
+    def test_cast_computed_integer_values_restore_source_width(self):
+        cases = [
+            (numpy.int32, "Add", 2**31 - 1, 1, TensorProto.INT64, 2**31 + 1, 1),
+            (numpy.int32, "Add", -(2**31), -1, TensorProto.INT64, 2 - 2**31, 1),
+            (numpy.int64, "Mul", 2**63 - 1, 2**63 - 1, TensorProto.INT64, 0, 1),
+            (numpy.int64, "Add", 2**63 - 1, 1, TensorProto.BOOL, 0, 1),
+            (numpy.uint64, "Add", 2**64 - 1, 1, TensorProto.BOOL, 0, 0),
+            (numpy.uint64, "Mul", 2**64 - 1, 2**64 - 1, TensorProto.INT64, 0, 1),
+            (numpy.int64, "Add", [2**63 - 1, 0], [2, -1], TensorProto.INT8, [0, 2], [1, 1]),
+            (numpy.int64, "Add", [0, 2**63 - 1], [-1, 2], TensorProto.INT8, [2, 0], [1, 1]),
+        ]
+        for dtype, op, lhs, rhs, to_type, offset, expected in cases:
+            for scalar in (False,) if isinstance(lhs, list) else (False, True):
+                with self.subTest(dtype=dtype, op=op, to_type=to_type, scalar=scalar):
+                    shape = [] if scalar else [len(lhs) if isinstance(lhs, list) else 1]
+                    nodes = [
+                        helper.make_node(op, ["lhs", "rhs"], ["computed"]),
+                        helper.make_node("Cast", ["computed"], ["casted"], to=to_type),
+                        helper.make_node("Cast", ["casted"], ["integer"], to=TensorProto.INT64),
+                        helper.make_node("Add", ["integer", "offset"], ["shape"]),
+                    ]
+                    initializers = [
+                        numpy_helper.from_array(numpy.array(lhs, dtype=dtype).reshape(shape), name="lhs"),
+                        numpy_helper.from_array(numpy.array(rhs, dtype=dtype).reshape(shape), name="rhs"),
+                        numpy_helper.from_array(numpy.array(offset, dtype=numpy.int64).reshape(shape), name="offset"),
+                    ]
+                    if scalar:
+                        initializers.append(numpy_helper.from_array(numpy.array([0], dtype=numpy.int64), name="axes"))
+                        nodes.append(helper.make_node("Unsqueeze", ["shape", "axes"], ["shape_vector"]))
+                    nodes.append(
+                        helper.make_node("ConstantOfShape", ["shape_vector" if scalar else "shape"], ["output"])
+                    )
+                    model = helper.make_model(
+                        helper.make_graph(
+                            nodes,
+                            "computed_integer_cast",
+                            [],
+                            [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                            initializers,
+                        ),
+                        opset_imports=[helper.make_opsetid("", 13)],
+                        ir_version=8,
+                    )
+                    inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                    self.assertEqual(
+                        [d.dim_value for d in inferred.graph.output[0].type.tensor_type.shape.dim],
+                        expected if isinstance(expected, list) else [expected],
+                    )
+
+    def test_cast_preserves_fractional_values_before_multiply(self):
+        for to_type in (TensorProto.FLOAT16, TensorProto.FLOAT, TensorProto.DOUBLE):
+            with self.subTest(to_type=to_type):
+                model = helper.make_model(
+                    helper.make_graph(
+                        [
+                            helper.make_node("Cast", ["value"], ["casted"], to=to_type),
+                            helper.make_node("Mul", ["casted", "scale"], ["scaled"]),
+                            helper.make_node("Cast", ["scaled"], ["shape"], to=TensorProto.INT64),
+                            helper.make_node("ConstantOfShape", ["shape"], ["output"]),
+                        ],
+                        "fractional_cast_shape",
+                        [],
+                        [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                        [
+                            numpy_helper.from_array(numpy.array([0.25, 0.75], dtype=numpy.float32), name="value"),
+                            helper.make_tensor("scale", to_type, [], [4]),
+                        ],
+                    ),
+                    opset_imports=[helper.make_opsetid("", 13)],
+                    ir_version=8,
+                )
+                inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                self.assertEqual([d.dim_value for d in inferred.graph.output[0].type.tensor_type.shape.dim], [1, 3])
+
+    def test_cast_preserves_symbolic_shape_values(self):
+        for to_type in (TensorProto.INT32, TensorProto.FLOAT16, TensorProto.FLOAT, TensorProto.DOUBLE):
+            with self.subTest(to_type=to_type):
+                model = helper.make_model(
+                    helper.make_graph(
+                        [
+                            helper.make_node("Shape", ["input"], ["shape"]),
+                            helper.make_node("Cast", ["shape"], ["casted"], to=to_type),
+                            helper.make_node("Cast", ["casted"], ["restored"], to=TensorProto.INT64),
+                            helper.make_node("Reshape", ["input", "restored"], ["output"]),
+                        ],
+                        "symbolic_cast_shape",
+                        [helper.make_tensor_value_info("input", TensorProto.FLOAT, ["N", 3])],
+                        [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                    ),
+                    opset_imports=[helper.make_opsetid("", 13)],
+                    ir_version=8,
+                )
+                inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                dims = inferred.graph.output[0].type.tensor_type.shape.dim
+                self.assertEqual([dims[0].dim_param, dims[1].dim_value], ["N", 3])
+
+    def test_cast_runtime_shape_values_remain_unknown(self):
+        model = helper.make_model(
+            helper.make_graph(
+                [
+                    helper.make_node("Cast", ["value"], ["boolean"], to=TensorProto.BOOL),
+                    helper.make_node("Cast", ["boolean"], ["shape"], to=TensorProto.INT64),
+                    helper.make_node("ConstantOfShape", ["shape"], ["output"]),
+                ],
+                "runtime_cast_shape",
+                [helper.make_tensor_value_info("value", TensorProto.INT64, [2])],
+                [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+            ),
+            opset_imports=[helper.make_opsetid("", 13)],
+            ir_version=8,
+        )
+        inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+        dims = inferred.graph.output[0].type.tensor_type.shape.dim
+        self.assertEqual(len(dims), 2)
+        self.assertTrue(all(d.dim_param and not d.HasField("dim_value") for d in dims))
+
+    def test_cast_values_in_shape_computation(self):
+        cases = [
+            (numpy.array([2, 3], dtype=numpy.int64), TensorProto.BOOL, [1, 1]),
+            (numpy.array([0.25, -0.5], dtype=numpy.float32), TensorProto.BOOL, [1, 1]),
+            (numpy.array([-2, -3], dtype=numpy.int32), TensorProto.BOOL, [1, 1]),
+            (numpy.array([0, 1], dtype=numpy.int64), TensorProto.BOOL, [0, 1]),
+            (numpy.array([257, 258], dtype=numpy.int64), TensorProto.INT8, [1, 2]),
+            (numpy.array([-255, 258], dtype=numpy.int64), TensorProto.UINT8, [1, 2]),
+            (numpy.array([65537, 65538], dtype=numpy.int64), TensorProto.INT16, [1, 2]),
+            (numpy.array([-65535, 65538], dtype=numpy.int64), TensorProto.UINT16, [1, 2]),
+            (numpy.array([2**32 + 1, 2**32 + 2], dtype=numpy.int64), TensorProto.INT32, [1, 2]),
+            (numpy.array([1 - 2**32, 2**32 + 2], dtype=numpy.int64), TensorProto.UINT32, [1, 2]),
+            (numpy.array([2**63 + 1], dtype=numpy.uint64), TensorProto.UINT8, [1]),
+            (numpy.array([1.9, 2.9], dtype=numpy.float64), TensorProto.INT64, [1, 2]),
+            (numpy.array([1.9999, 2.9999], dtype=numpy.float32), TensorProto.FLOAT16, [2, 3]),
+            (numpy.array([1.999999999, 2.999999999], dtype=numpy.float64), TensorProto.FLOAT, [2, 3]),
+            (numpy.array([], dtype=numpy.int64), TensorProto.BOOL, []),
+            (numpy.array(-0.25, dtype=numpy.float32), TensorProto.BOOL, [1]),
+        ]
+        for data, to_type, expected in cases:
+            for use_constant in (False, True):
+                with self.subTest(data=data, to_type=to_type, use_constant=use_constant):
+                    value = numpy_helper.from_array(data, name="value")
+                    nodes = [helper.make_node("Constant", [], ["value"], value=value)] if use_constant else []
+                    initializers = [] if use_constant else [value]
+                    nodes.extend(
+                        [
+                            helper.make_node("Cast", ["value"], ["casted"], to=to_type),
+                            helper.make_node("Cast", ["casted"], ["shape"], to=TensorProto.INT64),
+                        ]
+                    )
+                    if data.ndim == 0:
+                        initializers.append(numpy_helper.from_array(numpy.array([0], dtype=numpy.int64), name="axes"))
+                        nodes.append(helper.make_node("Unsqueeze", ["shape", "axes"], ["shape_vector"]))
+                    nodes.append(
+                        helper.make_node("ConstantOfShape", ["shape_vector" if data.ndim == 0 else "shape"], ["output"])
+                    )
+                    model = helper.make_model(
+                        helper.make_graph(
+                            nodes,
+                            "cast_shape_values",
+                            [],
+                            [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                            initializers,
+                        ),
+                        opset_imports=[helper.make_opsetid("", 13)],
+                        ir_version=8,
+                    )
+                    inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                    self.assertEqual(
+                        [d.dim_value for d in inferred.graph.output[0].type.tensor_type.shape.dim], expected
+                    )
+
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
         vis = [x for x in graph.value_info if x.name not in names_in_vis] + vis

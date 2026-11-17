@@ -897,6 +897,44 @@ class SymbolicShapeInference:
         self._compute_on_sympy_data(node, funcs[node.op_type])
 
     def _infer_Cast(self, node):  # noqa: N802
+        numeric_types = {
+            onnx.TensorProto.BOOL,
+            onnx.TensorProto.INT8,
+            onnx.TensorProto.INT16,
+            onnx.TensorProto.INT32,
+            onnx.TensorProto.INT64,
+            onnx.TensorProto.UINT8,
+            onnx.TensorProto.UINT16,
+            onnx.TensorProto.UINT32,
+            onnx.TensorProto.UINT64,
+            onnx.TensorProto.FLOAT16,
+            onnx.TensorProto.FLOAT,
+            onnx.TensorProto.DOUBLE,
+        }
+        from_type = self.known_vi_[node.input[0]].type.tensor_type.elem_type
+        to_type = get_attribute(node, "to")
+        data = self._try_get_value(node, 0)
+        if data is not None and from_type in numeric_types and to_type in numeric_types:
+            from_dtype = helper.tensor_dtype_to_np_dtype(from_type)
+            # Mixed large positive and negative Python integers can otherwise
+            # be promoted to float64 and lose low bits before conversion.
+            preserve_integers = from_dtype.kind in "iu" and not isinstance(data, np.ndarray)
+            value = np.asarray(data, dtype=object if preserve_integers else None)
+            if value.ndim <= 1 and (value.dtype.kind != "O" or all(is_literal(v) for v in value.flat)):
+                # A numeric Cast can change values, including bool conversion,
+                # integer narrowing, and floating-point rounding.
+                if value.dtype.kind == "O" and from_dtype.kind in "iu":
+                    # Python/SymPy arithmetic can exceed the source integer
+                    # width. Restore its low bits before the following Cast.
+                    info = np.iinfo(from_dtype)
+                    modulus = 1 << info.bits
+                    value = np.asarray(
+                        [(int(v) - info.min) % modulus + info.min for v in value.flat], dtype=from_dtype
+                    ).reshape(value.shape)
+                else:
+                    value = value.astype(from_dtype)
+                self.sympy_data_[node.output[0]] = value.astype(helper.tensor_dtype_to_np_dtype(to_type)).tolist()
+                return
         self._pass_on_sympy_data(node)
 
     def _infer_CategoryMapper(self, node):  # noqa: N802
