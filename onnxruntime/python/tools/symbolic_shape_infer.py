@@ -859,14 +859,16 @@ class SymbolicShapeInference:
             dst_tensor_type.CopyFrom(src_tensor_type)
 
     def _infer_ArrayFeatureExtractor(self, node):  # noqa: N802
-        data_shape = self._get_shape(node, 0)
-        indices_shape = self._get_shape(node, 1)
+        data_shape = self._get_sympy_shape(node, 0)
+        indices_shape = self._get_sympy_shape(node, 1)
+        output_shape = ([1] if len(data_shape) == 1 else data_shape[:-1]) + [sympy_reduce_product(indices_shape)]
+        self._update_computed_dims(output_shape)
         vi = self.known_vi_[node.output[0]]
         vi.CopyFrom(
             helper.make_tensor_value_info(
                 node.output[0],
                 self.known_vi_[node.input[0]].type.tensor_type.elem_type,
-                data_shape[:-1] + indices_shape,
+                get_shape_from_sympy_shape(output_shape),
             )
         )
 

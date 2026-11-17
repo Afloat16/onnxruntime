@@ -39,6 +39,60 @@ skipped_models = ["SSD-MobilenetV1", "SSD-int8", "Inception-1-int8"]
 
 
 class TestSymbolicShapeInference(unittest.TestCase):
+    @staticmethod
+    def _array_feature_extractor_models():
+        data_shapes = [[5], [2, 5], ["B", 2, 5]]
+        indices_cases = [([], 1), ([2], 2), ([1, 2], 2), ([2, 1, 2], 4), (["K", 2], "2*K")]
+        cases = [
+            (elem_type, data_shape, indices_shape, count, False)
+            for elem_type in [
+                TensorProto.FLOAT,
+                TensorProto.DOUBLE,
+                TensorProto.INT32,
+                TensorProto.INT64,
+                TensorProto.STRING,
+            ]
+            for data_shape in data_shapes
+            for indices_shape, count in indices_cases
+        ]
+        cases.extend(
+            (TensorProto.FLOAT, data_shape, indices_shape, count, True)
+            for data_shape in data_shapes
+            for indices_shape, count in indices_cases[:3]
+        )
+        for elem_type, data_shape, indices_shape, count, constant_indices in cases:
+            output_shape = ([1] if len(data_shape) == 1 else data_shape[:-1]) + [count]
+            inputs = [helper.make_tensor_value_info("X", elem_type, data_shape)]
+            initializers = []
+            if constant_indices:
+                initializers.append(helper.make_tensor("indices", TensorProto.INT64, indices_shape, range(count)))
+            else:
+                inputs.append(helper.make_tensor_value_info("indices", TensorProto.INT64, indices_shape))
+            graph = helper.make_graph(
+                [helper.make_node("ArrayFeatureExtractor", ["X", "indices"], ["Y"], domain="ai.onnx.ml")],
+                "array_feature_extractor",
+                inputs,
+                [helper.make_tensor_value_info("Y", elem_type, [None] * len(output_shape))],
+                initializers,
+            )
+            model = helper.make_model(
+                graph,
+                opset_imports=[helper.make_opsetid("", 18), helper.make_opsetid("ai.onnx.ml", 1)],
+                ir_version=10,
+            )
+            yield model, output_shape
+
+    def test_array_feature_extractor_output_shape(self):
+        for model, output_shape in self._array_feature_extractor_models():
+            with self.subTest(inputs=list(model.graph.input), initializers=list(model.graph.initializer)):
+                onnx.checker.check_model(model, full_check=True)
+                inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                onnx.checker.check_model(inferred, full_check=True)
+                self.assertEqual(
+                    inferred.graph.output[0],
+                    helper.make_tensor_value_info("Y", model.graph.input[0].type.tensor_type.elem_type, output_shape),
+                )
+
     def test_shape_preserving_hyper_connection_ops(self):
         cases = {
             "BranchwiseRMSNorm": (
