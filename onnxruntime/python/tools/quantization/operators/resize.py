@@ -1,3 +1,4 @@
+from ..quant_utils import FLOAT8_TYPES
 from .direct_q8 import Direct8BitOp, QDQDirect8BitOp
 
 
@@ -9,8 +10,8 @@ class QResize(Direct8BitOp):
         node = self.node
         assert node.op_type == "Resize"
 
-        # if version is less than 11, go to normal quantize.
-        if self.quantizer.opset_version < 11:
+        # Resize requires opset 11 and does not support FP8 tensors.
+        if self.quantizer.opset_version < 11 or self.quantizer.activation_qType in FLOAT8_TYPES:
             super(Direct8BitOp, self).quantize()
             return
 

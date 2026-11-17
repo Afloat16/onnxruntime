@@ -35,7 +35,7 @@ class Direct8BitOp(QuantOperatorBase):
 
         else:
             # Force quantize those ops if possible, use exclude node list if this is not you want
-            if not self.quantizer.is_valid_quantize_weight(node.input[0]):
+            if not self.quantizer.is_float_tensor(node.input[0]):
                 super().quantize()
                 return
 
