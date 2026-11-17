@@ -353,26 +353,35 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
                             onnx.checker.check_model(inferred, full_check=True)
 
     def test_onehot_runtime_depth_remains_unknown(self):
-        model = helper.make_model(
-            helper.make_graph(
-                [helper.make_node("OneHot", ["indices", "depth", "values"], ["output"])],
-                "onehot_runtime_depth",
-                [
-                    helper.make_tensor_value_info("indices", TensorProto.INT64, ["batch", 2]),
-                    helper.make_tensor_value_info("depth", TensorProto.INT64, []),
-                ],
-                [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
-                [numpy_helper.from_array(numpy.array([0, 1], numpy.float32), "values")],
-            ),
-            opset_imports=[helper.make_opsetid("", 13)],
-        )
-        inferred = SymbolicShapeInference.infer_shapes(model)
-        dimensions = inferred.graph.output[0].type.tensor_type.shape.dim
-        self.assertEqual(len(dimensions), 3)
-        self.assertEqual(dimensions[0].dim_param, "batch")
-        self.assertEqual(dimensions[1].dim_value, 2)
-        self.assertTrue(dimensions[2].HasField("dim_param"))
-        onnx.checker.check_model(inferred, full_check=True)
+        for dtype in (numpy.int32, numpy.int64, numpy.float32):
+            for depth_shape in ([], [1]):
+                for has_default in (False, True):
+                    with self.subTest(dtype=dtype, depth_shape=depth_shape, has_default=has_default):
+                        depth = numpy.array(3.75 if dtype == numpy.float32 else 3, dtype=dtype).reshape(depth_shape)
+                        depth_tensor = numpy_helper.from_array(depth, "depth")
+                        initializers = [numpy_helper.from_array(numpy.array([0, 1], numpy.float32), "values")]
+                        if has_default:
+                            initializers.append(depth_tensor)
+                        model = helper.make_model(
+                            helper.make_graph(
+                                [helper.make_node("OneHot", ["indices", "depth", "values"], ["output"])],
+                                "onehot_runtime_depth",
+                                [
+                                    helper.make_tensor_value_info("indices", TensorProto.INT64, ["batch", 2]),
+                                    helper.make_tensor_value_info("depth", depth_tensor.data_type, depth_shape),
+                                ],
+                                [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                                initializers,
+                            ),
+                            opset_imports=[helper.make_opsetid("", 13)],
+                        )
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        dimensions = inferred.graph.output[0].type.tensor_type.shape.dim
+                        self.assertEqual(len(dimensions), 3)
+                        self.assertEqual(dimensions[0].dim_param, "batch")
+                        self.assertEqual(dimensions[1].dim_value, 2)
+                        self.assertTrue(dimensions[2].HasField("dim_param"))
+                        onnx.checker.check_model(inferred, full_check=True)
 
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
