@@ -301,17 +301,17 @@ def create_weight_matching(float_model_path: str, qdq_model_path: str) -> dict[s
             logging.error(f"Model Error in '{qdq_model_path}': Dequantized tensor name '{weight_name}' not recognized!")
             continue
 
-        axis = -1
+        axis = 1
         for attr in node.attribute:
             if attr.name == "axis":
                 axis = attr.i
 
         weight_tensor = numpy_helper.to_array(weight_values)
         weight_scale = numpy_helper.to_array(find_by_name(node.input[1], initializers))
-        if len(node.input) > 2:
+        if len(node.input) > 2 and node.input[2]:
             weight_zp = numpy_helper.to_array(find_by_name(node.input[2], initializers))
         else:
-            weight_zp = numpy.zeros(weight_scale.shape, dtype=numpy.int32)
+            weight_zp = numpy.zeros(weight_scale.shape, dtype=weight_tensor.dtype)
 
         # Perform dequantization:
         if weight_scale.size == weight_zp.size == 1:
