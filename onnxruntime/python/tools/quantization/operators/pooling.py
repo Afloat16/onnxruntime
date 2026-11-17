@@ -11,6 +11,11 @@ class QLinearPool(QuantOperatorBase):
     def quantize(self):
         node = self.node
 
+        # QLinearAveragePool has no dilation attribute or dilated-kernel support.
+        for attribute in node.attribute:
+            if attribute.name == "dilations" and any(dilation != 1 for dilation in attribute.ints):
+                return super().quantize()
+
         # only try to quantize when given quantization parameters for it
         (
             data_found,
@@ -45,7 +50,8 @@ class QLinearPool(QuantOperatorBase):
         # Create qlinear pool node for given type (AveragePool, etc)
         kwargs = {}
         for attribute in node.attribute:
-            kwargs.update(attribute_to_kwarg(attribute))
+            if attribute.name != "dilations":
+                kwargs.update(attribute_to_kwarg(attribute))
         kwargs["domain"] = ms_domain
         qlinear_node_name = node.name + "_quant" if node.name else ""
         qnode = onnx.helper.make_node(
