@@ -383,6 +383,7 @@ class ONNXModel:
                     elif attr.name == "transB":
                         transB = onnx_helper.get_attribute_value(attr)  # noqa: N806
                 if alpha == 1.0 and beta == 1.0 and transA == 0:
+                    has_bias = len(node.input) > 2 and bool(node.input[2])
                     inputB = node.input[1]  # noqa: N806
                     if transB == 1:
                         B, _ = ONNXModel.__get_initializer(node.input[1], graph_path)  # noqa: N806
@@ -416,12 +417,12 @@ class ONNXModel:
                     matmul_node = onnx_helper.make_node(
                         "MatMul",
                         inputs=[node.input[0], inputB],
-                        outputs=[node.output[0] + ("_MatMul" if len(node.input) > 2 else "")],
+                        outputs=[node.output[0] + ("_MatMul" if has_bias else "")],
                         name=node.name + "_MatMul" if node.name else "",
                     )
                     new_nodes.append(matmul_node)
 
-                    if len(node.input) > 2:
+                    if has_bias:
                         add_node = onnx_helper.make_node(
                             "Add",
                             inputs=[node.output[0] + "_MatMul", node.input[2]],
