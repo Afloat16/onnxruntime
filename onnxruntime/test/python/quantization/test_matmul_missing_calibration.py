@@ -237,6 +237,99 @@ class TestMatMulMissingCalibration(unittest.TestCase):
                 self.assertEqual(sum(node.op_type == "QLinearMatMul" for node in quantized.graph.node), 1)
                 self._check_outputs(model, quantized, [{}, {}], [lhs @ rhs] * 2)
 
+    def test_quantized_ancestor_fallback(self):
+        lhs = np.array([[0.25, -0.5], [1, -1.5]], dtype=np.float32)
+        rhs = np.array([[1, 0.5], [-0.5, 0.75]], dtype=np.float32)
+        for missing, depth, quantized_producer, qtype, per_channel in itertools.product(
+            ("none", "input", "output", "then_output"),
+            (1, 2),
+            (False, True),
+            (QuantType.QInt8, QuantType.QUInt8),
+            (False, True),
+        ):
+            with self.subTest(
+                missing=missing,
+                depth=depth,
+                quantized_producer=quantized_producer,
+                qtype=qtype,
+                per_channel=per_channel,
+            ):
+                leaf_outputs = []
+
+                def branch(level, name, depth=depth, leaf_outputs=leaf_outputs):
+                    if level == depth:
+                        leaf_outputs.append(name)
+                        node = helper.make_node("MatMul", ["a", "b"], [name])
+                    else:
+                        node = helper.make_node(
+                            "If",
+                            [f"condition_{level}"],
+                            [name],
+                            then_branch=branch(level + 1, name + "_then"),
+                            else_branch=branch(level + 1, name + "_else"),
+                        )
+                    return helper.make_graph([node], name, [], [self._value(name)])
+
+                if_node = helper.make_node(
+                    "If",
+                    ["condition_0"],
+                    ["y"],
+                    then_branch=branch(1, "then_y"),
+                    else_branch=branch(1, "else_y"),
+                )
+                graph = helper.make_graph(
+                    [helper.make_node("MatMul", ["x", "identity"], ["a"]), if_node],
+                    "quantized_ancestor",
+                    [self._value("x"), self._value("b")]
+                    + [
+                        helper.make_tensor_value_info(f"condition_{index}", TensorProto.BOOL, [])
+                        for index in range(depth)
+                    ],
+                    [self._value("y")],
+                    [numpy_helper.from_array(np.eye(2, dtype=np.float32), "identity")],
+                )
+                model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)], ir_version=7)
+                ranges = {"a", "y"}
+                if quantized_producer:
+                    ranges.add("x")
+                if missing != "input":
+                    ranges.add("b")
+                if missing != "output":
+                    ranges.update(
+                        name for name in leaf_outputs if missing != "then_output" or not name.startswith("then_y")
+                    )
+                quantized = self._quantize(model, ranges, qtype, per_channel, subgraph=True)
+                nodes = list(quantized.graph.node)
+                self.assertEqual(sum(node.op_type == "QLinearMatMul" for node in nodes), int(quantized_producer))
+                dequantized = [node for node in nodes if node.op_type == "DequantizeLinear" and node.output[0] == "a"]
+                self.assertEqual(len(dequantized), int(quantized_producer and missing != "none"))
+                if dequantized:
+                    self.assertLess(
+                        nodes.index(dequantized[0]), next(i for i, node in enumerate(nodes) if node.op_type == "If")
+                    )
+                pending = [
+                    attr.g for node in nodes for attr in node.attribute if attr.type == onnx.AttributeProto.GRAPH
+                ]
+                while pending:
+                    subgraph = pending.pop()
+                    for node in subgraph.node:
+                        self.assertNotEqual(list(node.output), ["a"])
+                        if node.output[0] in leaf_outputs:
+                            fallback = missing in ("input", "output") or (
+                                missing == "then_output" and node.output[0].startswith("then_y")
+                            )
+                            self.assertEqual(node.op_type, "MatMul" if fallback else "DequantizeLinear")
+                        pending.extend(attr.g for attr in node.attribute if attr.type == onnx.AttributeProto.GRAPH)
+                feeds, answers = [], []
+                for conditions in itertools.product((False, True), repeat=depth):
+                    a = lhs if conditions[0] else -lhs
+                    b = rhs if conditions[-1] else rhs.T.copy()
+                    feeds.append(
+                        {"x": a, "b": b, **{f"condition_{i}": np.array(value) for i, value in enumerate(conditions)}}
+                    )
+                    answers.append(a @ b)
+                self._check_outputs(model, quantized, feeds, answers)
+
 
 if __name__ == "__main__":
     unittest.main()

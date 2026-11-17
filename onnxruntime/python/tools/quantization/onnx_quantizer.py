@@ -1102,7 +1102,16 @@ class ONNXQuantizer(BaseQuantizer):
             return: None if there is already a DequantizeLinear node that dequantizes it
                     A DequantizeLinear node otherwise
         """
-        if (value_name in self.quantized_value_map) and (value_name not in self.generated_value_names):
+        if value_name in self.generated_value_names:
+            return None
+        if value_name not in self.quantized_value_map and self.parent is not None:
+            # Restore a captured value in its owning graph so sibling and nested
+            # subgraphs can reuse the same float value.
+            dequantize_node = self.parent._dequantize_value(value_name)
+            if dequantize_node is not None:
+                self.parent.add_new_nodes([dequantize_node])
+            return None
+        if value_name in self.quantized_value_map:
             quantized_value = self.quantized_value_map[value_name]
             # Add DequantizeLinear Node for this input
 
