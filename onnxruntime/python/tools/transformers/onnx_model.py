@@ -163,8 +163,41 @@ class OnnxModel:
         logger.warning("Failed to remove node %s", node)  # It might be a bug to hit this line.
 
     def remove_nodes(self, nodes_to_remove):
-        for node in nodes_to_remove:
-            self.remove_node(node)
+        if not isinstance(nodes_to_remove, (list, tuple)) or len(nodes_to_remove) < 2 or len(self.graphs()) != 1:
+            for node in nodes_to_remove:
+                self.remove_node(node)
+            return
+
+        graph = self.graphs()[0]
+
+        # Removing nodes one at a time repeatedly searches the entire graph.
+        # Index requests by outputs, retaining equality checks for copied nodes
+        # and transient duplicate outputs during fusion.
+        pending = {}
+        for index, node in enumerate(nodes_to_remove):
+            pending.setdefault(tuple(node.output), []).append((index, node))
+        removed = set()
+        indices = []
+        for index, node in enumerate(graph.node):
+            candidates = pending.get(tuple(node.output))
+            if not candidates:
+                continue
+            for candidate_index, (request_index, candidate) in enumerate(candidates):
+                if node == candidate:
+                    removed.add(request_index)
+                    indices.append(index)
+                    del candidates[candidate_index]
+                    break
+            if len(removed) == len(nodes_to_remove):
+                break
+
+        # Delete in place so references to surviving NodeProto objects remain
+        # valid. Clearing and extending the field would copy those objects.
+        for index in reversed(indices):
+            del graph.node[index]
+        for index, node in enumerate(nodes_to_remove):
+            if index not in removed:
+                logger.warning("Failed to remove node %s", node)
 
     def add_node(self, node, graph_name=None):
         if graph_name is None or graph_name == self.model.graph.name:
