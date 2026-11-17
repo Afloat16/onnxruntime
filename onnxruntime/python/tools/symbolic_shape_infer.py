@@ -1042,8 +1042,10 @@ class SymbolicShapeInference:
         )
 
     def _infer_DequantizeLinear(self, node):  # noqa: N802
-        # Get the output data type from the scale input (index 1, required).
-        output_dtype = self.known_vi_[node.input[1]].type.tensor_type.elem_type
+        # An explicit output_dtype overrides the scale type starting in opset 23.
+        output_dtype = (
+            get_attribute(node, "output_dtype", 0) or self.known_vi_[node.input[1]].type.tensor_type.elem_type
+        )
 
         # Get the output shape from the first input.
         output_shape = self._get_shape(node, 0)
@@ -1052,11 +1054,12 @@ class SymbolicShapeInference:
         vi.CopyFrom(helper.make_tensor_value_info(node.output[0], output_dtype, output_shape))
 
     def _infer_QuantizeLinear(self, node):  # noqa: N802
-        # Get the output data type from the zero-point input (index 2, optional).
-        # Otherwise, default to uint8
-        output_dtype = onnx.TensorProto.UINT8
-        if len(node.input) > 2 and node.input[2]:
-            output_dtype = self.known_vi_[node.input[2]].type.tensor_type.elem_type
+        # Prefer output_dtype (opset 21+), then the optional zero point, then uint8.
+        output_dtype = get_attribute(node, "output_dtype", 0)
+        if not output_dtype:
+            output_dtype = onnx.TensorProto.UINT8
+            if len(node.input) > 2 and node.input[2]:
+                output_dtype = self.known_vi_[node.input[2]].type.tensor_type.elem_type
 
         # Get the output shape from the first input.
         output_shape = self._get_shape(node, 0)

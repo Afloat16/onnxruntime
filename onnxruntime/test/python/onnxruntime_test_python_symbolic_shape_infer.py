@@ -1498,6 +1498,68 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
         ]
         self._check_shapes(graph, inferred.graph, expected_shapes)
 
+    def _check_quantization_output_dtype(self, op_type, opset, scale_type, output_dtype, zero_point_name, quant_type):
+        is_quantize = op_type == "QuantizeLinear"
+        input_type = TensorProto.FLOAT if is_quantize else quant_type
+        if output_dtype:
+            expected_type = output_dtype
+        elif is_quantize:
+            expected_type = quant_type if zero_point_name else TensorProto.UINT8
+        else:
+            expected_type = scale_type
+        initializers = [helper.make_tensor("scale", scale_type, [], [0.125])]
+        if zero_point_name:
+            initializers.append(helper.make_tensor(zero_point_name, quant_type, [], [1]))
+        inputs = ["input", "scale"] + ([] if zero_point_name is None else [zero_point_name])
+        attributes = {} if output_dtype is None else {"output_dtype": output_dtype}
+        model = helper.make_model(
+            helper.make_graph(
+                [helper.make_node(op_type, inputs, ["output"], **attributes)],
+                "quantization_output_dtype",
+                [helper.make_tensor_value_info("input", input_type, ["N", 3])],
+                [helper.make_tensor_value_info("output", expected_type, ["N", 3])],
+                initializers,
+            ),
+            opset_imports=[helper.make_opsetid("", opset)],
+            ir_version=9,
+        )
+        onnx.checker.check_model(model, full_check=True)
+        inferred = SymbolicShapeInference.infer_shapes(model)
+        output = inferred.graph.output[0].type.tensor_type
+        self.assertEqual(output.elem_type, expected_type)
+        self.assertEqual([dim.dim_param or dim.dim_value for dim in output.shape.dim], ["N", 3])
+        onnx.checker.check_model(inferred, full_check=True)
+        return model, inferred
+
+    def test_quantize_linear_output_dtype(self):
+        for opset in [21, 23]:
+            for output_dtype in [None, 0, TensorProto.UINT8, TensorProto.INT8, TensorProto.UINT16, TensorProto.INT16]:
+                for zero_point_name in [None, "", "zero_point"]:
+                    with self.subTest(opset=opset, output_dtype=output_dtype, zero_point_name=zero_point_name):
+                        self._check_quantization_output_dtype(
+                            "QuantizeLinear",
+                            opset,
+                            TensorProto.FLOAT,
+                            output_dtype,
+                            zero_point_name,
+                            output_dtype or TensorProto.INT8,
+                        )
+
+    def test_dequantize_linear_output_dtype(self):
+        for opset in [23, 24]:
+            for scale_type in [TensorProto.FLOAT, TensorProto.FLOAT16]:
+                for output_dtype in [None, 0, TensorProto.FLOAT, TensorProto.FLOAT16]:
+                    for zero_point_name in [None, "", "zero_point"]:
+                        with self.subTest(
+                            opset=opset,
+                            scale_type=scale_type,
+                            output_dtype=output_dtype,
+                            zero_point_name=zero_point_name,
+                        ):
+                            self._check_quantization_output_dtype(
+                                "DequantizeLinear", opset, scale_type, output_dtype, zero_point_name, TensorProto.INT8
+                            )
+
     def test_matmulnbits(self):
         """
         Test ORT MatMulNBits op.
