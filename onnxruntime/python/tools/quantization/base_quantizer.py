@@ -338,9 +338,9 @@ class BaseQuantizer:
         self.model.initializer_extend([scale_initializer, zero_initializer])
 
         if not keep_float_weight:
-            if self.weight_qType == onnx.TensorProto.FLOAT8E4M3FN:
+            if qType == onnx.TensorProto.FLOAT8E4M3FN:
                 q_weight_initializer = onnx.TensorProto()
-                q_weight_initializer.data_type = self.weight_qType
+                q_weight_initializer.data_type = qType
                 q_weight_initializer.dims.extend(weight.dims)
                 q_weight_initializer.name = q_weight_name
                 # Do not remove .flatten().copy() numpy is not clear about data persistence.
