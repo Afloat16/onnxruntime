@@ -20,6 +20,7 @@ from onnxruntime.quantization import QuantFormat, QuantType, quantize_static
 from onnxruntime.quantization.calibrate import CalibrationDataReader
 from onnxruntime.quantization.qdq_loss_debug import (
     QUANT_INPUT_SUFFIX,
+    _run_dequantize_linear,
     collect_activations,
     compute_activation_error,
     compute_weight_error,
@@ -313,6 +314,90 @@ class TestSaveActivations(unittest.TestCase):
         b = np.array([7, 8, 9])
         c = np.array([1, 2, 3])
         create_activation_matching({"test" + QUANT_INPUT_SUFFIX: a, "test": c}, {"test": b})
+
+
+class TestWeightDequantization(unittest.TestCase):
+    def test_weight_matching_matches_cpu_dequantization(self):
+        cases = [((4, 3), 0), ((3, 4), 1), ((2, 3, 4), -1), ((3,), 0), ((2, 1, 3), 1), ((2, 3, 4, 5), 2)]
+        options = onnxruntime.SessionOptions()
+        options.intra_op_num_threads = 1
+        options.graph_optimization_level = onnxruntime.GraphOptimizationLevel.ORT_DISABLE_ALL
+        rng = np.random.default_rng(196)
+        for dtype in (np.int8, np.uint8):
+            for shape, axis in cases:
+                with self.subTest(dtype=dtype, shape=shape, axis=axis), tempfile.TemporaryDirectory() as directory:
+                    # Keep the differences in range to isolate channel assembly from integer overflow handling.
+                    low, high = (-31, 32) if dtype == np.int8 else (10, 70)
+                    weights = rng.integers(low, high, shape, dtype=dtype)
+                    zero = np.arange(shape[axis], dtype=dtype)
+                    scale = np.linspace(0.01, 0.1, shape[axis], dtype=np.float32)
+                    broadcast_shape = [1] * len(shape)
+                    broadcast_shape[axis] = shape[axis]
+                    float_weights = (weights.astype(np.float32) - zero.reshape(broadcast_shape)) * scale.reshape(
+                        broadcast_shape
+                    )
+                    output = helper.make_tensor_value_info("out", TensorProto.FLOAT, shape)
+                    float_model = helper.make_model(
+                        helper.make_graph(
+                            [helper.make_node("Identity", ["weight"], ["out"])],
+                            "float",
+                            [],
+                            [output],
+                            [onnx.numpy_helper.from_array(float_weights, "weight")],
+                        ),
+                        opset_imports=[helper.make_opsetid("", 13)],
+                        ir_version=10,
+                    )
+                    qdq_model = helper.make_model(
+                        helper.make_graph(
+                            [
+                                helper.make_node(
+                                    "DequantizeLinear", ["weight_quantized", "scale", "zero"], ["out"], axis=axis
+                                )
+                            ],
+                            "quantized",
+                            [],
+                            [output],
+                            [
+                                onnx.numpy_helper.from_array(weights, "weight_quantized"),
+                                onnx.numpy_helper.from_array(scale, "scale"),
+                                onnx.numpy_helper.from_array(zero, "zero"),
+                            ],
+                        ),
+                        opset_imports=[helper.make_opsetid("", 13)],
+                        ir_version=10,
+                    )
+                    onnx.checker.check_model(qdq_model, full_check=True)
+                    float_path = Path(directory) / "float.onnx"
+                    qdq_path = Path(directory) / "qdq.onnx"
+                    onnx.save(float_model, float_path)
+                    onnx.save(qdq_model, qdq_path)
+                    expected = onnxruntime.InferenceSession(
+                        qdq_model.SerializeToString(), options, providers=["CPUExecutionProvider"]
+                    ).run(None, {})[0]
+                    matched = create_weight_matching(str(float_path), str(qdq_path))
+                    self.assertEqual(set(matched), {"weight"})
+                    self.assertEqual(matched["weight"]["float"].dtype, float_weights.dtype)
+                    self.assertEqual(matched["weight"]["dequantized"].dtype, expected.dtype)
+                    np.testing.assert_array_equal(matched["weight"]["float"], float_weights)
+                    np.testing.assert_array_equal(matched["weight"]["dequantized"], expected)
+
+    def test_dequantization_preserves_empty_channel_behavior(self):
+        for axis in (0, -2):
+            with self.subTest(axis=axis):
+                self.assertIsNone(
+                    _run_dequantize_linear(
+                        np.empty((0, 3), dtype=np.int8),
+                        np.empty(0, dtype=np.float32),
+                        np.empty(0, dtype=np.int8),
+                        axis,
+                    )
+                )
+        empty = _run_dequantize_linear(
+            np.empty((3, 0, 2), dtype=np.int8), np.ones(3, dtype=np.float32), np.zeros(3, dtype=np.int8), 0
+        )
+        self.assertEqual(empty.dtype, np.float32)
+        np.testing.assert_array_equal(empty, np.empty((3, 0, 2), dtype=np.float32))
 
 
 if __name__ == "__main__":

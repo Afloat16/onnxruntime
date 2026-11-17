@@ -250,21 +250,17 @@ def _run_dequantize_linear(
     reshape_dims = list(weight_tensor.shape)  # deep copy
     reshape_dims[channel_axis] = 1  # only one per channel for reshape
     channel_count = weight_tensor.shape[channel_axis]
-    dequantized_weights = None
+    dequantized_channels = []
     for i in range(channel_count):
         per_channel_data = weight_tensor.take(i, channel_axis)
         dequantized_per_channel_data = (per_channel_data - weight_zp[i]) * weight_scale[i]
-        if i == 0:
-            dequantized_weights = numpy.asarray(dequantized_per_channel_data).reshape(reshape_dims)
-        else:
-            channel_weights = numpy.asarray(dequantized_per_channel_data).reshape(reshape_dims)
-            dequantized_weights = numpy.concatenate((dequantized_weights, channel_weights), channel_axis)
+        dequantized_channels.append(numpy.asarray(dequantized_per_channel_data).reshape(reshape_dims))
 
-    if dequantized_weights is None:
+    if not dequantized_channels:
         return None
 
-    dequantized_weights.reshape(weight_tensor.shape)
-    return dequantized_weights
+    # Assemble once to avoid copying all preceding channels on every iteration.
+    return numpy.concatenate(dequantized_channels, channel_axis)
 
 
 def create_weight_matching(float_model_path: str, qdq_model_path: str) -> dict[str, dict[str, numpy.ndarray]]:
