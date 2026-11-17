@@ -894,7 +894,17 @@ class SymbolicShapeInference:
             "Neg": lambda l: -l[0],  # noqa: E741
         }
         assert node.op_type in funcs
-        self._compute_on_sympy_data(node, funcs[node.op_type])
+        if node.op_type in ["Min", "Max"]:
+
+            def compute_variadic(values):
+                result = values[0]
+                for value in values[1:]:
+                    result = funcs[node.op_type]([result, value])
+                return result
+
+            self._compute_on_sympy_data(node, compute_variadic)
+        else:
+            self._compute_on_sympy_data(node, funcs[node.op_type])
 
     def _infer_Cast(self, node):  # noqa: N802
         self._pass_on_sympy_data(node)

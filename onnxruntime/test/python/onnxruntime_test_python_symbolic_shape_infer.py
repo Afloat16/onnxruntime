@@ -1296,6 +1296,81 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
         self.assertEqual(len(output_dims), 1)
         self.assertEqual(output_dims[0].dim_value, 512)
 
+    def test_min_max_variadic_constants(self):
+        input_values = [
+            [[3, 5]],
+            [[2, 7], [3, 6]],
+            [[2, 7], [3, 6], [5, 4]],
+            [[2, 7], 3, [5], [6, 4]],
+        ]
+        for op_type in ["Min", "Max"]:
+            for values in input_values:
+                for use_constant_nodes in [False, True]:
+                    with self.subTest(op_type=op_type, values=values, use_constant_nodes=use_constant_nodes):
+                        tensors = [
+                            numpy_helper.from_array(numpy.asarray(value, dtype=numpy.int64), name=f"value_{i}")
+                            for i, value in enumerate(values)
+                        ]
+                        nodes = (
+                            [helper.make_node("Constant", [], [tensor.name], value=tensor) for tensor in tensors]
+                            if use_constant_nodes
+                            else []
+                        )
+                        nodes.extend(
+                            [
+                                helper.make_node(op_type, [tensor.name for tensor in tensors], ["shape"]),
+                                helper.make_node("ConstantOfShape", ["shape"], ["output"]),
+                            ]
+                        )
+                        graph = helper.make_graph(
+                            nodes,
+                            "variadic_min_max",
+                            [],
+                            [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None, None])],
+                            [] if use_constant_nodes else tensors,
+                        )
+                        model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+                        onnx.checker.check_model(model, full_check=True)
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        onnx.checker.check_model(inferred, full_check=True)
+                        reduce = numpy.minimum.reduce if op_type == "Min" else numpy.maximum.reduce
+                        expected_shape = reduce(numpy.broadcast_arrays(*values)).tolist()
+                        self.assertEqual(self._tensor_shape(inferred.graph.output[0]), expected_shape)
+
+    def test_min_max_variadic_symbolic_values(self):
+        for op_type in ["Min", "Max"]:
+            limits = [8, 6] if op_type == "Min" else [2, 4]
+            sentinel = numpy.iinfo(numpy.int64).max if op_type == "Min" else numpy.iinfo(numpy.int64).min
+            cases = [
+                (["input_shape"], ["N", "M"]),
+                (["input_shape", "limits"], [f"{op_type}({limits[0]}, N)", f"{op_type}({limits[1]}, M)"]),
+                (["input_shape", "limits", "five"], [f"{op_type}(5, N)", f"{op_type}(5, M)"]),
+                (["input_shape", "limits", "five", "sentinel"], [f"{op_type}(5, N)", f"{op_type}(5, M)"]),
+                (["sentinel", "input_shape", "limits", "five"], [f"{op_type}(5, N)", f"{op_type}(5, M)"]),
+            ]
+            for inputs, expected_shape in cases:
+                with self.subTest(op_type=op_type, inputs=inputs):
+                    graph = helper.make_graph(
+                        [
+                            helper.make_node("Shape", ["input"], ["input_shape"]),
+                            helper.make_node(op_type, inputs, ["shape"]),
+                            helper.make_node("ConstantOfShape", ["shape"], ["output"]),
+                        ],
+                        "variadic_symbolic_min_max",
+                        [helper.make_tensor_value_info("input", TensorProto.FLOAT, ["N", "M"])],
+                        [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None, None])],
+                        [
+                            numpy_helper.from_array(numpy.asarray(limits, dtype=numpy.int64), name="limits"),
+                            numpy_helper.from_array(numpy.asarray(5, dtype=numpy.int64), name="five"),
+                            numpy_helper.from_array(numpy.asarray(sentinel, dtype=numpy.int64), name="sentinel"),
+                        ],
+                    )
+                    model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+                    onnx.checker.check_model(model, full_check=True)
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    onnx.checker.check_model(inferred, full_check=True)
+                    self.assertEqual(self._tensor_shape(inferred.graph.output[0]), expected_shape)
+
     def test_quantize_linear(self):
         """
         Test ONNX QuantizeLinear op.
