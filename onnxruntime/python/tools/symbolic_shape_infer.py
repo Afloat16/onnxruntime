@@ -2086,7 +2086,17 @@ class SymbolicShapeInference:
             axes = self._try_get_value(node, 1)
             assert get_attribute(node, "axes") is None
 
-        if axes is None:
+        if axes is None and op_set >= 13 and len(node.input) > 1 and node.input[1]:
+            axes_shape = self._get_shape(node, 1)
+            if axes_shape == [0]:
+                output_shape = input_shape
+            elif axes_shape == [1] and input_shape:
+                output_shape = get_shape_from_sympy_shape(self._new_symbolic_shape(len(input_shape) - 1, node))
+            else:
+                # Repeated axes are allowed for Squeeze, so even a known vector
+                # length greater than one does not determine the output rank.
+                raise ValueError(f"Cannot infer Squeeze output rank from runtime axes: {node.name}")
+        elif axes is None:
             # No axes have been provided (neither via attribute nor via input).
             # In this case the 'Shape' op should remove all axis with dimension 1.
             # For symbolic dimensions we guess they are !=1.
@@ -2192,17 +2202,28 @@ class SymbolicShapeInference:
             axes = self._try_get_value(node, 1)
             assert get_attribute(node, "axes") is None
 
-        output_rank = len(input_shape) + len(axes)
-        axes = [handle_negative_axis(a, output_rank) for a in axes]
+        if axes is None:
+            axes_shape = self._get_shape(node, 1)
+            if axes_shape is None or len(axes_shape) != 1 or not is_literal(axes_shape[0]):
+                raise ValueError(f"Cannot infer Unsqueeze output rank from runtime axes: {node.name}")
+            axes_count = int(axes_shape[0])
+            output_shape = (
+                get_shape_from_sympy_shape(self._new_symbolic_shape(len(input_shape) + axes_count, node))
+                if axes_count
+                else input_shape
+            )
+        else:
+            output_rank = len(input_shape) + len(axes)
+            axes = [handle_negative_axis(a, output_rank) for a in axes]
 
-        input_axis = 0
-        output_shape = []
-        for i in range(output_rank):
-            if i in axes:
-                output_shape.append(1)
-            else:
-                output_shape.append(input_shape[input_axis])
-                input_axis += 1
+            input_axis = 0
+            output_shape = []
+            for i in range(output_rank):
+                if i in axes:
+                    output_shape.append(1)
+                else:
+                    output_shape.append(input_shape[input_axis])
+                    input_axis += 1
 
         vi = self.known_vi_[node.output[0]]
         vi.CopyFrom(

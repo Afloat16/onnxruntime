@@ -1005,6 +1005,99 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
         self.assertIsInstance(present_kv[2], str)
         self.assertNotIn(present_kv[2], ["", "seq", "past_seq"])
 
+    def test_squeeze_unsqueeze_runtime_axes(self):
+        cases = [
+            ("Unsqueeze", [2, 3], 1),
+            ("Unsqueeze", [2, 3], 2),
+            ("Unsqueeze", ["batch", 3], 1),
+            ("Unsqueeze", [], 1),
+            ("Unsqueeze", [0, 3], 2),
+            ("Unsqueeze", [2, 3], 0),
+            ("Unsqueeze", [], 0),
+            ("Squeeze", [1, 2, 1, 3], 1),
+            ("Squeeze", [1], 1),
+            ("Squeeze", [1, "batch", 1, 3], 1),
+            ("Squeeze", [1, 0, 1, 3], 1),
+            ("Squeeze", [1, 2, 1, 3], 0),
+        ]
+        for opset in (13, 21):
+            for auto_merge in (False, True):
+                for op_type, input_shape, axes_count in cases:
+                    with self.subTest(
+                        opset=opset, auto_merge=auto_merge, op=op_type, shape=input_shape, axes=axes_count
+                    ):
+                        output_rank = len(input_shape) + (axes_count if op_type == "Unsqueeze" else -axes_count)
+                        graph = helper.make_graph(
+                            [
+                                helper.make_node(op_type, ["input", "axes"], ["reshaped"]),
+                                helper.make_node("Identity", ["reshaped"], ["output"]),
+                                helper.make_node("Shape", ["reshaped"], ["shape"]),
+                            ],
+                            "runtime_axes",
+                            [
+                                helper.make_tensor_value_info("input", TensorProto.FLOAT, input_shape),
+                                helper.make_tensor_value_info("axes", TensorProto.INT64, [axes_count]),
+                            ],
+                            [
+                                helper.make_tensor_value_info("output", TensorProto.FLOAT, None),
+                                helper.make_tensor_value_info("shape", TensorProto.INT64, None),
+                            ],
+                        )
+                        model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", opset)])
+                        inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=auto_merge)
+                        onnx.checker.check_model(inferred)
+                        output = inferred.graph.output[0].type.tensor_type
+                        self.assertEqual(output.elem_type, TensorProto.FLOAT)
+                        self.assertTrue(output.HasField("shape"))
+                        self.assertEqual(len(output.shape.dim), output_rank)
+                        if axes_count == 0:
+                            self.assertEqual(output.shape, inferred.graph.input[0].type.tensor_type.shape)
+                        else:
+                            symbols = [dim.dim_param for dim in output.shape.dim]
+                            self.assertTrue(all(symbols))
+                            self.assertEqual(len(set(symbols)), output_rank)
+                            self.assertNotIn("batch", symbols)
+                        self.assertEqual(inferred.graph.output[1].type.tensor_type.shape.dim[0].dim_value, output_rank)
+
+    def test_squeeze_unsqueeze_ambiguous_runtime_axes(self):
+        for op_type, axes_count in (("Squeeze", 2), ("Squeeze", "count"), ("Unsqueeze", "count")):
+            with self.subTest(op=op_type, axes=axes_count):
+                graph = helper.make_graph(
+                    [helper.make_node(op_type, ["input", "axes"], ["output"], name="runtime_axes")],
+                    "runtime_axes",
+                    [
+                        helper.make_tensor_value_info("input", TensorProto.FLOAT, [1, 2, 1, 3]),
+                        helper.make_tensor_value_info("axes", TensorProto.INT64, [axes_count]),
+                    ],
+                    [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                )
+                model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+                with self.assertRaisesRegex(ValueError, f"Cannot infer {op_type} output rank from runtime axes"):
+                    SymbolicShapeInference.infer_shapes(model)
+
+    def test_squeeze_known_and_omitted_axes(self):
+        cases = [
+            (["input"], None, [2, 3]),
+            (["input", ""], None, [2, 3]),
+            (["input", "axes"], [0, -4], [2, 1, 3]),
+            (["input", "axes"], [0, 2], [2, 3]),
+        ]
+        for node_inputs, axes, expected_shape in cases:
+            with self.subTest(inputs=node_inputs, axes=axes):
+                graph = helper.make_graph(
+                    [helper.make_node("Squeeze", node_inputs, ["output"])],
+                    "known_axes",
+                    [helper.make_tensor_value_info("input", TensorProto.FLOAT, [1, 2, 1, 3])],
+                    [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                    [] if axes is None else [helper.make_tensor("axes", TensorProto.INT64, [len(axes)], axes)],
+                )
+                model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+                inferred = SymbolicShapeInference.infer_shapes(model)
+                onnx.checker.check_model(inferred)
+                self.assertEqual(
+                    [dim.dim_value for dim in inferred.graph.output[0].type.tensor_type.shape.dim], expected_shape
+                )
+
     def test_unsqueeze_opset_11(self):
         graph = helper.make_graph(
             [
