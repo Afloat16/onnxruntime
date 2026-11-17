@@ -315,6 +315,78 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
 
 class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
+    def test_loop_omitted_control_inputs(self):
+        for opset in (11, 13, 21):
+            for batch in (3, "batch"):
+                for omit_trip_count, omit_condition in ((False, False), (True, False), (False, True), (True, True)):
+                    with self.subTest(
+                        opset=opset, batch=batch, omit_trip_count=omit_trip_count, omit_condition=omit_condition
+                    ):
+                        body = helper.make_graph(
+                            [
+                                helper.make_node("Less", ["iteration", "last_iteration"], ["condition_out"]),
+                                helper.make_node("Add", ["carried_in", "increment"], ["carried_out"]),
+                                helper.make_node("Identity", ["carried_out"], ["scan_out"]),
+                            ],
+                            "loop_body",
+                            [
+                                helper.make_tensor_value_info("iteration", TensorProto.INT64, []),
+                                helper.make_tensor_value_info("condition_in", TensorProto.BOOL, []),
+                                helper.make_tensor_value_info("carried_in", TensorProto.FLOAT, [batch, 2]),
+                            ],
+                            [
+                                helper.make_tensor_value_info("condition_out", TensorProto.BOOL, []),
+                                helper.make_tensor_value_info("carried_out", TensorProto.FLOAT, [batch, 2]),
+                                helper.make_tensor_value_info("scan_out", TensorProto.FLOAT, [batch, 2]),
+                            ],
+                            [
+                                numpy_helper.from_array(numpy.array(2, dtype=numpy.int64), "last_iteration"),
+                                numpy_helper.from_array(numpy.array(1, dtype=numpy.float32), "increment"),
+                            ],
+                        )
+                        initializers = []
+                        if not omit_trip_count:
+                            initializers.append(numpy_helper.from_array(numpy.array(3, numpy.int64), "trip_count"))
+                        if not omit_condition:
+                            initializers.append(numpy_helper.from_array(numpy.array(True), "condition"))
+                        model = helper.make_model(
+                            helper.make_graph(
+                                [
+                                    helper.make_node(
+                                        "Loop",
+                                        [
+                                            "" if omit_trip_count else "trip_count",
+                                            "" if omit_condition else "condition",
+                                            "input",
+                                        ],
+                                        ["output", "scan"],
+                                        body=body,
+                                    )
+                                ],
+                                "loop_optional_inputs",
+                                [helper.make_tensor_value_info("input", TensorProto.FLOAT, [batch, 2])],
+                                [
+                                    helper.make_tensor_value_info("output", TensorProto.FLOAT, [batch, 2]),
+                                    helper.make_tensor_value_info("scan", TensorProto.FLOAT, [None, batch, 2]),
+                                ],
+                                initializers,
+                            ),
+                            opset_imports=[helper.make_opsetid("", opset)],
+                        )
+                        onnx.checker.check_model(model, full_check=True)
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        onnx.checker.check_model(inferred, full_check=True)
+                        output_shape, scan_shape = [
+                            [
+                                dim.dim_value if dim.HasField("dim_value") else dim.dim_param
+                                for dim in output.type.tensor_type.shape.dim
+                            ]
+                            for output in inferred.graph.output
+                        ]
+                        self.assertEqual(output_shape, [batch, 2])
+                        self.assertEqual(scan_shape[1:], [batch, 2])
+                        self.assertIsInstance(scan_shape[0], str)
+
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
         vis = [x for x in graph.value_info if x.name not in names_in_vis] + vis

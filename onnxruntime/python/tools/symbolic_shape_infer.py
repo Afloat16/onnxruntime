@@ -1252,6 +1252,8 @@ class SymbolicShapeInference:
         # when sequence_type is used as loop carried input
         # needs to run subgraph infer twice if the tensor shape in sequence contains None
         for i, si in enumerate(subgraph.input):
+            if i < 2 and not node.input[i]:
+                continue
             si_name = si.name
             si.CopyFrom(self.known_vi_[node.input[i]])
             si.name = si_name
