@@ -20,7 +20,7 @@ from .qdq_base_operator import QDQOperatorBase
 def is_B_transposed(gemm_node):  # noqa: N802
     transB_attribute = [attr for attr in gemm_node.attribute if attr.name == "transB"]  # noqa: N806
     if transB_attribute:
-        return onnx.helper.get_attribute_value(transB_attribute[0]) > 0
+        return onnx.helper.get_attribute_value(transB_attribute[0]) != 0
 
     return False
 
@@ -45,9 +45,57 @@ class QLinearGemm(QOpMatMul):
     def __init__(self, onnx_quantizer, onnx_node):
         super().__init__(onnx_quantizer, onnx_node)
 
+    def _has_supported_types(self, zero_point_names, scale_names):
+        required = dict.fromkeys(zero_point_names, (onnx.TensorProto.INT8, onnx.TensorProto.UINT8))
+        required.update(dict.fromkeys(scale_names, (onnx.TensorProto.FLOAT,)))
+        types = {}
+        scope = self.quantizer
+        while scope is not None:
+            for initializer in scope.model.initializer():
+                allowed_types = required.pop(initializer.name, None)
+                if allowed_types is not None:
+                    if initializer.data_type not in allowed_types:
+                        return False
+                    types[initializer.name] = initializer.data_type
+            if not required:
+                input_type, weight_type, output_type = (types[name] for name in zero_point_names)
+                # CPU kernels require matching A/Y signedness and do not support int8 A with uint8 B.
+                return input_type == output_type and not (
+                    input_type == onnx.TensorProto.INT8 and weight_type == onnx.TensorProto.UINT8
+                )
+            scope = scope.parent
+        return False
+
+    def _has_positive_inner_dimension(self):
+        trans_a = any(attr.name == "transA" and attr.i != 0 for attr in self.node.attribute)
+        axes = (0 if trans_a else 1, 1 if is_B_transposed(self.node) else 0)
+        for name, axis in zip(self.node.input[:2], axes, strict=True):
+            scope = self.quantizer
+            while scope is not None:
+                value_info = scope.value_infos.get(name)
+                if value_info is not None and value_info.type.HasField("tensor_type"):
+                    shape = value_info.type.tensor_type.shape
+                    if len(shape.dim) == 2 and shape.dim[axis].HasField("dim_value") and shape.dim[axis].dim_value > 0:
+                        return True
+                initializer = scope.model.get_initializer(name)
+                if initializer is not None:
+                    if not any(value.name == name for value in scope.model.graph().input):
+                        if len(initializer.dims) == 2 and initializer.dims[axis] > 0:
+                            return True
+                    break
+                if value_info is not None:
+                    break
+                scope = scope.parent
+        return False
+
     def quantize(self):
         node = self.node
         assert node.op_type == "Gemm"
+        has_bias = len(node.input) == 3 and bool(node.input[2])
+        # QGemm does not initialize its output when K is zero. A runtime K that
+        # is not known to be positive must retain the floating-point Gemm path.
+        if not has_bias and not self._has_positive_inner_dimension():
+            return super().quantize()
 
         (
             data_found,
@@ -95,8 +143,18 @@ class QLinearGemm(QOpMatMul):
         if not data_found or quantized_input_names is None:
             return super().quantize()
 
+        if not has_bias:
+            # Check the effective types, including tensor-level overrides and
+            # cached operands. QGemm only supports 8-bit operands and FP32 scales.
+            if not self._has_supported_types((*zero_point_names, output_zp_name), (*scale_names, output_scale_name)):
+                return super().quantize()
+            weight = self.quantizer.find_quantized_value(node.input[1])
+            weight_axis = 0 if is_B_transposed(node) else 1
+            if weight is not None and weight.axis is not None and weight.axis != weight_axis:
+                return super().quantize()
+
         quantized_bias_name = ""
-        if len(node.input) == 3 and node.input[2]:
+        if has_bias:
             if not self.quantizer.is_input_a_initializer(node.input[2]):
                 return super().quantize()
 
