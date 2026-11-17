@@ -428,24 +428,23 @@ class MinMaxCalibrater(CalibraterBase):
         model and ensures their outputs are stored as part of the graph output
         :return: augmented ONNX model
         """
-        tensors, _ = self.select_tensors_to_calibrate(self.model)
+        tensors, value_infos = self.select_tensors_to_calibrate(self.model)
         reshape_shape_name = str(uuid.uuid4())
         reshape_shape = numpy_helper.from_array(np.array([-1], dtype=np.int64), reshape_shape_name)
         self.model.graph.initializer.append(reshape_shape)
+        original_nodes = list(self.model.graph.node)
+        first_consumers = {}
+        for index, node in enumerate(original_nodes):
+            for name in node.input:
+                if name in tensors:
+                    first_consumers.setdefault(name, index)
+        nodes_before = {}
 
         def get_op_version(op_type, model):
             for opset_import in model.opset_import:
                 if onnx.defs.has(op_type, opset_import.domain):
                     return opset_import.version
             raise RuntimeError(f"Model does not contain a version for '{op_type}'.")
-
-        def insert_nodes(tensor_name, new_nodes):
-            index = next(
-                (i for i, x in enumerate(self.model.graph.node) if tensor_name in x.input), len(self.model.graph.node)
-            )
-            for node in new_nodes:
-                self.model.graph.node.insert(index, node)
-                index += 1
 
         def add_reduce_min_max(tensor_name, reduce_op_name):
             # When doing ReduceMax/ReduceMin, ORT can't reduce on dim with value of 0 if 'keepdims' is false.
@@ -466,9 +465,6 @@ class MinMaxCalibrater(CalibraterBase):
                 name=intermediate_output,
             )
 
-            value_infos = {vi.name: vi for vi in self.model.graph.value_info}
-            value_infos.update({o.name: o for o in self.model.graph.output})
-            value_infos.update({i.name: i for i in self.model.graph.input})
             if tensor_name in value_infos:
                 onnx_type = value_infos[tensor_name].type.tensor_type.elem_type
             else:
@@ -490,12 +486,23 @@ class MinMaxCalibrater(CalibraterBase):
                     reduce_node.input.append(reduce_axes_name)
                     self.model.graph.initializer.append(reduce_axes)
 
-            insert_nodes(tensor_name, [reduce_node, reshape_node])
             self.model.graph.output.append(helper.make_tensor_value_info(reduce_output, onnx_type, [None]))
+            return [reduce_node, reshape_node]
 
         for tensor in tensors:
-            add_reduce_min_max(tensor, "ReduceMin")
-            add_reduce_min_max(tensor, "ReduceMax")
+            min_nodes = add_reduce_min_max(tensor, "ReduceMin")
+            max_nodes = add_reduce_min_max(tensor, "ReduceMax")
+            index = first_consumers.get(tensor, len(original_nodes))
+            # Preserve insertion order: ReduceMax precedes ReduceMin, then the first consumer.
+            nodes_before.setdefault(index, []).extend(max_nodes + min_nodes)
+
+        augmented_nodes = []
+        for index, node in enumerate(original_nodes):
+            augmented_nodes.extend(nodes_before.get(index, ()))
+            augmented_nodes.append(node)
+        augmented_nodes.extend(nodes_before.get(len(original_nodes), ()))
+        self.model.graph.ClearField("node")
+        self.model.graph.node.extend(augmented_nodes)
 
         onnx.save(
             self.model,
