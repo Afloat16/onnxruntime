@@ -9,6 +9,7 @@ import logging
 import os
 import sys
 from collections import deque
+from heapq import heapify, heappop, heappush
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -1136,56 +1137,58 @@ class OnnxModel:
 
     @staticmethod
     def graph_topological_sort(graph, is_deterministic=False):
-        deps_set = set()  # dependency set of all node
-        sorted_node_set = set()  # sorted node set
-        sorted_nodes = []  # initialize sorted_nodes
-
-        initializer_names = [init.name for init in graph.initializer]
-        graph_input_names = [input.name for input in graph.input]
-        input_names = initializer_names + graph_input_names
-
+        graph_nodes = list(graph.node)
         if is_deterministic:
-            input_names.sort()
+            graph_nodes.sort(key=lambda node: node.name)
 
-        for input_name in input_names:
-            deps_set.add(input_name)
+        available_inputs = {initializer.name for initializer in graph.initializer}
+        available_inputs.update(input.name for input in graph.input)
+        available_inputs.add("")  # Optional inputs do not introduce dependencies.
 
-        sorted_node_set_len = -1
-        graph_nodes = graph.node if not is_deterministic else sorted(graph.node, key=lambda x: x.name)
+        # Most optimized graphs are already sorted, or need only a few nodes
+        # moved. Complete the first forward pass without constructing edges.
+        sorted_nodes = []
+        remaining = []
+        for node_idx, node in enumerate(graph_nodes):
+            if all(input_name in available_inputs for input_name in node.input):
+                sorted_nodes.append(node)
+                available_inputs.update(node.output)
+            else:
+                remaining.append(node_idx)
 
-        last_node_name = None
-        while len(sorted_node_set) != len(graph_nodes):
-            if len(sorted_node_set) == sorted_node_set_len:
-                break
-            sorted_node_set_len = len(sorted_node_set)
-            for node_idx, node in enumerate(graph_nodes):
-                if node_idx in sorted_node_set:
-                    continue
-                input_count = sum(1 for _ in node.input if _)
-                if input_count == 0:
-                    sorted_nodes.append(node)
-                    sorted_node_set.add(node_idx)
-                    for output in node.output:
-                        if output:
-                            deps_set.add(output)
-                    continue
-                failed = False
-                for input_name in node.input:
-                    if input_name and input_name not in deps_set:
-                        failed = True
-                        last_node_name = node.name
-                if not failed:
-                    sorted_nodes.append(node)
-                    sorted_node_set.add(node_idx)
-                    for output in node.output:
-                        if output:
-                            deps_set.add(output)
-                else:
-                    continue
+        deps_count = [0] * len(graph_nodes)
+        deps_to_nodes = {}
+        ready = []
+        for node_idx in remaining:
+            missing_inputs = set(graph_nodes[node_idx].input) - available_inputs
+            deps_count[node_idx] = len(missing_inputs)
+            if not missing_inputs:
+                ready.append(node_idx)
+            for input_name in missing_inputs:
+                deps_to_nodes.setdefault(input_name, []).append(node_idx)
 
-        if len(sorted_node_set) != len(graph.node):
+        heapify(ready)
+        next_pass = []
+        while ready:
+            node_idx = heappop(ready)
+            node = graph_nodes[node_idx]
+            sorted_nodes.append(node)
+            for output in node.output:
+                for dependent_idx in deps_to_nodes.pop(output, []):
+                    deps_count[dependent_idx] -= 1
+                    if deps_count[dependent_idx] == 0:
+                        # Preserve the original forward-scan order: a node before
+                        # this position would only be visited on the next pass.
+                        heappush(ready if dependent_idx > node_idx else next_pass, dependent_idx)
+            if not ready:
+                ready, next_pass = next_pass, []
+
+        if len(sorted_nodes) != len(graph_nodes):
+            last_node_name = next(
+                graph_nodes[index].name for index in range(len(graph_nodes) - 1, -1, -1) if deps_count[index]
+            )
             raise RuntimeError(
-                f"Graph is not a DAG: len(sorted_node_set)={len(sorted_node_set)}, len(graph.node)={len(graph.node)}, failed at node {last_node_name}"
+                f"Graph is not a DAG: len(sorted_node_set)={len(sorted_nodes)}, len(graph.node)={len(graph.node)}, failed at node {last_node_name}"
             )
 
         graph.ClearField("node")
