@@ -315,6 +315,97 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
 
 class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
+    @staticmethod
+    def _make_same_padding_model(op_type, spatial_shape, kernel_shape, strides, dilations, auto_pad, ceil_mode):
+        channels_last = op_type == "NhwcConv"
+        is_conv = op_type in ("Conv", "NhwcConv")
+        input_shape = ["batch", *spatial_shape, 2] if channels_last else ["batch", 2, *spatial_shape]
+        inputs = ["input"]
+        initializers = []
+        attributes = {"auto_pad": auto_pad, "kernel_shape": kernel_shape, "dilations": dilations}
+        if strides is not None:
+            attributes["strides"] = strides
+        if is_conv:
+            inputs.append("weight")
+            weight_shape = [3, *kernel_shape, 2] if channels_last else [3, 2, *kernel_shape]
+            initializers.append(numpy_helper.from_array(numpy.ones(weight_shape, dtype=numpy.float32), "weight"))
+        else:
+            attributes["ceil_mode"] = ceil_mode
+        output_names = ["output", "indices"] if op_type == "MaxPool" else ["output"]
+        graph = helper.make_graph(
+            [
+                helper.make_node(
+                    op_type, inputs, output_names, domain="com.microsoft" if channels_last else "", **attributes
+                )
+            ],
+            "same_padding",
+            [helper.make_tensor_value_info("input", TensorProto.FLOAT, input_shape)],
+            [
+                helper.make_tensor_value_info(
+                    name, TensorProto.INT64 if name == "indices" else TensorProto.FLOAT, [None] * len(input_shape)
+                )
+                for name in output_names
+            ],
+            initializers,
+        )
+        return helper.make_model(
+            graph,
+            opset_imports=[helper.make_opsetid("", 19), helper.make_opsetid("com.microsoft", 1)],
+            ir_version=8,
+        )
+
+    def test_same_padding_symbolic_spatial_dimensions(self):
+        cases = [
+            (["N"], [3], [2], [1], ["ceiling(N/2)"]),
+            (["N", 7], [3, 5], [2, 3], [1, 1], ["ceiling(N/2)", 3]),
+            (["N", "M", "K"], [3, 3, 3], [2, 3, 2], [1, 1, 1], ["ceiling(N/2)", "ceiling(M/3)", "ceiling(K/2)"]),
+            (["N", 2**53 + 1], [3, 3], [2, 3], [1, 1], ["ceiling(N/2)", (2**53 + 3) // 3]),
+        ]
+        for op_type in ("Conv", "AveragePool", "MaxPool", "NhwcConv"):
+            for spatial_shape, kernel_shape, strides, dilations, expected_spatial in cases:
+                if op_type == "NhwcConv" and len(spatial_shape) != 2:
+                    continue
+                for auto_pad in ("SAME_UPPER", "SAME_LOWER"):
+                    for ceil_mode in (0, 1) if op_type in ("AveragePool", "MaxPool") else (0,):
+                        with self.subTest(
+                            op_type=op_type,
+                            spatial_shape=spatial_shape,
+                            dilations=dilations,
+                            auto_pad=auto_pad,
+                            ceil_mode=ceil_mode,
+                        ):
+                            model = self._make_same_padding_model(
+                                op_type, spatial_shape, kernel_shape, strides, dilations, auto_pad, ceil_mode
+                            )
+                            onnx.checker.check_model(model, full_check=True)
+                            inferred = SymbolicShapeInference.infer_shapes(model)
+                            onnx.checker.check_model(inferred, full_check=True)
+                            expected = (
+                                ["batch", *expected_spatial, 3]
+                                if op_type == "NhwcConv"
+                                else ["batch", 3 if op_type == "Conv" else 2, *expected_spatial]
+                            )
+                            for output in inferred.graph.output:
+                                self.assertEqual(self._tensor_shape(output), expected)
+
+    def test_same_padding_static_dimensions_and_default_strides(self):
+        for op_type in ("Conv", "AveragePool", "MaxPool"):
+            for auto_pad in ("SAME_UPPER", "SAME_LOWER"):
+                for ceil_mode in (0, 1) if op_type != "Conv" else (0,):
+                    for spatial_shape, strides, expected_spatial in (
+                        ([5, 7], [2, 3], [3, 3]),
+                        (["N", "M"], None, ["N", "M"]),
+                    ):
+                        with self.subTest(op_type=op_type, auto_pad=auto_pad, ceil_mode=ceil_mode, strides=strides):
+                            model = self._make_same_padding_model(
+                                op_type, spatial_shape, [3, 5], strides, [1, 1], auto_pad, ceil_mode
+                            )
+                            inferred = SymbolicShapeInference.infer_shapes(model)
+                            onnx.checker.check_model(inferred, full_check=True)
+                            expected = ["batch", 3 if op_type == "Conv" else 2, *expected_spatial]
+                            for output in inferred.graph.output:
+                                self.assertEqual(self._tensor_shape(output), expected)
+
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
         vis = [x for x in graph.value_info if x.name not in names_in_vis] + vis

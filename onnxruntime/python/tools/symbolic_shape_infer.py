@@ -759,7 +759,13 @@ class SymbolicShapeInference:
         if pads is None:
             pads = [0] * (2 * rank)
             auto_pad = get_attribute(node, "auto_pad", b"NOTSET").decode("utf-8")
-            if auto_pad != "VALID" and auto_pad != "NOTSET":
+            if auto_pad in ("SAME_UPPER", "SAME_LOWER") and all(d == 1 for d in dilations):
+                for i, dim in enumerate(spatial_shape):
+                    sympy_shape[-rank + i + (-1 if channels_last else 0)] = sympy.ceiling(
+                        dim / sympy.Integer(strides[i])
+                    )
+                return sympy_shape
+            elif auto_pad != "VALID" and auto_pad != "NOTSET":
                 try:
                     residual = [sympy.Mod(d, s) for d, s in zip(sympy_shape[-rank:], strides, strict=False)]
                     total_pads = [
