@@ -1187,6 +1187,8 @@ class HistogramCollector(CalibrationDataCollector):
         dtype = histogram[1].dtype
         kl_divergence = np.zeros(zero_bin_index - num_half_quantized_bin + 1)
         thresholds = [(np.array(0, dtype=dtype), np.array(0, dtype=dtype)) for i in range(kl_divergence.size)]
+        cumulative_counts = np.concatenate((np.zeros(1, dtype=hist.dtype), np.cumsum(hist)))
+        quantized_bin_indices = np.arange(num_quantized_bins)
 
         # <------------ num bins ---------------->
         #        <--- quantized bins ---->
@@ -1208,12 +1210,12 @@ class HistogramCollector(CalibrationDataCollector):
 
             thresholds[i - num_half_quantized_bin] = (hist_edges[start_index], hist_edges[end_index])
 
-            sliced_distribution = copy.deepcopy(hist[start_index:end_index])
+            sliced_distribution = hist[start_index:end_index]
 
             # reference distribution p
             p = sliced_distribution.copy()  # a copy of np array
-            left_outliers_count = sum(hist[:start_index])
-            right_outliers_count = sum(hist[end_index:])
+            left_outliers_count = cumulative_counts[start_index]
+            right_outliers_count = cumulative_counts[-1] - cumulative_counts[end_index]
             p[0] += left_outliers_count
             p[-1] += right_outliers_count
 
@@ -1221,26 +1223,19 @@ class HistogramCollector(CalibrationDataCollector):
             nonzeros = (p != 0).astype(np.int64)
 
             # quantize p.size bins into quantized bins (default 128 bins)
-            quantized_bins = np.zeros(num_quantized_bins, dtype=np.int64)
             num_merged_bins = sliced_distribution.size // num_quantized_bins
-
-            # merge bins into quantized bins
-            for index in range(num_quantized_bins):
-                start = index * num_merged_bins
-                end = start + num_merged_bins
-                quantized_bins[index] = sum(sliced_distribution[start:end])
-            quantized_bins[-1] += sum(sliced_distribution[num_quantized_bins * num_merged_bins :])
+            starts = quantized_bin_indices * num_merged_bins
+            # The final quantized bin also includes any remainder bins.
+            quantized_bins = np.add.reduceat(sliced_distribution, starts, dtype=np.int64)
 
             # in order to compare p and q, we need to make length of q equals to length of p
             # expand quantized bins into p.size bins
-            q = np.zeros(p.size, dtype=np.float64)
-            for index in range(num_quantized_bins):
-                start = index * num_merged_bins
-                end = p.size if index == num_quantized_bins - 1 else start + num_merged_bins
-
-                norm = sum(nonzeros[start:end])
-                if norm != 0:
-                    q[start:end] = (quantized_bins[index] / norm) * nonzeros[start:end]
+            norms = np.add.reduceat(nonzeros, starts)
+            normalized_bins = np.zeros(num_quantized_bins, dtype=np.float64)
+            np.divide(quantized_bins, norms, out=normalized_bins, where=norms != 0)
+            widths = np.full(num_quantized_bins, num_merged_bins)
+            widths[-1] = p.size - starts[-1]
+            q = np.repeat(normalized_bins, widths) * nonzeros
 
             p = smooth_distribution(p)
             q = smooth_distribution(q)
