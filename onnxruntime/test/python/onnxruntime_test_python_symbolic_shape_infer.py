@@ -1,6 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
+import math
 import os
 
 import numpy
@@ -1055,6 +1056,106 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
             helper.make_tensor_value_info("output", TensorProto.FLOAT, ["b", "s", 1]),
         ]
         self._check_shapes(graph, inferred.graph, expected_shapes)
+
+    @staticmethod
+    def _constant_of_shape_value_models():
+        for shape in ([], [0], [1], [5], [2, 3], [2, 0, 3]):
+            for fill in (0, 1, -3, numpy.iinfo(numpy.int64).min, numpy.iinfo(numpy.int64).max):
+                initializers = [numpy_helper.from_array(numpy.array(shape, numpy.int64), "shape")]
+                nodes = [
+                    helper.make_node(
+                        "ConstantOfShape",
+                        ["shape"],
+                        ["filled"],
+                        value=numpy_helper.from_array(numpy.array([fill], numpy.int64)),
+                    )
+                ]
+                outputs = [helper.make_tensor_value_info("filled", TensorProto.INT64, shape)]
+                if math.prod(shape):
+                    data = "filled"
+                    if len(shape) > 1:
+                        nodes.append(helper.make_node("Transpose", [data], ["transposed"]))
+                        data = "transposed"
+                    initializers.extend(
+                        [
+                            numpy_helper.from_array(numpy.array([math.prod(shape)], numpy.int64), "flat_shape"),
+                            numpy_helper.from_array(numpy.array(0, numpy.int64), "index"),
+                            numpy_helper.from_array(numpy.array(fill, numpy.int64), "expected"),
+                        ]
+                    )
+                    nodes.extend(
+                        [
+                            helper.make_node("Reshape", [data, "flat_shape"], ["flat"]),
+                            helper.make_node("Gather", ["flat", "index"], ["selected"]),
+                            helper.make_node("Equal", ["selected", "expected"], ["condition"]),
+                        ]
+                    )
+                    branches = {
+                        name: helper.make_graph(
+                            [
+                                helper.make_node(
+                                    "Constant",
+                                    [],
+                                    [name],
+                                    value=numpy_helper.from_array(numpy.array(values, numpy.float32)),
+                                )
+                            ],
+                            name,
+                            [],
+                            [helper.make_tensor_value_info(name, TensorProto.FLOAT, [len(values)])],
+                        )
+                        for name, values in (("then_branch", [7, 7]), ("else_branch", [9, 9, 9]))
+                    }
+                    nodes.append(helper.make_node("If", ["condition"], ["choice"], **branches))
+                    outputs.append(helper.make_tensor_value_info("choice", TensorProto.FLOAT, [None]))
+                model = helper.make_model(
+                    helper.make_graph(nodes, "constant_of_shape_values", [], outputs, initializers),
+                    opset_imports=[helper.make_opsetid("", 13)],
+                    ir_version=7,
+                )
+                yield model, shape, fill
+
+    def test_constant_of_shape_values(self):
+        for model, shape, fill in self._constant_of_shape_value_models():
+            with self.subTest(shape=shape, fill=fill):
+                onnx.checker.check_model(model, full_check=True)
+                inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                onnx.checker.check_model(inferred, full_check=True)
+                output = inferred.graph.output[0].type.tensor_type
+                self.assertEqual(output.elem_type, TensorProto.INT64)
+                self.assertEqual([d.dim_value for d in output.shape.dim], shape)
+                if math.prod(shape):
+                    self.assertEqual([d.dim_value for d in inferred.graph.output[1].type.tensor_type.shape.dim], [2])
+
+    def test_constant_of_shape_shape_input(self):
+        for count in (0, 1, 3):
+            for fill in (0, 1, 2):
+                with self.subTest(count=count, fill=fill):
+                    model = helper.make_model(
+                        helper.make_graph(
+                            [
+                                helper.make_node(
+                                    "ConstantOfShape",
+                                    ["shape"],
+                                    ["filled"],
+                                    value=numpy_helper.from_array(numpy.array([fill], numpy.int64)),
+                                ),
+                                helper.make_node("ConstantOfShape", ["filled"], ["output"]),
+                            ],
+                            "constant_of_shape_shape_input",
+                            [],
+                            [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None] * count)],
+                            [numpy_helper.from_array(numpy.array([count], numpy.int64), "shape")],
+                        ),
+                        opset_imports=[helper.make_opsetid("", 13)],
+                        ir_version=7,
+                    )
+                    onnx.checker.check_model(model, full_check=True)
+                    inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                    onnx.checker.check_model(inferred, full_check=True)
+                    output = inferred.graph.output[0].type.tensor_type
+                    self.assertEqual(output.elem_type, TensorProto.FLOAT)
+                    self.assertEqual([d.dim_value for d in output.shape.dim], [fill] * count)
 
     def test_shape_start_end(self):
         graph = helper.make_graph(

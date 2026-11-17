@@ -1001,9 +1001,11 @@ class SymbolicShapeInference:
             self._update_computed_dims(sympy_shape)
             # update sympy data if output type is int, and shape is known
             if vi.type.tensor_type.elem_type == onnx.TensorProto.INT64 and all(is_literal(x) for x in sympy_shape):
-                self.sympy_data_[node.output[0]] = np.ones(
-                    [int(x) for x in sympy_shape], dtype=np.int64
-                ) * numpy_helper.to_array(get_attribute(node, "value", 0))
+                self.sympy_data_[node.output[0]] = np.full(
+                    [int(x) for x in sympy_shape],
+                    numpy_helper.to_array(get_attribute(node, "value")).item(),
+                    dtype=np.int64,
+                )
         else:
             # create new dynamic shape
             # note input0 is a 1D vector of shape, the new symbolic shape has the rank of the shape vector length
