@@ -19,9 +19,19 @@ from parameterized import parameterized
 from parity_utilities import find_transformers_source
 
 if find_transformers_source():
-    from float16 import convert_float_to_float16
+    from float16 import (
+        _npfloat16_to_int,
+        convert_float_to_float16,
+        convert_np_to_float16,
+        convert_tensor_float_to_float16,
+    )
 else:
-    from onnxruntime.transformers.float16 import convert_float_to_float16
+    from onnxruntime.transformers.float16 import (
+        _npfloat16_to_int,
+        convert_float_to_float16,
+        convert_np_to_float16,
+        convert_tensor_float_to_float16,
+    )
 
 
 def _make_resize_model_opset11(num_resize_nodes=2, use_empty_names=True, share_scales=False):
@@ -171,6 +181,52 @@ def _make_constant_of_shape_model():
     ]
     graph = helper.make_graph(nodes, "constant_of_shape_test", [graph_input], [graph_output])
     return helper.make_model(graph, opset_imports=[helper.make_opsetid("", 18)], ir_version=8)
+
+
+class TestFloat16ValueConversion(unittest.TestCase):
+    def test_all_float16_bit_patterns(self):
+        bits = np.arange(65536, dtype=np.uint16)
+        values = bits.view(np.float16)
+        self.assertEqual(_npfloat16_to_int(values), list(range(65536)))
+        self.assertEqual(_npfloat16_to_int(values[::-7]), bits[::-7].tolist())
+        self.assertEqual(_npfloat16_to_int([]), [])
+
+    def test_tensor_storage_preserves_boundary_values(self):
+        values = np.array(
+            [0.0, -0.0, 1e-20, -1e-20, 1e10, -1e10, np.inf, -np.inf, np.nan, -np.nan, 1.5, -2.0],
+            dtype=np.float32,
+        ).reshape(3, 4)
+        expected = np.array(
+            [0x0000, 0x8000, 0x0001, 0x8001, 0x7BFF, 0xFBFF, 0x7C00, 0xFC00, 0x7E00, 0xFE00, 0x3E00, 0xC000],
+            dtype=np.uint16,
+        ).reshape(3, 4)
+        for raw in (False, True):
+            with self.subTest(raw=raw):
+                tensor = (
+                    numpy_helper.from_array(values, "weights")
+                    if raw
+                    else helper.make_tensor("weights", TensorProto.FLOAT, values.shape, values.ravel())
+                )
+                tensor.doc_string = "Preserve tensor metadata"
+                result = convert_tensor_float_to_float16(tensor)
+                self.assertIs(result, tensor)
+                self.assertEqual(result.name, "weights")
+                self.assertEqual(list(result.dims), [3, 4])
+                self.assertEqual(result.doc_string, "Preserve tensor metadata")
+                self.assertEqual(result.data_type, TensorProto.FLOAT16)
+                np.testing.assert_array_equal(numpy_helper.to_array(result).view(np.uint16), expected)
+                self.assertEqual(len(result.float_data), 0)
+
+    def test_debug_diagnostics_preserve_conversion(self):
+        values = np.array([1e-20, -1e-20, 1e10, -1e10], dtype=np.float32)
+        with self.assertNoLogs(convert_np_to_float16.__module__, level="WARNING"):
+            quiet = convert_np_to_float16(values, min_positive_val=1e-4, max_finite_val=10000)
+        with self.assertLogs(convert_np_to_float16.__module__, level="DEBUG") as captured:
+            verbose = convert_np_to_float16(values, min_positive_val=1e-4, max_finite_val=10000)
+        self.assertEqual(len(captured.records), 4)
+        self.assertTrue(all("will be truncated" in record.getMessage() for record in captured.records))
+        np.testing.assert_array_equal(quiet.view(np.uint16), verbose.view(np.uint16))
+        np.testing.assert_array_equal(quiet, np.array([1e-4, -1e-4, 10000, -10000], dtype=np.float16))
 
 
 class TestFloat16Conversion(unittest.TestCase):

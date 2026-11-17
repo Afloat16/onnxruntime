@@ -33,7 +33,7 @@ def _npfloat16_to_int(np_list):
     :param np_list: numpy float16 list
     :return int_list: python int list
     """
-    return [int(bin(_.view("H"))[2:].zfill(16), 2) for _ in np_list]
+    return np.asarray(np_list, dtype=np.float16).view(np.uint16).tolist()
 
 
 def convert_np_to_float16(np_array, min_positive_val=5.96e-08, max_finite_val=65504.0):
@@ -47,21 +47,24 @@ def convert_np_to_float16(np_array, min_positive_val=5.96e-08, max_finite_val=65
     def between(a, b, c):
         return np.logical_and(a < b, b < c)
 
-    if np_array[np.where(np_array > 0)].shape[0] > 0:
-        positive_max = np_array[np.where(np_array > 0)].max()
-        positive_min = np_array[np.where(np_array > 0)].min()
-        if positive_max >= max_finite_val:
-            logger.debug(f"the float32 number {positive_max} will be truncated to {max_finite_val}")
-        if positive_min <= min_positive_val:
-            logger.debug(f"the float32 number {positive_min} will be truncated to {min_positive_val}")
+    if logger.isEnabledFor(logging.DEBUG):
+        positive = np_array[np_array > 0]
+        if positive.size:
+            positive_max = positive.max()
+            positive_min = positive.min()
+            if positive_max >= max_finite_val:
+                logger.debug(f"the float32 number {positive_max} will be truncated to {max_finite_val}")
+            if positive_min <= min_positive_val:
+                logger.debug(f"the float32 number {positive_min} will be truncated to {min_positive_val}")
 
-    if np_array[np.where(np_array < 0)].shape[0] > 0:
-        negative_max = np_array[np.where(np_array < 0)].max()
-        negative_min = np_array[np.where(np_array < 0)].min()
-        if negative_min <= -max_finite_val:
-            logger.debug(f"the float32 number {negative_min} will be truncated to {-max_finite_val}")
-        if negative_max >= -min_positive_val:
-            logger.debug(f"the float32 number {negative_max} will be truncated to {-min_positive_val}")
+        negative = np_array[np_array < 0]
+        if negative.size:
+            negative_max = negative.max()
+            negative_min = negative.min()
+            if negative_min <= -max_finite_val:
+                logger.debug(f"the float32 number {negative_min} will be truncated to {-max_finite_val}")
+            if negative_max >= -min_positive_val:
+                logger.debug(f"the float32 number {negative_max} will be truncated to {-min_positive_val}")
 
     np_array = np.where(between(0, np_array, min_positive_val), min_positive_val, np_array)
     np_array = np.where(between(-min_positive_val, np_array, 0), -min_positive_val, np_array)
