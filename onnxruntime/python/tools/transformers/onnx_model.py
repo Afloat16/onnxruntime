@@ -923,12 +923,17 @@ class OnnxModel:
 
     def remove_unused_constant(self):
         input_name_to_nodes = self.input_name_to_nodes()
+        graph_output_names = set(self.get_graphs_output_names())
 
         # remove unused constant
         unused_nodes = []
         nodes = self.nodes()
         for node in nodes:
-            if node.op_type == "Constant" and node.output[0] not in input_name_to_nodes:
+            if (
+                node.op_type == "Constant"
+                and node.output[0] not in input_name_to_nodes
+                and node.output[0] not in graph_output_names
+            ):
                 unused_nodes.append(node)
 
         self.remove_nodes(unused_nodes)
@@ -1056,7 +1061,12 @@ class OnnxModel:
         input_to_remove = []
         if allow_remove_graph_inputs:
             input_name_to_nodes = self.input_name_to_nodes()
-            input_to_remove = [input for input in self.model.graph.input if input.name not in input_name_to_nodes]
+            graph_output_names = {output.name for output in self.model.graph.output}
+            input_to_remove = [
+                input
+                for input in self.model.graph.input
+                if input.name not in input_name_to_nodes and input.name not in graph_output_names
+            ]
             for name in input_to_remove:
                 self.model.graph.input.remove(name)
 
@@ -1075,7 +1085,7 @@ class OnnxModel:
     def update_graph(self, verbose=False, allow_remove_graph_inputs=False):
         graph = self.model.graph
 
-        remaining_input_names = set()
+        remaining_input_names = {output.name for output in graph.output}
         for node in graph.node:
             if node.op_type in ["Loop", "Scan", "If"]:
                 # Add input names of nodes in subgraphs
