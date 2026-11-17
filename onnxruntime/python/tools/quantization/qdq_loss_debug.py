@@ -355,9 +355,18 @@ def compute_signal_to_quantization_noice_ratio(
     left = numpy.concatenate(xlist).flatten()
     right = numpy.concatenate(ylist).flatten()
 
+    # Promote before subtraction and norm accumulation to avoid integer wraparound and low-precision overflow.
+    compute_dtype = numpy.result_type(left.dtype, right.dtype, numpy.float64)
+    promoted_left = left.astype(compute_dtype, copy=False)
+    if left.dtype.kind in "iu" and right.dtype.kind in "iu" and max(left.dtype.itemsize, right.dtype.itemsize) == 8:
+        # Converting 64-bit integers before subtraction can erase small differences above 2**53.
+        difference = (left.astype(object) - right.astype(object)).astype(compute_dtype)
+    else:
+        difference = promoted_left - right.astype(compute_dtype, copy=False)
+
     epsilon = numpy.finfo("float").eps
-    tensor_norm = max(numpy.linalg.norm(left), epsilon)
-    diff_norm = max(numpy.linalg.norm(left - right), epsilon)
+    tensor_norm = max(numpy.linalg.norm(promoted_left), epsilon)
+    diff_norm = max(numpy.linalg.norm(difference), epsilon)
     res = tensor_norm / diff_norm
     return 20 * math.log10(res)
 
