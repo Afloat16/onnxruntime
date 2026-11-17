@@ -315,6 +315,51 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
 
 class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
+    def _check_layer_norm_omitted_outputs(self, op_type, output_patterns):
+        for opset in (17, 21):
+            for axis in (-1, 1):
+                for outputs in output_patterns:
+                    with self.subTest(op_type=op_type, opset=opset, axis=axis, outputs=outputs):
+                        input_shape = ["batch", 2, 4]
+                        statistics_shape = ["batch", 2, 1] if axis == -1 else ["batch", 1, 1]
+                        scale_shape = [4] if axis == -1 else [2, 4]
+                        expected = [
+                            helper.make_tensor_value_info(
+                                output, TensorProto.FLOAT, input_shape if output == "Y" else statistics_shape
+                            )
+                            for output in outputs
+                            if output
+                        ]
+                        graph = helper.make_graph(
+                            [helper.make_node(op_type, ["X", "scale"], outputs, axis=axis)],
+                            "LayerNorm_Optional_Outputs",
+                            [helper.make_tensor_value_info("X", TensorProto.FLOAT, input_shape)],
+                            expected,
+                            [
+                                helper.make_tensor(
+                                    "scale", TensorProto.FLOAT, scale_shape, [1.0] * numpy.prod(scale_shape)
+                                )
+                            ],
+                        )
+                        model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", opset)], ir_version=10)
+                        if op_type == "LayerNormalization":
+                            onnx.checker.check_model(model)
+                        inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                        if op_type == "LayerNormalization":
+                            onnx.checker.check_model(inferred)
+                        self._check_shapes(graph, inferred.graph, expected)
+                        self.assertEqual(list(inferred.graph.node[0].output), outputs)
+                        self.assertNotIn("", [value.name for value in inferred.graph.value_info])
+
+    def test_layer_norm_omitted_outputs(self):
+        self._check_layer_norm_omitted_outputs(
+            "LayerNormalization",
+            [["Y"], ["Y", ""], ["Y", "", ""], ["Y", "mean"], ["Y", "mean", ""], ["Y", "", "inv"], ["Y", "mean", "inv"]],
+        )
+
+    def test_simplified_layer_norm_omitted_output(self):
+        self._check_layer_norm_omitted_outputs("SimplifiedLayerNormalization", [["Y"], ["Y", ""], ["Y", "inv"]])
+
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
         vis = [x for x in graph.value_info if x.name not in names_in_vis] + vis
