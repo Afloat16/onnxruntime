@@ -25,11 +25,14 @@ class AttentionQuant(QuantOperatorBase):
         node = self.node
         assert node.op_type == "Attention"
 
-        # TODO This is a temporary fix to stop exporting QAttention with qkv_hidden_sizes
-        # attribute. This needs to be removed once the QAttention for varied q,k,v sizes
-        # is implemented
+        # QAttention represents the contrib operator, requires a projection bias,
+        # and has no inputs for attention_bias or past_sequence_length.
+        if node.domain != ms_domain or len(node.input) < 3 or not node.input[2] or any(node.input[5:]):
+            return super().quantize()
+
+        # These Attention attributes are not part of the QAttention schema.
         for attr in node.attribute:
-            if attr.name == "qkv_hidden_sizes":
+            if attr.name in ("qkv_hidden_sizes", "rotary_embedding_dim"):
                 return super().quantize()
 
         (
