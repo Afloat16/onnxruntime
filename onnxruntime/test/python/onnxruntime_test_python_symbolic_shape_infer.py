@@ -347,6 +347,72 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
             for dimension in value_info.type.tensor_type.shape.dim
         ]
 
+    def test_transpose_constant_shape_values(self):
+        cases = [([], [3], [3]), ([2], [2, 3], [2, 3]), ([2, 2], [2, 3, 4, 5], [2, 4, 3, 5])]
+        for opset in (13, 21):
+            for shape, values, expected in cases:
+                for explicit_perm in (False, True):
+                    with self.subTest(opset=opset, shape=shape, explicit_perm=explicit_perm):
+                        transpose = helper.make_node("Transpose", ["constant"], ["transposed"])
+                        if explicit_perm:
+                            transpose.attribute.append(
+                                helper.make_attribute(
+                                    "perm", list(reversed(range(len(shape)))), attr_type=AttributeProto.INTS
+                                )
+                            )
+                        graph = helper.make_graph(
+                            [
+                                helper.make_node(
+                                    "Constant",
+                                    [],
+                                    ["constant"],
+                                    value=helper.make_tensor("value", TensorProto.INT64, shape, values),
+                                ),
+                                transpose,
+                                helper.make_node("Reshape", ["transposed", "flatten_shape"], ["expand_shape"]),
+                                helper.make_node("Expand", ["input", "expand_shape"], ["output"]),
+                            ],
+                            "TransposeConstantShapeValues",
+                            [helper.make_tensor_value_info("input", TensorProto.FLOAT, [])],
+                            [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                            [helper.make_tensor("flatten_shape", TensorProto.INT64, [1], [-1])],
+                        )
+                        model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", opset)])
+                        inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                        self.assertEqual(self._tensor_shape(inferred.graph.output[0]), expected)
+                        onnx.checker.check_model(inferred, full_check=True)
+
+    def test_transpose_symbolic_scalar_shape_value(self):
+        for opset in (13, 21):
+            for explicit_perm in (False, True):
+                with self.subTest(opset=opset, explicit_perm=explicit_perm):
+                    transpose = helper.make_node("Transpose", ["dimension"], ["transposed"])
+                    if explicit_perm:
+                        transpose.attribute.append(helper.make_attribute("perm", [], attr_type=AttributeProto.INTS))
+                    graph = helper.make_graph(
+                        [
+                            helper.make_node("Shape", ["input"], ["shape"]),
+                            helper.make_node("Gather", ["shape", "index"], ["dimension"]),
+                            transpose,
+                            helper.make_node("Reshape", ["transposed", "vector_shape"], ["expand_shape"]),
+                            helper.make_node("Expand", ["seed", "expand_shape"], ["output"]),
+                        ],
+                        "TransposeSymbolicScalarShapeValue",
+                        [
+                            helper.make_tensor_value_info("input", TensorProto.FLOAT, ["batch"]),
+                            helper.make_tensor_value_info("seed", TensorProto.FLOAT, []),
+                        ],
+                        [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                        [
+                            helper.make_tensor("index", TensorProto.INT64, [], [0]),
+                            helper.make_tensor("vector_shape", TensorProto.INT64, [1], [1]),
+                        ],
+                    )
+                    model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", opset)])
+                    inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                    self.assertEqual(self._tensor_shape(inferred.graph.output[0]), ["batch"])
+                    onnx.checker.check_model(inferred, full_check=True)
+
     def test_sparse_attention_indexer_qsa(self):
         node = helper.make_node(
             "SparseAttentionIndexer",

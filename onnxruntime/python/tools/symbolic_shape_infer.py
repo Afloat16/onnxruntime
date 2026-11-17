@@ -2177,7 +2177,7 @@ class SymbolicShapeInference:
             perm = get_attribute(node, "perm", reversed(list(range(len(data_shape)))))
             input_data = self.sympy_data_[node.input[0]]
             self.sympy_data_[node.output[0]] = (
-                np.transpose(np.array(input_data).reshape(*data_shape), axes=tuple(perm)).flatten().tolist()
+                np.transpose(np.array(input_data).reshape(data_shape), axes=tuple(perm)).flatten().tolist()
             )
 
     def _infer_Unsqueeze(self, node):  # noqa: N802
