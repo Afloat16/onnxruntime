@@ -2462,25 +2462,22 @@ class SymbolicShapeInference:
     def _infer_UnfoldTensor(self, node):  # noqa: N802
         input_shape = self._get_shape(node, 0)
         if input_shape is not None:
-            output_shape = input_shape.copy()
+            output_shape = self._get_sympy_shape(node, 0)
             output_dtype = self.known_vi_[node.input[0]].type.tensor_type.elem_type
             assert output_dtype is not None
 
-            rank, dim, size, step = len(input_shape), None, None, None
-            for attr in node.attribute:
-                if attr.name == "dim":
-                    dim = attr.i
-                    dim = rank + dim if dim == -1 else dim
-                elif attr.name == "size":
-                    size = attr.i
-                elif attr.name == "step":
-                    step = attr.i
+            dim = handle_negative_axis(get_attribute(node, "dim", -1), len(input_shape))
+            size = get_attribute(node, "size")
+            step = get_attribute(node, "step", 1)
 
+            output_shape[dim] = (output_shape[dim] - size) // step + 1
             output_shape.append(size)
-            output_shape[dim] = (input_shape[dim] - size) // step + 1
+            self._update_computed_dims(output_shape)
 
             vi = self.known_vi_[node.output[0]]
-            vi.CopyFrom(helper.make_tensor_value_info(node.output[0], output_dtype, output_shape))
+            vi.CopyFrom(
+                helper.make_tensor_value_info(node.output[0], output_dtype, get_shape_from_sympy_shape(output_shape))
+            )
 
     def _infer_DynamicTimeWarping(self, node):  # noqa: N802
         # Input 0 has shape M x N or 1 x M x N

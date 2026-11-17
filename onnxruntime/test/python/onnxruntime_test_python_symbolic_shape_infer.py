@@ -39,6 +39,56 @@ skipped_models = ["SSD-MobilenetV1", "SSD-int8", "Inception-1-int8"]
 
 
 class TestSymbolicShapeInference(unittest.TestCase):
+    @staticmethod
+    def _unfold_tensor_models():
+        length = "floor(N/2 - 3/2) + 1"
+        large_dimension = 2**53 + 7
+        cases = [
+            ([7], {"size": 3}, [5, 3]),
+            ([7], {"dim": 0, "size": 3}, [5, 3]),
+            ([7], {"size": 3, "step": 2}, [3, 3]),
+            ([7], {"dim": 0, "size": 3, "step": 2}, [3, 3]),
+            ([7], {"dim": -1, "size": 3, "step": 2}, [3, 3]),
+            ([2, 7, 4], {"dim": 1, "size": 3, "step": 2}, [2, 3, 4, 3]),
+            ([2, 7, 4], {"dim": -2, "size": 3, "step": 2}, [2, 3, 4, 3]),
+            ([2, 7, 4], {"dim": -3, "size": 2, "step": 1}, [1, 7, 4, 2]),
+            ([2, 7, 4], {"dim": 0, "size": 2, "step": 1}, [1, 7, 4, 2]),
+            (["N"], {"dim": 0, "size": 3, "step": 2}, [length, 3]),
+            (["N"], {"size": 3}, ["N - 2", 3]),
+            (["B", "N", 4], {"dim": -2, "size": 3, "step": 2}, ["B", length, 4, 3]),
+            (["B", "N", 4], {"dim": 1, "size": 3, "step": 1}, ["B", "N - 2", 4, 3]),
+            (["B", 7, 4], {"dim": 1, "size": 3, "step": 2}, ["B", 3, 4, 3]),
+            (["B", 7, 4], {"size": 2, "step": 2}, ["B", 7, 2, 2]),
+            (["B", 7, 4], {"dim": -1, "size": 2, "step": 2}, ["B", 7, 2, 2]),
+            ([large_dimension], {"dim": 0, "size": 3, "step": 3}, [(large_dimension - 3) // 3 + 1, 3]),
+            ([0, 7, 4], {"dim": 1, "size": 3, "step": 2}, [0, 3, 4, 3]),
+        ]
+        for elem_type in (TensorProto.FLOAT, TensorProto.DOUBLE, TensorProto.INT32, TensorProto.INT64):
+            for shape, attrs, expected_shape in cases:
+                graph = helper.make_graph(
+                    [helper.make_node("UnfoldTensor", ["x"], ["y"], domain="com.microsoft", **attrs)],
+                    "unfold_tensor",
+                    [helper.make_tensor_value_info("x", elem_type, shape)],
+                    [helper.make_tensor_value_info("y", elem_type, [None] * (len(shape) + 1))],
+                )
+                model = helper.make_model(
+                    graph,
+                    opset_imports=[helper.make_opsetid("", 13), helper.make_opsetid("com.microsoft", 1)],
+                    ir_version=7,
+                )
+                yield model, shape, attrs, expected_shape
+
+    def test_unfold_tensor_dimensions(self):
+        for model, shape, attrs, expected_shape in self._unfold_tensor_models():
+            elem_type = model.graph.input[0].type.tensor_type.elem_type
+            with self.subTest(elem_type=elem_type, shape=shape, attrs=attrs):
+                onnx.checker.check_model(model, full_check=True)
+                inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                onnx.checker.check_model(inferred, full_check=True)
+                self.assertEqual(
+                    inferred.graph.output[0], helper.make_tensor_value_info("y", elem_type, expected_shape)
+                )
+
     def test_shape_preserving_hyper_connection_ops(self):
         cases = {
             "BranchwiseRMSNorm": (
