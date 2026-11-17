@@ -920,20 +920,46 @@ class SymbolicShapeInference:
             # be promoted to float64 and lose low bits before conversion.
             preserve_integers = from_dtype.kind in "iu" and not isinstance(data, np.ndarray)
             value = np.asarray(data, dtype=object if preserve_integers else None)
-            if value.ndim <= 1 and (value.dtype.kind != "O" or all(is_literal(v) for v in value.flat)):
+            if value.ndim <= 1:
                 # A numeric Cast can change values, including bool conversion,
                 # integer narrowing, and floating-point rounding.
-                if value.dtype.kind == "O" and from_dtype.kind in "iu":
-                    # Python/SymPy arithmetic can exceed the source integer
-                    # width. Restore its low bits before the following Cast.
-                    info = np.iinfo(from_dtype)
-                    modulus = 1 << info.bits
-                    value = np.asarray(
-                        [(int(v) - info.min) % modulus + info.min for v in value.flat], dtype=from_dtype
+                mixed_value = None
+                if value.dtype.kind == "O":
+                    # Shape computations may mix symbols with concrete values.
+                    # Convert the concrete elements without changing symbols.
+                    literal_mask = np.asarray(
+                        [
+                            is_literal(v) or isinstance(v, (bool, int, float, np.integer, np.floating, np.bool_))
+                            for v in value.flat
+                        ],
+                        dtype=bool,
                     ).reshape(value.shape)
-                else:
-                    value = value.astype(from_dtype)
-                self.sympy_data_[node.output[0]] = value.astype(helper.tensor_dtype_to_np_dtype(to_type)).tolist()
+                    mixed_value = value.copy()
+                    value = value[literal_mask]
+                try:
+                    with np.errstate(over="ignore", invalid="ignore"):
+                        if value.dtype.kind == "O" and from_dtype.kind in "iu":
+                            # Python/SymPy arithmetic can exceed the source integer
+                            # width. Restore its low bits before the following Cast.
+                            info = np.iinfo(from_dtype)
+                            modulus = 1 << info.bits
+                            value = np.asarray(
+                                [(int(v) - info.min) % modulus + info.min for v in value.flat], dtype=from_dtype
+                            ).reshape(value.shape)
+                        else:
+                            value = value.astype(from_dtype)
+                        if value.dtype.kind == "f" and not np.all(np.isfinite(value)):
+                            return
+                        value = value.astype(helper.tensor_dtype_to_np_dtype(to_type))
+                except (OverflowError, TypeError, ValueError):
+                    return
+                # Nonfinite values cannot safely feed symbolic integer arithmetic.
+                if value.dtype.kind == "f" and not np.all(np.isfinite(value)):
+                    return
+                if mixed_value is not None:
+                    mixed_value[literal_mask] = value
+                    value = mixed_value
+                self.sympy_data_[node.output[0]] = value.tolist()
                 return
         self._pass_on_sympy_data(node)
 

@@ -315,6 +315,152 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
 
 class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
+    def test_cast_mixed_symbolic_and_literal_values(self):
+        cases = [
+            (TensorProto.FLOAT16, TensorProto.INT64, 1.0),
+            (TensorProto.FLOAT, TensorProto.INT64, 1.0),
+            (TensorProto.DOUBLE, TensorProto.INT64, 1.0),
+            (TensorProto.FLOAT16, TensorProto.INT32, 1.75),
+            (TensorProto.FLOAT, TensorProto.INT32, 1.75),
+            (TensorProto.DOUBLE, TensorProto.INT32, 1.75),
+            (TensorProto.INT64, TensorProto.INT8, 257),
+            (TensorProto.INT64, TensorProto.UINT8, -255),
+        ]
+        for from_type, to_type, literal in cases:
+            for reverse in (False, True):
+                for use_constant in (False, True):
+                    with self.subTest(from_type=from_type, to_type=to_type, reverse=reverse, use_constant=use_constant):
+                        value = helper.make_tensor("literal", from_type, [1], [literal])
+                        nodes = [helper.make_node("Constant", [], ["literal"], value=value)] if use_constant else []
+                        nodes.extend(
+                            [
+                                helper.make_node("Shape", ["input"], ["symbolic_shape"]),
+                                helper.make_node("Cast", ["symbolic_shape"], ["symbolic"], to=from_type),
+                                helper.make_node("Cast", ["literal"], ["concrete"], to=from_type),
+                                helper.make_node(
+                                    "Concat",
+                                    ["concrete", "symbolic"] if reverse else ["symbolic", "concrete"],
+                                    ["mixed"],
+                                    axis=0,
+                                ),
+                                helper.make_node("Cast", ["mixed"], ["casted"], to=to_type),
+                                helper.make_node("Cast", ["casted"], ["target"], to=TensorProto.INT64),
+                                helper.make_node("Reshape", ["input", "target"], ["output"]),
+                            ]
+                        )
+                        model = helper.make_model(
+                            helper.make_graph(
+                                nodes,
+                                "mixed_symbolic_literal_cast",
+                                [helper.make_tensor_value_info("input", TensorProto.FLOAT, ["N"])],
+                                [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None, None])],
+                                [] if use_constant else [value],
+                            ),
+                            opset_imports=[helper.make_opsetid("", 13)],
+                            ir_version=8,
+                        )
+                        onnx.checker.check_model(model, full_check=True)
+                        original = model.SerializeToString()
+                        inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                        self.assertEqual(
+                            self._tensor_shape(inferred.graph.output[0]), [1, "N"] if reverse else ["N", 1]
+                        )
+                        self.assertEqual(inferred.graph.output[0].type.tensor_type.elem_type, TensorProto.FLOAT)
+                        onnx.checker.check_model(inferred, full_check=True)
+                        self.assertEqual(model.SerializeToString(), original)
+
+    def test_cast_source_float_overflow_remains_unknown(self):
+        for dtype, exponent in ((numpy.float16, 15), (numpy.float32, 127), (numpy.float64, 1023)):
+            for sign in (-1, 1):
+                for scalar in (False, True):
+                    for overflow in (False, True):
+                        with self.subTest(dtype=dtype, sign=sign, scalar=scalar, overflow=overflow):
+                            shape = [] if scalar else [1]
+                            nodes = [
+                                helper.make_node("Mul", ["lhs", "rhs"], ["product"]),
+                                helper.make_node("Cast", ["product"], ["boolean"], to=TensorProto.BOOL),
+                                helper.make_node("Cast", ["boolean"], ["target"], to=TensorProto.INT64),
+                            ]
+                            initializers = [
+                                numpy_helper.from_array(
+                                    numpy.array(sign * 2.0**exponent, dtype=dtype).reshape(shape), name="lhs"
+                                ),
+                                numpy_helper.from_array(
+                                    numpy.array(2 if overflow else 1, dtype=dtype).reshape(shape), name="rhs"
+                                ),
+                            ]
+                            if scalar:
+                                initializers.append(
+                                    numpy_helper.from_array(numpy.array([0], dtype=numpy.int64), name="axes")
+                                )
+                                nodes.append(helper.make_node("Unsqueeze", ["target", "axes"], ["target_vector"]))
+                            nodes.append(
+                                helper.make_node(
+                                    "ConstantOfShape", ["target_vector" if scalar else "target"], ["output"]
+                                )
+                            )
+                            model = helper.make_model(
+                                helper.make_graph(
+                                    nodes,
+                                    "source_float_overflow_cast",
+                                    [],
+                                    [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None])],
+                                    initializers,
+                                ),
+                                opset_imports=[helper.make_opsetid("", 13)],
+                                ir_version=8,
+                            )
+                            onnx.checker.check_model(model, full_check=True)
+                            inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                            dims = inferred.graph.output[0].type.tensor_type.shape.dim
+                            self.assertEqual(len(dims), 1)
+                            if overflow:
+                                self.assertTrue(dims[0].dim_param)
+                                self.assertFalse(dims[0].HasField("dim_value"))
+                            else:
+                                self.assertEqual(dims[0].dim_value, 1)
+                            onnx.checker.check_model(inferred, full_check=True)
+
+    def test_cast_nonfinite_float_results_do_not_reach_arithmetic(self):
+        for dtype, to_type, magnitude in (
+            (numpy.float32, TensorProto.FLOAT16, 100000.0),
+            (numpy.float64, TensorProto.FLOAT, 1e100),
+        ):
+            for value in (magnitude, -magnitude, numpy.nan):
+                for scalar in (False, True):
+                    for use_constant in (False, True):
+                        with self.subTest(dtype=dtype, value=value, scalar=scalar, use_constant=use_constant):
+                            shape = [] if scalar else [1]
+                            tensor = numpy_helper.from_array(
+                                numpy.array(value, dtype=dtype).reshape(shape), name="value"
+                            )
+                            nodes = [helper.make_node("Constant", [], ["value"], value=tensor)] if use_constant else []
+                            nodes.extend(
+                                [
+                                    helper.make_node("Cast", ["value"], ["casted"], to=to_type),
+                                    helper.make_node("Mul", ["casted", "one"], ["output"]),
+                                ]
+                            )
+                            initializers = ([] if use_constant else [tensor]) + [
+                                helper.make_tensor("one", to_type, [], [1])
+                            ]
+                            model = helper.make_model(
+                                helper.make_graph(
+                                    nodes,
+                                    "nonfinite_cast_arithmetic",
+                                    [],
+                                    [helper.make_tensor_value_info("output", to_type, shape)],
+                                    initializers,
+                                ),
+                                opset_imports=[helper.make_opsetid("", 13)],
+                                ir_version=8,
+                            )
+                            onnx.checker.check_model(model, full_check=True)
+                            inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                            self.assertEqual(self._tensor_shape(inferred.graph.output[0]), shape)
+                            self.assertEqual(inferred.graph.output[0].type.tensor_type.elem_type, to_type)
+                            onnx.checker.check_model(inferred, full_check=True)
+
     def test_cast_computed_integer_values_restore_source_width(self):
         cases = [
             (numpy.int32, "Add", 2**31 - 1, 1, TensorProto.INT64, 2**31 + 1, 1),
