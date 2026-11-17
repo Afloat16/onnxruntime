@@ -341,6 +341,9 @@ class SymbolicShapeInference:
         self.out_mp_.CopyFrom(in_mp)
         self.graph_inputs_ = {i.name: i for i in list(self.out_mp_.graph.input)}
         self.initializers_ = {i.name: i for i in self.out_mp_.graph.initializer}
+        self.overridable_initializers_ = (
+            self.graph_inputs_.keys() & self.initializers_.keys() if self.out_mp_.ir_version >= 4 else set()
+        )
         self.known_vi_ = {i.name: i for i in list(self.out_mp_.graph.input)}
         self.known_vi_.update(
             {
@@ -605,6 +608,12 @@ class SymbolicShapeInference:
             self.subgraph_id_ += 1
 
         symbolic_shape_inference._preprocess(self.tmp_mp_)
+        # Captured immutable initializers become temporary graph inputs. Preserve
+        # their mutability from the parent, while retaining local input defaults.
+        symbolic_shape_inference.overridable_initializers_.difference_update(subgraph_implicit_input)
+        symbolic_shape_inference.overridable_initializers_.update(
+            self.overridable_initializers_ & subgraph_implicit_input
+        )
         symbolic_shape_inference.suggested_merge_ = self.suggested_merge_.copy()
         while symbolic_shape_inference.run_:
             symbolic_shape_inference._infer_impl(self.sympy_data_.copy())
@@ -1223,7 +1232,13 @@ class SymbolicShapeInference:
             get_attribute(node, "then_branch"),
             get_attribute(node, "else_branch"),
         ]
-        cond = self._try_get_value(node, 0)
+        condition_name = node.input[0]
+        cond = None
+        if condition_name not in self.overridable_initializers_ and not (
+            condition_name in self.initializers_
+            and onnx.external_data_helper.uses_external_data(self.initializers_[condition_name])
+        ):
+            cond = self._try_get_value(node, 0)
         if cond is not None:
             if as_scalar(cond) > 0:
                 subgraphs[1].CopyFrom(subgraphs[0])

@@ -315,6 +315,140 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
 
 class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
+    @staticmethod
+    def _make_if_condition_model(default=True, source="overridable", scalar=True, shape_output=False, nested=False):
+        branches = {}
+        for name, length in (("then_branch", 2), ("else_branch", 3)):
+            values = [length] if shape_output else list(range(length))
+            tensor = numpy_helper.from_array(numpy.asarray(values, dtype=numpy.int64))
+            branch_nodes = [helper.make_node("Constant", [], [name + "_value"], value=tensor)]
+            if nested:
+                branch_nodes[0].output[0] = name + "_constant"
+                branch_nodes.append(helper.make_node("Add", [name + "_constant", "offset"], [name + "_value"]))
+            branches[name] = helper.make_graph(
+                branch_nodes,
+                name,
+                [],
+                [helper.make_tensor_value_info(name + "_value", TensorProto.INT64, [len(values)])],
+            )
+        nodes = [helper.make_node("If", ["condition"], ["selected"], **branches)]
+        for _ in range(int(nested)):
+            outer_branches = {}
+            for name in ("then_branch", "else_branch"):
+                outer_branches[name] = helper.make_graph(
+                    nodes, "outer_" + name, [], [helper.make_tensor_value_info("selected", TensorProto.INT64, [None])]
+                )
+            nodes = [helper.make_node("If", ["outer_condition"], ["selected"], **outer_branches)]
+        output = helper.make_tensor_value_info("selected", TensorProto.INT64, [None])
+        if shape_output:
+            nodes.append(helper.make_node("ConstantOfShape", ["selected"], ["output"]))
+            output = helper.make_tensor_value_info("output", TensorProto.FLOAT, [None])
+        condition = numpy.asarray(default if scalar else [default], dtype=numpy.bool_)
+        tensor = numpy_helper.from_array(condition, "condition")
+        initializers = []
+        inputs = []
+        if source in ("initializer", "overridable", "external"):
+            initializers.append(tensor)
+        elif source == "constant":
+            nodes.insert(0, helper.make_node("Constant", [], ["condition"], value=tensor))
+        if source in ("overridable", "runtime"):
+            inputs.append(helper.make_tensor_value_info("condition", TensorProto.BOOL, list(condition.shape)))
+        if source == "external":
+            onnx.external_data_helper.set_external_data(tensor, location="unloaded_condition.bin")
+            tensor.ClearField("raw_data")
+        if nested:
+            inputs.append(helper.make_tensor_value_info("outer_condition", TensorProto.BOOL, []))
+            inputs.append(helper.make_tensor_value_info("offset", TensorProto.INT64, []))
+        return helper.make_model(
+            helper.make_graph(nodes, "if_condition", inputs, [output], initializers),
+            opset_imports=[helper.make_opsetid("", 13)],
+            ir_version=8,
+        )
+
+    def test_if_overridable_condition_keeps_both_branches(self):
+        for default in (False, True):
+            for scalar in (False, True):
+                for shape_output in (False, True):
+                    with self.subTest(default=default, scalar=scalar, shape_output=shape_output):
+                        model = self._make_if_condition_model(default, scalar=scalar, shape_output=shape_output)
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        dimensions = inferred.graph.output[0].type.tensor_type.shape.dim
+                        self.assertEqual(len(dimensions), 1)
+                        self.assertTrue(dimensions[0].HasField("dim_param"))
+                        for original, actual in zip(
+                            model.graph.node[0].attribute, inferred.graph.node[0].attribute, strict=True
+                        ):
+                            self.assertEqual(original.g.node, actual.g.node)
+
+    def test_if_captured_overridable_condition_keeps_both_branches(self):
+        for default in (False, True):
+            for scalar in (False, True):
+                for nested in (1, 2):
+                    with self.subTest(default=default, scalar=scalar, nested=nested):
+                        model = self._make_if_condition_model(default, scalar=scalar, nested=nested)
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        self.assertTrue(inferred.graph.output[0].type.tensor_type.shape.dim[0].HasField("dim_param"))
+                        branches = [inferred.graph]
+                        for _ in range(nested):
+                            branches = [branch.g for graph in branches for branch in graph.node[0].attribute]
+                        for graph in branches:
+                            shapes = {
+                                branch.name: branch.g.output[0].type.tensor_type.shape.dim[0].dim_value
+                                for branch in graph.node[0].attribute
+                            }
+                            self.assertEqual(shapes, {"then_branch": 2, "else_branch": 3})
+
+    def test_if_runtime_condition_keeps_both_branches(self):
+        for scalar in (False, True):
+            for shape_output in (False, True):
+                with self.subTest(scalar=scalar, shape_output=shape_output):
+                    model = self._make_if_condition_model(source="runtime", scalar=scalar, shape_output=shape_output)
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    self.assertTrue(inferred.graph.output[0].type.tensor_type.shape.dim[0].HasField("dim_param"))
+
+    def test_if_constant_condition_still_selects_branch(self):
+        for source in ("initializer", "constant"):
+            for default in (False, True):
+                for nested in (0, 1, 2):
+                    with self.subTest(source=source, default=default, nested=nested):
+                        model = self._make_if_condition_model(default, source=source, nested=nested)
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        self.assertEqual(
+                            inferred.graph.output[0].type.tensor_type.shape.dim[0].dim_value, 2 if default else 3
+                        )
+
+    def test_if_unloaded_external_condition_stays_unknown(self):
+        for scalar in (False, True):
+            for nested in (0, 1, 2):
+                with self.subTest(scalar=scalar, nested=nested):
+                    model = self._make_if_condition_model(source="external", scalar=scalar, nested=nested)
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    self.assertTrue(inferred.graph.output[0].type.tensor_type.shape.dim[0].HasField("dim_param"))
+
+    def test_if_local_initializer_shadows_overridable_parent(self):
+        for outer_default in (False, True):
+            for local_default in (False, True):
+                with self.subTest(outer_default=outer_default, local_default=local_default):
+                    model = self._make_if_condition_model(outer_default, nested=True)
+                    model.graph.name = "if_local_condition"
+                    for branch in model.graph.node[0].attribute:
+                        branch.g.initializer.append(
+                            numpy_helper.from_array(numpy.asarray(local_default, dtype=numpy.bool_), "condition")
+                        )
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    self.assertEqual(
+                        inferred.graph.output[0].type.tensor_type.shape.dim[0].dim_value, 2 if local_default else 3
+                    )
+
+    def test_if_ir3_initializer_still_selects_branch(self):
+        for default in (False, True):
+            with self.subTest(default=default):
+                model = self._make_if_condition_model(default, shape_output=True)
+                model.ir_version = 3
+                model.opset_import[0].version = 9
+                inferred = SymbolicShapeInference.infer_shapes(model)
+                self.assertEqual(inferred.graph.output[0].type.tensor_type.shape.dim[0].dim_value, 2 if default else 3)
+
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
         vis = [x for x in graph.value_info if x.name not in names_in_vis] + vis
