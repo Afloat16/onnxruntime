@@ -404,6 +404,158 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
         inferred = SymbolicShapeInference.infer_shapes(model)
         self.assertTrue(inferred.graph.output[0].type.tensor_type.shape.dim[1].HasField("dim_param"))
 
+    @staticmethod
+    def _make_nonzero_empty_default_model(declared_shape, default_shape, dtype, view=None, depth=0, local_data=None):
+        data = numpy.empty(default_shape, dtype=dtype)
+        model = TestSymbolicShapeInferenceForOperators._make_nonzero_count_model(data, "overridable")
+        model.graph.input[0].CopyFrom(
+            helper.make_tensor_value_info("data", numpy_helper.from_array(data).data_type, declared_shape)
+        )
+        if view:
+            args = {}
+            inputs = ["data"]
+            if view == "Cast":
+                args["to"] = TensorProto.FLOAT
+            elif view == "Transpose":
+                args["perm"] = [0]
+            elif view == "Reshape":
+                inputs.append("target_shape")
+                model.graph.initializer.append(
+                    numpy_helper.from_array(numpy.asarray([0], dtype=numpy.int64), "target_shape")
+                )
+            model.graph.node.insert(0, helper.make_node(view, inputs, ["view"], **args))
+            model.graph.node[-1].input[0] = "view"
+        if depth:
+            model.graph.input.append(helper.make_tensor_value_info("choose", TensorProto.BOOL, []))
+
+            def branch(level):
+                if level:
+                    nodes = [
+                        helper.make_node(
+                            "If", ["choose"], ["indices"], then_branch=branch(level - 1), else_branch=branch(level - 1)
+                        )
+                    ]
+                    initializers = []
+                else:
+                    data_name = "data" if local_data is None else "branch_data"
+                    nodes = [helper.make_node("NonZero", [data_name], ["indices"])]
+                    initializers = [] if local_data is None else [numpy_helper.from_array(local_data, data_name)]
+                return helper.make_graph(
+                    nodes,
+                    "nonzero_branch",
+                    [],
+                    [helper.make_tensor_value_info("indices", TensorProto.INT64, [len(default_shape), None])],
+                    initializers,
+                )
+
+            model.graph.ClearField("node")
+            model.graph.node.append(
+                helper.make_node(
+                    "If", ["choose"], ["indices"], then_branch=branch(depth - 1), else_branch=branch(depth - 1)
+                )
+            )
+        return model
+
+    def test_nonzero_empty_defaults_follow_declared_shapes(self):
+        for declared, default in ((["N"], (0,)), ([None], (0,)), ([2, "N"], (2, 0)), (["N", 3], (0, 3))):
+            for dtype in (numpy.bool_, numpy.int64, numpy.float32):
+                for downstream in (False, True):
+                    with self.subTest(declared=declared, dtype=dtype, downstream=downstream):
+                        model = self._make_nonzero_empty_default_model(declared, default, dtype)
+                        if downstream:
+                            model.graph.node.append(
+                                helper.make_node("Transpose", ["indices"], ["coordinates"], perm=[1, 0])
+                            )
+                            model.graph.output[0].CopyFrom(
+                                helper.make_tensor_value_info("coordinates", TensorProto.INT64, [None, len(default)])
+                            )
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        dims = inferred.graph.output[0].type.tensor_type.shape.dim
+                        self.assertEqual(dims[1 if downstream else 0].dim_value, len(default))
+                        self.assertTrue(dims[0 if downstream else 1].HasField("dim_param"))
+
+    def test_nonzero_empty_defaults_inferred_views_stay_unknown(self):
+        for view in ("Identity", "Cast", "Transpose", "Reshape"):
+            for dtype in (numpy.int64, numpy.float32):
+                with self.subTest(view=view, dtype=dtype):
+                    model = self._make_nonzero_empty_default_model(["N"], (0,), dtype, view=view)
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    self.assertTrue(inferred.graph.output[0].type.tensor_type.shape.dim[1].HasField("dim_param"))
+
+    def test_nonzero_empty_defaults_captured_shapes(self):
+        for declared, default in ((["N"], (0,)), ([0], (0,)), ([2, "N"], (2, 0))):
+            for depth in (1, 2):
+                for dtype in (numpy.int64, numpy.float32):
+                    with self.subTest(declared=declared, depth=depth, dtype=dtype):
+                        model = self._make_nonzero_empty_default_model(declared, default, dtype, depth=depth)
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        dims = inferred.graph.output[0].type.tensor_type.shape.dim
+                        self.assertEqual(dims[0].dim_value, len(default))
+                        if 0 in declared:
+                            self.assertEqual(dims[1].dim_value, 0)
+                        else:
+                            self.assertTrue(dims[1].HasField("dim_param"))
+
+    def test_nonzero_empty_defaults_local_initializers(self):
+        for local in (numpy.empty((0,), dtype=numpy.int64), numpy.asarray([0, 2, 3], dtype=numpy.int64)):
+            for depth in (1, 2):
+                with self.subTest(local=local, depth=depth):
+                    model = self._make_nonzero_empty_default_model(
+                        ["N"], (0,), numpy.int64, depth=depth, local_data=local
+                    )
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [1, int(numpy.count_nonzero(local))])
+
+    def test_nonzero_empty_defaults_ir3_constant(self):
+        for declared in (["N"], [0]):
+            for dtype in (numpy.int64, numpy.float32):
+                with self.subTest(declared=declared, dtype=dtype):
+                    model = self._make_nonzero_empty_default_model(declared, (0,), dtype)
+                    model.ir_version = 3
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [1, 0])
+
+    def test_nonzero_empty_defaults_loop_carried_shapes(self):
+        for dtype in (numpy.int64, numpy.float32):
+            with self.subTest(dtype=dtype):
+                model = self._make_nonzero_empty_default_model(["N"], (0,), dtype)
+                data_type = model.graph.input[0].type.tensor_type.elem_type
+                body = helper.make_graph(
+                    [
+                        helper.make_node("Identity", ["condition_in"], ["condition_out"]),
+                        helper.make_node("Identity", ["state"], ["next_state"]),
+                        helper.make_node("NonZero", ["state"], ["body_indices"]),
+                        helper.make_node("Gather", ["body_indices", "coordinate_axis"], ["coordinates"], axis=0),
+                    ],
+                    "nonzero_loop",
+                    [
+                        helper.make_tensor_value_info("iteration", TensorProto.INT64, []),
+                        helper.make_tensor_value_info("condition_in", TensorProto.BOOL, []),
+                        helper.make_tensor_value_info("state", data_type, ["N"]),
+                    ],
+                    [
+                        helper.make_tensor_value_info("condition_out", TensorProto.BOOL, []),
+                        helper.make_tensor_value_info("next_state", data_type, ["N"]),
+                        helper.make_tensor_value_info("coordinates", TensorProto.INT64, [None]),
+                    ],
+                    [numpy_helper.from_array(numpy.asarray(0, dtype=numpy.int64), "coordinate_axis")],
+                )
+                model.graph.initializer.extend(
+                    [
+                        numpy_helper.from_array(numpy.asarray(1, dtype=numpy.int64), "trip_count"),
+                        numpy_helper.from_array(numpy.asarray(True), "condition"),
+                    ]
+                )
+                model.graph.ClearField("node")
+                model.graph.node.append(
+                    helper.make_node("Loop", ["trip_count", "condition", "data"], ["final_state", "indices"], body=body)
+                )
+                model.graph.output[0].CopyFrom(
+                    helper.make_tensor_value_info("indices", TensorProto.INT64, [None, None])
+                )
+                inferred = SymbolicShapeInference.infer_shapes(model)
+                self.assertTrue(inferred.graph.output[0].type.tensor_type.shape.dim[1].HasField("dim_param"))
+
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
         vis = [x for x in graph.value_info if x.name not in names_in_vis] + vis

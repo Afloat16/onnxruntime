@@ -340,6 +340,12 @@ class SymbolicShapeInference:
         self.out_mp_ = onnx.ModelProto()
         self.out_mp_.CopyFrom(in_mp)
         self.graph_inputs_ = {i.name: i for i in list(self.out_mp_.graph.input)}
+        # NonZero emptiness must use declarations, not an overridable default's
+        # dimensions subsequently cached in known_vi_.
+        self.nonzero_input_shapes_ = {name: get_shape_from_value_info(i) for name, i in self.graph_inputs_.items()}
+        self.nonzero_constant_outputs_ = {
+            output for node in self.out_mp_.graph.node if node.op_type == "Constant" for output in node.output
+        }
         self.initializers_ = {i.name: i for i in self.out_mp_.graph.initializer}
         self.known_vi_ = {i.name: i for i in list(self.out_mp_.graph.input)}
         self.known_vi_.update(
@@ -605,6 +611,13 @@ class SymbolicShapeInference:
             self.subgraph_id_ += 1
 
         symbolic_shape_inference._preprocess(self.tmp_mp_)
+        # Synthetic capture inputs and loop-carried formal inputs may have
+        # inherited cached default dimensions. Only retain original declarations.
+        symbolic_shape_inference.nonzero_input_shapes_ = {
+            name: self.nonzero_input_shapes_[name]
+            for name in subgraph_implicit_input
+            if name in self.nonzero_input_shapes_
+        }
         symbolic_shape_inference.suggested_merge_ = self.suggested_merge_.copy()
         while symbolic_shape_inference.run_:
             symbolic_shape_inference._infer_impl(self.sympy_data_.copy())
@@ -1337,12 +1350,21 @@ class SymbolicShapeInference:
     def _infer_NonZero(self, node):  # noqa: N802
         input_shape = self._get_shape(node, 0)
         input_rank = len(input_shape)
-        nz_len = 0 if 0 in input_shape else None
         name = node.input[0]
+        immutable_initializer = name in self.initializers_ and (
+            name not in self.graph_inputs_ or self.out_mp_.ir_version < 4
+        )
+        empty_shape = (
+            list(self.initializers_[name].dims) if immutable_initializer else self.nonzero_input_shapes_.get(name)
+        )
+        nz_len = 0 if empty_shape is not None and 0 in empty_shape else None
+        # General cached intermediates can depend on an overridable initializer.
+        # Keep their count unknown rather than treating the default as constant.
+        constant_source = immutable_initializer or name in self.nonzero_constant_outputs_
         if (
             nz_len is None
             and input_rank
-            and name not in self.graph_inputs_
+            and constant_source
             and not (
                 name in self.initializers_ and onnx.external_data_helper.uses_external_data(self.initializers_[name])
             )
