@@ -120,6 +120,9 @@ class ONNXQuantizer(BaseQuantizer):
 
         # Map of all original value names to quantized value names
         self.quantized_value_map = {}
+        # LSTM uses a packed weight layout that other operators cannot consume.
+        self.lstm_weight_cache = {}
+        self.lstm_weight_names = None
         # some output from nodes will be quantized, yet itself should be treat as existing so
         # no dequantized will be applied when needed later
         self.generated_value_names = self.model.get_non_initializer_inputs()

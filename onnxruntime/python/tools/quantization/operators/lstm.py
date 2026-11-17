@@ -2,7 +2,7 @@ import numpy
 import onnx
 from onnx import onnx_pb as onnx_proto
 
-from ..quant_utils import QuantType, attribute_to_kwarg, ms_domain  # noqa: F401
+from ..quant_utils import TENSOR_NAME_QUANT_SUFFIX, QuantType, attribute_to_kwarg, ms_domain  # noqa: F401
 from .base_operator import QuantOperatorBase
 
 """
@@ -13,6 +13,67 @@ from .base_operator import QuantOperatorBase
 class LSTMQuant(QuantOperatorBase):
     def __init__(self, onnx_quantizer, onnx_node):
         super().__init__(onnx_quantizer, onnx_node)
+
+    def _weight_name_prefix(self, weight_name):
+        root_quantizer = self.quantizer
+        while root_quantizer.parent is not None:
+            root_quantizer = root_quantizer.parent
+        if root_quantizer.lstm_weight_names is None:
+            names = set()
+            graphs = [root_quantizer.model.graph()]
+            while graphs:
+                graph = graphs.pop()
+                names.update(tensor.name for tensor in graph.initializer)
+                names.update(value.name for value in (*graph.input, *graph.output, *graph.value_info))
+                for node in graph.node:
+                    names.update(node.input)
+                    names.update(node.output)
+                    for attr in node.attribute:
+                        if attr.type == onnx.AttributeProto.GRAPH:
+                            graphs.append(attr.g)
+                        elif attr.type == onnx.AttributeProto.GRAPHS:
+                            graphs.extend(attr.graphs)
+            root_quantizer.lstm_weight_names = names
+        names = root_quantizer.lstm_weight_names
+        prefix = weight_name + "_lstm"
+        candidate = prefix
+        suffix = 0
+        tensor_suffixes = ("", TENSOR_NAME_QUANT_SUFFIX, "_zero_point", "_scale")
+        while any(
+            candidate + tensor_suffix in names
+            or self.quantizer.find_initializer_in_path(candidate + tensor_suffix)
+            or self.quantizer.contains_tensor(candidate + tensor_suffix)
+            for tensor_suffix in tensor_suffixes
+        ):
+            candidate = f"{prefix}_{suffix}"
+            suffix += 1
+        names.update(candidate + tensor_suffix for tensor_suffix in tensor_suffixes)
+        return candidate
+
+    def _quantize_weight(self, weight):
+        if weight.name in self.quantizer.lstm_weight_cache:
+            return self.quantizer.lstm_weight_cache[weight.name]
+
+        num_dir, gate_size, input_size = weight.dims
+        # Reshape only the quantizer's NumPy view. Keep the original initializer
+        # and the ordinary quantized-value cache available to other consumers.
+        quantized = self.quantizer.quantize_weight_per_channel_impl(
+            weight.name,
+            onnx_proto.TensorProto.INT8,
+            0,
+            weight_shape=(num_dir * gate_size, input_size) if self.quantizer.is_per_channel() else None,
+            quantized_name_prefix=self._weight_name_prefix(weight.name),
+        )
+        quantized_weight = self.quantizer.model.get_initializer(quantized[0])
+        quantized_array = onnx.numpy_helper.to_array(quantized_weight).reshape(num_dir, gate_size, input_size)
+        quantized_weight.CopyFrom(
+            onnx.numpy_helper.from_array(numpy.transpose(quantized_array, (0, 2, 1)), quantized[0])
+        )
+        if self.quantizer.is_per_channel():
+            for name in quantized[1:]:
+                self.quantizer.model.get_initializer(name).dims[:] = [num_dir, gate_size]
+        self.quantizer.lstm_weight_cache[weight.name] = quantized
+        return quantized
 
     def quantize(self):
         """
@@ -37,55 +98,8 @@ class LSTMQuant(QuantOperatorBase):
             super().quantize()
             return
 
-        [W_num_dir, W_4_hidden_size, W_input_size] = W.dims  # noqa: N806
-        [R_num_dir, R_4_hidden_size, R_hidden_size] = R.dims  # noqa: N806
-
-        if self.quantizer.is_per_channel():
-            del W.dims[0]
-            del R.dims[0]
-            W.dims[0] = W_num_dir * W_4_hidden_size
-            R.dims[0] = R_num_dir * R_4_hidden_size
-
-        quant_input_weight_tuple = self.quantizer.quantize_weight_per_channel(
-            node.input[1],
-            onnx_proto.TensorProto.INT8,
-            0,  # self.quantizer.weight_qType?
-        )
-        quant_recurrent_weight_tuple = self.quantizer.quantize_weight_per_channel(
-            node.input[2],
-            onnx_proto.TensorProto.INT8,
-            0,  # self.quantizer.weight_qType?
-        )
-
-        W_quant_weight = model.get_initializer(quant_input_weight_tuple[0])  # noqa: N806
-        R_quant_weight = model.get_initializer(quant_recurrent_weight_tuple[0])  # noqa: N806
-
-        W_quant_array = onnx.numpy_helper.to_array(W_quant_weight)  # noqa: N806
-        R_quant_array = onnx.numpy_helper.to_array(R_quant_weight)  # noqa: N806
-
-        W_quant_array = numpy.reshape(W_quant_array, (W_num_dir, W_4_hidden_size, W_input_size))  # noqa: N806
-        R_quant_array = numpy.reshape(R_quant_array, (R_num_dir, R_4_hidden_size, R_hidden_size))  # noqa: N806
-
-        W_quant_array = numpy.transpose(W_quant_array, (0, 2, 1))  # noqa: N806
-        R_quant_array = numpy.transpose(R_quant_array, (0, 2, 1))  # noqa: N806
-
-        W_quant_tranposed = onnx.numpy_helper.from_array(W_quant_array, quant_input_weight_tuple[0])  # noqa: N806
-        R_quant_tranposed = onnx.numpy_helper.from_array(R_quant_array, quant_recurrent_weight_tuple[0])  # noqa: N806
-
-        model.remove_initializers([W_quant_weight, R_quant_weight])
-        model.add_initializer(W_quant_tranposed)
-        model.add_initializer(R_quant_tranposed)
-
-        W_quant_zp = model.get_initializer(quant_input_weight_tuple[1])  # noqa: N806
-        R_quant_zp = model.get_initializer(quant_recurrent_weight_tuple[1])  # noqa: N806
-        W_quant_scale = model.get_initializer(quant_input_weight_tuple[2])  # noqa: N806
-        R_quant_scale = model.get_initializer(quant_recurrent_weight_tuple[2])  # noqa: N806
-
-        if self.quantizer.is_per_channel():
-            W_quant_zp.dims[:] = [W_num_dir, W_4_hidden_size]
-            R_quant_zp.dims[:] = [R_num_dir, R_4_hidden_size]
-            W_quant_scale.dims[:] = [W_num_dir, W_4_hidden_size]
-            R_quant_scale.dims[:] = [R_num_dir, R_4_hidden_size]
+        quant_input_weight_tuple = self._quantize_weight(W)
+        quant_recurrent_weight_tuple = self._quantize_weight(R)
 
         inputs = []
         input_len = len(node.input)

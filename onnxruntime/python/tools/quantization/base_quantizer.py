@@ -383,13 +383,18 @@ class BaseQuantizer:
         channel_axis,
         reduce_range=True,
         keep_float_weight=False,
+        weight_shape=None,
+        quantized_name_prefix=None,
     ):
+        """Quantize a weight, optionally using a local reshape and private output names."""
         # TODO(adrianlizarraga): This function is now only used by onnx_quantizer.py, so move it there.
         initializer = find_by_name(weight_name, self.model.initializer())
         if initializer is None:
             raise ValueError("{} is not an initializer", weight_name)
 
         weights = tensor_proto_to_array(initializer)
+        if weight_shape is not None:
+            weights = weights.reshape(weight_shape)
         weights_rank = len(weights.shape)
         is_axis_valid, axis_norm = normalize_axis(channel_axis, weights_rank)
         if not is_axis_valid:
@@ -477,12 +482,13 @@ class BaseQuantizer:
 
         # combine per_channel_data into one
         quantized_weights = np.concatenate(quantized_per_channel_data_list, channel_axis)
-        q_weight_name = weight_name + TENSOR_NAME_QUANT_SUFFIX
-        zp_name = weight_name + "_zero_point"
-        scale_name = weight_name + "_scale"
+        name_prefix = weight_name if quantized_name_prefix is None else quantized_name_prefix
+        q_weight_name = name_prefix + TENSOR_NAME_QUANT_SUFFIX
+        zp_name = name_prefix + "_zero_point"
+        scale_name = name_prefix + "_scale"
 
         # Update packed weight, zero point, and scale initializers
-        zero_scale_shape = [initializer.dims[channel_axis]]
+        zero_scale_shape = [weights_shape[channel_axis]]
         scale_initializer = onnx.helper.make_tensor(
             scale_name, initializer.data_type, zero_scale_shape, np.hstack(scale_list).tolist()
         )
@@ -512,7 +518,7 @@ class BaseQuantizer:
                 quantized_weights = np.asarray(
                     quantized_weights,
                     dtype=onnx.helper.tensor_dtype_to_np_dtype(weight_qType),
-                ).reshape(initializer.dims)
+                ).reshape(weights_shape)
                 q_weight_initializer = onnx.numpy_helper.from_array(quantized_weights, q_weight_name)
                 self.model.initializer_extend([q_weight_initializer])
 
