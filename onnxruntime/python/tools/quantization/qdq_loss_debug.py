@@ -145,19 +145,17 @@ def collect_activations(
         providers=execution_providers,
     )
 
-    intermediate_outputs = []
-    for input_d in input_reader:
-        intermediate_outputs.append(inference_session.run(None, input_d))
-    if not intermediate_outputs:
-        raise RuntimeError("No data is collected while running augmented model!")
-
     output_dict = {}
     output_info = inference_session.get_outputs()
-    for batch in intermediate_outputs:
-        for output, output_data in zip(output_info, batch, strict=False):
+    has_data = False
+    for input_d in input_reader:
+        has_data = True
+        for output, output_data in zip(output_info, inference_session.run(None, input_d), strict=False):
             if output.name.endswith(_TENSOR_SAVE_POSTFIX):
                 output_name = output.name[:-_TENSOR_SAVE_POSTFIX_LEN]
                 output_dict.setdefault(output_name, []).append(output_data)
+    if not has_data:
+        raise RuntimeError("No data is collected while running augmented model!")
 
     return output_dict
 
