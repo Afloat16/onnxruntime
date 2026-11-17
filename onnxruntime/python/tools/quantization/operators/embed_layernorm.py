@@ -25,8 +25,16 @@ class EmbedLayerNormalizationQuant(QuantOperatorBase):
         node = self.node
         assert node.op_type == "EmbedLayerNormalization"
 
-        if len(node.output) > 2:
-            logging.info(f"Quantization is not applied to {node.name} since it has 3 outputs")
+        if len(node.output) != 2 or not all(node.output):
+            logging.info(
+                f"Quantization is not applied to {node.name} since QEmbedLayerNormalization requires two outputs"
+            )
+            return super().quantize()
+
+        if len(node.input) > 8 and node.input[8]:
+            logging.info(
+                f"Quantization is not applied to {node.name} since QEmbedLayerNormalization does not support position_ids"
+            )
             return super().quantize()
 
         """
@@ -106,6 +114,8 @@ class EmbedLayerNormalizationQuant(QuantOperatorBase):
 
         kwargs = {}
         for attribute in node.attribute:
+            if attribute.name == "mask_index_type":
+                continue
             kwargs.update(attribute_to_kwarg(attribute))
         kwargs["domain"] = ms_domain
 
