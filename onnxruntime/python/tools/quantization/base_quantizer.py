@@ -27,6 +27,7 @@ from .quant_utils import (
     get_opset_version,
     model_has_infer_metadata,
     normalize_axis,
+    onnx_domain,
     pack_bytes_to_4bit,
     quantize_data,
     quantize_nparray,
@@ -523,6 +524,8 @@ class BaseQuantizer:
             return
 
         for node in self.model.nodes():
+            if node.domain not in ("", onnx_domain):
+                continue
             # adjust tensor_ranges for input of Clip and Relu node
             if node.op_type in ["Clip", "Relu"]:
                 if not self.should_quantize_node(node):

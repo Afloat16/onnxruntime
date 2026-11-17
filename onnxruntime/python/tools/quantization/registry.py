@@ -21,7 +21,7 @@ from .operators.resize import QDQResize, QResize
 from .operators.softmax import QLinearSoftmax
 from .operators.split import QDQSplit, QSplit
 from .operators.where import QDQWhere, QLinearWhere
-from .quant_utils import QuantizationMode
+from .quant_utils import QuantizationMode, ms_domain, onnx_domain
 
 CommonOpsRegistry = {
     "Gather": GatherQuant,
@@ -99,7 +99,8 @@ def CreateDefaultOpQuantizer(onnx_quantizer, node):  # noqa: N802
 
 def CreateOpQuantizer(onnx_quantizer, node):  # noqa: N802
     registry = IntegerOpsRegistry if onnx_quantizer.mode == QuantizationMode.IntegerOps else QLinearOpsRegistry
-    if node.op_type in registry:
+    supported_domains = (ms_domain,) if node.op_type in ("Attention", "EmbedLayerNormalization") else ("", onnx_domain)
+    if node.domain in supported_domains and node.op_type in registry:
         op_quantizer = registry[node.op_type](onnx_quantizer, node)
         if op_quantizer.should_quantize():
             return op_quantizer
@@ -107,6 +108,6 @@ def CreateOpQuantizer(onnx_quantizer, node):  # noqa: N802
 
 
 def CreateQDQQuantizer(onnx_quantizer, node):  # noqa: N802
-    if node.op_type in QDQRegistry:
+    if node.domain in ("", onnx_domain) and node.op_type in QDQRegistry:
         return QDQRegistry[node.op_type](onnx_quantizer, node)
     return QDQOperatorBase(onnx_quantizer, node)
