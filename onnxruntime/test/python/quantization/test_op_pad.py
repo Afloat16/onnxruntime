@@ -243,14 +243,13 @@ class TestOpQuatizerPad(unittest.TestCase):
             weight_type=weight_type,
             extra_options=extra_options,
         )
-        # DequantizeLinear=2 means there are one DequantizeLinear Node aftr both conv and pad,
-        # which means pad node is running in quantized semantic.
-        # In dynamic quantize mode, pad operator in fact not quantized as input is fp32.
+        # A runtime padding value keeps Pad in float, sharing the Conv dequantization
+        # with Identity. Constant padding uses an integer Pad and a second dequantization.
+        # In dynamic quantize mode, Pad is not quantized because its input is fp32.
         if quantize_mode != "static":
             kwargs = {"DynamicQuantizeLinear": 1} if activation_type == QuantType.QUInt8 else {"QuantizeLinear": 1}
         else:
-            # edge case will have 2 graph inputs
-            kwargs = {"DequantizeLinear": 2, "QuantizeLinear": 2 if edge_case else 1}
+            kwargs = {"DequantizeLinear": 1 if edge_case else 2, "QuantizeLinear": 1}
         check_op_type_count(self, model_i8_path, **kwargs)
         # check node input/output type if such node exists in the graph
         qnode_io_qtypes = {

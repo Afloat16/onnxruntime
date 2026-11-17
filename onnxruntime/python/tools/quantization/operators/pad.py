@@ -48,19 +48,30 @@ class QPad(QuantOperatorBase):
                     super().quantize()
                     return
 
+                padding_constant_array = self.quantizer.model.get_constant_value(node.input[2])
+                if padding_constant_array is None or self.quantizer.model.is_graph_input(node.input[2]):
+                    return super().quantize()
+
+                zp_array = onnx.numpy_helper.to_array(zp_tensor)
+                zp_value = zp_array.item() if zp_array.ndim == 0 else zp_array[0]
+                scale_array = onnx.numpy_helper.to_array(scale_tensor)
+                scale_value = scale_array.item() if scale_array.ndim == 0 else scale_array[0]
+                quantized_padding_constant_array = quantize_nparray(
+                    self.quantizer.activation_qType,
+                    padding_constant_array,
+                    scale_value,
+                    zp_value,
+                )
+                # Padding can extend the input's range. Keep it in float if reusing
+                # the input parameters would clip the fill beyond normal rounding.
+                restored_padding = (quantized_padding_constant_array.astype(np.float64) - float(zp_value)) * float(
+                    scale_value
+                )
+                if not np.allclose(padding_constant_array, restored_padding, rtol=0, atol=float(scale_value) / 2):
+                    return super().quantize()
+
                 padding_constant_initializer = self.quantizer.model.get_initializer(node.input[2])
                 if padding_constant_initializer is not None:
-                    zp_array = onnx.numpy_helper.to_array(zp_tensor)
-                    zp_value = zp_array.item() if zp_array.ndim == 0 else zp_array[0]
-                    scale_array = onnx.numpy_helper.to_array(scale_tensor)
-                    scale_value = scale_array.item() if scale_array.ndim == 0 else scale_array[0]
-                    padding_constant_array = onnx.numpy_helper.to_array(padding_constant_initializer)
-                    quantized_padding_constant_array = quantize_nparray(
-                        self.quantizer.activation_qType,
-                        padding_constant_array,
-                        scale_value,
-                        zp_value,
-                    )
                     quantized_padding_constant_name = node.input[2] + TENSOR_NAME_QUANT_SUFFIX
                     quantized_padding_constant_initializer = onnx.numpy_helper.from_array(
                         quantized_padding_constant_array,
