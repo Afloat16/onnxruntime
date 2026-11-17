@@ -108,7 +108,9 @@ class TestWhereFallback(unittest.TestCase):
                 options.inter_op_num_threads = 1
                 options.log_severity_level = 3
                 original = ort.InferenceSession(model.SerializeToString(), options, providers=["CPUExecutionProvider"])
-                actual = ort.InferenceSession(quantized.SerializeToString(), options, providers=["CPUExecutionProvider"])
+                actual = ort.InferenceSession(
+                    quantized.SerializeToString(), options, providers=["CPUExecutionProvider"]
+                )
                 for feed in feeds:
                     expected = np.where(feed["condition"], x, x if shared else y)
                     np.testing.assert_array_equal(original.run(None, feed)[0], expected)
