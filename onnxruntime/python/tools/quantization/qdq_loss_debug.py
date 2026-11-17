@@ -339,21 +339,23 @@ def create_weight_matching(float_model_path: str, qdq_model_path: str) -> dict[s
 
 
 def compute_signal_to_quantization_noice_ratio(
-    x: Sequence[numpy.ndarray] | numpy.ndarray, y: Sequence[numpy.ndarray] | numpy.ndarray
+    x: Sequence[numpy.ndarray | numpy.generic] | numpy.ndarray | numpy.generic,
+    y: Sequence[numpy.ndarray | numpy.generic] | numpy.ndarray | numpy.generic,
 ) -> float:
-    if isinstance(x, numpy.ndarray):
+    if isinstance(x, (numpy.ndarray, numpy.generic)):
         xlist = [x]
     else:
         xlist = x
-    if isinstance(y, numpy.ndarray):
+    if isinstance(y, (numpy.ndarray, numpy.generic)):
         ylist = [y]
     else:
         ylist = y
     if len(xlist) != len(ylist):
         raise RuntimeError("Unequal number of tensors to compare!")
 
-    left = numpy.concatenate(xlist).flatten()
-    right = numpy.concatenate(ylist).flatten()
+    # Normalize each tensor before joining, including scalars and differently shaped batches.
+    left = numpy.concatenate([numpy.asarray(tensor).ravel() for tensor in xlist])
+    right = numpy.concatenate([numpy.asarray(tensor).ravel() for tensor in ylist])
 
     epsilon = numpy.finfo("float").eps
     tensor_norm = max(numpy.linalg.norm(left), epsilon)
