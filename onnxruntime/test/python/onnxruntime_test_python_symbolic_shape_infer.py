@@ -1157,6 +1157,46 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
                     self.assertEqual(output.elem_type, TensorProto.FLOAT)
                     self.assertEqual([d.dim_value for d in output.shape.dim], [fill] * count)
 
+    @staticmethod
+    def _constant_of_shape_scalar_unsqueeze_models():
+        for opset in (11, 13, 21):
+            for axis in (0, -1):
+                for fill in (0, 2):
+                    initializers = [numpy_helper.from_array(numpy.array([], numpy.int64), "shape")]
+                    axes = ["axes"] if opset >= 13 else []
+                    attributes = {} if opset >= 13 else {"axes": [axis]}
+                    if axes:
+                        initializers.append(numpy_helper.from_array(numpy.array([axis], numpy.int64), "axes"))
+                    model = helper.make_model(
+                        helper.make_graph(
+                            [
+                                helper.make_node(
+                                    "ConstantOfShape",
+                                    ["shape"],
+                                    ["scalar"],
+                                    value=numpy_helper.from_array(numpy.array([fill], numpy.int64)),
+                                ),
+                                helper.make_node("Unsqueeze", ["scalar", *axes], ["vector"], **attributes),
+                                helper.make_node("Reshape", ["data", "vector"], ["output"]),
+                            ],
+                            "constant_of_shape_scalar_unsqueeze",
+                            [helper.make_tensor_value_info("data", TensorProto.FLOAT, [fill])],
+                            [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None])],
+                            initializers,
+                        ),
+                        opset_imports=[helper.make_opsetid("", opset)],
+                        ir_version=7,
+                    )
+                    yield model, opset, axis, fill
+
+    def test_constant_of_shape_scalar_unsqueeze(self):
+        for model, opset, axis, fill in self._constant_of_shape_scalar_unsqueeze_models():
+            with self.subTest(opset=opset, axis=axis, fill=fill):
+                onnx.checker.check_model(model, full_check=True)
+                inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                onnx.checker.check_model(inferred, full_check=True)
+                self.assertEqual([d.dim_value for d in inferred.graph.output[0].type.tensor_type.shape.dim], [fill])
+
     def test_shape_start_end(self):
         graph = helper.make_graph(
             [
