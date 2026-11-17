@@ -1368,8 +1368,8 @@ class OnnxModel:
             tensor2 (TensorProto): initializer 2
             signature_cache1 (dict): Optional dictionary to store data signatures of tensor1 in order to speed up comparison.
             signature_cache2 (dict): Optional dictionary to store data signatures of tensor2 in order to speed up comparison.
-            rtol (float): Optional relative difference threshold for minor precision differences
-            atol (float): Optional absolute difference threshold for minor precision differences
+            rtol (float): Optional relative difference threshold for floating-point and complex tensors.
+            atol (float): Optional absolute difference threshold for floating-point and complex tensors.
         Returns:
             bool: True when two initializers has same value.
         """
@@ -1390,8 +1390,11 @@ class OnnxModel:
         if tensor1.data_type == tensor2.data_type and tensor1.dims == tensor2.dims:
             n1 = numpy_helper.to_array(tensor1)
             n2 = numpy_helper.to_array(tensor2)
-            if sig1 == sig2:
-                # Same signature, now do the expensive check to confirm the data is the same
+            discrete_type = tensor1.data_type in (TensorProto.BOOL, TensorProto.STRING) or TensorProto.DataType.Name(
+                tensor1.data_type
+            ).startswith(("INT", "UINT"))
+            if sig1 == sig2 or discrete_type:
+                # Discrete values require exact equality even when floating-point tolerances are provided.
                 return (n1 == n2).all()
             else:
                 # Check if tensors are allclose
