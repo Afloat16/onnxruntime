@@ -18,9 +18,11 @@ class QDQNormalization(QDQOperatorBase):
         self.quantizer.quantize_activation_tensor(node.input[0])
 
         # Scale
-        scale_is_initializer = self.quantizer.is_input_a_initializer(node.input[1])
+        scale_initializer = self.quantizer.model.get_initializer(node.input[1])
+        scale_is_initializer = scale_initializer is not None
+        default_axis = 0 if scale_is_initializer and len(scale_initializer.dims) == 1 else 1
         scale_is_per_channel, scale_channel_axis = self.quantizer.is_tensor_per_channel(
-            node.input[1], default_axis=1, op_type=node.op_type
+            node.input[1], default_axis=default_axis, op_type=node.op_type
         )
 
         if scale_is_per_channel:
