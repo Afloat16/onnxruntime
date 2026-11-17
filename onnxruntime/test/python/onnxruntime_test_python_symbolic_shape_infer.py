@@ -315,6 +315,104 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
 
 class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
+    def test_symbolic_names_preserve_original_node_positions(self):
+        for reverse_outputs in (False, True):
+            for name in ("", "shared_name"):
+                with self.subTest(reverse_outputs=reverse_outputs, name=name):
+                    outputs = [
+                        helper.make_node("Reshape", ["copied", "shape"], ["reshaped"], name=name),
+                        helper.make_node("NonZero", ["copied"], ["nonzero"], name=name),
+                    ]
+                    if reverse_outputs:
+                        outputs.reverse()
+                    nodes = [
+                        helper.make_node("Identity", ["input"], ["copied"], name=name),
+                        helper.make_node("Identity", ["input"], ["unused"], name=name),
+                        *outputs,
+                    ]
+                    graph = helper.make_graph(
+                        nodes,
+                        "symbolic_names",
+                        [
+                            helper.make_tensor_value_info("input", TensorProto.FLOAT, [2, 3]),
+                            helper.make_tensor_value_info("shape", TensorProto.INT64, [3]),
+                        ],
+                        [
+                            helper.make_tensor_value_info("reshaped", TensorProto.FLOAT, None),
+                            helper.make_tensor_value_info("nonzero", TensorProto.INT64, None),
+                        ],
+                    )
+                    model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+                    for _ in range(2):
+                        model = SymbolicShapeInference.infer_shapes(model)
+                        onnx.checker.check_model(model)
+                        reshape_index = 3 if reverse_outputs else 2
+                        nonzero_index = 2 if reverse_outputs else 3
+                        self.assertEqual(
+                            [dim.dim_param for dim in model.graph.output[0].type.tensor_type.shape.dim],
+                            [f"Reshape_{reshape_index}_o0__d{i}" for i in range(3)],
+                        )
+                        self.assertEqual(
+                            model.graph.output[1].type.tensor_type.shape.dim[1].dim_param,
+                            f"NonZero_{nonzero_index}_o0__d1",
+                        )
+
+    def test_symbolic_names_with_omitted_first_outputs(self):
+        graph = helper.make_graph(
+            [
+                helper.make_node("Custom", ["input"], ["", "first"], domain="test"),
+                helper.make_node("Custom", ["input"], ["", "second"], domain="test"),
+            ],
+            "optional_outputs",
+            [helper.make_tensor_value_info("input", TensorProto.FLOAT, ["batch", 2])],
+            [
+                helper.make_tensor_value_info("input", TensorProto.FLOAT, ["batch", 2]),
+                helper.make_tensor_value_info("first", TensorProto.FLOAT, None),
+                helper.make_tensor_value_info("second", TensorProto.FLOAT, None),
+            ],
+        )
+        model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13), helper.make_opsetid("test", 1)])
+        inferred = SymbolicShapeInference.infer_shapes(model, guess_output_rank=True)
+        onnx.checker.check_model(inferred)
+        for index in range(2):
+            self.assertEqual(
+                [dim.dim_param for dim in inferred.graph.output[index + 1].type.tensor_type.shape.dim],
+                [f"Custom_{index}_o1__d{dim}" for dim in range(2)],
+            )
+
+    def test_symbolic_names_keep_subgraph_positions_separate(self):
+        def branch(extra_node):
+            nodes = [helper.make_node("Identity", ["input"], ["unused"])] if extra_node else []
+            nodes.append(helper.make_node("NonZero", ["input"], ["local"]))
+            return helper.make_graph(
+                nodes, "branch", [], [helper.make_tensor_value_info("local", TensorProto.INT64, None)]
+            )
+
+        graph = helper.make_graph(
+            [
+                helper.make_node("NonZero", ["input"], ["root"]),
+                helper.make_node(
+                    "If", ["condition"], ["selected"], then_branch=branch(True), else_branch=branch(False)
+                ),
+            ],
+            "subgraph_names",
+            [
+                helper.make_tensor_value_info("input", TensorProto.FLOAT, [2, 3]),
+                helper.make_tensor_value_info("condition", TensorProto.BOOL, []),
+            ],
+            [
+                helper.make_tensor_value_info("root", TensorProto.INT64, None),
+                helper.make_tensor_value_info("selected", TensorProto.INT64, None),
+            ],
+        )
+        model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+        inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+        onnx.checker.check_model(inferred)
+        self.assertEqual(inferred.graph.output[0].type.tensor_type.shape.dim[1].dim_param, "NonZero_0_o0__d1")
+        expected = {"then_branch": "NonZero_0_1_o0__d1", "else_branch": "NonZero_1_0_o0__d1"}
+        for attr in inferred.graph.node[1].attribute:
+            self.assertEqual(attr.g.output[0].type.tensor_type.shape.dim[1].dim_param, expected[attr.name])
+
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
         vis = [x for x in graph.value_info if x.name not in names_in_vis] + vis

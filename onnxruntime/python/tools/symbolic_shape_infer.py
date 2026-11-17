@@ -339,6 +339,7 @@ class SymbolicShapeInference:
     def _preprocess(self, in_mp):
         self.out_mp_ = onnx.ModelProto()
         self.out_mp_.CopyFrom(in_mp)
+        self.node_positions_ = None
         self.graph_inputs_ = {i.name: i for i in list(self.out_mp_.graph.input)}
         self.initializers_ = {i.name: i for i in self.out_mp_.graph.initializer}
         self.known_vi_ = {i.name: i for i in list(self.out_mp_.graph.input)}
@@ -716,8 +717,12 @@ class SymbolicShapeInference:
         return new_symbolic_dim
 
     def _new_symbolic_dim_from_output(self, node, out_idx=0, dim=0):
+        if self.node_positions_ is None:
+            # Nonempty output names are unique within a graph. Include every
+            # output so nodes with an omitted first output remain distinct.
+            self.node_positions_ = {tuple(n.output): index for index, n in enumerate(self.out_mp_.graph.node)}
         return self._new_symbolic_dim(
-            f"{node.op_type}{self.prefix_}_{list(self.out_mp_.graph.node).index(node)}_o{out_idx}_",
+            f"{node.op_type}{self.prefix_}_{self.node_positions_[tuple(node.output)]}_o{out_idx}_",
             dim,
         )
 
