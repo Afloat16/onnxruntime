@@ -425,15 +425,17 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
                     inferred = SymbolicShapeInference.infer_shapes(model)
                     self.assertTrue(inferred.graph.output[0].type.tensor_type.shape.dim[0].HasField("dim_param"))
 
-    def test_if_local_initializer_shadows_overridable_parent(self):
+    def test_if_local_initializer_still_selects_branch(self):
         for outer_default in (False, True):
             for local_default in (False, True):
                 with self.subTest(outer_default=outer_default, local_default=local_default):
                     model = self._make_if_condition_model(outer_default, nested=True)
                     model.graph.name = "if_local_condition"
                     for branch in model.graph.node[0].attribute:
+                        # ONNX subgraph definitions must not shadow visible outer names.
+                        branch.g.node[0].input[0] = "local_condition"
                         branch.g.initializer.append(
-                            numpy_helper.from_array(numpy.asarray(local_default, dtype=numpy.bool_), "condition")
+                            numpy_helper.from_array(numpy.asarray(local_default, dtype=numpy.bool_), "local_condition")
                         )
                     inferred = SymbolicShapeInference.infer_shapes(model)
                     self.assertEqual(
