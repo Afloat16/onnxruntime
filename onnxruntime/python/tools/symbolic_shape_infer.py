@@ -871,11 +871,27 @@ class SymbolicShapeInference:
         )
 
     def _infer_symbolic_compute_ops(self, node):
+        def divide(values):
+            input_type = get_elem_type_from_type_proto(self.known_vi_[node.input[0]].type)
+            if input_type in (
+                onnx.TensorProto.INT8,
+                onnx.TensorProto.INT16,
+                onnx.TensorProto.INT32,
+                onnx.TensorProto.INT64,
+                onnx.TensorProto.UINT8,
+                onnx.TensorProto.UINT16,
+                onnx.TensorProto.UINT32,
+                onnx.TensorProto.UINT64,
+            ):
+                quotient = sympy.sympify(values[0]) / sympy.sympify(values[1])
+                # ONNX integer division truncates towards zero, including negative shape intermediates.
+                return sympy.Piecewise((sympy.ceiling(quotient), quotient < 0), (sympy.floor(quotient), True))
+            quotient = values[0] // values[1]
+            return int(quotient) if isinstance(quotient, float) else quotient
+
         funcs = {
             "Add": lambda l: l[0] + l[1],  # noqa: E741
-            "Div": lambda l: (  # noqa: E741
-                int(l[0] // l[1]) if isinstance(l[0] // l[1], float) else l[0] // l[1]
-            ),  # integer div in sympy
+            "Div": divide,
             "Equal": lambda l: l[0] == l[1],  # noqa: E741
             "Floor": lambda l: sympy.floor(l[0]),  # noqa: E741
             "Max": lambda l: (  # noqa: E741

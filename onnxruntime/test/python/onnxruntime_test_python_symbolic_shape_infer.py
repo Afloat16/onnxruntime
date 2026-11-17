@@ -7,6 +7,7 @@ import numpy
 
 # -*- coding: UTF-8 -*-
 import onnx
+import sympy
 from onnx import AttributeProto, GraphProto, TensorProto, helper, numpy_helper  # noqa: F401
 
 if os.path.exists(
@@ -1295,6 +1296,74 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
         output_dims = unique_element(model.graph.output).type.tensor_type.shape.dim
         self.assertEqual(len(output_dims), 1)
         self.assertEqual(output_dims[0].dim_value, 512)
+
+    def test_integer_division_truncates_towards_zero(self):
+        for element_type in (TensorProto.INT32, TensorProto.INT64):
+            cases = [(-5, 2, -2), (5, -2, -2), (-5, -2, 2), (5, 2, 2), (-1, 2, 0), (0, -2, 0)]
+            if element_type == TensorProto.INT64:
+                cases.extend([(2**60 + 1, 1, 2**60 + 1), (-(2**60 + 1), 1, -(2**60 + 1))])
+            for numerator, denominator, quotient in cases:
+                for scalar in (False, True):
+                    with self.subTest(type=element_type, numerator=numerator, denominator=denominator, scalar=scalar):
+                        dims = [] if scalar else [1]
+                        initializers = [
+                            helper.make_tensor("numerator", element_type, dims, [numerator]),
+                            helper.make_tensor("denominator", element_type, dims, [denominator]),
+                            helper.make_tensor("offset", TensorProto.INT64, dims, [3 - quotient]),
+                            helper.make_tensor("data", TensorProto.FLOAT, [], [1]),
+                        ]
+                        nodes = [
+                            helper.make_node("Div", ["numerator", "denominator"], ["quotient"]),
+                            helper.make_node("Cast", ["quotient"], ["quotient_int64"], to=TensorProto.INT64),
+                            helper.make_node("Add", ["quotient_int64", "offset"], ["size"]),
+                        ]
+                        if scalar:
+                            initializers.append(helper.make_tensor("axes", TensorProto.INT64, [1], [0]))
+                            nodes.append(helper.make_node("Unsqueeze", ["size", "axes"], ["shape"]))
+                        nodes.append(helper.make_node("Expand", ["data", "shape" if scalar else "size"], ["output"]))
+                        graph = helper.make_graph(
+                            nodes,
+                            "integer_division",
+                            [],
+                            [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                            initializers,
+                        )
+                        inferred = SymbolicShapeInference.infer_shapes(
+                            helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+                        )
+                        self.assertEqual(inferred.graph.output[0].type.tensor_type.shape.dim[0].dim_value, 3)
+                        onnx.checker.check_model(inferred, full_check=True)
+
+    def test_symbolic_integer_division_truncates_towards_zero(self):
+        graph = helper.make_graph(
+            [
+                helper.make_node("Shape", ["input"], ["input_shape"]),
+                helper.make_node("Sub", ["input_shape", "five"], ["numerator"]),
+                helper.make_node("Div", ["numerator", "two"], ["quotient"]),
+                helper.make_node("Add", ["quotient", "ten"], ["shape"]),
+                helper.make_node("Expand", ["data", "shape"], ["output"]),
+            ],
+            "symbolic_integer_division",
+            [helper.make_tensor_value_info("input", TensorProto.FLOAT, ["N"])],
+            [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+            [
+                helper.make_tensor("five", TensorProto.INT64, [1], [5]),
+                helper.make_tensor("two", TensorProto.INT64, [1], [2]),
+                helper.make_tensor("ten", TensorProto.INT64, [1], [10]),
+                helper.make_tensor("data", TensorProto.FLOAT, [], [1]),
+            ],
+        )
+        inferred = SymbolicShapeInference.infer_shapes(
+            helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+        )
+        symbol = sympy.Symbol("N", integer=True, nonnegative=True)
+        dimension = sympy.sympify(
+            inferred.graph.output[0].type.tensor_type.shape.dim[0].dim_param, locals={"N": symbol}
+        )
+        for size, expected in [(0, 8), (1, 8), (2, 9), (4, 10), (5, 10), (6, 10), (7, 11), (10, 12)]:
+            with self.subTest(size=size):
+                self.assertEqual(dimension.subs(symbol, size), expected)
+        onnx.checker.check_model(inferred, full_check=True)
 
     def test_quantize_linear(self):
         """
