@@ -696,6 +696,7 @@ class ONNXQuantizer(BaseQuantizer):
         weight_name: str,
         bias_tp: onnx.TensorProto,
         is_per_channel: bool,
+        beta: float = 1.0,
     ) -> tuple[bool, np.ndarray | None]:
         """Checks if the bias scale is too small and increases the weight scale if needed."""
 
@@ -703,6 +704,10 @@ class ONNXQuantizer(BaseQuantizer):
             return False, None
 
         bias_float_data = tensor_proto_to_array(bias_tp)
+        if beta == 0:
+            bias_float_data = np.zeros_like(bias_float_data)
+        elif beta != 1.0:
+            bias_float_data = bias_float_data.astype(np.float64) * beta
         int32_info = np.iinfo(np.int32)
         multiplicative_epsilon = 1.0001
         qrange = np.array(int32_info.max, dtype=np.float64) - np.array(int32_info.min + 1, dtype=np.float64)
@@ -826,6 +831,7 @@ class ONNXQuantizer(BaseQuantizer):
                 weight_name,
                 bias_initializer,
                 is_per_channel,
+                beta,
             )
             if did_update:
                 self._requantize_weight(weight_name, new_weight_scale)

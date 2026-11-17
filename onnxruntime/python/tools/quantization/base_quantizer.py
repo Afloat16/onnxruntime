@@ -96,6 +96,7 @@ class BaseQuantizer:
             "EnableSubgraph" in self.extra_options and self.extra_options["EnableSubgraph"]
         )
         self.parent = None
+        self._gemm_initializer_state = None
         self.force_quantize_no_input_check = (
             "ForceQuantizeNoInputCheck" in self.extra_options and self.extra_options["ForceQuantizeNoInputCheck"]
         )
@@ -212,25 +213,29 @@ class BaseQuantizer:
             else:
                 raise TypeError(f"Only float16 or float32 are supported with float 8 but bias dtype is {data.dtype}.")
             quantized_data = data.astype(np.float32)
+            if beta != 1.0:
+                quantized_data *= beta
             bias_scale = np.array([1], dtype=quantized_data.dtype)
             bias_scale_data = bias_scale.reshape(-1)
             packed_bias_initializer = onnx.numpy_helper.from_array(quantized_data, quantized_bias_name)
             self.model.initializer_extend([packed_bias_initializer])
             node_type = "Cast"
         else:
-            # calculate scale for bias
-            # TODO: This formula should be explained including why the scale is not estimated for the bias as well.
-            bias_scale = input_scale * weight_scale * beta
+            # Integer accumulators use the product scale; Gemm's beta scales the bias values.
+            bias_scale = input_scale * weight_scale
+            scaled_bias_data = np.asarray(bias_data, dtype=np.float64)
+            if beta != 1.0:
+                scaled_bias_data = scaled_bias_data * beta
             if bias_scale_dtype is not None:
                 # A separate FP32 DQ permits a sufficient bias scale even when weight adjustment is skipped.
-                min_bias_scale = np.abs(np.asarray(bias_data, dtype=np.float64)) / np.iinfo(np.int32).max
+                min_bias_scale = np.abs(scaled_bias_data) / np.iinfo(np.int32).max
                 if bias_scale.size == 1:
                     min_bias_scale = min_bias_scale.max()
                 bias_scale = np.maximum(bias_scale, min_bias_scale * 1.0001).astype(bias_scale_dtype)
                 bias_scale = np.where(bias_scale == 0, np.ones_like(bias_scale, dtype=bias_scale_dtype), bias_scale)
 
             # Quantize by dividing by bias_scale
-            quantized_data = np.asarray(bias_data, dtype=np.float64) / np.asarray(bias_scale, dtype=np.float64)
+            quantized_data = scaled_bias_data / np.asarray(bias_scale, dtype=np.float64)
             quantized_data = quantized_data.round()
 
             # Clip quantized data to the range of a int32

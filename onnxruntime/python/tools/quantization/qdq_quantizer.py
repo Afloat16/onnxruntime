@@ -370,15 +370,14 @@ class QDQQuantizer(BaseQuantizer):
     def quantize_bias_tensor(self, node_name, bias_name, input_name, weight_name, beta=1.0):
         """
         Adds a bias tensor to the list of bias tensors to quantize. Called by op quantizers that
-        want to quantize a bias with bias_zero_point = 0 and bias_scale = input_scale * weight_scale * beta.
-        TODO: Explain the reasoning for using this formula.
+        want to quantize beta * bias with bias_zero_point = 0 and bias_scale = input_scale * weight_scale.
 
         Args:
             node_name: name of the node that consumes the bias, input, and weight tensors.
             bias_name: name of the bias tensor to quantize.
             input_name: name of the input tensor whose scale is used to compute the bias's scale.
             weight_name: name of the weight tensor whose scale is used to compute the bias's scale.
-            beta: Multiplier used to compute the bias's scale.
+            beta: Multiplier applied to the bias values before quantization.
         """
         # If the user provided quantization overrides for this tensor, treat it as a regular weight.
         if self.tensor_quant_overrides.get(bias_name):
@@ -423,6 +422,7 @@ class QDQQuantizer(BaseQuantizer):
         weight_name: str,
         bias_tp: onnx.TensorProto,
         is_per_channel: bool,
+        beta: float = 1.0,
     ) -> tuple[bool, np.ndarray | None]:
         """
         Checks if the bias scale (input_scale * weight_scale) that we intend to use is too small.
@@ -439,12 +439,17 @@ class QDQQuantizer(BaseQuantizer):
         :param weight_name: The weight initializer's name. Used for logging.
         :param bias_tp: The bias ONNX initializer.
         :param is_per_channel: True if the bias and weight are quantized per-channel.
+        :param beta: Multiplier applied to the bias values before quantization.
         :return: A tuple with a bool indicating if the weight's scale was adjusted and the new weight scale.
         """
         if not weight_scale.size:
             return False, None
 
         bias_float_data = tensor_proto_to_array(bias_tp)
+        if beta == 0:
+            bias_float_data = np.zeros_like(bias_float_data)
+        elif beta != 1.0:
+            bias_float_data = bias_float_data.astype(np.float64) * beta
 
         int32_info = np.iinfo(np.int32)
         multiplicative_epsilon = 1.0001
@@ -549,6 +554,7 @@ class QDQQuantizer(BaseQuantizer):
                 bias_info.weight_name,
                 find_by_name(bias_name, self.model.initializer()),
                 is_per_channel,
+                bias_info.beta,
             )
 
             if did_update_weight_scale:
@@ -1266,10 +1272,14 @@ class QDQQuantizer(BaseQuantizer):
             self.weight_qType != onnx.TensorProto.FLOAT8E4M3FN
             and bias_initializer.data_type == onnx.TensorProto.FLOAT16
         ):
-            bias_scale_fp16 = np.asarray(input_scale * weight_scale * bias_info.beta, dtype=np.float16)
+            bias_scale_fp16 = np.asarray(input_scale * weight_scale, dtype=np.float16)
             bias_data_fp64 = tensor_proto_to_array(bias_initializer).astype(np.float64)
-            if np.any(bias_scale_fp16 == 0) or np.any(
-                np.abs(bias_data_fp64) > np.iinfo(np.int32).max * bias_scale_fp16.astype(np.float64)
+            if bias_info.beta != 1.0:
+                bias_data_fp64 = bias_data_fp64 * bias_info.beta
+            if (
+                bias_info.beta == 0
+                or np.any(bias_scale_fp16 == 0)
+                or np.any(np.abs(bias_data_fp64) > np.iinfo(np.int32).max * bias_scale_fp16.astype(np.float64))
             ):
                 # Use FP32 DQ followed by an FP16 cast if scale rounding would erase or clip the bias.
                 input_scale = input_scale.astype(np.float32)

@@ -107,13 +107,14 @@ class TestOpGemm(unittest.TestCase):
                     quantized = onnx.load(output_path)
                     onnx.checker.check_model(quantized)
                     initializers = {t.name: onnx.numpy_helper.to_array(t) for t in quantized.graph.initializer}
-                    scales = initializers["bias_quantized_scale"]
+                    bias_name = next(node for node in quantized.graph.node if node.op_type == "Gemm").input[2]
+                    scales = initializers[bias_name + "_quantized_scale"]
                     use_fp16_bias_scale = model_dtype == np.float16 and magnitude == 0.005 and beta != 0
                     self.assertEqual(scales.dtype, np.float16 if use_fp16_bias_scale else np.float32)
-                    cast_nodes = [n for n in quantized.graph.node if n.op_type == "Cast" and n.output == ["bias"]]
+                    cast_nodes = [n for n in quantized.graph.node if n.op_type == "Cast" and n.output == [bias_name]]
                     self.assertEqual(len(cast_nodes), 0 if model_dtype == np.float32 or use_fp16_bias_scale else 1)
                     self.assertTrue((scales > 0).all())
-                    dequantized = initializers["bias_quantized"].astype(np.float32) * scales
+                    dequantized = initializers[bias_name + "_quantized"].astype(np.float32) * scales
                     expected_bias = bias.astype(np.float32) * beta
                     np.testing.assert_allclose(dequantized, expected_bias, rtol=1e-5)
                     self.assertTrue((initializers["weight_scale"] < 0.001).all())
