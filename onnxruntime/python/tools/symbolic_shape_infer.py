@@ -644,6 +644,11 @@ class SymbolicShapeInference:
             for i, v in enumerate(values):
                 if type(v) is not np.ndarray:
                     continue
+                if v.dtype.kind == "f" and node.input[i] in self.sympy_data_ and not allow_float_values:
+                    # Legacy symbolic consumers cannot interpret typed floating
+                    # values by silently truncating them into shape integers.
+                    values[i] = None
+                    continue
                 if len(v.shape) > 1:
                     new_v = None  # ignore value for rank > 1
                 elif len(v.shape) == 0:
@@ -693,6 +698,17 @@ class SymbolicShapeInference:
             "Unsqueeze",
             "Squeeze",
         ]
+        value = self.sympy_data_.get(node.input[0])
+        if isinstance(value, np.ndarray):
+            output_shape = get_shape_from_value_info(self.known_vi_[node.output[0]])
+            if output_shape is not None and all(is_literal(dimension) for dimension in output_shape):
+                try:
+                    self.sympy_data_[node.output[0]] = value.reshape(
+                        tuple(int(dimension) for dimension in output_shape)
+                    )
+                except ValueError:
+                    return  # The inferred shape cannot represent the cached data.
+            return
         self._compute_on_sympy_data(node, lambda x: x[0])
 
     def _pass_on_shape_and_type(self, node):
@@ -870,6 +886,28 @@ class SymbolicShapeInference:
             )
         )
 
+    def _try_get_concrete_numeric_values(self, node):
+        values = []
+        for index, name in enumerate(node.input):
+            if name in self.graph_inputs_ or (
+                name in self.initializers_ and onnx.external_data_helper.uses_external_data(self.initializers_[name])
+            ):
+                return None
+            value = self._try_get_value(node, index)
+            if value is None:
+                return None
+            try:
+                dtype = helper.tensor_dtype_to_np_dtype(self.known_vi_[name].type.tensor_type.elem_type)
+                if dtype.kind not in "bifu":
+                    return None
+                value = np.asarray(value, dtype=dtype)
+            except (TypeError, ValueError, OverflowError):
+                return None  # An unresolved symbolic dimension is not a concrete value.
+            if value.ndim > 1 or not np.all(np.isfinite(value)):
+                return None
+            values.append(value)
+        return values
+
     def _infer_symbolic_compute_ops(self, node):
         floating_ops = {
             "Add": np.add,
@@ -888,23 +926,9 @@ class SymbolicShapeInference:
             # Floating-point shape calculations must round at each tensor's dtype,
             # without discarding fractional intermediates before a later Cast.
             dtype = helper.tensor_dtype_to_np_dtype(data_type)
-            values = []
-            for index, name in enumerate(node.input):
-                if name in self.graph_inputs_ or (
-                    name in self.initializers_
-                    and onnx.external_data_helper.uses_external_data(self.initializers_[name])
-                ):
-                    return
-                value = self._try_get_value(node, index)
-                if value is None:
-                    return
-                try:
-                    value = np.asarray(value, dtype=dtype)
-                except (TypeError, ValueError, OverflowError):
-                    return  # An unresolved symbolic dimension is not a concrete float.
-                if value.ndim > 1 or not np.all(np.isfinite(value)):
-                    return
-                values.append(value)
+            values = self._try_get_concrete_numeric_values(node)
+            if values is None:
+                return
             with np.errstate(all="ignore"):
                 result = floating_ops[node.op_type](*values)
                 if data_type == onnx.TensorProto.FLOAT16:
@@ -943,6 +967,28 @@ class SymbolicShapeInference:
         self._compute_on_sympy_data(node, funcs[node.op_type])
 
     def _infer_Cast(self, node):  # noqa: N802
+        value = self.sympy_data_.get(node.input[0])
+        if isinstance(value, np.ndarray):
+            if value.ndim > 1 or value.dtype.kind not in "bifu" or not np.all(np.isfinite(value)):
+                return
+            dtype = helper.tensor_dtype_to_np_dtype(get_attribute(node, "to"))
+            if dtype.kind not in "bifu":
+                return
+            if value.dtype.kind == "f" and dtype.kind in "iu":
+                truncated = np.trunc(value.astype(np.float64))
+                bounds = np.iinfo(dtype)
+                upper = 2 ** (bounds.bits - (dtype.kind == "i"))
+                if not np.all((truncated >= bounds.min) & (truncated < upper)):
+                    return  # Out-of-range float-to-integer casts are not portable.
+            with np.errstate(all="ignore"):
+                converted = value.astype(dtype)
+                if dtype == np.dtype(np.float16) and not np.array_equal(
+                    converted.astype(np.float32), value.astype(np.float32)
+                ):
+                    return  # Keep the same FP16/FP32 precision boundary as arithmetic.
+            if np.all(np.isfinite(converted)):
+                self.sympy_data_[node.output[0]] = converted
+            return
         self._pass_on_sympy_data(node)
 
     def _infer_CategoryMapper(self, node):  # noqa: N802
@@ -975,7 +1021,14 @@ class SymbolicShapeInference:
         )
 
     def _infer_Concat(self, node):  # noqa: N802
-        if any(i in self.sympy_data_ or i in self.initializers_ for i in node.input):
+        concrete_values = self._try_get_concrete_numeric_values(node)
+        if (
+            concrete_values is not None
+            and all(value.ndim == 1 for value in concrete_values)
+            and get_attribute(node, "axis") in (0, -1)
+        ):
+            self.sympy_data_[node.output[0]] = np.concatenate(concrete_values)
+        elif any(i in self.sympy_data_ or i in self.initializers_ for i in node.input):
             values = self._get_int_or_float_values(node)
             if all(v is not None for v in values):
                 assert get_attribute(node, "axis") == 0
@@ -1226,7 +1279,11 @@ class SymbolicShapeInference:
             idx = self._try_get_value(node, 1)
             if idx is not None:
                 data = self.sympy_data_[node.input[0]]
-                if type(data) is list:
+                if isinstance(data, np.ndarray):
+                    indices = np.asarray(idx)
+                    if indices.dtype.kind in "iu":
+                        self.sympy_data_[node.output[0]] = np.asarray(np.take(data, indices, axis=0))
+                elif type(data) is list:
                     if type(idx) is np.ndarray and len(idx.shape) == 1:
                         self.sympy_data_[node.output[0]] = [data[int(i)] for i in idx]
                     else:
@@ -2062,7 +2119,7 @@ class SymbolicShapeInference:
         ):
             input_sympy_data = self.sympy_data_[node.input[0]]
             if type(input_sympy_data) is list or (
-                type(input_sympy_data) is np.array and len(input_sympy_data.shape) == 1
+                type(input_sympy_data) is np.ndarray and len(input_sympy_data.shape) == 1
             ):
                 self.sympy_data_[node.output[0]] = input_sympy_data[starts[0] : ends[0] : steps[0]]
 
@@ -2222,6 +2279,9 @@ class SymbolicShapeInference:
             data_shape = self._get_shape(node, 0)
             perm = get_attribute(node, "perm", reversed(list(range(len(data_shape)))))
             input_data = self.sympy_data_[node.input[0]]
+            if isinstance(input_data, np.ndarray):
+                self.sympy_data_[node.output[0]] = np.transpose(input_data, axes=tuple(perm))
+                return
             self.sympy_data_[node.output[0]] = (
                 np.transpose(np.array(input_data).reshape(*data_shape), axes=tuple(perm)).flatten().tolist()
             )

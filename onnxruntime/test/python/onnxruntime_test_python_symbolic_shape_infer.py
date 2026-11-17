@@ -1445,6 +1445,312 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
                 self.assertEqual(len(dimensions), 1)
                 self.assertTrue(dimensions[0].HasField("dim_param"))
 
+    def _check_floating_cache_chain(
+        self, values, nodes, result, expected, source="initializer", unknown=False, inputs=None, result_type=None
+    ):
+        initializers = []
+        prefix = []
+        for name, value in values.items():
+            tensor = numpy_helper.from_array(numpy.asarray(value), name)
+            if source == "constant":
+                prefix.append(helper.make_node("Constant", [], [name], value=tensor))
+            else:
+                initializers.append(tensor)
+        expected = numpy.asarray(expected)
+        result_type = result_type or helper.np_dtype_to_tensor_dtype(expected.dtype)
+        suffix = [helper.make_node("Cast", [result], ["target"], to=TensorProto.INT64)]
+        target = "target"
+        if expected.ndim == 0:
+            initializers.append(helper.make_tensor("target_axes", TensorProto.INT64, [1], [0]))
+            suffix.append(helper.make_node("Unsqueeze", [target, "target_axes"], ["vector_target"]))
+            target = "vector_target"
+        suffix.append(helper.make_node("ConstantOfShape", [target], ["output"]))
+        model = helper.make_model(
+            helper.make_graph(
+                prefix + nodes + suffix,
+                "floating_cache_chain",
+                inputs or [],
+                [
+                    helper.make_tensor_value_info("output", TensorProto.FLOAT, [None] * expected.size),
+                    helper.make_tensor_value_info(result, result_type, list(expected.shape)),
+                ],
+                initializers,
+            ),
+            opset_imports=[helper.make_opsetid("", 13)],
+            ir_version=8,
+        )
+        inferred = SymbolicShapeInference.infer_shapes(model)
+        dimensions = inferred.graph.output[0].type.tensor_type.shape.dim
+        self.assertEqual(len(dimensions), expected.size)
+        if unknown:
+            self.assertTrue(all(dimension.HasField("dim_param") for dimension in dimensions))
+        else:
+            self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [int(value) for value in expected.flat])
+
+    def test_floating_arithmetic_cache_through_casts(self):
+        for source in ("initializer", "constant"):
+            for first, middle in ((TensorProto.FLOAT, TensorProto.DOUBLE), (TensorProto.DOUBLE, TensorProto.FLOAT)):
+                dtype = helper.tensor_dtype_to_np_dtype(first)
+                with self.subTest(source=source, first=first, middle=middle):
+                    self._check_floating_cache_chain(
+                        {"a": numpy.array([1.25], dtype=dtype), "two": numpy.array([2], dtype=dtype)},
+                        [
+                            helper.make_node("Mul", ["a", "two"], ["fraction"]),
+                            helper.make_node("Cast", ["fraction"], ["middle"], to=middle),
+                            helper.make_node("Cast", ["middle"], ["restored"], to=first),
+                            helper.make_node("Mul", ["restored", "two"], ["result"]),
+                        ],
+                        "result",
+                        numpy.array([5], dtype=dtype),
+                        source,
+                    )
+            with self.subTest(source=source, conversion="double_to_float_rounding"):
+                self._check_floating_cache_chain(
+                    {
+                        "a": numpy.array([1.99999999]),
+                        "zero": numpy.array([0.0]),
+                        "two": numpy.array([2], numpy.float32),
+                    },
+                    [
+                        helper.make_node("Add", ["a", "zero"], ["fraction"]),
+                        helper.make_node("Cast", ["fraction"], ["rounded"], to=TensorProto.FLOAT),
+                        helper.make_node("Mul", ["rounded", "two"], ["result"]),
+                    ],
+                    "result",
+                    numpy.array([4], numpy.float32),
+                    source,
+                )
+
+    def test_floating_arithmetic_cache_through_views(self):
+        for dtype in (numpy.float16, numpy.float32, numpy.float64):
+            for source in ("initializer", "constant"):
+                for operation in ("Reshape", "Squeeze", "Unsqueeze", "matrix_roundtrip"):
+                    with self.subTest(dtype=dtype, source=source, operation=operation):
+                        scalar = operation == "Unsqueeze"
+                        values = {
+                            "a": numpy.array(1.25 if scalar else [1.25], dtype=dtype),
+                            "two": numpy.array(2, dtype=dtype),
+                            "axes": numpy.array([0], numpy.int64),
+                        }
+                        nodes = [helper.make_node("Mul", ["a", "two"], ["fraction"])]
+                        if operation == "Reshape":
+                            values["shape"] = numpy.array([], numpy.int64)
+                            nodes.append(helper.make_node("Reshape", ["fraction", "shape"], ["view"]))
+                        elif operation == "matrix_roundtrip":
+                            values["shape"] = numpy.array([1, 1], numpy.int64)
+                            nodes.extend(
+                                [
+                                    helper.make_node("Reshape", ["fraction", "shape"], ["matrix"]),
+                                    helper.make_node("Squeeze", ["matrix", "axes"], ["view"]),
+                                ]
+                            )
+                        else:
+                            nodes.append(helper.make_node(operation, ["fraction", "axes"], ["view"]))
+                        nodes.append(helper.make_node("Mul", ["view", "two"], ["result"]))
+                        expected = 5 if operation in ("Reshape", "Squeeze") else [5]
+                        self._check_floating_cache_chain(
+                            values, nodes, "result", numpy.array(expected, dtype=dtype), source
+                        )
+
+    def test_floating_arithmetic_cache_through_gather(self):
+        for dtype in (numpy.float16, numpy.float32, numpy.float64):
+            for source in ("initializer", "constant"):
+                for indices in (0, 1, -1, [2, 0], []):
+                    with self.subTest(dtype=dtype, source=source, indices=indices):
+                        expected = numpy.take(numpy.array([5, 7, 9], dtype=dtype), numpy.array(indices, numpy.int64))
+                        self._check_floating_cache_chain(
+                            {
+                                "a": numpy.array([1.25, 1.75, 2.25], dtype=dtype),
+                                "two": numpy.array(2, dtype=dtype),
+                                "indices": numpy.array(indices, numpy.int64),
+                            },
+                            [
+                                helper.make_node("Mul", ["a", "two"], ["fraction"]),
+                                helper.make_node("Gather", ["fraction", "indices"], ["selected"]),
+                                helper.make_node("Mul", ["selected", "two"], ["result"]),
+                            ],
+                            "result",
+                            expected,
+                            source,
+                        )
+
+    def test_floating_arithmetic_cache_through_slice(self):
+        for dtype in (numpy.float16, numpy.float32, numpy.float64):
+            for source in ("initializer", "constant"):
+                for start, end, step in ((0, 2, 1), (1, 4, 2), (2, 2, 1)):
+                    with self.subTest(dtype=dtype, source=source, start=start, end=end, step=step):
+                        expected = numpy.array([5, 7, 9, 11], dtype=dtype)[start:end:step]
+                        self._check_floating_cache_chain(
+                            {
+                                "a": numpy.array([1.25, 1.75, 2.25, 2.75], dtype=dtype),
+                                "two": numpy.array(2, dtype=dtype),
+                                "starts": numpy.array([start], numpy.int64),
+                                "ends": numpy.array([end], numpy.int64),
+                                "axes": numpy.array([0], numpy.int64),
+                                "steps": numpy.array([step], numpy.int64),
+                            },
+                            [
+                                helper.make_node("Mul", ["a", "two"], ["fraction"]),
+                                helper.make_node(
+                                    "Slice", ["fraction", "starts", "ends", "axes", "steps"], ["selected"]
+                                ),
+                                helper.make_node("Mul", ["selected", "two"], ["result"]),
+                            ],
+                            "result",
+                            expected,
+                            source,
+                        )
+
+    def test_floating_arithmetic_cache_through_concat_and_transpose(self):
+        for dtype in (numpy.float16, numpy.float32, numpy.float64):
+            for source in ("initializer", "constant"):
+                for operation in ("Concat", "Transpose", "scalar_transpose", "matrix_transpose"):
+                    with self.subTest(dtype=dtype, source=source, operation=operation):
+                        scalar = operation == "scalar_transpose"
+                        values = {
+                            "a": numpy.array(1.25 if scalar else [1.25], dtype=dtype),
+                            "two": numpy.array(2, dtype=dtype),
+                        }
+                        nodes = [helper.make_node("Mul", ["a", "two"], ["fraction"])]
+                        if operation == "Concat":
+                            values["other"] = numpy.array([3.5], dtype=dtype)
+                            nodes.append(helper.make_node("Concat", ["fraction", "other"], ["view"], axis=0))
+                            expected = [5, 7]
+                        elif operation == "matrix_transpose":
+                            values["a"] = numpy.array([1.25, 1.75, 2.25, 2.75], dtype=dtype)
+                            values["shape"] = numpy.array([2, 2], numpy.int64)
+                            values["vector"] = numpy.array([4], numpy.int64)
+                            nodes.extend(
+                                [
+                                    helper.make_node("Reshape", ["fraction", "shape"], ["matrix"]),
+                                    helper.make_node("Transpose", ["matrix"], ["transposed"], perm=[1, 0]),
+                                    helper.make_node("Reshape", ["transposed", "vector"], ["view"]),
+                                ]
+                            )
+                            expected = [5, 9, 7, 11]
+                        else:
+                            nodes.append(helper.make_node("Transpose", ["fraction"], ["view"]))
+                            expected = 5 if scalar else [5]
+                        nodes.append(helper.make_node("Mul", ["view", "two"], ["result"]))
+                        self._check_floating_cache_chain(
+                            values, nodes, "result", numpy.array(expected, dtype=dtype), source
+                        )
+
+    def test_floating_arithmetic_cache_legacy_consumers_stay_unknown(self):
+        for dtype in (numpy.float32, numpy.float64):
+            for operation in ("Equal", "Where", "Min", "Max"):
+                with self.subTest(dtype=dtype, operation=operation):
+                    values = {
+                        "a": numpy.array([1.25], dtype=dtype),
+                        "two": numpy.array(2, dtype=dtype),
+                        "other": numpy.array([2.25], dtype=dtype),
+                        "condition": numpy.array([True]),
+                        "yes": numpy.array([3], numpy.int64),
+                        "no": numpy.array([5], numpy.int64),
+                    }
+                    nodes = [helper.make_node("Mul", ["a", "two"], ["fraction"])]
+                    if operation == "Equal":
+                        nodes.extend(
+                            [
+                                helper.make_node("Equal", ["fraction", "other"], ["condition_result"]),
+                                helper.make_node("Where", ["condition_result", "yes", "no"], ["result"]),
+                            ]
+                        )
+                        expected = numpy.array([5], numpy.int64)
+                    else:
+                        args = ["condition", "fraction", "other"] if operation == "Where" else ["fraction", "other"]
+                        nodes.extend(
+                            [
+                                helper.make_node(operation, args, ["selected"]),
+                                helper.make_node("Mul", ["selected", "two"], ["result"]),
+                            ]
+                        )
+                        expected = numpy.array([4.5 if operation == "Min" else 5], dtype=dtype)
+                    self._check_floating_cache_chain(values, nodes, "result", expected, unknown=True)
+
+    def test_floating_arithmetic_cache_cast_boolean_and_integer_boundaries(self):
+        for data_type, value, expected in (
+            (TensorProto.BOOL, 2.5, True),
+            (TensorProto.BOOL, 0.0, False),
+            (TensorProto.INT8, 127.9, 127),
+            (TensorProto.INT8, -128.9, -128),
+            (TensorProto.UINT8, 255.9, 255),
+            (TensorProto.INT64, numpy.nextafter(float(2**63), 0), 2**63 - 1024),
+            (TensorProto.UINT64, numpy.nextafter(float(2**64), 0), 2**64 - 2048),
+        ):
+            with self.subTest(data_type=data_type, value=value):
+                self._check_floating_cache_chain(
+                    {
+                        "a": numpy.array([value]),
+                        "zero": numpy.array([0.0]),
+                        "expected": numpy.array([expected], dtype=helper.tensor_dtype_to_np_dtype(data_type)),
+                        "yes": numpy.array([2], numpy.int64),
+                        "no": numpy.array([3], numpy.int64),
+                    },
+                    [
+                        helper.make_node("Add", ["a", "zero"], ["fraction"]),
+                        helper.make_node("Cast", ["fraction"], ["converted"], to=data_type),
+                        helper.make_node("Equal", ["converted", "expected"], ["equal"]),
+                        helper.make_node("Where", ["equal", "yes", "no"], ["result"]),
+                    ],
+                    "result",
+                    numpy.array([2], numpy.int64),
+                )
+
+    def test_floating_arithmetic_cache_unsafe_narrowing_stays_unknown(self):
+        for data_type, value in (
+            (TensorProto.INT8, 128.0),
+            (TensorProto.UINT8, -1.0),
+            (TensorProto.INT64, float(2**63)),
+            (TensorProto.UINT64, float(2**64)),
+            (TensorProto.FLOAT16, 1.5001),
+        ):
+            with self.subTest(data_type=data_type, value=value):
+                self._check_floating_cache_chain(
+                    {
+                        "a": numpy.array([value]),
+                        "zero": numpy.array([0.0]),
+                        "expected": numpy.array([0], dtype=helper.tensor_dtype_to_np_dtype(data_type)),
+                        "yes": numpy.array([2], numpy.int64),
+                        "no": numpy.array([3], numpy.int64),
+                    },
+                    [
+                        helper.make_node("Add", ["a", "zero"], ["fraction"]),
+                        helper.make_node("Cast", ["fraction"], ["converted"], to=data_type),
+                        helper.make_node("Equal", ["converted", "expected"], ["equal"]),
+                        helper.make_node("Where", ["equal", "yes", "no"], ["result"]),
+                    ],
+                    "result",
+                    numpy.array([3], numpy.int64),
+                    unknown=True,
+                )
+
+    def test_floating_arithmetic_cache_dynamic_view_and_concat_stay_unknown(self):
+        for operation in ("Reshape", "Concat"):
+            with self.subTest(operation=operation):
+                argument_type = TensorProto.INT64 if operation == "Reshape" else TensorProto.FLOAT
+                view = helper.make_node(operation, ["fraction", "argument"], ["view"])
+                if operation == "Concat":
+                    view.attribute.append(helper.make_attribute("axis", 0))
+                values = {"a": numpy.array([1.25], numpy.float32), "two": numpy.array(2, numpy.float32)}
+                nodes = [helper.make_node("Mul", ["a", "two"], ["fraction"]), view]
+                operand = "view"
+                if operation == "Reshape":
+                    # Restore a known target-vector length without recovering the
+                    # value discarded at the preceding unknown-shape view.
+                    values["fixed_shape"] = numpy.array([1], numpy.int64)
+                    nodes.append(helper.make_node("Reshape", ["view", "fixed_shape"], ["fixed_view"]))
+                    operand = "fixed_view"
+                nodes.append(helper.make_node("Mul", [operand, "two"], ["result"]))
+                self._check_floating_cache_chain(
+                    values,
+                    nodes,
+                    "result",
+                    numpy.array([5] if operation == "Reshape" else [5, 7], numpy.float32),
+                    unknown=True,
+                    inputs=[helper.make_tensor_value_info("argument", argument_type, [1])],
+                )
+
     def test_mul_precision(self):
         graph_input = onnx.helper.make_tensor_value_info("input", TensorProto.FLOAT, [1024])
         graph_output = onnx.helper.make_tensor_value_info("output", TensorProto.FLOAT, None)
