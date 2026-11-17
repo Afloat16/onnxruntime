@@ -18,10 +18,14 @@ from onnx import TensorProto, helper, numpy_helper
 from parameterized import parameterized
 from parity_utilities import find_transformers_source
 
+from onnxruntime import GraphOptimizationLevel, InferenceSession, SessionOptions
+
 if find_transformers_source():
     from float16 import convert_float_to_float16
+    from onnx_model import OnnxModel
 else:
     from onnxruntime.transformers.float16 import convert_float_to_float16
+    from onnxruntime.transformers.onnx_model import OnnxModel
 
 
 def _make_resize_model_opset11(num_resize_nodes=2, use_empty_names=True, share_scales=False):
@@ -175,6 +179,62 @@ def _make_constant_of_shape_model():
 
 class TestFloat16Conversion(unittest.TestCase):
     """Tests for convert_float_to_float16 correctness."""
+
+    def test_graph_input_returned_as_output(self):
+        options = SessionOptions()
+        options.intra_op_num_threads = 1
+        options.inter_op_num_threads = 1
+        options.graph_optimization_level = GraphOptimizationLevel.ORT_DISABLE_ALL
+        cases = [
+            ([], np.array(1.0001, dtype=np.float32)),
+            ([3], np.array([1.0001, -1.0001, -0.0], dtype=np.float32)),
+            ([0], np.array([], dtype=np.float32)),
+        ]
+        for shape, data in cases:
+            for with_consumer in (False, True):
+                for keep_io_types in (True, False, ["input"], ["internal_output"]):
+                    for disable_shape_infer in (False, True):
+                        with self.subTest(
+                            shape=shape,
+                            with_consumer=with_consumer,
+                            keep_io_types=keep_io_types,
+                            disable_shape_infer=disable_shape_infer,
+                        ):
+                            outputs = [helper.make_tensor_value_info("input", TensorProto.FLOAT, shape)]
+                            nodes = []
+                            if with_consumer:
+                                nodes.append(helper.make_node("Identity", ["input"], ["internal_output"]))
+                                outputs.append(
+                                    helper.make_tensor_value_info("internal_output", TensorProto.FLOAT, shape)
+                                )
+                            graph = helper.make_graph(
+                                nodes,
+                                "input_passthrough",
+                                [helper.make_tensor_value_info("input", TensorProto.FLOAT, shape)],
+                                outputs,
+                            )
+                            model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)], ir_version=8)
+                            converted = convert_float_to_float16(
+                                model, keep_io_types=keep_io_types, disable_shape_infer=disable_shape_infer
+                            )
+                            OnnxModel(converted).topological_sort()
+                            onnx.checker.check_model(converted, full_check=True)
+                            keep_input = keep_io_types is True or keep_io_types == ["input"]
+                            feed = data if keep_input else data.astype(np.float16)
+                            session = InferenceSession(
+                                converted.SerializeToString(), options, providers=["CPUExecutionProvider"]
+                            )
+                            actual = session.run(None, {"input": feed})
+                            self.assertEqual(actual[0].dtype, feed.dtype)
+                            self.assertEqual(actual[0].shape, feed.shape)
+                            self.assertEqual(actual[0].tobytes(), feed.tobytes())
+                            if with_consumer:
+                                expected = data.astype(np.float16)
+                                if keep_io_types is True or keep_io_types == ["internal_output"]:
+                                    expected = expected.astype(np.float32)
+                                self.assertEqual(actual[1].dtype, expected.dtype)
+                                self.assertEqual(actual[1].shape, expected.shape)
+                                self.assertEqual(actual[1].tobytes(), expected.tobytes())
 
     def _get_all_node_names(self, model):
         """Return all node names in the model graph."""

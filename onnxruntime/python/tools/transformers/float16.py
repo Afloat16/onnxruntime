@@ -299,6 +299,10 @@ def convert_float_to_float16(
 
     for i, n in enumerate(model.graph.output):
         if n.name in fp32_outputs:
+            # An input returned directly is already float32. Keep its input
+            # cast mapping for internal consumers without redefining the input.
+            if n.name in fp32_inputs:
+                continue
             input_name = "graph_output_cast_" + str(i)
             name_mapping[n.name] = input_name
             graph_io_to_skip.add(n.name)
