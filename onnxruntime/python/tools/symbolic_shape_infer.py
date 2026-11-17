@@ -1343,7 +1343,9 @@ class SymbolicShapeInference:
 
     def _infer_OneHot(self, node):  # noqa: N802
         sympy_shape = self._get_sympy_shape(node, 0)
-        depth = self._try_get_value(node, 1)
+        depth = as_scalar(self._try_get_value(node, 1))
+        if isinstance(depth, float):
+            depth = int(depth)
         axis = get_attribute(node, "axis", -1)
         axis = handle_negative_axis(axis, len(sympy_shape) + 1)
         new_shape = get_shape_from_sympy_shape(
