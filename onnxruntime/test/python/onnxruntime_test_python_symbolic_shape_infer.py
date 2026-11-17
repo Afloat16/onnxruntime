@@ -1246,6 +1246,205 @@ class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
     def test_einsum_transpose(self):
         self._test_einsum_one_input_impl(["a", "b"], ["b", "a"], "ij -> ji")
 
+    @staticmethod
+    def _make_floating_arithmetic_model(data_type, values, operations, source="initializer", numeric_output=False):
+        dtype = helper.tensor_dtype_to_np_dtype(data_type)
+        initializers = []
+        nodes = []
+        shapes = {name: numpy.asarray(value).shape for name, value in values.items()}
+        for name, value in values.items():
+            tensor = numpy_helper.from_array(numpy.asarray(value, dtype=dtype), name=name)
+            if source == "constant":
+                nodes.append(helper.make_node("Constant", [], [name], value=tensor))
+            else:
+                initializers.append(tensor)
+        for op_type, inputs, output in operations:
+            nodes.append(helper.make_node(op_type, inputs, [output]))
+            shapes[output] = numpy.broadcast_shapes(*(shapes[name] for name in inputs))
+        result = operations[-1][2]
+        if numeric_output:
+            output = helper.make_tensor_value_info(result, data_type, shapes[result])
+        else:
+            nodes.append(helper.make_node("Cast", [result], ["target"], to=TensorProto.INT64))
+            target = "target"
+            if not shapes[result]:
+                initializers.append(helper.make_tensor("axes", TensorProto.INT64, [1], [0]))
+                nodes.append(helper.make_node("Unsqueeze", [target, "axes"], ["vector_target"]))
+                target = "vector_target"
+            nodes.append(helper.make_node("ConstantOfShape", [target], ["output"]))
+            rank = shapes[result][0] if shapes[result] else 1
+            output = helper.make_tensor_value_info("output", TensorProto.FLOAT, [None] * rank)
+        return helper.make_model(
+            helper.make_graph(nodes, "floating_arithmetic", [], [output], initializers),
+            opset_imports=[helper.make_opsetid("", 13)],
+            ir_version=8,
+        )
+
+    def test_floating_arithmetic_keeps_fractional_intermediates(self):
+        cases = [
+            ({"a": [0.5], "b": [1.5]}, [("Add", ["a", "b"], "sum")], [2]),
+            (
+                {"a": [3.5], "b": [1.25], "four": [4]},
+                [("Sub", ["a", "b"], "difference"), ("Mul", ["difference", "four"], "scaled")],
+                [9],
+            ),
+            ({"a": [1.25], "two": [2]}, [("Mul", ["a", "two"], "first"), ("Mul", ["first", "two"], "second")], [5]),
+            (
+                {"a": [5], "two": [2]},
+                [("Div", ["a", "two"], "quotient"), ("Mul", ["quotient", "two"], "restored")],
+                [5],
+            ),
+            ({"a": [-1.25], "four": [4]}, [("Neg", ["a"], "positive"), ("Mul", ["positive", "four"], "scaled")], [5]),
+            ({"a": [-1.25]}, [("Floor", ["a"], "floor"), ("Neg", ["floor"], "positive")], [2]),
+            ({"a": [0.5, 1.5], "b": 1.5}, [("Add", ["a", "b"], "sum")], [2, 3]),
+            (
+                {"a": [1.25, 1.75], "two": 2},
+                [("Mul", ["a", "two"], "first"), ("Mul", ["first", "two"], "second")],
+                [5, 7],
+            ),
+        ]
+        for data_type in (TensorProto.FLOAT16, TensorProto.FLOAT, TensorProto.DOUBLE):
+            for source in ("initializer", "constant"):
+                for values, operations, expected in cases:
+                    with self.subTest(data_type=data_type, source=source, operations=operations):
+                        inferred = SymbolicShapeInference.infer_shapes(
+                            self._make_floating_arithmetic_model(data_type, values, operations, source)
+                        )
+                        self.assertEqual(self._tensor_shape(inferred.graph.output[0]), expected)
+
+    def test_floating_arithmetic_scalar_values(self):
+        for data_type in (TensorProto.FLOAT16, TensorProto.FLOAT, TensorProto.DOUBLE):
+            for source in ("initializer", "constant"):
+                with self.subTest(data_type=data_type, source=source):
+                    inferred = SymbolicShapeInference.infer_shapes(
+                        self._make_floating_arithmetic_model(
+                            data_type,
+                            {"a": 0.5, "b": 1.5},
+                            [("Add", ["a", "b"], "sum")],
+                            source,
+                        )
+                    )
+                    self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [2])
+
+    def test_floating_arithmetic_rounds_each_intermediate_to_tensor_dtype(self):
+        for data_type, threshold in (
+            (TensorProto.FLOAT16, 2**11),
+            (TensorProto.FLOAT, 2**24),
+            (TensorProto.DOUBLE, 2**53),
+        ):
+            for source in ("initializer", "constant"):
+                with self.subTest(data_type=data_type, source=source):
+                    model = self._make_floating_arithmetic_model(
+                        data_type,
+                        {"large": [threshold], "one": [1]},
+                        [
+                            ("Add", ["large", "one"], "rounded"),
+                            ("Sub", ["rounded", "large"], "difference"),
+                            ("Add", ["difference", "one"], "positive"),
+                        ],
+                        source,
+                    )
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    if data_type == TensorProto.FLOAT16:
+                        # Native CPU may promote this chain to FP32 and produce 2,
+                        # while per-node FP16 rounding produces 1. Keep it unknown.
+                        dimensions = inferred.graph.output[0].type.tensor_type.shape.dim
+                        self.assertEqual(len(dimensions), 1)
+                        self.assertTrue(dimensions[0].HasField("dim_param"))
+                    else:
+                        self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [1])
+
+    def test_floating_arithmetic_empty_broadcast(self):
+        for data_type in (TensorProto.FLOAT16, TensorProto.FLOAT, TensorProto.DOUBLE):
+            for op_type in ("Add", "Sub", "Mul", "Div"):
+                for empty_first in (False, True):
+                    with self.subTest(data_type=data_type, op_type=op_type, empty_first=empty_first):
+                        inputs = ["empty", "scalar"] if empty_first else ["scalar", "empty"]
+                        inferred = SymbolicShapeInference.infer_shapes(
+                            self._make_floating_arithmetic_model(
+                                data_type,
+                                {"empty": [], "scalar": 1.5},
+                                [(op_type, inputs, "empty_result")],
+                            )
+                        )
+                        self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [])
+
+    def test_floating_arithmetic_nonfinite_remains_safe(self):
+        for data_type in (TensorProto.FLOAT16, TensorProto.FLOAT, TensorProto.DOUBLE):
+            for op_type, values in (
+                ("Add", {"a": [numpy.nan], "b": [1]}),
+                ("Sub", {"a": [numpy.inf], "b": [numpy.inf]}),
+                ("Mul", {"a": [numpy.finfo(helper.tensor_dtype_to_np_dtype(data_type)).max], "b": [2]}),
+                ("Div", {"a": [0], "b": [0]}),
+            ):
+                with self.subTest(data_type=data_type, op_type=op_type):
+                    inferred = SymbolicShapeInference.infer_shapes(
+                        self._make_floating_arithmetic_model(
+                            data_type,
+                            values,
+                            [(op_type, ["a", "b"], "result")],
+                            numeric_output=True,
+                        )
+                    )
+                    self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [1])
+
+    def test_floating_arithmetic_overridable_input_stays_unknown(self):
+        for source_name in ("a", "b"):
+            with self.subTest(source_name=source_name):
+                model = self._make_floating_arithmetic_model(
+                    TensorProto.FLOAT,
+                    {"a": [0.5], "b": [1.5]},
+                    [("Add", ["a", "b"], "sum")],
+                )
+                model.graph.input.append(helper.make_tensor_value_info(source_name, TensorProto.FLOAT, [1]))
+                inferred = SymbolicShapeInference.infer_shapes(model)
+                dimensions = inferred.graph.output[0].type.tensor_type.shape.dim
+                self.assertEqual(len(dimensions), 1)
+                self.assertTrue(dimensions[0].HasField("dim_param"))
+
+    def test_floating_arithmetic_symbolic_value_stays_unknown(self):
+        for op_type in ("Add", "Sub", "Mul", "Div"):
+            with self.subTest(op_type=op_type):
+                graph = helper.make_graph(
+                    [
+                        helper.make_node("Shape", ["input"], ["input_shape"]),
+                        helper.make_node("Cast", ["input_shape"], ["float_shape"], to=TensorProto.FLOAT),
+                        helper.make_node(op_type, ["float_shape", "value"], ["result"]),
+                        helper.make_node("Cast", ["result"], ["target"], to=TensorProto.INT64),
+                        helper.make_node("ConstantOfShape", ["target"], ["output"]),
+                    ],
+                    "symbolic_floating_arithmetic",
+                    [helper.make_tensor_value_info("input", TensorProto.FLOAT, ["N"])],
+                    [helper.make_tensor_value_info("output", TensorProto.FLOAT, [None])],
+                    [helper.make_tensor("value", TensorProto.FLOAT, [1], [0.5])],
+                )
+                inferred = SymbolicShapeInference.infer_shapes(
+                    helper.make_model(
+                        graph,
+                        opset_imports=[helper.make_opsetid("", 13)],
+                        ir_version=8,
+                    )
+                )
+                dimensions = inferred.graph.output[0].type.tensor_type.shape.dim
+                self.assertEqual(len(dimensions), 1)
+                self.assertTrue(dimensions[0].HasField("dim_param"))
+
+    def test_floating_arithmetic_unloaded_external_values_stay_unknown(self):
+        for source_name in ("a", "b"):
+            with self.subTest(source_name=source_name):
+                model = self._make_floating_arithmetic_model(
+                    TensorProto.FLOAT,
+                    {"a": [0.5], "b": [1.5]},
+                    [("Add", ["a", "b"], "sum")],
+                )
+                tensor = next(tensor for tensor in model.graph.initializer if tensor.name == source_name)
+                onnx.external_data_helper.set_external_data(tensor, location="unavailable_float_data.bin")
+                tensor.ClearField("raw_data")
+                inferred = SymbolicShapeInference.infer_shapes(model)
+                dimensions = inferred.graph.output[0].type.tensor_type.shape.dim
+                self.assertEqual(len(dimensions), 1)
+                self.assertTrue(dimensions[0].HasField("dim_param"))
+
     def test_mul_precision(self):
         graph_input = onnx.helper.make_tensor_value_info("input", TensorProto.FLOAT, [1024])
         graph_output = onnx.helper.make_tensor_value_info("output", TensorProto.FLOAT, None)

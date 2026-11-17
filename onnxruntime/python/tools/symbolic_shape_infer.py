@@ -871,6 +871,52 @@ class SymbolicShapeInference:
         )
 
     def _infer_symbolic_compute_ops(self, node):
+        floating_ops = {
+            "Add": np.add,
+            "Sub": np.subtract,
+            "Mul": np.multiply,
+            "Div": np.divide,
+            "Neg": np.negative,
+            "Floor": np.floor,
+        }
+        data_type = self.known_vi_[node.input[0]].type.tensor_type.elem_type
+        if (
+            node.op_type in floating_ops
+            and data_type in (onnx.TensorProto.FLOAT16, onnx.TensorProto.FLOAT, onnx.TensorProto.DOUBLE)
+            and all(self.known_vi_[name].type.tensor_type.elem_type == data_type for name in node.input)
+        ):
+            # Floating-point shape calculations must round at each tensor's dtype,
+            # without discarding fractional intermediates before a later Cast.
+            dtype = helper.tensor_dtype_to_np_dtype(data_type)
+            values = []
+            for index, name in enumerate(node.input):
+                if name in self.graph_inputs_ or (
+                    name in self.initializers_
+                    and onnx.external_data_helper.uses_external_data(self.initializers_[name])
+                ):
+                    return
+                value = self._try_get_value(node, index)
+                if value is None:
+                    return
+                try:
+                    value = np.asarray(value, dtype=dtype)
+                except (TypeError, ValueError, OverflowError):
+                    return  # An unresolved symbolic dimension is not a concrete float.
+                if value.ndim > 1 or not np.all(np.isfinite(value)):
+                    return
+                values.append(value)
+            with np.errstate(all="ignore"):
+                result = floating_ops[node.op_type](*values)
+                if data_type == onnx.TensorProto.FLOAT16:
+                    # CPU execution can promote an FP16 arithmetic chain to FP32.
+                    # Only propagate values that agree with both execution paths.
+                    promoted = floating_ops[node.op_type](*(value.astype(np.float32) for value in values))
+                    if not np.array_equal(result.astype(np.float32), promoted):
+                        return
+            if np.all(np.isfinite(result)):
+                self.sympy_data_[node.output[0]] = np.asarray(result, dtype=dtype)
+            return
+
         funcs = {
             "Add": lambda l: l[0] + l[1],  # noqa: E741
             "Div": lambda l: (  # noqa: E741
