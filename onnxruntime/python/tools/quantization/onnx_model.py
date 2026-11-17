@@ -604,8 +604,9 @@ class ONNXModel:
     def _check_init(self, init, test=None):
         if init.data_type == onnx.TensorProto.FLOAT8E4M3FN:
             if init.HasField("raw_data"):
-                b = list(init.raw_data)
-                if any((i & 127) == 127 for i in b):
+                raw_data = init.raw_data
+                # E4M3FN's only NaN encodings are 0x7F and 0xFF.
+                if b"\x7f" in raw_data or b"\xff" in raw_data:
                     raise ValueError(f"Initializer {init.name!r} has nan.")
         return init
 
