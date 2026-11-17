@@ -746,7 +746,7 @@ class SymbolicShapeInference:
             ceil_mode
             and get_opset(self.out_mp_) >= 22
             and node.op_type in ("AveragePool", "MaxPool")
-            and get_attribute(node, "auto_pad", b"NOTSET") in (b"NOTSET", b"VALID")
+            and get_attribute(node, "auto_pad", b"NOTSET") in (b"", b"NOTSET", b"VALID")
         )
 
         if not any(is_symbolic_dims):
@@ -766,7 +766,7 @@ class SymbolicShapeInference:
         if pads is None:
             pads = [0] * (2 * rank)
             auto_pad = get_attribute(node, "auto_pad", b"NOTSET").decode("utf-8")
-            if auto_pad != "VALID" and auto_pad != "NOTSET":
+            if auto_pad not in ("", "VALID", "NOTSET"):
                 try:
                     residual = [sympy.Mod(d, s) for d, s in zip(sympy_shape[-rank:], strides, strict=False)]
                     total_pads = [

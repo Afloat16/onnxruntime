@@ -46,6 +46,8 @@ class TestSymbolicShapeInference(unittest.TestCase):
             (1, 3, 1, None, None),
             (2, 4, 2, (1, 1), None),
             (1, 3, 1, None, "VALID"),
+            (2, 2, 1, (0, 1), ""),
+            (3, 2, 1, None, ""),
         )[case_index]
         spatial_shape = [f"D{i}" if layout == "all" or (layout == "mixed" and i == 0) else 4 for i in range(rank)]
         attributes = {"kernel_shape": [kernel] * rank, "strides": [stride] * rank, "ceil_mode": ceil_mode}
@@ -72,7 +74,7 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
     def test_pool_ceil_mode_trailing_window(self):
         layouts = [(1, "all"), (2, "all"), (2, "mixed"), (3, "all"), (3, "mixed")]
-        cases = [(rank, layout, case_index) for rank, layout in layouts for case_index in range(4)]
+        cases = [(rank, layout, case_index) for rank, layout in layouts for case_index in range(6)]
         cases.extend((rank, "none", 0) for rank in (1, 2, 3))
         for op_type in ("AveragePool", "MaxPool"):
             for ceil_mode in (0, 1):
