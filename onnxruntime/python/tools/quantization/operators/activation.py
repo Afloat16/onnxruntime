@@ -17,7 +17,13 @@ class QLinearActivation(QuantOperatorBase):
         # activation nodes, therefore these nodes can be removed from the graph if they follow a quantized op.
         # If input to this node is not quantized then keep this node
         # If activation is symmetric, not quantize the op and simply return
-        if node.input[0] not in self.quantizer.quantized_value_map or self.quantizer.is_activation_symmetric:
+        # Preserve the activation when its input is also needed without clipping.
+        if (
+            node.input[0] not in self.quantizer.quantized_value_map
+            or self.quantizer.is_activation_symmetric
+            or self.quantizer.model.is_graph_output(node.input[0])
+            or len(self.quantizer.original_input_name_to_nodes[node.input[0]]) != 1
+        ):
             return super().quantize()
 
         quantized_value = self.quantizer.quantized_value_map[node.input[0]]

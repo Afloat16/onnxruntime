@@ -527,6 +527,8 @@ class BaseQuantizer:
             if node.op_type in ["Clip", "Relu"]:
                 if not self.should_quantize_node(node):
                     continue
+                if self.model.is_graph_output(node.input[0]):
+                    continue
                 if len(self.model.input_name_to_nodes()[node.input[0]]) != 1:
                     continue
                 if node.input[0] not in self.tensors_range or node.output[0] not in self.tensors_range:

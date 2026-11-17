@@ -97,6 +97,8 @@ class ONNXQuantizer(BaseQuantizer):
         self.q_matmul_const_b_only = "MatMulConstBOnly" in self.extra_options and self.extra_options["MatMulConstBOnly"]
 
         self.new_nodes = []
+        # Preserve the original consumers before direct quantizers rewrite node inputs in place.
+        self.original_input_name_to_nodes = self.model.input_name_to_nodes()
         self.graph_scope = "/"  # for human readable debug information
         self.tensor_names = {}  # in case the shape inference not totally working
         self.tensor_names.update({ot.name: 1 for ot in model.graph.output})
