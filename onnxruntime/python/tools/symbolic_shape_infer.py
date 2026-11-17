@@ -1335,9 +1335,24 @@ class SymbolicShapeInference:
         vi.CopyFrom(helper.make_tensor_value_info(node.output[0], onnx.TensorProto.INT64, [selected, 3]))
 
     def _infer_NonZero(self, node):  # noqa: N802
-        input_rank = self._get_shape_rank(node, 0)
-        # create a new symbolic dimension for NonZero output
-        nz_len = str(self._new_symbolic_dim_from_output(node, 0, 1))
+        input_shape = self._get_shape(node, 0)
+        input_rank = len(input_shape)
+        nz_len = 0 if 0 in input_shape else None
+        name = node.input[0]
+        if (
+            nz_len is None
+            and input_rank
+            and name not in self.graph_inputs_
+            and not (
+                name in self.initializers_ and onnx.external_data_helper.uses_external_data(self.initializers_[name])
+            )
+        ):
+            value = self._try_get_value(node, 0)
+            if isinstance(value, np.ndarray) and value.dtype.kind in "biuf" and list(value.shape) == input_shape:
+                # Only the output extent is needed; do not allocate coordinates.
+                nz_len = int(np.count_nonzero(value))
+        if nz_len is None:
+            nz_len = str(self._new_symbolic_dim_from_output(node, 0, 1))
         vi = self.known_vi_[node.output[0]]
         vi.CopyFrom(helper.make_tensor_value_info(node.output[0], vi.type.tensor_type.elem_type, [input_rank, nz_len]))
 

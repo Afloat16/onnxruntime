@@ -315,6 +315,95 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
 
 class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
+    @staticmethod
+    def _make_nonzero_count_model(data, source="initializer", downstream=False):
+        tensor = numpy_helper.from_array(data, "data")
+        nodes = []
+        inputs = []
+        initializers = []
+        if source == "constant":
+            nodes.append(helper.make_node("Constant", [], ["data"], value=tensor))
+        elif source != "runtime":
+            initializers.append(tensor)
+        if source in ("runtime", "overridable"):
+            inputs.append(helper.make_tensor_value_info("data", tensor.data_type, list(data.shape)))
+        if source == "external":
+            onnx.external_data_helper.set_external_data(tensor, location="unloaded_nonzero.bin")
+            tensor.ClearField("raw_data")
+        nodes.append(helper.make_node("NonZero", ["data"], ["indices"]))
+        output = helper.make_tensor_value_info("indices", TensorProto.INT64, [data.ndim, None])
+        if downstream:
+            nodes.append(helper.make_node("Transpose", ["indices"], ["coordinates"], perm=[1, 0]))
+            output = helper.make_tensor_value_info("coordinates", TensorProto.INT64, [None, data.ndim])
+        return helper.make_model(
+            helper.make_graph(nodes, "nonzero_count", inputs, [output], initializers),
+            opset_imports=[helper.make_opsetid("", 13)],
+            ir_version=8,
+        )
+
+    def test_nonzero_constant_count(self):
+        for dtype in (numpy.bool_, numpy.uint8, numpy.int32, numpy.int64, numpy.float32):
+            for data in (
+                numpy.asarray([0, 2, 0, 4], dtype=dtype),
+                numpy.zeros((2, 3), dtype=dtype),
+                numpy.asarray([[[1, 0], [2, 3]]], dtype=dtype),
+                numpy.empty((0, 3), dtype=dtype),
+            ):
+                for source in ("initializer", "constant"):
+                    with self.subTest(dtype=dtype, shape=data.shape, source=source):
+                        model = self._make_nonzero_count_model(data, source)
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        self.assertEqual(
+                            self._tensor_shape(inferred.graph.output[0]), [data.ndim, int(numpy.count_nonzero(data))]
+                        )
+
+    def test_nonzero_float_special_values(self):
+        data = numpy.asarray([0.0, -0.0, numpy.nan, numpy.inf, -numpy.inf], dtype=numpy.float32)
+        for source in ("initializer", "constant"):
+            with self.subTest(source=source):
+                inferred = SymbolicShapeInference.infer_shapes(self._make_nonzero_count_model(data, source))
+                self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [1, 3])
+
+    def test_nonzero_empty_runtime_input(self):
+        for shape in ((0,), (2, 0), (0, 2, 3)):
+            with self.subTest(shape=shape):
+                model = self._make_nonzero_count_model(numpy.empty(shape, dtype=numpy.float32), "runtime")
+                inferred = SymbolicShapeInference.infer_shapes(model)
+                self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [len(shape), 0])
+
+    def test_nonzero_count_reaches_downstream_shape(self):
+        for source in ("initializer", "constant"):
+            with self.subTest(source=source):
+                data = numpy.asarray([[0, 1], [2, 0]], dtype=numpy.int64)
+                inferred = SymbolicShapeInference.infer_shapes(
+                    self._make_nonzero_count_model(data, source, downstream=True)
+                )
+                self.assertEqual(self._tensor_shape(inferred.graph.output[0]), [2, 2])
+
+    def test_nonzero_runtime_and_unloaded_counts_stay_unknown(self):
+        for source in ("runtime", "overridable", "external"):
+            for dtype in (numpy.bool_, numpy.int64):
+                with self.subTest(source=source, dtype=dtype):
+                    data = numpy.asarray([0, 1, 1], dtype=dtype)
+                    inferred = SymbolicShapeInference.infer_shapes(self._make_nonzero_count_model(data, source))
+                    dimensions = inferred.graph.output[0].type.tensor_type.shape.dim
+                    self.assertEqual(dimensions[0].dim_value, 1)
+                    self.assertTrue(dimensions[1].HasField("dim_param"))
+
+    def test_nonzero_symbolic_shape_values_stay_unknown(self):
+        model = helper.make_model(
+            helper.make_graph(
+                [helper.make_node("Shape", ["data"], ["shape"]), helper.make_node("NonZero", ["shape"], ["indices"])],
+                "symbolic_nonzero",
+                [helper.make_tensor_value_info("data", TensorProto.FLOAT, ["N"])],
+                [helper.make_tensor_value_info("indices", TensorProto.INT64, [1, None])],
+            ),
+            opset_imports=[helper.make_opsetid("", 13)],
+            ir_version=8,
+        )
+        inferred = SymbolicShapeInference.infer_shapes(model)
+        self.assertTrue(inferred.graph.output[0].type.tensor_type.shape.dim[1].HasField("dim_param"))
+
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
         vis = [x for x in graph.value_info if x.name not in names_in_vis] + vis
