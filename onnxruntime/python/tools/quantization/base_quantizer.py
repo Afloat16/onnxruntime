@@ -518,6 +518,25 @@ class BaseQuantizer:
 
         return q_weight_name, zp_name, scale_name
 
+    def is_clip_with_dynamic_bounds(self, node):
+        """Clip can be fused into a fixed quantization range only when its bounds are constant."""
+        if node.op_type != "Clip":
+            return False
+        for name in node.input[1:]:
+            if not name:
+                continue
+            if self.model.find_graph_input(name) is not None:
+                return True
+            if self.model.get_initializer(name) is not None:
+                continue
+            if any(
+                producer.op_type == "Constant" and producer.domain in ("", "ai.onnx") and name in producer.output
+                for producer in self.model.nodes()
+            ):
+                continue
+            return True
+        return False
+
     def adjust_tensor_ranges(self):
         if self.tensors_range is None:
             return
@@ -526,6 +545,8 @@ class BaseQuantizer:
             # adjust tensor_ranges for input of Clip and Relu node
             if node.op_type in ["Clip", "Relu"]:
                 if not self.should_quantize_node(node):
+                    continue
+                if self.is_clip_with_dynamic_bounds(node):
                     continue
                 if len(self.model.input_name_to_nodes()[node.input[0]]) != 1:
                     continue

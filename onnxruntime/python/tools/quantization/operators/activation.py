@@ -17,7 +17,11 @@ class QLinearActivation(QuantOperatorBase):
         # activation nodes, therefore these nodes can be removed from the graph if they follow a quantized op.
         # If input to this node is not quantized then keep this node
         # If activation is symmetric, not quantize the op and simply return
-        if node.input[0] not in self.quantizer.quantized_value_map or self.quantizer.is_activation_symmetric:
+        if (
+            node.input[0] not in self.quantizer.quantized_value_map
+            or self.quantizer.is_activation_symmetric
+            or self.quantizer.is_clip_with_dynamic_bounds(node)
+        ):
             return super().quantize()
 
         quantized_value = self.quantizer.quantized_value_map[node.input[0]]
@@ -109,6 +113,7 @@ class QDQRemovableActivation(QDQOperatorBase):
         if (
             not self.quantizer.is_activation_symmetric
             and not self.quantizer.qdq_keep_removable_activations
+            and not self.quantizer.is_clip_with_dynamic_bounds(node)
             and self.quantizer.try_replacing_upstream_output(node.input[0], node.output[0])
         ):
             self.quantizer.remove_node(self.node)
