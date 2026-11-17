@@ -64,16 +64,25 @@ def _clean_initializers_helper(graph, model):
     requesting_tensor_names.difference_update(output for node in graph.node for output in node.output)
 
     unused_initializer = []
-    for initializer in graph.initializer:
-        if initializer.name in requesting_tensor_names:
-            requesting_tensor_names.remove(initializer.name)
+    unused_ranges = []
+    for index, initializer in enumerate(graph.initializer):
+        name = initializer.name
+        if name in requesting_tensor_names:
+            requesting_tensor_names.remove(name)
         else:
-            # mark it to remove, remove here directly will cause mis-behavier
             unused_initializer.append(initializer)
+            if unused_ranges and unused_ranges[-1][1] == index:
+                unused_ranges[-1][1] += 1
+            else:
+                unused_ranges.append([index, index + 1])
+
+    # Delete by index to avoid repeated protobuf equality searches. Reverse ranges
+    # preserve indices without copying the retained initializer payloads.
+    for start, end in reversed(unused_ranges):
+        del graph.initializer[start:end]
 
     name_to_input = {input.name: input for input in graph.input}
     for initializer in unused_initializer:
-        graph.initializer.remove(initializer)
         if initializer.name in name_to_input:
             try:
                 graph.input.remove(name_to_input[initializer.name])
