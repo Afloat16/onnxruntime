@@ -39,6 +39,122 @@ skipped_models = ["SSD-MobilenetV1", "SSD-int8", "Inception-1-int8"]
 
 
 class TestSymbolicShapeInference(unittest.TestCase):
+    def _make_scan_model(self, opset, lengths_mode, symbolic, reverse, num_states):
+        legacy = opset == 8
+        batch, sequence = ("batch", "sequence") if symbolic else (2, 4)
+        feature_shape = ([], ["feature" if symbolic else 3], [2, "feature" if symbolic else 3])[num_states]
+        body_shape = feature_shape if legacy else [batch, *feature_shape]
+        num_scan_inputs = 2 if num_states == 2 else 1
+        state_names = [f"initial_{i}" for i in range(num_states)]
+        scan_names = [f"data_{i}" for i in range(num_scan_inputs)]
+        inputs = [
+            helper.make_tensor_value_info(name, TensorProto.FLOAT, [batch, *feature_shape]) for name in state_names
+        ]
+        inputs.extend(
+            helper.make_tensor_value_info(name, TensorProto.FLOAT, [batch, sequence, *feature_shape])
+            for name in scan_names
+        )
+        initializers = [numpy_helper.from_array(numpy.array(0.25, dtype=numpy.float32), "offset")]
+        node_inputs = state_names + scan_names
+        if legacy:
+            node_inputs = ["" if lengths_mode == "omitted" else "lengths", *node_inputs]
+            if lengths_mode == "runtime":
+                inputs.append(helper.make_tensor_value_info("lengths", TensorProto.INT64, [batch]))
+            elif lengths_mode == "initializer":
+                initializers.append(numpy_helper.from_array(numpy.array([2, 4], dtype=numpy.int64), "lengths"))
+        body_inputs = [
+            helper.make_tensor_value_info(f"state_{i}", TensorProto.FLOAT, [None] * len(body_shape))
+            for i in range(num_states)
+        ]
+        body_inputs.extend(
+            helper.make_tensor_value_info(f"scan_{i}", TensorProto.FLOAT, [None] * len(body_shape))
+            for i in range(num_scan_inputs)
+        )
+        body_nodes = []
+        combined = "scan_0"
+        if num_scan_inputs == 2:
+            body_nodes.append(helper.make_node("Add", ["scan_0", "scan_1"], ["combined"]))
+            combined = "combined"
+        body_nodes.append(helper.make_node("Add", [combined, "offset"], ["increment"]))
+        for i in range(num_states):
+            body_nodes.append(helper.make_node("Add", [f"state_{i}", "increment"], [f"updated_{i}"]))
+        body_output_names = [f"updated_{i}" for i in range(num_states)]
+        for i in range(num_scan_inputs):
+            source = f"updated_{i}" if num_states else "increment"
+            body_nodes.append(helper.make_node("Identity", [source], [f"scan_out_{i}"]))
+            body_output_names.append(f"scan_out_{i}")
+        body = helper.make_graph(
+            body_nodes,
+            "scan_body",
+            body_inputs,
+            [
+                helper.make_tensor_value_info(name, TensorProto.FLOAT, [None] * len(body_shape))
+                for name in body_output_names
+            ],
+        )
+        directions = [int(reverse)] if num_scan_inputs == 1 else [int(reverse), int(not reverse)]
+        attributes = (
+            {"directions": directions}
+            if legacy
+            else {
+                "scan_input_axes": [1 if opset == 9 else -len(feature_shape) - 1] * num_scan_inputs,
+                "scan_input_directions": directions,
+                "scan_output_axes": [1] * num_scan_inputs,
+            }
+        )
+        output_shapes = [[batch, *feature_shape]] * num_states + [[batch, sequence, *feature_shape]] * num_scan_inputs
+        output_names = [f"output_{i}" for i in range(len(output_shapes))]
+        model = helper.make_model(
+            helper.make_graph(
+                [
+                    helper.make_node(
+                        "Scan", node_inputs, output_names, body=body, num_scan_inputs=num_scan_inputs, **attributes
+                    )
+                ],
+                "scan",
+                inputs,
+                [
+                    helper.make_tensor_value_info(name, TensorProto.FLOAT, [None] * len(shape))
+                    for name, shape in zip(output_names, output_shapes, strict=True)
+                ],
+                initializers,
+            ),
+            opset_imports=[helper.make_opsetid("", opset)],
+            ir_version=7,
+        )
+        return model, output_shapes, body_shape
+
+    def _check_scan_model(self, opset, lengths_mode, symbolic, reverse, num_states):
+        model, output_shapes, body_shape = self._make_scan_model(opset, lengths_mode, symbolic, reverse, num_states)
+        onnx.checker.check_model(model, full_check=True)
+        inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+        onnx.checker.check_model(inferred, full_check=True)
+        for output, expected in zip(inferred.graph.output, output_shapes, strict=True):
+            self.assertEqual(output.type.tensor_type.elem_type, TensorProto.FLOAT)
+            self.assertEqual([d.dim_param or d.dim_value for d in output.type.tensor_type.shape.dim], expected)
+        body = next(a.g for a in inferred.graph.node[0].attribute if a.name == "body")
+        self.assertEqual(len(body.input), num_states + (2 if num_states == 2 else 1))
+        for value in [*body.input, *body.output]:
+            self.assertEqual([d.dim_param or d.dim_value for d in value.type.tensor_type.shape.dim], body_shape)
+
+    def test_scan_opset8(self):
+        for lengths_mode in ("omitted", "initializer", "runtime"):
+            for symbolic in (False, True):
+                for reverse in (False, True):
+                    for num_states in (0, 1, 2):
+                        with self.subTest(
+                            lengths_mode=lengths_mode, symbolic=symbolic, reverse=reverse, num_states=num_states
+                        ):
+                            self._check_scan_model(8, lengths_mode, symbolic, reverse, num_states)
+
+    def test_scan_later_opsets(self):
+        for opset in (9, 11, 21):
+            for symbolic in (False, True):
+                for reverse in (False, True):
+                    for num_states in (0, 1, 2):
+                        with self.subTest(opset=opset, symbolic=symbolic, reverse=reverse, num_states=num_states):
+                            self._check_scan_model(opset, "omitted", symbolic, reverse, num_states)
+
     def test_shape_preserving_hyper_connection_ops(self):
         cases = {
             "BranchwiseRMSNorm": (

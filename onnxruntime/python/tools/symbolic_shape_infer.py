@@ -1787,30 +1787,45 @@ class SymbolicShapeInference:
     def _infer_Scan(self, node):  # noqa: N802
         subgraph = get_attribute(node, "body")
         num_scan_inputs = get_attribute(node, "num_scan_inputs")
-        scan_input_axes = get_attribute(node, "scan_input_axes", [0] * num_scan_inputs)
-        num_scan_states = len(node.input) - num_scan_inputs
+        is_opset8 = get_opset(self.out_mp_) == 8
+        # Scan-8 has a sequence_lens input and slices each batch independently.
+        input_offset = 1 if is_opset8 else 0
+        node_inputs = node.input[input_offset:]
+        scan_input_axes = (
+            [1] * num_scan_inputs if is_opset8 else get_attribute(node, "scan_input_axes", [0] * num_scan_inputs)
+        )
+        num_scan_states = len(node_inputs) - num_scan_inputs
         scan_input_axes = [
-            handle_negative_axis(ax, self._get_shape_rank(node, i + num_scan_states))
+            handle_negative_axis(ax, self._get_shape_rank(node, i + num_scan_states + input_offset))
             for i, ax in enumerate(scan_input_axes)
         ]
         # We may have cases where the subgraph has optional inputs that appear in both subgraph's input and initializer,
         # but not in the node's input. In such cases, the input model might be invalid, but let's skip those optional inputs.
-        assert len(subgraph.input) >= len(node.input)
-        subgraph_inputs = subgraph.input[: len(node.input)]
+        assert len(subgraph.input) >= len(node_inputs)
+        subgraph_inputs = subgraph.input[: len(node_inputs)]
         for i, si in enumerate(subgraph_inputs):
             subgraph_name = si.name
-            si.CopyFrom(self.known_vi_[node.input[i]])
-            if i >= num_scan_states:
+            si.CopyFrom(self.known_vi_[node_inputs[i]])
+            if is_opset8:
+                del si.type.tensor_type.shape.dim[: 1 if i < num_scan_states else 2]
+            elif i >= num_scan_states:
                 scan_input_dim = si.type.tensor_type.shape.dim
                 scan_input_dim.remove(scan_input_dim[scan_input_axes[i - num_scan_states]])
             si.name = subgraph_name
-        self._onnx_infer_subgraph(node, subgraph)
+        subgraph_infer = self._onnx_infer_subgraph(node, subgraph, use_node_input=False)
+        subgraph.ClearField("input")
+        subgraph.input.extend(subgraph_infer.out_mp_.graph.input[: len(node_inputs)])
         num_scan_outputs = len(node.output) - num_scan_states
         scan_output_axes = get_attribute(node, "scan_output_axes", [0] * num_scan_outputs)
-        scan_input_dim = get_shape_from_type_proto(self.known_vi_[node.input[-1]].type)[scan_input_axes[-1]]
+        scan_input_shape = get_shape_from_type_proto(self.known_vi_[node.input[-1]].type)
+        scan_input_dim = scan_input_shape[scan_input_axes[-1]]
         for i, o in enumerate(node.output):
             vi = self.known_vi_[o]
-            if i >= num_scan_states:
+            if is_opset8:
+                shape = get_shape_from_type_proto(subgraph.output[i].type)
+                shape = [scan_input_shape[0], *([scan_input_dim] if i >= num_scan_states else []), *shape]
+                vi.CopyFrom(helper.make_tensor_value_info(o, subgraph.output[i].type.tensor_type.elem_type, shape))
+            elif i >= num_scan_states:
                 shape = get_shape_from_type_proto(subgraph.output[i].type)
                 new_dim = handle_negative_axis(scan_output_axes[i - num_scan_states], len(shape) + 1)
                 shape = [*shape[:new_dim], scan_input_dim, *shape[new_dim:]]
