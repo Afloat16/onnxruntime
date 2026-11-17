@@ -114,7 +114,7 @@ class ConvInteger(QuantOperatorBase):
 
         scales_mul_op_output = scales_mul_node.output[0]
 
-        has_bias = len(node.input) == 3
+        has_bias = len(node.input) == 3 and bool(node.input[2])
         scaled_output_name = node.output[0] if not has_bias else node.output[0] + "quant_scaled_output"
 
         # Add mul operation to multiply mul_scales_op result with output of ConvInteger
@@ -189,7 +189,7 @@ class QLinearConv(QuantOperatorBase):
 
         quantized_bias_name = ""
         bias_present = False
-        if len(node.input) == 3:
+        if len(node.input) == 3 and node.input[2]:
             if self.quantizer.weight_qType == onnx_proto.TensorProto.FLOAT8E4M3FN:
                 raise RuntimeError("Quantization to FLOAT8E4M3FN for operator Conv is not supported.")
             quantized_bias_name = self.quantizer.quantize_bias_static(node.input[2], node.input[0], node.input[1])
@@ -256,5 +256,5 @@ class QDQConv(QDQOperatorBase):
         else:
             self.quantizer.quantize_weight_tensor(node.input[1])
 
-        if len(node.input) == 3:
+        if len(node.input) == 3 and node.input[2]:
             self.quantizer.quantize_bias_tensor(node.name, node.input[2], node.input[0], node.input[1])
