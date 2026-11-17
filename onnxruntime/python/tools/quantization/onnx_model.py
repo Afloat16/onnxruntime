@@ -443,7 +443,8 @@ class ONNXModel:
         graph_path.pop()
         return graph
 
-    def replace_gemm_with_matmul(self):
+    def get_tensor_names(self):
+        """Return tensor names in this graph and all descendant graphs."""
         tensor_names = set()
         graphs = [self.graph()]
         while graphs:
@@ -458,6 +459,10 @@ class ONNXModel:
                         graphs.append(attr.g)
                     elif attr.type == onnx.AttributeProto.GRAPHS:
                         graphs.extend(attr.graphs)
+        return tensor_names
+
+    def replace_gemm_with_matmul(self):
+        tensor_names = self.get_tensor_names()
         graph_path = [self.graph()]
         transposed_sources = {}
         ONNXModel.__replace_gemm_with_matmul(graph_path, tensor_names, transposed_sources)

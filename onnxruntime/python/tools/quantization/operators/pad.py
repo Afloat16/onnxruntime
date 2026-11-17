@@ -63,14 +63,9 @@ class QPad(QuantOperatorBase):
                     )
                     # A Pad uses its data input's quantization parameters, which
                     # may differ from those used by other consumers of the constant.
-                    name_prefix = node.output[0] + "_pad_value"
-                    quantized_padding_constant_name = name_prefix
-                    suffix = 0
-                    while self.quantizer.find_initializer_in_path(
-                        quantized_padding_constant_name
-                    ) or self.quantizer.contains_tensor(quantized_padding_constant_name):
-                        quantized_padding_constant_name = f"{name_prefix}_{suffix}"
-                        suffix += 1
+                    quantized_padding_constant_name = self.quantizer.get_unique_tensor_name(
+                        node.output[0] + "_pad_value"
+                    )
                     quantized_padding_constant_initializer = onnx.numpy_helper.from_array(
                         quantized_padding_constant_array,
                         quantized_padding_constant_name,

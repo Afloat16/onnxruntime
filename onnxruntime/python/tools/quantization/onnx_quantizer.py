@@ -103,6 +103,9 @@ class ONNXQuantizer(BaseQuantizer):
         self.tensor_names.update({it.name: 1 for it in model.graph.input})
         for node in self.model.model.graph.node:
             self.tensor_names.update(dict.fromkeys(node.output, 1))
+        # A new outer-scope tensor must not shadow a descendant definition.
+        # These names are reserved, but are not necessarily available in this scope.
+        self._reserved_tensor_names = self.model.get_tensor_names()
 
         if self.mode not in QuantizationMode:
             raise ValueError(f"unsupported quantization mode {self.mode}")
@@ -152,6 +155,7 @@ class ONNXQuantizer(BaseQuantizer):
             self.extra_options,
         )
         sub_quantizer.parent = self
+        sub_quantizer._reserved_tensor_names = self._reserved_tensor_names
         sub_quantizer.graph_scope = f"{self.graph_scope}{graph_key}/"
         sub_quantizer.quantize_model()
         return sub_quantizer.model.model.graph
@@ -864,6 +868,16 @@ class ONNXQuantizer(BaseQuantizer):
             or (tensor_name in self.tensor_names)
             or (tensor_name in self.generated_value_names)
         )
+
+    def get_unique_tensor_name(self, name_prefix):
+        """Reserve a tensor name without shadowing existing or descendant values."""
+        name = name_prefix
+        suffix = 0
+        while name in self._reserved_tensor_names or self.find_initializer_in_path(name) or self.contains_tensor(name):
+            name = f"{name_prefix}_{suffix}"
+            suffix += 1
+        self._reserved_tensor_names.add(name)
+        return name
 
     def quantize_activation(self, node, indices, from_subgraph=False):
         return self.__quantize_inputs(
