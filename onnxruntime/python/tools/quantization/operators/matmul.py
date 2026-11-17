@@ -133,6 +133,18 @@ class QLinearMatMul(QOpMatMul):
     def quantize(self):
         node = self.node
         assert node.op_type == "MatMul"
+        # Check all required ranges before quantizing either input. Falling back
+        # after input quantization can leave references to nodes that were never added.
+        if self.quantizer.quantization_params is None or node.output[0] not in self.quantizer.quantization_params:
+            return super().quantize()
+        for input_name in node.input:
+            if (
+                self.quantizer.find_quantized_value(input_name) is None
+                and not self.quantizer.find_initializer_in_path(input_name)
+                and input_name not in self.quantizer.quantization_params
+            ):
+                return super().quantize()
+
         #  Get Quantized from both activation(input[0]) and weight(input[1])
         (
             quantized_input_names,
