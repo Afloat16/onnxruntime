@@ -2491,7 +2491,7 @@ class SymbolicShapeInference:
             assert shape_len == 2 or shape_len == 3
             M, N = input_shape[shape_len - 2], input_shape[shape_len - 1]  # noqa: N806
             output_shape = [2, f"max({M}, {N}) <= O < {M} + {N}"]
-            output_dtype = onnx.TensorProto.FLOAT
+            output_dtype = onnx.TensorProto.INT32
             vi = self.known_vi_[node.output[0]]
             vi.CopyFrom(helper.make_tensor_value_info(node.output[0], output_dtype, output_shape))
 

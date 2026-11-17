@@ -39,6 +39,45 @@ skipped_models = ["SSD-MobilenetV1", "SSD-int8", "Inception-1-int8"]
 
 
 class TestSymbolicShapeInference(unittest.TestCase):
+    @staticmethod
+    def _dynamic_time_warping_models():
+        for shape in ([1, 1], [2, 3], [3, 2], [6, 10], ["M", "N"], [1, 1, 1], [1, 2, 3], [1, "M", "N"]):
+            for gather_path in (False, True):
+                nodes = [helper.make_node("DynamicTimeWarping", ["cost"], ["path"], domain="com.microsoft")]
+                outputs = [helper.make_tensor_value_info("path", TensorProto.INT32, [2, None])]
+                initializers = []
+                if gather_path:
+                    initializers.append(numpy_helper.from_array(numpy.arange(16, dtype=numpy.int64), "labels"))
+                    nodes.append(helper.make_node("Gather", ["labels", "path"], ["gathered"], axis=0))
+                    outputs.append(helper.make_tensor_value_info("gathered", TensorProto.INT64, [2, None]))
+                model = helper.make_model(
+                    helper.make_graph(
+                        nodes,
+                        "dynamic_time_warping_type",
+                        [helper.make_tensor_value_info("cost", TensorProto.FLOAT, shape)],
+                        outputs,
+                        initializers,
+                    ),
+                    opset_imports=[helper.make_opsetid("", 13), helper.make_opsetid("com.microsoft", 1)],
+                    ir_version=7,
+                )
+                yield model, shape, gather_path
+
+    def test_dynamic_time_warping_output_type(self):
+        for model, shape, gather_path in self._dynamic_time_warping_models():
+            with self.subTest(shape=shape, gather_path=gather_path):
+                onnx.checker.check_model(model, full_check=True)
+                inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                onnx.checker.check_model(inferred, full_check=True)
+                path_type = inferred.graph.output[0].type.tensor_type
+                self.assertEqual(path_type.elem_type, TensorProto.INT32)
+                self.assertEqual(path_type.shape.dim[0].dim_value, 2)
+                self.assertTrue(path_type.shape.dim[1].dim_param)
+                if gather_path:
+                    gathered_type = inferred.graph.output[1].type.tensor_type
+                    self.assertEqual(gathered_type.elem_type, TensorProto.INT64)
+                    self.assertEqual(gathered_type.shape, path_type.shape)
+
     def test_shape_preserving_hyper_connection_ops(self):
         cases = {
             "BranchwiseRMSNorm": (
