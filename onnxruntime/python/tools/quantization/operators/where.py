@@ -7,14 +7,13 @@ from .qdq_base_operator import QDQOperatorBase
 
 class QLinearWhere(QuantOperatorBase):
     def should_quantize(self):
-        return True
+        return self.quantizer.should_quantize_node(self.node)
 
     def quantize(self):
         node = self.node
         assert node.op_type == "Where"
         if not self.quantizer.force_quantize_no_input_check:
-            self.quantizer.new_nodes += [node]
-            return
+            return super().quantize()
         (
             data_found,
             output_scale_name,
