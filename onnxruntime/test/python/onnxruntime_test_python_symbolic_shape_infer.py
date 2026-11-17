@@ -315,6 +315,215 @@ class TestSymbolicShapeInference(unittest.TestCase):
 
 
 class TestSymbolicShapeInferenceForOperators(unittest.TestCase):
+    def test_compress_known_condition_shape(self):
+        cases = [
+            ([5], None, [True, False, True], [2]),
+            ([5], 0, [False] * 5, [0]),
+            ([0], None, [], [0]),
+            ([2, 3], None, [True, False, False, True], [2]),
+            ([2, 3], 0, [True, False], [1, 3]),
+            ([2, 3], -1, [True, False, True], [2, 2]),
+            (["B", 3], -1, [True, False, True], ["B", 2]),
+            (["B", 3], None, [], [0]),
+            (["B", 3], None, [False, False], [0]),
+            ([2, 0, 3], None, [], [0]),
+            (["B", 0, 3], None, [], [0]),
+        ]
+        for shape, axis, condition, expected in cases:
+            for constant_node in (False, True):
+                with self.subTest(shape=shape, axis=axis, condition=condition, constant_node=constant_node):
+                    value = numpy_helper.from_array(numpy.array(condition, dtype=bool), "condition")
+                    nodes = [helper.make_node("Constant", [], ["condition"], value=value)] if constant_node else []
+                    nodes.append(
+                        helper.make_node(
+                            "Compress",
+                            ["input", "condition"],
+                            ["output"],
+                            **({"axis": axis} if axis is not None else {}),
+                        )
+                    )
+                    graph = helper.make_graph(
+                        nodes,
+                        "compress_known_condition",
+                        [helper.make_tensor_value_info("input", TensorProto.FLOAT, shape)],
+                        [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                        initializer=[] if constant_node else [value],
+                    )
+                    model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    actual = [
+                        dim.dim_value if dim.HasField("dim_value") else dim.dim_param
+                        for dim in inferred.graph.output[0].type.tensor_type.shape.dim
+                    ]
+                    self.assertEqual(actual, expected)
+
+    def test_compress_condition_is_limited_to_input_extent(self):
+        for shape, axis, expected in (([2], None, [1]), ([3, 2], -1, [3, 1])):
+            with self.subTest(shape=shape, axis=axis):
+                model = helper.make_model(
+                    helper.make_graph(
+                        [
+                            helper.make_node(
+                                "Compress",
+                                ["input", "condition"],
+                                ["output"],
+                                **({"axis": axis} if axis is not None else {}),
+                            )
+                        ],
+                        "compress_overlong_condition",
+                        [helper.make_tensor_value_info("input", TensorProto.FLOAT, shape)],
+                        [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                        [numpy_helper.from_array(numpy.array([True, False, True, True]), "condition")],
+                    ),
+                    opset_imports=[helper.make_opsetid("", 13)],
+                )
+                inferred = SymbolicShapeInference.infer_shapes(model)
+                self.assertEqual(
+                    [dim.dim_value for dim in inferred.graph.output[0].type.tensor_type.shape.dim], expected
+                )
+
+    def test_compress_shape_values(self):
+        for source in ("initializer", "constant", "shape"):
+            for axis in (None, 0, -1):
+                for empty in (False, True):
+                    with self.subTest(source=source, axis=axis, empty=empty):
+                        condition = numpy_helper.from_array(
+                            numpy.array([False, False, False] if empty else [True, False, True]), "condition"
+                        )
+                        initializers = [condition]
+                        nodes = []
+                        if source == "shape":
+                            input_shape = [1, 1, 1] if empty else ["B", 1, 3]
+                            expected = [] if empty else ["B", 3]
+                            nodes.append(helper.make_node("Shape", ["input"], ["shape"]))
+                        else:
+                            input_shape = [1] if empty else [6]
+                            expected = [] if empty else [2, 3]
+                            shape = numpy_helper.from_array(numpy.array([2, 99, 3], dtype=numpy.int64), "shape")
+                            if source == "constant":
+                                nodes.append(helper.make_node("Constant", [], ["shape"], value=shape))
+                            else:
+                                initializers.append(shape)
+                        nodes.extend(
+                            [
+                                helper.make_node(
+                                    "Compress",
+                                    ["shape", "condition"],
+                                    ["selected"],
+                                    **({"axis": axis} if axis is not None else {}),
+                                ),
+                                helper.make_node("Reshape", ["input", "selected"], ["output"]),
+                            ]
+                        )
+                        model = helper.make_model(
+                            helper.make_graph(
+                                nodes,
+                                "compressed_reshape_shape",
+                                [helper.make_tensor_value_info("input", TensorProto.FLOAT, input_shape)],
+                                [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                                initializers,
+                            ),
+                            opset_imports=[helper.make_opsetid("", 13)],
+                        )
+                        inferred = SymbolicShapeInference.infer_shapes(model)
+                        actual = [
+                            dim.dim_value if dim.HasField("dim_value") else dim.dim_param
+                            for dim in inferred.graph.output[0].type.tensor_type.shape.dim
+                        ]
+                        self.assertEqual(actual, expected)
+
+    def test_compress_fractional_values(self):
+        for constant_node in (False, True):
+            with self.subTest(constant_node=constant_node):
+                values = numpy_helper.from_array(numpy.array([1.5, 99.0, 2.5], dtype=numpy.float32), "values")
+                initializers = [
+                    numpy_helper.from_array(numpy.array([True, False, True]), "condition"),
+                    numpy_helper.from_array(numpy.array(2.0, dtype=numpy.float32), "factor"),
+                ]
+                nodes = []
+                if constant_node:
+                    nodes.append(helper.make_node("Constant", [], ["values"], value=values))
+                else:
+                    initializers.append(values)
+                nodes.extend(
+                    [
+                        helper.make_node("Compress", ["values", "condition"], ["selected"]),
+                        helper.make_node("Mul", ["selected", "factor"], ["scaled"]),
+                        helper.make_node("Cast", ["scaled"], ["shape"], to=TensorProto.INT64),
+                        helper.make_node("Reshape", ["input", "shape"], ["output"]),
+                    ]
+                )
+                model = helper.make_model(
+                    helper.make_graph(
+                        nodes,
+                        "compressed_fractional_values",
+                        [helper.make_tensor_value_info("input", TensorProto.FLOAT, [15])],
+                        [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                        initializers,
+                    ),
+                    opset_imports=[helper.make_opsetid("", 13)],
+                )
+                inferred = SymbolicShapeInference.infer_shapes(model)
+                self.assertEqual([dim.dim_value for dim in inferred.graph.output[0].type.tensor_type.shape.dim], [3, 5])
+
+    def test_compress_condition_depends_on_symbolic_dimension(self):
+        model = helper.make_model(
+            helper.make_graph(
+                [
+                    helper.make_node("Shape", ["input"], ["shape"]),
+                    helper.make_node("Equal", ["shape", "three"], ["condition"]),
+                    helper.make_node("Compress", ["data", "condition"], ["output"]),
+                ],
+                "compress_symbolic_condition",
+                [helper.make_tensor_value_info("input", TensorProto.FLOAT, ["N"])],
+                [helper.make_tensor_value_info("output", TensorProto.INT64, None)],
+                [
+                    numpy_helper.from_array(numpy.array([3], dtype=numpy.int64), "three"),
+                    numpy_helper.from_array(numpy.array([7], dtype=numpy.int64), "data"),
+                ],
+            ),
+            opset_imports=[helper.make_opsetid("", 13)],
+        )
+        inferred = SymbolicShapeInference.infer_shapes(model)
+        dimension = inferred.graph.output[0].type.tensor_type.shape.dim[0]
+        self.assertTrue(dimension.HasField("dim_param"))
+        self.assertTrue(dimension.dim_param.startswith("Compress"))
+
+    def test_compress_unknown_condition_or_extent(self):
+        for axis in (None, 0, -1):
+            for known_condition in (False, True):
+                with self.subTest(axis=axis, known_condition=known_condition):
+                    inputs = [helper.make_tensor_value_info("input", TensorProto.FLOAT, ["B", "N"])]
+                    initializers = []
+                    if known_condition:
+                        initializers.append(numpy_helper.from_array(numpy.array([True, False]), "condition"))
+                    else:
+                        inputs.append(helper.make_tensor_value_info("condition", TensorProto.BOOL, [2]))
+                    model = helper.make_model(
+                        helper.make_graph(
+                            [
+                                helper.make_node(
+                                    "Compress",
+                                    ["input", "condition"],
+                                    ["output"],
+                                    **({"axis": axis} if axis is not None else {}),
+                                )
+                            ],
+                            "compress_unknown",
+                            inputs,
+                            [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                            initializers,
+                        ),
+                        opset_imports=[helper.make_opsetid("", 13)],
+                    )
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    dims = inferred.graph.output[0].type.tensor_type.shape.dim
+                    compressed_axis = 0 if axis is None else axis
+                    self.assertTrue(dims[compressed_axis].HasField("dim_param"))
+                    self.assertTrue(dims[compressed_axis].dim_param.startswith("Compress"))
+                    if axis is not None:
+                        self.assertEqual(dims[1 if axis == 0 else 0].dim_param, "N" if axis == 0 else "B")
+
     def _check_shapes(self, graph, inferred_graph, vis):  # type: (GraphProto, GraphProto, List[ValueInfoProto]) -> None
         names_in_vis = {x.name for x in vis}
         vis = [x for x in graph.value_info if x.name not in names_in_vis] + vis

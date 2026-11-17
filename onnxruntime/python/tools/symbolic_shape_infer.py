@@ -910,15 +910,37 @@ class SymbolicShapeInference:
 
     def _infer_Compress(self, node):  # noqa: N802
         input_shape = self._get_shape(node, 0)
-        # create a new symbolic dimension for Compress output
-        compress_len = str(self._new_symbolic_dim_from_output(node))
         axis = get_attribute(node, "axis")
+        axis = None if axis is None else handle_negative_axis(axis, len(input_shape))
+        compress_len = None
+        condition = self._try_get_value(node, 1)
+        # Fold literal Boolean tensors. A cached symbolic comparison need not
+        # be decidable from the input shapes alone.
+        if isinstance(condition, np.ndarray) and condition.ndim == 1 and condition.dtype == np.bool_:
+            condition = condition.tolist()
+            input_length = sympy_reduce_product(self._get_sympy_shape(node, 0)) if axis is None else input_shape[axis]
+            if is_literal(input_length):
+                condition = condition[: int(input_length)]
+                compress_len = sum(bool(value) for value in condition)
+            elif not any(condition):
+                compress_len = 0
+            # Shape computations use one-dimensional cached values. Keep
+            # selected symbolic dimensions and integer values without conversion.
+            if len(input_shape) == 1:
+                data = self._try_get_value(node, 0)
+                data = as_list(data.tolist() if isinstance(data, np.ndarray) else data, keep_none=True)
+                if data is not None:
+                    selected = [value for value, keep in zip(data, condition, strict=False) if keep]
+                    self.sympy_data_[node.output[0]] = selected
+                    compress_len = len(selected)
+        if compress_len is None:
+            compress_len = str(self._new_symbolic_dim_from_output(node))
         if axis is None:
             # when axis is not specified, input is flattened before compress so output is 1D
             output_shape = [compress_len]
         else:
             output_shape = input_shape
-            output_shape[handle_negative_axis(axis, len(input_shape))] = compress_len
+            output_shape[axis] = compress_len
         vi = self.known_vi_[node.output[0]]
         vi.CopyFrom(
             helper.make_tensor_value_info(
