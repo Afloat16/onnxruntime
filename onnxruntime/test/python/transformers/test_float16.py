@@ -176,6 +176,69 @@ def _make_constant_of_shape_model():
 class TestFloat16Conversion(unittest.TestCase):
     """Tests for convert_float_to_float16 correctness."""
 
+    def test_blocked_node_casts_preserve_first_value_info(self):
+        graph_input = helper.make_tensor_value_info("input", TensorProto.FLOAT, [2, 3])
+        graph_input.doc_string = "first input metadata"
+        duplicate_input = helper.make_tensor_value_info("input", TensorProto.FLOAT, [2, 3])
+        duplicate_input.doc_string = "later value-info metadata"
+        intermediate = helper.make_tensor_value_info("intermediate", TensorProto.FLOAT, [2, 3])
+        intermediate.doc_string = "blocked output metadata"
+        graph = helper.make_graph(
+            [
+                helper.make_node("Relu", ["input"], ["intermediate"]),
+                helper.make_node("Identity", ["intermediate"], ["output"]),
+            ],
+            "duplicate_value_info",
+            [graph_input],
+            [helper.make_tensor_value_info("output", TensorProto.FLOAT, [2, 3])],
+            value_info=[duplicate_input, intermediate],
+        )
+        model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+        converted = convert_float_to_float16(model, disable_shape_infer=True, op_block_list=["Relu"])
+        value_info = {value.name: value for value in converted.graph.value_info}
+        self.assertEqual(value_info["input_cast_to_fp32"].doc_string, "first input metadata")
+        self.assertEqual(value_info["intermediate_cast_to_fp16"].doc_string, "blocked output metadata")
+        self.assertEqual(value_info["input_cast_to_fp32"].type.tensor_type.elem_type, TensorProto.FLOAT)
+        self.assertEqual(value_info["intermediate_cast_to_fp16"].type.tensor_type.elem_type, TensorProto.FLOAT)
+
+    def test_blocked_reshape_keeps_integer_inputs_and_shares_data_cast(self):
+        for keep_io_types in (False, True):
+            for use_bfloat16 in (False, True):
+                with self.subTest(keep_io_types=keep_io_types, use_bfloat16=use_bfloat16):
+                    graph = helper.make_graph(
+                        [
+                            helper.make_node("Reshape", ["input", "shape"], ["output0"]),
+                            helper.make_node("Reshape", ["input", "shape"], ["output1"]),
+                        ],
+                        "blocked_reshape",
+                        [
+                            helper.make_tensor_value_info("input", TensorProto.FLOAT, [2, 3]),
+                            helper.make_tensor_value_info("shape", TensorProto.INT64, [2]),
+                        ],
+                        [helper.make_tensor_value_info(f"output{i}", TensorProto.FLOAT, [3, 2]) for i in range(2)],
+                    )
+                    model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+                    converted = convert_float_to_float16(
+                        model,
+                        keep_io_types=keep_io_types,
+                        op_block_list=["Reshape"],
+                        use_bfloat16_as_blocked_nodes_dtype=use_bfloat16,
+                    )
+                    reshape_nodes = [node for node in converted.graph.node if node.op_type == "Reshape"]
+                    self.assertEqual([node.input[1] for node in reshape_nodes], ["shape", "shape"])
+                    self.assertEqual(reshape_nodes[0].input[0], reshape_nodes[1].input[0])
+                    input_casts = [
+                        node
+                        for node in converted.graph.node
+                        if node.op_type == "Cast" and node.output[0] == reshape_nodes[0].input[0]
+                    ]
+                    self.assertEqual(len(input_casts), 1)
+                    expected_type = TensorProto.BFLOAT16 if use_bfloat16 else TensorProto.FLOAT
+                    self.assertEqual(helper.get_attribute_value(input_casts[0].attribute[0]), expected_type)
+                    self.assertFalse(
+                        any(node.op_type == "Cast" and "shape" in node.input for node in converted.graph.node)
+                    )
+
     def _get_all_node_names(self, model):
         """Return all node names in the model graph."""
         return [n.name for n in model.graph.node]
