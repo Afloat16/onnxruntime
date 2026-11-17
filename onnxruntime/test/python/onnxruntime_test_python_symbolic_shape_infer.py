@@ -39,6 +39,56 @@ skipped_models = ["SSD-MobilenetV1", "SSD-int8", "Inception-1-int8"]
 
 
 class TestSymbolicShapeInference(unittest.TestCase):
+    def test_constant_literal_attributes(self):
+        cases = [
+            ("value_int", 3, AttributeProto.INT, TensorProto.INT64, []),
+            ("value_ints", [2, 3], AttributeProto.INTS, TensorProto.INT64, [2]),
+            ("value_ints", [], AttributeProto.INTS, TensorProto.INT64, [0]),
+            ("value_float", 1.5, AttributeProto.FLOAT, TensorProto.FLOAT, []),
+            ("value_floats", [1.5, 2.5], AttributeProto.FLOATS, TensorProto.FLOAT, [2]),
+            ("value_floats", [], AttributeProto.FLOATS, TensorProto.FLOAT, [0]),
+            ("value_string", "hello", AttributeProto.STRING, TensorProto.STRING, []),
+            ("value_strings", ["hello", "世界"], AttributeProto.STRINGS, TensorProto.STRING, [2]),
+            ("value_strings", [], AttributeProto.STRINGS, TensorProto.STRING, [0]),
+        ]
+        for opset in (12, 13, 21):
+            for attribute, value, attribute_type, element_type, shape in cases:
+                with self.subTest(opset=opset, attribute=attribute, value=value):
+                    node = helper.make_node("Constant", [], ["constant"])
+                    node.attribute.append(helper.make_attribute(attribute, value, attr_type=attribute_type))
+                    graph = helper.make_graph(
+                        [node, helper.make_node("Identity", ["constant"], ["output"])],
+                        "constant_literal",
+                        [],
+                        [helper.make_tensor_value_info("output", element_type, None)],
+                    )
+                    model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", opset)])
+                    original = model.SerializeToString()
+                    inferred = SymbolicShapeInference.infer_shapes(model)
+                    onnx.checker.check_model(inferred, full_check=True)
+                    output = inferred.graph.output[0].type.tensor_type
+                    self.assertEqual(output.elem_type, element_type)
+                    self.assertEqual([dim.dim_value for dim in output.shape.dim], shape)
+                    self.assertEqual(model.SerializeToString(), original)
+
+    def test_constant_literal_shape_values(self):
+        for attribute in ("value", "value_ints"):
+            with self.subTest(attribute=attribute):
+                value = helper.make_tensor("shape", TensorProto.INT64, [2], [2, 3]) if attribute == "value" else [2, 3]
+                graph = helper.make_graph(
+                    [
+                        helper.make_node("Constant", [], ["shape"], **{attribute: value}),
+                        helper.make_node("Reshape", ["input", "shape"], ["output"]),
+                    ],
+                    "constant_literal_shape",
+                    [helper.make_tensor_value_info("input", TensorProto.FLOAT, [6])],
+                    [helper.make_tensor_value_info("output", TensorProto.FLOAT, None)],
+                )
+                model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)])
+                inferred = SymbolicShapeInference.infer_shapes(model)
+                onnx.checker.check_model(inferred, full_check=True)
+                self.assertEqual([dim.dim_value for dim in inferred.graph.output[0].type.tensor_type.shape.dim], [2, 3])
+
     def test_shape_preserving_hyper_connection_ops(self):
         cases = {
             "BranchwiseRMSNorm": (

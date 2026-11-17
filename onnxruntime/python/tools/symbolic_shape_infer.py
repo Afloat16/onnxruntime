@@ -990,6 +990,22 @@ class SymbolicShapeInference:
 
     def _infer_Constant(self, node):  # noqa: N802
         t = get_attribute(node, "value")
+        if t is None:
+            for attribute, data_type in (
+                ("value_int", onnx.TensorProto.INT64),
+                ("value_ints", onnx.TensorProto.INT64),
+                ("value_float", onnx.TensorProto.FLOAT),
+                ("value_floats", onnx.TensorProto.FLOAT),
+                ("value_string", onnx.TensorProto.STRING),
+                ("value_strings", onnx.TensorProto.STRING),
+            ):
+                value = get_attribute(node, attribute)
+                if value is not None:
+                    is_vector = attribute.endswith("s")
+                    t = helper.make_tensor(
+                        node.output[0], data_type, [len(value)] if is_vector else [], value if is_vector else [value]
+                    )
+                    break
         self.sympy_data_[node.output[0]] = numpy_helper.to_array(t)
 
     def _infer_ConstantOfShape(self, node):  # noqa: N802
