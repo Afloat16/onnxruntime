@@ -1601,8 +1601,8 @@ class SymbolicShapeInference:
         # this works for opsets < 14 and 14 since we check i < len(node.output) in the loop
         for i in [1, 2, 3, 4]:
             if i < len(node.output) and node.output[i]:
-                # all of these parameters have the same shape as the 1st input
-                self._propagate_shape_and_type(node, input_index=1, output_index=i)
+                # Statistics have the shape and element type of input_mean, which can differ from scale's type.
+                self._propagate_shape_and_type(node, input_index=3, output_index=i)
 
     def _infer_Range(self, node):  # noqa: N802
         vi = self.known_vi_[node.output[0]]

@@ -39,6 +39,67 @@ skipped_models = ["SSD-MobilenetV1", "SSD-int8", "Inception-1-int8"]
 
 
 class TestSymbolicShapeInference(unittest.TestCase):
+    @staticmethod
+    def _batch_normalization_models():
+        float_types = [TensorProto.FLOAT16, TensorProto.FLOAT, TensorProto.DOUBLE]
+        cases = [
+            (opset, scale_type if opset == 14 else stats_type, scale_type, stats_type, training, None)
+            for opset in [14, 15, 21]
+            for scale_type in float_types
+            for stats_type in float_types
+            for training in [False, True]
+        ]
+        cases.extend((opset, dtype, dtype, dtype, True, None) for opset in [9, 13] for dtype in float_types)
+        cases.extend(
+            (opset, TensorProto.FLOAT16, TensorProto.FLOAT16, TensorProto.FLOAT, True, omitted_output)
+            for opset in [14, 15, 21]
+            for omitted_output in [1, 2]
+        )
+        for opset, data_type, scale_type, stats_type, training, omitted_output in cases:
+            data_shape = ["B", "C", 2]
+            inputs = [
+                helper.make_tensor_value_info("X", data_type, data_shape),
+                helper.make_tensor_value_info("scale", scale_type, ["C"]),
+                helper.make_tensor_value_info("bias", scale_type, ["C"]),
+                helper.make_tensor_value_info("mean", stats_type, ["C"]),
+                helper.make_tensor_value_info("variance", stats_type, ["C"]),
+            ]
+            output_names = ["Y"]
+            if training:
+                output_names.extend(["running_mean", "running_var"])
+                if opset < 14:
+                    output_names.extend(["saved_mean", "saved_var"])
+            if omitted_output is not None:
+                output_names[omitted_output] = ""
+            expected_outputs = [
+                helper.make_tensor_value_info(
+                    name, data_type if i == 0 else stats_type, data_shape if i == 0 else ["C"]
+                )
+                for i, name in enumerate(output_names)
+                if name
+            ]
+            attributes = {"training_mode": int(training)} if opset >= 14 else {}
+            graph = helper.make_graph(
+                [helper.make_node("BatchNormalization", [v.name for v in inputs], output_names, **attributes)],
+                "batch_normalization",
+                inputs,
+                expected_outputs,
+            )
+            yield (
+                helper.make_model(graph, opset_imports=[helper.make_opsetid("", opset)], ir_version=10),
+                expected_outputs,
+            )
+
+    def test_batch_normalization_statistics_types(self):
+        for model, expected_outputs in self._batch_normalization_models():
+            with self.subTest(
+                opset=model.opset_import[0].version, inputs=list(model.graph.input), outputs=expected_outputs
+            ):
+                onnx.checker.check_model(model, full_check=True)
+                inferred = SymbolicShapeInference.infer_shapes(model, auto_merge=True)
+                onnx.checker.check_model(inferred, full_check=True)
+                self.assertEqual(list(inferred.graph.output), expected_outputs)
+
     def test_shape_preserving_hyper_connection_ops(self):
         cases = {
             "BranchwiseRMSNorm": (
