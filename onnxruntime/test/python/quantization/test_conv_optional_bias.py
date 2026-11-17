@@ -1,9 +1,11 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
+import logging
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import call, patch
 
 import numpy as np
 import onnx
@@ -62,14 +64,19 @@ class TestConvOptionalBias(unittest.TestCase):
                 if quant_format is None:
                     quantize_dynamic(input_path, output_path, weight_type=weight_type)
                 else:
-                    quantize_static(
-                        input_path,
-                        output_path,
-                        _DataReader(self.feeds),
-                        quant_format=quant_format,
-                        activation_type=QuantType.QUInt8,
-                        weight_type=weight_type,
-                        per_channel=per_channel,
+                    with patch("logging.warning", wraps=logging.warning) as log_warning:
+                        quantize_static(
+                            input_path,
+                            output_path,
+                            _DataReader(self.feeds),
+                            quant_format=quant_format,
+                            activation_type=QuantType.QUInt8,
+                            weight_type=weight_type,
+                            per_channel=per_channel,
+                        )
+                    self.assertNotIn(
+                        call("Expected bias '' to be an initializer"),
+                        log_warning.call_args_list,
                     )
                 quantized = onnx.load(output_path)
                 onnx.checker.check_model(quantized, full_check=True)
