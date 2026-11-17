@@ -654,7 +654,7 @@ class SymbolicShapeInference:
                 values[i] = new_v
         values_len = [len(v) if isinstance(v, list) else 0 for v in values]
         max_len = max(values_len)
-        if max_len >= 1 and broadcast:
+        if broadcast and any(isinstance(value, list) for value in values):
             # broadcast
             for i, v in enumerate(values):
                 if v is None:
@@ -909,30 +909,56 @@ class SymbolicShapeInference:
         vi.CopyFrom(helper.make_tensor_value_info(node.output[0], output_type, self._get_shape(node, 0)))
 
     def _infer_Compress(self, node):  # noqa: N802
+        def get_constant_value(index):
+            name = node.input[index]
+            if name in self.graph_inputs_:
+                return None
+            initializer = self.initializers_.get(name)
+            if initializer is not None and onnx.external_data_helper.uses_external_data(initializer):
+                return None
+            return self._try_get_value(node, index)
+
         input_shape = self._get_shape(node, 0)
         axis = get_attribute(node, "axis")
         axis = None if axis is None else handle_negative_axis(axis, len(input_shape))
         compress_len = None
-        condition = self._try_get_value(node, 1)
+        condition = get_constant_value(1)
         # Fold literal Boolean tensors. A cached symbolic comparison need not
         # be decidable from the input shapes alone.
         if isinstance(condition, np.ndarray) and condition.ndim == 1 and condition.dtype == np.bool_:
-            condition = condition.tolist()
-            input_length = sympy_reduce_product(self._get_sympy_shape(node, 0)) if axis is None else input_shape[axis]
+            sympy_shape = self._get_sympy_shape(node, 0) if input_shape is not None else None
+            input_length = None
+            if sympy_shape is not None:
+                input_length = sympy_reduce_product(sympy_shape) if axis is None else sympy_shape[axis]
             if is_literal(input_length):
                 condition = condition[: int(input_length)]
-                compress_len = sum(bool(value) for value in condition)
-            elif not any(condition):
+                compress_len = int(np.count_nonzero(condition))
+            elif not np.any(condition):
                 compress_len = 0
-            # Shape computations use one-dimensional cached values. Keep
-            # selected symbolic dimensions and integer values without conversion.
-            if len(input_shape) == 1:
-                data = self._try_get_value(node, 0)
-                data = as_list(data.tolist() if isinstance(data, np.ndarray) else data, keep_none=True)
+            # Limit propagation to INT64 shape values supported by the symbolic consumers.
+            if (
+                input_shape is not None
+                and len(input_shape) == 1
+                and self.known_vi_[node.input[0]].type.tensor_type.elem_type == onnx.TensorProto.INT64
+            ):
+                data = get_constant_value(0)
                 if data is not None:
-                    selected = [value for value, keep in zip(data, condition, strict=False) if keep]
-                    self.sympy_data_[node.output[0]] = selected
+                    if isinstance(data, np.ndarray):
+                        length = min(len(data), len(condition))
+                        selected = data[:length][condition[:length]]
+                    else:
+                        selected = [
+                            value for value, keep in zip(as_list(data, keep_none=True), condition, strict=False) if keep
+                        ]
                     compress_len = len(selected)
+                    # Keep zero targets dynamic until Reshape can distinguish allowzero from copied dimensions.
+                    integer_values = all(
+                        (isinstance(value, (int, np.integer)) and not isinstance(value, (bool, np.bool_)))
+                        or (isinstance(value, sympy.Expr) and value.is_integer)
+                        for value in selected
+                    )
+                    if integer_values and not any(is_literal(value) and value == 0 for value in selected):
+                        self.sympy_data_[node.output[0]] = selected
         if compress_len is None:
             compress_len = str(self._new_symbolic_dim_from_output(node))
         if axis is None:
